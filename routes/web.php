@@ -12,9 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::post('/profile/update', 'HomeController@update')->name('profile.update');
+Route::post('/password/change', 'HomeController@change_password')->name('password.change');

@@ -4,14 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ env('APP_NAME', 'APP NAME') }} is a Hospital Management System">
+    <meta name="author" content="Yinka, Tunji Oyeniran">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ env('APP_NAME', 'APP NAME') }}</title>
 
     <!-- Styles -->
-{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    {{-- <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet"> --}}
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <!-- Font Awesome CSS-->
@@ -22,66 +24,40 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="{{ asset('css/style.default.css') }}" id="theme-stylesheet">
+
+    {{-- Page Styles --}}
+    @if( View::hasSection('page_styles') )
+        @yield('page_styles')
+    @endif
+
+    {{-- Layout Styles --}}
+    <style type="text/css">
+        * {
+            border-radius: 0 !important;
+        }
+        .table-wrapper {
+          overflow-x: auto;
+        }
+        textarea {
+          resize: vertical;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+    <div id="app" class="page">
+        @include('shared.navbar')
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+        <div class="page-content d-flex align-items-stretch">
+            @include('shared.sidebar')
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
+            <div class="content-inner">
+                @include('shared.page-header')
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                @yield('content')
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                @include('shared.page-footer')
             </div>
-        </nav>
-
-        @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
@@ -96,5 +72,22 @@
     <script src="{{ asset('js/charts-home.js') }}"></script>
     <!-- Main File-->
     <script src="{{ asset('js/front.js') }}"></script>
+
+    {{-- Layout Scripts --}}
+    <script type="text/javascript">
+      // Confirm Action
+      $('.confirm-action').click(function(e) {
+        var ans = confirm('Are you sureee?');
+        if(ans) {
+        } else {
+          e.preventDefault();
+        }
+      });
+    </script>
+
+    {{-- Page Scripts --}}
+    @if( View::hasSection('page_scripts') )
+        @yield('page_scripts')
+    @endif
 </body>
 </html>

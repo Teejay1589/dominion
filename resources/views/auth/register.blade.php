@@ -94,25 +94,31 @@
                 <div class="col-lg-6 bg-white">
                     <div class="form d-flex align-items-center">
                         <div class="content">
-                            <form id="register-form">
+                            <form id="register-form" method="POST" action="{{ route('register') }}">
+                                {{ csrf_field() }}
+
                                 <div class="form-group">
-                                    <input id="register-username" type="text" name="registerUsername" required class="input-material">
+                                    <input id="register-username" type="text" name="name" required class="input-material">
                                     <label for="register-username" class="label-material">User Name</label>
                                 </div>
                                 <div class="form-group">
-                                    <input id="register-email" type="email" name="registerEmail" required class="input-material">
+                                    <input id="register-email" type="email" name="email" required class="input-material">
                                     <label for="register-email" class="label-material">Email Address      </label>
                                 </div>
                                 <div class="form-group">
-                                    <input id="register-passowrd" type="password" name="registerPassword" required class="input-material">
-                                    <label for="register-passowrd" class="label-material">password        </label>
+                                    <input id="register-passowrd" type="password" name="password" required class="input-material">
+                                    <label for="register-passowrd" class="label-material">Password        </label>
+                                </div>
+                                <div class="form-group">
+                                    <input id="register-passowrd" type="password" name="password_confirmation" required class="input-material">
+                                    <label for="register-passowrd" class="label-material">Confirm Password        </label>
                                 </div>
                                 <div class="form-group terms-conditions">
                                     <input id="license" type="checkbox" class="checkbox-template">
                                     <label for="license">Agree the terms and policy</label>
                                 </div>
                                 <input id="register" type="submit" value="Register" class="btn btn-primary">
-                            </form><small>Already have an account? </small><a href="login.html" class="signup">Login</a>
+                            </form><small>Already have an account? </small><a href="{{ route('login') }}" class="signup">Login</a>
                         </div>
                     </div>
                 </div>

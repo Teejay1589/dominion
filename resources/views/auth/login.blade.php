@@ -86,17 +86,18 @@
                 <div class="col-lg-6 bg-white">
                     <div class="form d-flex align-items-center">
                         <div class="content">
-                            <form id="login-form" method="post">
+                            <form id="login-form" method="POST" action="{{ route('login') }}">
+                                {{ csrf_field() }}
+
                                 <div class="form-group">
-                                    <input id="login-username" type="text" name="loginUsername" required="" class="input-material">
+                                    <input id="login-username" type="text" name="email" required="" class="input-material">
                                     <label for="login-username" class="label-material">User Name</label>
                                 </div>
                                 <div class="form-group">
-                                    <input id="login-password" type="password" name="loginPassword" required="" class="input-material">
+                                    <input id="login-password" type="password" name="password" required="" class="input-material">
                                     <label for="login-password" class="label-material">Password</label>
-                                </div><a id="login" href="index.html" class="btn btn-primary">Login</a>
-                                <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-                            </form><a href="#" class="forgot-pass">Forgot Password?</a><br><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>
+                                </div><button type="submit" class="btn btn-primary">Login</button>
+                            </form>{{-- <a href="#" class="forgot-pass">Forgot Password?</a> --}}<br><small>Do not have an account? </small><a href="register.html" class="{{ route('register') }}">Signup</a>
                         </div>
                     </div>
                 </div>

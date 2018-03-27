@@ -12,9 +12,9 @@
                             <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
                         </div>
                     </div>
-                    <div class="card-header">Card Header</div>
+                    <div class="card-header">Profile Update</div>
                     <div class="card-body">
-                        <p>Card body sample ...</p>
+                        <p>Profille update form ...</p>
                     </div>
                 </div>
             </div>
