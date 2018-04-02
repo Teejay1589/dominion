@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Patients extends Model
+class Cases extends Model
 {
-    protected $table = 'patients';
+    protected $table = 'cases';
 
     /**
      * The attributes that are mass assignable.
@@ -14,7 +14,7 @@ class Patients extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'gender', 'telephone', 'next_of_kin', 'next_of_kin_telephone',  'blood_group',  'genotype', 'user_id',
+        'title', 'patient_id', 'discharged_on', 'user_id',
     ];
 
     public function table()
@@ -27,8 +27,8 @@ class Patients extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
-    public function cases()
+    public function patient()
     {
-        return $this->hasMany('App\Cases', 'patient_id');
+        return $this->belongsTo('App\Patients', 'patient_id');
     }
 }

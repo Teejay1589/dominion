@@ -41,23 +41,32 @@
         textarea {
           resize: vertical;
         }
+        .modal.in {
+            /*background: dimgray;*/
+        }
     </style>
 </head>
 <body>
     <div id="app" class="page">
-        @include('shared.navbar')
+        @auth()
+            @include('shared.alerts')
+            @include('shared.navbar')
 
-        <div class="page-content d-flex align-items-stretch">
-            @include('shared.sidebar')
+            <div class="page-content d-flex align-items-stretch">
+                @include('shared.sidebar')
 
-            <div class="content-inner">
-                @include('shared.page-header')
+                <div class="content-inner">
+                    @include('shared.page-header')
 
-                @yield('content')
+                    @yield('content')
 
-                @include('shared.page-footer')
+                    @include('shared.page-footer')
+                </div>
             </div>
-        </div>
+        @endauth
+        @guest()
+            @yield('content')
+        @endguest
     </div>
 
     <!-- Scripts -->

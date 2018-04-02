@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Cases;
 use App\Patients;
-use App\Http\Requests\CreatePatients;
+use App\Http\Requests\CreateCases;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PatientsController extends Controller
+class CasesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,8 +18,8 @@ class PatientsController extends Controller
     public function __construct()
     {
         $this->page = collect();
-        $this->page->title = 'Patients';
-        $this->page->view = 'patients';
+        $this->page->title = 'Cases';
+        $this->page->view = 'cases';
         $this->middleware('auth');
     }
 
@@ -27,9 +28,10 @@ class PatientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id = '')
     {
         return view($this->page->view)
+            ->with('cases', Cases::all())
             ->with('patients', Patients::all())
             ->with('page', $this->page);
     }
@@ -50,24 +52,25 @@ class PatientsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreatePatients $request)
+    public function store(CreateCases $request)
     {
         $request['user_id'] = Auth::id();
+        $request['patient_id'] = $request['patient'];
 
-        $obj = new Patients($request->all());
+        $obj = new Cases($request->all());
         $obj->save();
 
-        session()->flash('success', 'New Patient Created!');
+        session()->flash('success', 'New Case Created!');
         return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Patients  $patients
+     * @param  \App\Cases  $cases
      * @return \Illuminate\Http\Response
      */
-    public function show(Patients $patients)
+    public function show(Cases $cases)
     {
         //
     }
@@ -75,10 +78,10 @@ class PatientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Patients  $patients
+     * @param  \App\Cases  $cases
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patients $patients)
+    public function edit(Cases $cases)
     {
         //
     }
@@ -87,29 +90,29 @@ class PatientsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Patients  $patients
+     * @param  \App\Cases  $cases
      * @return \Illuminate\Http\Response
      */
-    public function update(CreatePatients $request, $id)
+    public function update(CreateCases $request, $id)
     {
-        $obj = Patients::findOrFail($id);
+        $obj = Cases::findOrFail($id);
         $obj->update($request->all());
 
-        session()->flash('success', 'Patient Updated!');
+        session()->flash('success', 'Case Updated!');
         return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Patients  $patients
+     * @param  \App\Cases  $cases
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Patients::findOrFail($id)->delete();
+        Cases::findOrFail($id)->delete();
 
-        session()->flash('success', 'Patient Deleted!');
+        session()->flash('success', 'Case Deleted!');
         return redirect()->back();
     }
 }

@@ -50,6 +50,16 @@ class User extends Authenticatable
 
     public function users()
     {
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\User', 'user_id');
+    }
+
+    public function patients()
+    {
+        return $this->hasMany('App\Patients', 'user_id');
+    }
+
+    public function cases()
+    {
+        return $this->hasMany('App\Cases', 'user_id');
     }
 }

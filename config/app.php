@@ -230,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // Added Pakages
+        'Carbon' => Carbon\Carbon::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 

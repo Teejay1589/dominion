@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfile;
 use App\Http\Requests\ChangeUserPassword;
 use App\User;
-use Illuminate\Support\Facades\DB;
-use Redirect;
 use Illuminate\Hashing\BcryptHasher;
 
 class HomeController extends Controller
@@ -21,6 +19,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        $this->page = collect();
+        $this->page->title = 'Profile';
+        $this->page->view = 'profile';
         $this->middleware('auth');
     }
 
@@ -36,7 +37,8 @@ class HomeController extends Controller
 
     public function profile()
     {
-        return view('profile');
+        return view($this->page->view)
+            ->with('page', $this->page);
     }
 
     public function update(UpdateProfile $request)
