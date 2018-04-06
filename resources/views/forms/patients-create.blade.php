@@ -76,11 +76,6 @@
                             </div>
                         </div>
                     </div>
-
-					{{-- <div class="form-group">
-						<label class="form-control-label">Symptoms </label>
-						<textarea name="symptoms" class="form-control" rows="3" placeholder="Symptoms">{{ old('symptoms') }}</textarea>
-					</div> --}}
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

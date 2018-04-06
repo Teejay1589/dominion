@@ -44,36 +44,37 @@
     </style>
 </head>
 <body>
-<div id="app">
-    <div id="app" class="page">
-        @auth()
-            @include('shared.alerts')
-            @include('shared.navbar')
+    <div id="app">
+        <div id="app" class="page">
+            @auth()
+                @include('shared.alerts')
+                @include('shared.navbar')
 
-            <div class="page-content d-flex align-items-stretch">
-                @include('shared.sidebar')
+                <div class="page-content d-flex align-items-stretch">
+                    @include('shared.sidebar')
 
-                <div class="content-inner">
-                    @include('shared.page-header')
+                    <div class="content-inner">
+                        @include('shared.page-header')
 
-                    @yield('content')
+                        @yield('content')
 
-                    @include('shared.page-footer')
+                        @include('shared.page-footer')
+                    </div>
                 </div>
-            </div>
-        @endauth
-        @guest()
-            @yield('content')
-        @endguest
+            @endauth
+            @guest()
+                @yield('content')
+            @endguest
+        </div>
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/popper.js/umd/popper.min.js') }}"> </script>
+    <script src="{{ asset('vendor/popper.js/umd/popper.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('vendor/jquery.cookie/jquery.cookie.js') }}"> </script>
+    <script src="{{ asset('vendor/jquery.cookie/jquery.cookie.js') }}"></script>
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('js/charts-home.js') }}"></script>
@@ -96,19 +97,5 @@
     @if( View::hasSection('page_scripts') )
         @yield('page_scripts')
     @endif
-</div>
-
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
-
-<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('vendor/popper.js/umd/popper.min.js') }}"></script>
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('vendor/jquery.cookie/jquery.cookie.js') }}"></script>
-<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-<script src="{{ asset('vendor/jquery-validation/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('js/charts-home.js') }}"></script>
-<!-- Main File-->
-<script src="{{ asset('js/front.js') }}"></script>
 </body>
 </html>

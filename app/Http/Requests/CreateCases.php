@@ -24,9 +24,17 @@ class CreateCases extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|min:2|max:191',
             'patient' => 'required|integer|min:1|exists:patients,id',
-            'discharged_on' => 'nullable|date_format:Y-m-d',
+            'doctors' => 'required|array|min:1|max:5',
+            'title' => 'required|string|min:2|max:191',
+            'symptoms' => 'nullable|string|min:2',
+            'treatment' => 'nullable|string|min:2',
+            'medicine' => 'nullable|string|min:2',
+            'is_consultation' => 'nullable|boolean',
+            'is_emergency' => 'nullable|boolean',
+            'is_delivery' => 'nullable|boolean',
+            // 'is_success' => 'nullable|boolean',
+            // 'discharged_on' => 'nullable|date_format:Y-m-d',
         ];
     }
 }

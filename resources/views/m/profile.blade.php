@@ -58,6 +58,36 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <label class="form-control-label">Date of Birth: </label>
+                            <input class="form-control" type="date" name="date_of_birth" value="{{ old('date_of_birth', Auth::user()->date_of_birth) }}" placeholder="Y-m-d">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Address: </label>
+                            <textarea class="form-control" name="address" placeholder="Address" rows="2">{{ old('address', Auth::user()->address) }}</textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Country: </label>
+                                    <input class="form-control" type="text" name="country" placeholder="Country" value="{{ old('country', Auth::user()->country) }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">State: </label>
+                                    <input class="form-control" type="text" name="state" placeholder="State" value="{{ old('state', Auth::user()->state) }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Job: </label>
+                            <input class="form-control" type="text" name="job" placeholder="Job" value="{{ old('job', Auth::user()->job) }}">
+                        </div>
+
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary">Update</button>
                         </div>

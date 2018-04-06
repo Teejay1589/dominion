@@ -14,7 +14,14 @@ class Cases extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'patient_id', 'discharged_on', 'user_id',
+        'user_id', 'patient_id', 'title', 'symptoms', 'treatment', 'medicine', 'is_consultation', 'is_emergency', 'is_delivery', 'is_success', 'discharged_on',
+    ];
+
+    protected $casts = [
+        'is_consultation' => 'boolean',
+        'is_emergency' => 'boolean',
+        'is_delivery' => 'boolean',
+        'is_success' => 'boolean',
     ];
 
     public function user()
@@ -24,6 +31,16 @@ class Cases extends Model
 
     public function patient()
     {
-        return $this->belongsTo('App\Patients', 'patient_id');
+        return $this->belongsTo('App\Patient', 'patient_id');
+    }
+
+    public function case_doctors()
+    {
+        return $this->hasMany('App\CaseDoctors', 'case_id');
+    }
+
+    public function surgeries()
+    {
+        return $this->hasMany('App\Surgery', 'case_id');
     }
 }

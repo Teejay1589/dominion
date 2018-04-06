@@ -15,18 +15,21 @@ class CreateCasesTable extends Migration
     {
         Schema::create('cases', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('patient_id');
-            $table->integer('doctor_id');
-            $table->integer('billing_id');
+            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('patient_id')->index();
             $table->string('title');
-            $table->string('symptoms');
-            $table->string('treatment');
-            $table->string('medicine');
-            $table->string('consultation');
-            $table->string('surgeon');
-            $table->string('operation');
-            $table->string('delivery');
+            $table->text('symptoms')->nullable();
+            $table->text('treatment')->nullable();
+            $table->text('medicine')->nullable();
+            $table->boolean('is_consultation')->default(0);
+            $table->boolean('is_emergency')->default(0);
+            $table->boolean('is_delivery')->default(0);
+            $table->boolean('is_success')->default(0);
+            $table->datetime('discharged_on')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('patient_id')->references('id')->on('patients');
         });
     }
 
