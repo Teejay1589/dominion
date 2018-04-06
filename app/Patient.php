@@ -2,10 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Patients extends Model
+class Patient extends Authenticatable
 {
+    use Notifiable;
+
     protected $table = 'patients';
 
     /**
@@ -14,13 +17,8 @@ class Patients extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'gender', 'telephone', 'next_of_kin', 'next_of_kin_telephone',  'blood_group',  'genotype', 'user_id',
+        'user_id', 'name', 'gender', 'telephone', 'next_of_kin', 'next_of_kin_telephone',  'blood_group',  'weight',  'height',
     ];
-
-    public function table()
-    {
-        return $this->table;
-    }
 
     public function user()
     {

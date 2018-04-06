@@ -29,8 +29,9 @@ class CreatePatients extends FormRequest
             'telephone' => 'nullable|string|min:8|max:16',
             'next_of_kin' => 'nullable|string|min:2|max:191',
             'next_of_kin_telephone' => 'nullable|string|min:8|max:16',
-            'blood_group' => 'nullable|string|max:2',
-            'genotype' => 'nullable|string|max:2',
+            'blood_group' => 'nullable|string|min:1|max:3',
+            'weight' => 'nullable|string',
+            'height' => 'nullable|string',
         ];
     }
 }

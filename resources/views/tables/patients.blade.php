@@ -8,7 +8,8 @@
 				<th>Telephone</th>
 				<th>Next of Kin</th>
 				<th>Blood Group</th>
-				<th>Genotype</th>
+				<th>Weight</th>
+				<th>Height</th>
 				<th>No of Cases</th>
 				<th>Actions</th>
 			</tr>
@@ -22,7 +23,8 @@
     				<td>{{ $element->telephone }}</td>
     				<td>{{ $element->next_of_kin }} {{ (isset($element->next_of_kin_telephone)) ? "[".$element->next_of_kin_telephone."]" : "" }}</td>
     				<td>{{ $element->blood_group }}</td>
-    				<td>{{ $element->genotype }}</td>
+    				<td>{{ $element->weight }}</td>
+    				<td>{{ $element->height }}</td>
     				<td>{{ $element->cases->count() }} <small><a href="javascript:;">cases</a></small></td>
     				<td>
     					<small>

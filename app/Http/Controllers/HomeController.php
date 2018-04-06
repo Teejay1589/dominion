@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfile;
 use App\Http\Requests\ChangeUserPassword;
@@ -20,8 +19,8 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->page = collect();
-        $this->page->title = 'Profile';
-        $this->page->view = 'profile';
+        $this->page->title = 'Dashboard';
+        $this->page->view = 'm.home';
         $this->middleware('auth');
     }
 
@@ -32,16 +31,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
-
-    public function profile()
-    {
         return view($this->page->view)
             ->with('page', $this->page);
     }
 
-    public function update(UpdateProfile $request)
+    public function profile()
+    {
+        $this->page->title = 'Profile';
+        $this->page->view = 'm.profile';
+        return view($this->page->view)
+            ->with('page', $this->page);
+    }
+
+    // public function update(UpdateProfile $request) // to be used later
+    public function update(Request $request)
     {
         Auth::user()->update($request->all());
 

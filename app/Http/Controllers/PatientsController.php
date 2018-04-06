@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Patients;
+use App\Patient;
 use App\Http\Requests\CreatePatients;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +18,7 @@ class PatientsController extends Controller
     {
         $this->page = collect();
         $this->page->title = 'Patients';
-        $this->page->view = 'patients';
+        $this->page->view = 'm.patients';
         $this->middleware('auth');
     }
 
@@ -30,7 +30,7 @@ class PatientsController extends Controller
     public function index()
     {
         return view($this->page->view)
-            ->with('patients', Patients::all())
+            ->with('patients', Patient::all())
             ->with('page', $this->page);
     }
 
@@ -54,7 +54,7 @@ class PatientsController extends Controller
     {
         $request['user_id'] = Auth::id();
 
-        $obj = new Patients($request->all());
+        $obj = new Patient($request->all());
         $obj->save();
 
         session()->flash('success', 'New Patient Created!');
@@ -75,10 +75,10 @@ class PatientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Patients  $patients
+     * @param  \App\Patient  $patients
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patients $patients)
+    public function edit(Patient $patients)
     {
         //
     }
@@ -87,12 +87,12 @@ class PatientsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Patients  $patients
+     * @param  \App\Patient  $patients
      * @return \Illuminate\Http\Response
      */
     public function update(CreatePatients $request, $id)
     {
-        $obj = Patients::findOrFail($id);
+        $obj = Patient::findOrFail($id);
         $obj->update($request->all());
 
         session()->flash('success', 'Patient Updated!');
@@ -102,12 +102,12 @@ class PatientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Patients  $patients
+     * @param  \App\Patient  $patients
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Patients::findOrFail($id)->delete();
+        Patient::findOrFail($id)->delete();
 
         session()->flash('success', 'Patient Deleted!');
         return redirect()->back();

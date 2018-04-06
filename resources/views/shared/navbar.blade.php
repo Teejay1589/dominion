@@ -20,7 +20,8 @@
                 <!-- Navbar Menu -->
                 <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                     <!-- Search-->
-                    <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
+                    {{-- <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li> --}}
+
                     <!-- Notifications-->
                     {{-- <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-red badge-corner">12</span></a>
                         <ul aria-labelledby="notifications" class="dropdown-menu">
@@ -68,8 +69,9 @@
                             <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages   </strong></a></li>
                         </ul>
                     </li> --}}
+
                     <!-- Logout    -->
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link logout"
                             onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
@@ -79,6 +81,38 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
+                    </li> --}}
+
+                    <li class="nav-item dropdown">
+                        <a data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false" class="nav-link language dropdown-toggle">
+                            <span class="d-none d-sm-inline-block">
+                                {{ Auth::user()->first_name . " " . Auth::user()->last_name }}</span>
+                        </a>
+                        <ul aria-labelledby="languages" class="dropdown-menu">
+                            <li>
+                                <a rel="nofollow" class="dropdown-item" href="{{ url('/home') }}">
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" class="dropdown-item" href="{{ url('/profile') }}">
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a rel="nofollow" class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

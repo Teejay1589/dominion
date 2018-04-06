@@ -53,18 +53,14 @@
     <div class="container">
         <div class="header-top-left">
             <ul id="m_nav_list" class="m_nav menu__list">
-                <li class="m_nav_item menu__item menu__item--current" id="m_nav_item_1">
-                    <a href="{{ url('/') }}" class="menu__link">Home</a>
+                <li class="m_nav_item menu__item menu__item--current" id="m_nav_item_1"><a href="index.html"
+                                                                                           class="menu__link">Home </a>
                 </li>
-                <li class="m_nav_item menu__item" id="moble_nav_item_2">
-                    <a href="#about" class="menu__link">About Us</a>
-                </li>
-                <li class="m_nav_item menu__item" id="moble_nav_item_3">
-                    <a href="#services" class="menu__link">Services</a>
-                </li>
-                <li class="m_nav_item menu__item" id="moble_nav_item_4">
-                    <a href="#team" class="menu__link">Team</a>
-                </li>
+                <li class="m_nav_item menu__item" id="moble_nav_item_2"><a href="#about" class="menu__link">About
+                        Us </a></li>
+                <li class="m_nav_item menu__item" id="moble_nav_item_3"><a href="#services"
+                                                                           class="menu__link">Services</a></li>
+                <li class="m_nav_item menu__item" id="moble_nav_item_4"><a href="#team" class="menu__link">Team</a></li>
             </ul>
         </div>
 

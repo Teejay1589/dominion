@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cases;
-use App\Patients;
+use App\Patient;
 use App\Http\Requests\CreateCases;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +19,7 @@ class CasesController extends Controller
     {
         $this->page = collect();
         $this->page->title = 'Cases';
-        $this->page->view = 'cases';
+        $this->page->view = 'm.cases';
         $this->middleware('auth');
     }
 
@@ -32,7 +32,7 @@ class CasesController extends Controller
     {
         return view($this->page->view)
             ->with('cases', Cases::all())
-            ->with('patients', Patients::all())
+            ->with('patients', Patient::all())
             ->with('page', $this->page);
     }
 

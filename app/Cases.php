@@ -17,11 +17,6 @@ class Cases extends Model
         'title', 'patient_id', 'discharged_on', 'user_id',
     ];
 
-    public function table()
-    {
-        return $this->table;
-    }
-
     public function user()
     {
         return $this->belongsTo('App\User', 'user_id');

@@ -20,14 +20,42 @@
                             {{ csrf_field() }}
                         </div>
 
-                        <div class="form-group">
-                            <label for="name" class="form-control-label">Name: <span class="text-danger">*</span></label>
-                            <input class="form-control" placeholder="Your Name" type="text" name="name" value="{{ old('name', Auth::user()->name) }}" required>
+                        <div class="row">
+                            <div class="col-lg-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">First Name: <span class="text-danger">*</span></label>
+                                    <input class="form-control" placeholder="Your First Name" type="text" name="first_name" value="{{ old('first_name', Auth::user()->first_name) }}" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Last Name: <span class="text-danger">*</span></label>
+                                    <input class="form-control" placeholder="Your Last Name" type="text" name="last_name" value="{{ old('last_name', Auth::user()->last_name) }}" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Email: <span class="text-danger">*</span></label>
+                                    <input class="form-control" placeholder="Your Email" type="email" name="email" value="{{ old('email', Auth::user()->email) }}" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Phone: <span class="text-danger">*</span></label>
+                                    <input class="form-control" placeholder="Your Phone Number" type="tel" name="phone" value="{{ old('phone', Auth::user()->phone) }}" required>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="form-control-label">Email: <span class="text-danger">*</span></label>
-                            <input class="form-control" placeholder="Your Email" type="email" name="email" value="{{ old('email', Auth::user()->email) }}" required>
+                            <label class="form-control-label">Gender: <span class="text-danger">*</span></label>
+                            <select name="gender" class="form-control" required>
+                                <option value="MALE" {{ old('gender', Auth::user()->gender) == 'MALE' ? 'selected' : '' }}>MALE</option>
+                                <option value="FEMALE" {{ old('gender', Auth::user()->gender) == 'FEMALE' ? 'selected' : '' }}>FEMALE</option>
+                            </select>
                         </div>
 
                         <div class="text-right">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePatients extends Migration
+class CreatePatientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,14 +15,17 @@ class CreatePatients extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id')->index();
             $table->string('name');
             $table->enum('gender', ['UNKNOWN', 'MALE', 'FEMALE'])->default('UNKNOWN');
             $table->string('telephone')->nullable();
             $table->string('next_of_kin')->nullable();
             $table->string('next_of_kin_telephone')->nullable();
             $table->string('blood_group')->nullable();
-            $table->string('genotype')->nullable();
-            $table->unsignedInteger('user_id')->nullable()->index();
+            $table->text('symptoms')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('height')->nullable();
+            $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
