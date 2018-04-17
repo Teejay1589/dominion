@@ -15,7 +15,7 @@
                     <div class="card-title">Update Profile Form</div>
                 </div>
                 <div class="card-body">
-                    <form class="" action="{{ url('/profile/update') }}" method="POST" enctype="multipart/form-data">
+                    <form class="" action="{{ url('/m/profile/update') }}" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             {{ csrf_field() }}
                         </div>
@@ -109,7 +109,7 @@
                     <div class="card-title">Change Password Form</div>
                 </div>
                 <div class="card-body">
-                    <form class="" action="{{ url('/password/change') }}" method="POST">
+                    <form class="" action="{{ url('/m/password/change') }}" method="POST">
                         <div class="form-group">
                             {{ csrf_field() }}
                         </div>

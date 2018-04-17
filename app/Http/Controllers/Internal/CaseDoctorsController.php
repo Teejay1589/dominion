@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Internal;
 
-use App\Surgery;
+use App\CaseDoctors;
 use Illuminate\Http\Request;
 
-class SurgeryController extends Controller
+class CaseDoctorsController extends InternalControl
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SurgeryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Surgery  $surgery
+     * @param  \App\CaseDoctors  $caseDoctors
      * @return \Illuminate\Http\Response
      */
-    public function show(Surgery $surgery)
+    public function show(CaseDoctors $caseDoctors)
     {
         //
     }
@@ -52,10 +52,10 @@ class SurgeryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Surgery  $surgery
+     * @param  \App\CaseDoctors  $caseDoctors
      * @return \Illuminate\Http\Response
      */
-    public function edit(Surgery $surgery)
+    public function edit(CaseDoctors $caseDoctors)
     {
         //
     }
@@ -64,10 +64,10 @@ class SurgeryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Surgery  $surgery
+     * @param  \App\CaseDoctors  $caseDoctors
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Surgery $surgery)
+    public function update(Request $request, CaseDoctors $caseDoctors)
     {
         //
     }
@@ -75,10 +75,10 @@ class SurgeryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Surgery  $surgery
+     * @param  \App\CaseDoctors  $caseDoctors
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Surgery $surgery)
+    public function destroy(CaseDoctors $caseDoctors)
     {
         //
     }

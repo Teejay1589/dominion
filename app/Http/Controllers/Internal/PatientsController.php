@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Internal;
 
 use App\Patient;
 use App\Http\Requests\CreatePatients;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PatientsController extends Controller
+class PatientsController extends InternalControl
 {
     /**
      * Create a new controller instance.
@@ -19,7 +19,7 @@ class PatientsController extends Controller
         $this->page = collect();
         $this->page->title = 'Patients';
         $this->page->view = 'm.patients';
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
     }
 
     /**
@@ -55,6 +55,7 @@ class PatientsController extends Controller
         $request['user_id'] = Auth::id();
 
         $obj = new Patient($request->all());
+        $obj->password = bcrypt($obj->telephone);
         $obj->save();
 
         session()->flash('success', 'New Patient Created!');

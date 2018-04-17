@@ -17,7 +17,10 @@ class Patient extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'gender', 'telephone', 'next_of_kin', 'next_of_kin_telephone',  'blood_group',  'weight',  'height',
+        'user_id', 'name', 'gender', 'email', 'telephone', 'next_of_kin', 'next_of_kin_telephone',  'blood_group',  'weight',  'height',
+    ];
+    protected $hidden = [
+        'password', 'remember_token',
     ];
 
     public function user()

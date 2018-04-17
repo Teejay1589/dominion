@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Internal;
 
 use App\Cases;
 use App\Patient;
@@ -11,7 +11,7 @@ use App\Http\Requests\UpdateCases;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CasesController extends Controller
+class CasesController extends InternalControl
 {
     /**
      * Create a new controller instance.
@@ -23,7 +23,7 @@ class CasesController extends Controller
         $this->page = collect();
         $this->page->title = 'Cases';
         $this->page->view = 'm.cases';
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
     }
 
     /**

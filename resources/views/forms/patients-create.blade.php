@@ -1,4 +1,4 @@
-<form action="{{ url('/patients/create') }}" method="post">
+<form action="{{ url('/m/patients/create') }}" method="post">
 	<div class="modal fade" id="modal-create">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -30,10 +30,15 @@
                         </div>
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
-                                <label class="form-control-label">Telephone </label>
-								<input class="form-control" type="tel" name="telephone" placeholder="Patient Telephone" value="{{ old('telephone') }}">
+                                <label class="form-control-label">Telephone <span class="text-danger">*</span></label>
+								<input class="form-control" type="tel" name="telephone" placeholder="Patient Telephone" value="{{ old('telephone') }}" required>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Email <span class="text-danger">*</span></label>
+                        <input class="form-control" type="email" name="email" placeholder="Patient Email" value="{{ old('email') }}" required>
                     </div>
 
                     <br>

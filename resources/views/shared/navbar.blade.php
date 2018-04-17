@@ -87,27 +87,27 @@
                         <a data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false" class="nav-link language dropdown-toggle">
                             <span class="d-none d-sm-inline-block">
-                                {{ Auth::user()->first_name . " " . Auth::user()->last_name }}</span>
+                                {{ Auth::guard('admin')->user()->first_name . " " . Auth::guard('admin')->user()->last_name }}</span>
                         </a>
                         <ul aria-labelledby="languages" class="dropdown-menu">
                             <li>
-                                <a rel="nofollow" class="dropdown-item" href="{{ url('/home') }}">
+                                <a rel="nofollow" class="dropdown-item" href="{{ url('/m/home') }}">
                                     Dashboard
                                 </a>
                             </li>
                             <li>
-                                <a rel="nofollow" class="dropdown-item" href="{{ url('/profile') }}">
+                                <a rel="nofollow" class="dropdown-item" href="{{ url('/m/profile') }}">
                                     Profile
                                 </a>
                             </li>
                             <li>
-                                <a rel="nofollow" class="dropdown-item" href="{{ route('logout') }}"
+                                <a rel="nofollow" class="dropdown-item" href="{{ route('m.logout') }}"
                                    onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                <form id="logout-form" action="{{ route('m.logout') }}" method="POST"
                                       style="display: none;">
                                     {{ csrf_field() }}
                                 </form>

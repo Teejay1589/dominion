@@ -81,7 +81,7 @@
             <div class="row">
                 <!-- Logo & Information Panel-->
                 <div class="col-lg-6">
-                    <div class="info d-flex align-items-center">
+                    <div class="info d-flex align-items-center bg-info">
                         <div class="content">
                             <div class="logo">
                                 <h1>Dashboard</h1>
@@ -94,12 +94,16 @@
                 <div class="col-lg-6 bg-white">
                     <div class="form d-flex align-items-center">
                         <div class="content">
-                            <form id="register-form" method="POST" action="{{ route('register') }}">
+                            <form id="register-form" method="POST" action="{{ route('m.register') }}">
                                 {{ csrf_field() }}
 
                                 <div class="form-group">
-                                    <input id="register-username" type="text" name="name" required class="input-material">
-                                    <label for="register-username" class="label-material">User Name</label>
+                                    <input id="register-username" type="text" name="first_name" required class="input-material">
+                                    <label for="register-username" class="label-material">First Name</label>
+                                </div>
+                                <div class="form-group">
+                                    <input id="register-username" type="text" name="last_name" required class="input-material">
+                                    <label for="register-username" class="label-material">Last Name</label>
                                 </div>
                                 <div class="form-group">
                                     <input id="register-email" type="email" name="email" required class="input-material">
@@ -117,8 +121,8 @@
                                     <input id="license" type="checkbox" class="checkbox-template">
                                     <label for="license">Agree the terms and policy</label>
                                 </div>
-                                <input id="register" type="submit" value="Register" class="btn btn-primary">
-                            </form><small>Already have an account? </small><a href="{{ route('login') }}" class="signup">Login</a>
+                                <input id="register" type="submit" value="Register" class="btn btn-info">
+                            </form><small>Already have an account? </small><a href="{{ route('m.login') }}" class="signup text-info">Login</a>
                         </div>
                     </div>
                 </div>
@@ -126,7 +130,7 @@
         </div>
     </div>
     <div class="copyrights text-center">
-        <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a>
+        <p>Design by <a href="https://bootstrapious.com" class="external text-info">Bootstrapious</a>
             <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
         </p>
     </div>

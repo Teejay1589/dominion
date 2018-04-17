@@ -18,6 +18,7 @@ class CreatePatientsTable extends Migration
             $table->unsignedInteger('user_id')->index();
             $table->string('name');
             $table->enum('gender', ['UNKNOWN', 'MALE', 'FEMALE'])->default('UNKNOWN');
+            $table->string('email')->nullable();
             $table->string('telephone')->nullable();
             $table->string('next_of_kin')->nullable();
             $table->string('next_of_kin_telephone')->nullable();
@@ -25,6 +26,7 @@ class CreatePatientsTable extends Migration
             $table->text('symptoms')->nullable();
             $table->string('weight')->nullable();
             $table->string('height')->nullable();
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
 

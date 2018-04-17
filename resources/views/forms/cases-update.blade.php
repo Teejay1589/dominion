@@ -1,4 +1,4 @@
-<form action="{{ url('/cases/update/'.$active_object->id) }}" method="post">
+<form action="{{ url('/m/cases/update/'.$active_object->id) }}" method="post">
 	<div class="modal fade" id="modal-update-{{ $active_object->id }}">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">

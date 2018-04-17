@@ -1,4 +1,4 @@
-<form action="{{ url('/patients/update/'.$active_object->id) }}" method="post">
+<form action="{{ url('/m/patients/update/'.$active_object->id) }}" method="post">
 	<div class="modal fade" id="modal-update-{{ $active_object->id }}">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -34,6 +34,11 @@
 								<input class="form-control" type="tel" name="telephone" placeholder="Patient Telephone" value="{{ old('telephone', $active_object->telephone) }}">
                             </div>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Email <span class="text-danger">*</span></label>
+                        <input class="form-control" type="email" name="email" placeholder="Patient Email" value="{{ old('email', $active_object->email) }}" required>
                     </div>
 
                     <br>

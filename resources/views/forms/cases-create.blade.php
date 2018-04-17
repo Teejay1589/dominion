@@ -1,4 +1,4 @@
-<form action="{{ url('/cases/create') }}" method="post">
+<form action="{{ url('/m/cases/create') }}" method="post">
 	<div class="modal fade" id="modal-create">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
