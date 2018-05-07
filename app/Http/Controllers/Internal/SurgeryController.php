@@ -3,10 +3,28 @@
 namespace App\Http\Controllers\Internal;
 
 use App\Surgery;
+use App\Patient;
+use App\Cases;
+use App\SurgeryName;
+use App\Http\Requests\CreateSurgeries;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SurgeryController extends InternalControl
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->page = collect();
+        $this->page->title = 'Surgeries';
+        $this->page->view = 'm.surgeries';
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +32,12 @@ class SurgeryController extends InternalControl
      */
     public function index()
     {
-        //
+        return view($this->page->view)
+            ->with('surgeries', Surgery::all())
+            // ->with('surgeries', Surgery::orderBy('id', 'desc')->paginate(10))
+            ->with('cases', Cases::all())
+            ->with('surgery_names', SurgeryName::all())
+            ->with('page', $this->page);
     }
 
     /**
@@ -33,18 +56,51 @@ class SurgeryController extends InternalControl
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateSurgeries $request)
     {
-        //
+        $request['user_id'] = Auth::id();
+        $request['case_id'] = $request->case;
+        // $request['is_success'] = isset($request->is_success) ? 1 : 0;
+
+        if ( SurgeryName::where('surgery_name', $request->name)->count() == 0 ) {
+            $obj1 = new SurgeryName();
+            $obj1->surgery_name = $request->name;
+            $obj1->save();
+        }
+
+        $obj = new Surgery($request->all());
+        $obj->save();
+
+        session()->flash('success', 'New Surgery Created!');
+        return redirect()->back();
+    }
+    public function resurgery(CreateSurgeries $request, $id)
+    {
+        $request['user_id'] = Auth::id();
+        $request['case_id'] = $request->case;
+        $request['surgery_id'] = $id;
+        // $request['is_success'] = isset($request->is_success) ? 1 : 0;
+
+        if ( SurgeryName::where('surgery_name', $request->name)->count() == 0 ) {
+            $obj1 = new SurgeryName();
+            $obj1->surgery_name = $request->name;
+            $obj1->save();
+        }
+
+        $obj = new Surgery($request->all());
+        $obj->save();
+
+        session()->flash('success', 'New Surgery Created!');
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Surgery  $surgery
+     * @param  \App\Surgeries  $surgeries
      * @return \Illuminate\Http\Response
      */
-    public function show(Surgery $surgery)
+    public function show(Surgeries $surgeries)
     {
         //
     }
@@ -52,10 +108,10 @@ class SurgeryController extends InternalControl
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Surgery  $surgery
+     * @param  \App\Surgery  $surgeries
      * @return \Illuminate\Http\Response
      */
-    public function edit(Surgery $surgery)
+    public function edit(Surgery $surgeries)
     {
         //
     }
@@ -64,22 +120,38 @@ class SurgeryController extends InternalControl
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Surgery  $surgery
+     * @param  \App\Surgery  $surgeries
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Surgery $surgery)
+    public function update(CreateSurgeries $request, $id)
     {
-        //
+        $request['case_id'] = $request->case;
+        $request['is_success'] = isset($request->is_success) ? 1 : 0;
+
+        if ( SurgeryName::where('surgery_name', $request->name)->count() == 0 ) {
+            $obj1 = new SurgeryName();
+            $obj1->surgery_name = $request->name;
+            $obj1->save();
+        }
+
+        $obj = Surgery::findOrFail($id);
+        $obj->update($request->all());
+
+        session()->flash('success', 'Surgery Updated!');
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Surgery  $surgery
+     * @param  \App\Surgery  $surgeries
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Surgery $surgery)
+    public function destroy($id)
     {
-        //
+        Surgery::findOrFail($id)->delete();
+
+        session()->flash('success', 'Surgery Deleted!');
+        return redirect()->back();
     }
 }

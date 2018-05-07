@@ -43,8 +43,7 @@ class HomeController extends Controller
             ->with('page', $this->page);
     }
 
-    // public function update(UpdateProfile $request) // to be used later
-    public function update(Request $request)
+    public function update(UpdateProfile $request)
     {
         Auth::user()->update($request->all());
 

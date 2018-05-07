@@ -12,10 +12,20 @@
 				<div class="modal-body">
 					{{ csrf_field() }}
 
-					<div class="form-group">
-						<label class="form-control-label">Name <span class="text-danger">*</span></label>
-						<input class="form-control" type="text" name="name" placeholder="Patient Name" value="{{ old('name') }}" required>
-					</div>
+                    <div class="row">
+                        <div class="col-lg-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="form-control-label">First Name <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" name="first_name" placeholder="Patient First Name" value="{{ old('first_name') }}" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="form-control-label">Last Name <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" name="last_name" placeholder="Patient Last Name" value="{{ old('last_name') }}" required>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-lg-6 col-xs-12">
@@ -30,15 +40,15 @@
                         </div>
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
-                                <label class="form-control-label">Telephone <span class="text-danger">*</span></label>
-								<input class="form-control" type="tel" name="telephone" placeholder="Patient Telephone" value="{{ old('telephone') }}" required>
+                                <label class="form-control-label">Phone Number <span class="text-danger">*</span></label>
+								<input class="form-control" type="tel" name="phone" placeholder="Patient Phone Number" value="{{ old('phone') }}" required>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-control-label">Email <span class="text-danger">*</span></label>
-                        <input class="form-control" type="email" name="email" placeholder="Patient Email" value="{{ old('email') }}" required>
+                        <label class="form-control-label">Email </label>
+                        <input class="form-control" type="email" name="email" placeholder="Patient Email" value="{{ old('email') }}" >
                     </div>
 
                     <br>

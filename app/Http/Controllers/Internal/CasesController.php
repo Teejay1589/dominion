@@ -35,6 +35,7 @@ class CasesController extends InternalControl
     {
         return view($this->page->view)
             ->with('cases', Cases::all())
+            // ->with('cases', Cases::orderBy('id', 'desc')->paginate(10))
             ->with('patients', Patient::all())
             ->with('users', User::all())
             ->with('page', $this->page);

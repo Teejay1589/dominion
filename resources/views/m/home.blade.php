@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('page_styles')
+@endsection
+
 @section('content')
     <!-- Dashboard Counts Section-->
     <section class="dashboard-counts no-padding-bottom">
@@ -204,4 +207,7 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('page_scripts')
 @endsection

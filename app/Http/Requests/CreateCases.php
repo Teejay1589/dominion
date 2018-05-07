@@ -34,7 +34,7 @@ class CreateCases extends FormRequest
             'is_emergency' => 'nullable|boolean',
             'is_delivery' => 'nullable|boolean',
             // 'is_success' => 'nullable|boolean',
-            // 'discharged_on' => 'nullable|date_format:Y-m-d',
+            // 'discharged_on' => 'nullable|date_format:Y-m-d'
         ];
     }
 }

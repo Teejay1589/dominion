@@ -23,7 +23,7 @@
                             	<label class="form-control-label">Select Patient <span class="text-danger">*</span></label>
 								<select class="form-control" name="patient" required disabled>
 									@foreach ($patients as $element)
-										<option value="{{ $element->id }}" {{ (old('patient', $active_object->patient_id) == $element->id) ? 'selected' : '' }}>{{ $element->name }} [{{ $element->telephone }}]</option>
+										<option value="{{ $element->id }}" {{ (old('patient', $active_object->patient_id) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone }}]</option>
 									@endforeach
 								</select>
                             </div>
@@ -68,22 +68,22 @@
 
 					<div class="form-group">
 						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="is_consultation" class="form-check-input" value="1" {{ old('is_consultation', $active_object->is_consultation) == 1 ? 'checked' : '' }}> Is Consultation
+							<input type="checkbox" name="is_consultation" class="form-check-input" value="1" {{ old('is_consultation', $active_object->is_consultation) == 1 ? 'checked' : '' }}> Consultation
 						</label>
 						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="is_emergency" class="form-check-input" value="1" {{ old('is_emergency', $active_object->is_emergency) == 1 ? 'checked' : '' }}> is Emergency
+							<input type="checkbox" name="is_emergency" class="form-check-input" value="1" {{ old('is_emergency', $active_object->is_emergency) == 1 ? 'checked' : '' }}> Emergency
 						</label>
 						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="is_delivery" class="form-check-input" value="1" {{ old('is_delivery', $active_object->is_delivery) == 1 ? 'checked' : '' }}> is Delivery
+							<input type="checkbox" name="is_delivery" class="form-check-input" value="1" {{ old('is_delivery', $active_object->is_delivery) == 1 ? 'checked' : '' }}> Delivery
 						</label>
 						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="is_success" class="form-check-input" value="1" {{ old('is_success', $active_object->is_success) == 1 ? 'checked' : '' }} {{ ($active_object->is_delivery) ? '' : 'disabled' }}> is Delivery a Success
+							<input type="checkbox" name="is_success" class="form-check-input" value="1" {{ old('is_success', $active_object->is_success) == 1 ? 'checked' : '' }} {{ ($active_object->is_delivery) ? '' : 'disabled' }}> Delivery is a Success
 						</label>
 					</div>
 
 					<div class="form-group">
 						<label class="form-control-label">Discharged On <span class="text-danger">*</span></label>
-						<input class="form-control" type="date" name="discharged_on" placeholder="Date Discharged (Y-m-d)" value="{{ old('discharged_on', $active_object->discharged_on) }}">
+						<input class="form-control" type="date" name="discharged_on" placeholder="Date Discharged (Y-m-d)" value="{{ is_null(old('started_at', $active_object->discharged_on)) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", old('started_at', $active_object->discharged_on))->format("Y-m-d") }}">
 					</div>
 				</div>
 				<div class="modal-footer">

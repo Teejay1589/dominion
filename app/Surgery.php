@@ -14,11 +14,7 @@ class Surgery extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'case_id', 'name', 'is_success', 'started_at', 'ended_at',
-    ];
-
-    protected $casts = [
-        'is_success' => 'boolean',
+        'user_id', 'case_id', 'surgery_id', 'name', 'surgery_date', 'complications',
     ];
 
     public function user()
@@ -29,5 +25,15 @@ class Surgery extends Model
     public function case()
     {
         return $this->belongsTo('App\Cases', 'case_id');
+    }
+
+    public function surgery()
+    {
+        return $this->belongsTo('App\Surgery');
+    }
+
+    public function surgeries()
+    {
+        return $this->hasMany('App\Surgery');
     }
 }

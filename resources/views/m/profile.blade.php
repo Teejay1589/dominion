@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('page_styles')
+@endsection
+
 @section('content')
 
     <section>
@@ -138,4 +141,7 @@
         </div>
     </section>
 
+@endsection
+
+@section('page_scripts')
 @endsection

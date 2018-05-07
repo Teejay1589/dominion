@@ -36,49 +36,49 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Login  form validation
     // ------------------------------------------------------ //
-    $('#login-form').validate({
-        messages: {
-            loginUsername: 'please enter your username',
-            loginPassword: 'please enter your password'
-        }
-    });
+    // $('#login-form').validate({
+    //     messages: {
+    //         loginUsername: 'please enter your username',
+    //         loginPassword: 'please enter your password'
+    //     }
+    // });
 
     // ------------------------------------------------------- //
     // Register form validation
     // ------------------------------------------------------ //
-    $('#register-form').validate({
-        messages: {
-            registerUsername: 'please enter your first name',
-            registerEmail: 'please enter a vaild Email Address',
-            registerPassword: 'please enter your password'
-        }
-    });
+    // $('#register-form').validate({
+    //     messages: {
+    //         registerUsername: 'please enter your first name',
+    //         registerEmail: 'please enter a vaild Email Address',
+    //         registerPassword: 'please enter your password'
+    //     }
+    // });
 
     // ------------------------------------------------------- //
     // Sidebar Functionality
     // ------------------------------------------------------ //
-    $('#toggle-btn').on('click', function (e) {
-        e.preventDefault();
-        $(this).toggleClass('active');
+    // $('#toggle-btn').on('click', function (e) {
+    //     e.preventDefault();
+    //     $(this).toggleClass('active');
 
-        $('.side-navbar').toggleClass('shrinked');
-        $('.content-inner').toggleClass('active');
-        $(document).trigger('sidebarChanged');
+    //     $('.side-navbar').toggleClass('shrinked');
+    //     $('.content-inner').toggleClass('active');
+    //     $(document).trigger('sidebarChanged');
 
-        if ($(window).outerWidth() > 1183) {
-            if ($('#toggle-btn').hasClass('active')) {
-                $('.navbar-header .brand-small').hide();
-                $('.navbar-header .brand-big').show();
-            } else {
-                $('.navbar-header .brand-small').show();
-                $('.navbar-header .brand-big').hide();
-            }
-        }
+    //     if ($(window).outerWidth() > 1183) {
+    //         if ($('#toggle-btn').hasClass('active')) {
+    //             $('.navbar-header .brand-small').hide();
+    //             $('.navbar-header .brand-big').show();
+    //         } else {
+    //             $('.navbar-header .brand-small').show();
+    //             $('.navbar-header .brand-big').hide();
+    //         }
+    //     }
 
-        if ($(window).outerWidth() < 1183) {
-            $('.navbar-header .brand-small').show();
-        }
-    });
+    //     if ($(window).outerWidth() < 1183) {
+    //         $('.navbar-header .brand-small').show();
+    //     }
+    // });
 
     // ------------------------------------------------------- //
     // Material Inputs
@@ -106,23 +106,23 @@ $(document).ready(function () {
     });
 
     // ------------------------------------------------------- //
-    // Footer 
-    // ------------------------------------------------------ //   
+    // Footer
+    // ------------------------------------------------------ //
 
-    var contentInner = $('.content-inner');
+    // var contentInner = $('.content-inner');
 
-    $(document).on('sidebarChanged', function () {
-        adjustFooter();
-    });
+    // $(document).on('sidebarChanged', function () {
+    //     adjustFooter();
+    // });
 
-    $(window).on('resize', function () {
-        adjustFooter();
-    })
+    // $(window).on('resize', function () {
+    //     adjustFooter();
+    // })
 
-    function adjustFooter() {
-        var footerBlockHeight = $('.main-footer').outerHeight();
-        contentInner.css('padding-bottom', footerBlockHeight + 'px');
-    }
+    // function adjustFooter() {
+    //     var footerBlockHeight = $('.main-footer').outerHeight();
+    //     contentInner.css('padding-bottom', footerBlockHeight + 'px');
+    // }
 
     // ------------------------------------------------------- //
     // External links to new window

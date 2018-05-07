@@ -15,7 +15,7 @@ class CreateCasesTable extends Migration
     {
         Schema::create('cases', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('user_id')->index()->nullable();
             $table->unsignedInteger('patient_id')->index();
             $table->string('title');
             $table->text('symptoms')->nullable();

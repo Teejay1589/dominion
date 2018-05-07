@@ -24,13 +24,10 @@ class UpdateProfile extends FormRequest
     public function rules()
     {
         return [
-            // 'avatar' => 'nullable|file|image|max:1024',
-            // 'username' => 'required|string|min:4|max:25',
-            'name' => 'required|string|min:2|max:191',
+            'first_name' => 'required|string|min:2|max:191',
+            'last_name' => 'required|string|min:2|max:191',
             'email' => 'required|email|max:191',
-            // 'gender' => 'required|string|min:4|max:6',
-
-            // 'role' => 'nullable|integer|min:1|exists:roles,id',
+            'gender' => 'required|string|min:4|max:6',
         ];
     }
 }

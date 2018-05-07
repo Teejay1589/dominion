@@ -23,9 +23,9 @@
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
                             	<label class="form-control-label">Select Patient <span class="text-danger">*</span></label>
-								<select class="form-control" name="patient" required>
+								<select class="select-patient" name="patient" required multiple>
 									@foreach ($patients as $element)
-										<option value="{{ $element->id }}" {{ (old('patient') == $element->id) ? 'selected' : '' }}>{{ $element->name }} [{{ $element->telephone }}]</option>
+										<option value="{{ $element->id }}" {{ (old('patient') == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone }}]</option>
 									@endforeach
 								</select>
                             </div>
@@ -47,7 +47,7 @@
 						<textarea name="symptoms" class="form-control" rows="2" placeholder="Symptoms">{{ old('symptoms') }}</textarea>
 					</div>
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
                             	<label class="form-control-label">Treatment </label>
@@ -60,17 +60,17 @@
 								<textarea name="medicine" class="form-control" rows="3" placeholder="Medicine">{{ old('medicine') }}</textarea>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
 					<div class="form-group">
 						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="is_consultation" class="form-check-input" value="1" {{ old('is_consultation') == 1 ? 'checked' : '' }}> Is Consultation
+							<input type="checkbox" name="is_consultation" class="form-check-input" value="1" {{ old('is_consultation') == 1 ? 'checked' : '' }}> Consultation
 						</label>
 						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="is_emergency" class="form-check-input" value="1" {{ old('is_emergency') == 1 ? 'checked' : '' }}> is Emergency
+							<input type="checkbox" name="is_emergency" class="form-check-input" value="1" {{ old('is_emergency') == 1 ? 'checked' : '' }}> Emergency
 						</label>
 						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="is_delivery" class="form-check-input" value="1" {{ old('is_delivery') == 1 ? 'checked' : '' }}> is Delivery
+							<input type="checkbox" name="is_delivery" class="form-check-input" value="1" {{ old('is_delivery') == 1 ? 'checked' : '' }}> Delivery
 						</label>
 					</div>
 				</div>

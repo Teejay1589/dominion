@@ -41,6 +41,9 @@
         .modal.in {
             /*background: dimgray;*/
         }
+        .card-title {
+            margin-bottom: .5rem;
+        }
     </style>
 </head>
 <body>
@@ -91,6 +94,44 @@
           e.preventDefault();
         }
       });
+
+        $('#toggle-btn').on('click', function (e) {
+            e.preventDefault();
+            $(this).toggleClass('active');
+
+            $('.side-navbar').toggleClass('shrinked');
+            $('.content-inner').toggleClass('active');
+            $(document).trigger('sidebarChanged');
+
+            if ($(window).outerWidth() > 1183) {
+                if ($('#toggle-btn').hasClass('active')) {
+                    $('.navbar-header .brand-small').hide();
+                    $('.navbar-header .brand-big').show();
+                } else {
+                    $('.navbar-header .brand-small').show();
+                    $('.navbar-header .brand-big').hide();
+                }
+            }
+
+            if ($(window).outerWidth() < 1183) {
+                $('.navbar-header .brand-small').show();
+            }
+        });
+
+        var contentInner = $('.content-inner');
+
+        $(document).on('sidebarChanged', function () {
+            adjustFooter();
+        });
+
+        $(window).on('resize', function () {
+            adjustFooter();
+        })
+
+        function adjustFooter() {
+            var footerBlockHeight = $('.main-footer').outerHeight();
+            contentInner.css('padding-bottom', footerBlockHeight + 'px');
+        }
     </script>
 
     {{-- Page Scripts --}}

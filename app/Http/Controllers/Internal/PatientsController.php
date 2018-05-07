@@ -31,6 +31,7 @@ class PatientsController extends InternalControl
     {
         return view($this->page->view)
             ->with('patients', Patient::all())
+            // ->with('patients', Patient::orderBy('id', 'desc')->paginate(10))
             ->with('page', $this->page);
     }
 
@@ -111,6 +112,20 @@ class PatientsController extends InternalControl
         Patient::findOrFail($id)->delete();
 
         session()->flash('success', 'Patient Deleted!');
+        return redirect()->back();
+    }
+
+    public function password_reset($id)
+    {
+        $patient = Patient::findOrFail($id);
+        if( !is_null($patient->phone) ) {
+            $patient->password = bcrypt($patient->phone);
+            $patient->update();
+            session()->flash('success', 'Patient Password Reset to phone number!');
+        } else {
+            session()->flash('success', 'Patient Password is unchanged!');
+        }
+
         return redirect()->back();
     }
 }

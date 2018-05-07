@@ -24,10 +24,11 @@ class CreatePatients extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:2|max:191',
+            'first_name' => 'required|string|min:2|max:191',
+            'last_name' => 'required|string|min:2|max:191',
             'gender' => 'required|string|min:4|max:12',
             'email' => 'nullable|email|max:191',
-            'telephone' => 'required|string|min:8|max:16',
+            'phone' => 'required|string|min:8|max:16',
             'next_of_kin' => 'nullable|string|min:2|max:191',
             'next_of_kin_telephone' => 'nullable|string|min:8|max:16',
             'blood_group' => 'nullable|string|min:1|max:3',

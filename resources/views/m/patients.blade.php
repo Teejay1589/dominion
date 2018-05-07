@@ -1,5 +1,16 @@
 @extends('layouts.app')
 
+@section('page_styles')
+    @if( count($patients) > 0 )
+        <link rel="stylesheet" type="text/css" href="{{ asset('js/datatables/datatables.min.css') }}">
+        <style type="text/css">
+            .dataTables_wrapper .row {
+                width: 100%;
+            }
+        </style>
+    @endif
+@endsection
+
 @section('content')
 
     <section>
@@ -12,7 +23,7 @@
         	<div class="clearfix"></div>
         	<br>
 
-            <div id="update-profile" class="card" style="width: 100%;">
+            <div class="card" style="width: 100%;">
                 <div class="card-close">
                     <div class="dropdown">
                         <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
@@ -22,11 +33,22 @@
                 <div class="card-header">
                     <div class="card-title">Patients</div>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-0">
                     @include('tables.patients')
                 </div>
             </div>
         </div>
     </section>
 
+@endsection
+
+@section('page_scripts')
+    @if( count($patients) > 0 )
+        <script type="text/javascript" src="{{ asset('js/datatables/datatables.min.js') }}"></script>
+        <script type="text/javascript">
+            $(".table").DataTable({
+                "pageLength": 10
+            });
+        </script>
+    @endif
 @endsection
