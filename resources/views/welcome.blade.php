@@ -61,6 +61,7 @@
                 <li class="m_nav_item menu__item" id="moble_nav_item_3"><a href="#services"
                                                                            class="menu__link">Services</a></li>
                 <li class="m_nav_item menu__item" id="moble_nav_item_4"><a href="#team" class="menu__link">Team</a></li>
+                <li class="m_nav_item menu__item" id="moble_nav_item_5"><a href="{{ url('/blog') }}" class="menu__link">Blog</a></li>
             </ul>
         </div>
 
@@ -68,7 +69,7 @@
             <div class="header-top-right">
                 <p>Our Patient? Login</p>
             </div>
-        </a>
+ </a>
         <a href="{{ url('/newBook') }}" data-toggle="modal" data-target="#myModal1">
             <div class="header-top-right mg-right">
                 <p class="appoint">New Patient? Book An Appointment</p>
@@ -80,7 +81,8 @@
 <div class="header">
     <div class="container">
         <div class="logo">
-            <a href="{{ url('/') }}">Dominion <span>Medical Center</span></a>
+        <img src="{{ asset('img/logo.png') }}">
+            <a href="{{ url('/') }}">Dominion <span class="smallfont">Specialist Medical And Diagnostics Center</span></a>
         </div>
 
 

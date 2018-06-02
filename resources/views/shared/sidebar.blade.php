@@ -32,6 +32,7 @@
         <li><a href="#"> <i class="icon-check"></i>Cases </a></li>
         <li><a href="#"> <i class="fa fa-calendar-o"></i>Schedules (On Call) </a></li>
         <li><a href="#"> <i class="icon-page"></i>Research / Case Reviews </a></li>
+        <li class="{{ isset($page) && $page->view == 'm.blog' ? 'active' : '' }}"><a href="{{ url('/m/blog/posts') }}"><i class="fa fa-paragraph"></i>Posts </a></li>
     </ul>
 
     <span class="heading">Management</span>

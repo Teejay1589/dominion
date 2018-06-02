@@ -71,3 +71,22 @@ Route::post('/m/surgery_names/create/{id}', 'Internal\SurgeryNameController@resu
 // Route::get('/m/surgery_names/edit/{id}', 'Internal\SurgeryNameController@edit')->name('m.surgery_names.edit');
 Route::post('/m/surgery_names/update/{id}', 'Internal\SurgeryNameController@update')->name('m.surgery_names.update');
 Route::get('/m/surgery_names/delete/{id}', 'Internal\SurgeryNameController@destroy')->name('m.surgery_names.destroy');
+
+
+
+
+
+// Blog Page
+Route::get('/blog', 'PublicController@blog');
+Route::get('/blog/{slug}', ['as' => '/blog/blog.single', 'uses' => 'PublicController@getSingle'])->where('slug', '[\w\d\-\_]+');
+
+// Blog Post
+Route::resource('/m/blog/posts', 'Internal\PostController');
+Route::post('/m/blog/post/create', 'Internal\PostController@store')->name('m/blog/posts.show');
+Route::get('/m/blog/post/edit/{id}', 'Internal\PostController@update');
+Route::get('/m/blog/post/delete/{id}', 'Internal\PostController@destroy')->name('/m/blog/posts.destroy');
+Route::post('/m/blog/post/{id}/edit', 'Internal\PostController@update')->name('/m/blog/posts.edit');
+
+// Blog
+Route::get('/m/blog', ['uses' => 'Internal\BlogController@getIndex', 'as' => '/m/blog/blog.index']);
+Route::get('/m/blog/{slug}', ['as' => '/m/blog/blog.single', 'uses' => 'Internal\BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
