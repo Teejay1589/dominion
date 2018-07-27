@@ -10,6 +10,11 @@ class Role extends Model
         'name',
     ];
 
+    public static function table()
+    {
+        return 'roles';
+    }
+
     public function users()
     {
         return $this->hasMany('App\User');

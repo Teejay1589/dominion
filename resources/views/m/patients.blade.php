@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title', $page->title)
 
 @section('page_styles')
     @if( count($patients) > 0 )
@@ -7,6 +9,18 @@
             .dataTables_wrapper .row {
                 width: 100%;
             }
+            a.text-primary {
+                color: #0099cc !important;
+            }
+            a.text-primary:hover {
+                color: #007399 !important;
+            }
+            a.text-danger {
+                color: #d96557 !important;
+            }
+            a.text-danger:hover {
+                color: #ce402f !important;
+            }
         </style>
     @endif
 @endsection
@@ -14,41 +28,80 @@
 @section('content')
 
     <section>
-        <div class="container-fluid">
-        	<div>
-        		<a href="#modal-create" class="btn btn-link btn-block" data-toggle="modal">Create Patient</a>
-	        	@include('forms.patients-create')
-        	</div>
+        <div class="row mb15">
+            <div class="col-md-1 col-xs-12"></div>
+        	<div class="col-md-10 col-xs-12">
 
-        	<div class="clearfix"></div>
-        	<br>
+                @include('components.toolbar', [
+                    'model' => new App\Patient(),
+                    'create_form' => 'forms.patients-create',
+                    'data_name' => 'Patient',
+                    'data' => $patients,
+                    'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at')
+                ])
 
-            <div class="card" style="width: 100%;">
-                <div class="card-close">
-                    <div class="dropdown">
-                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                        <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
-                    </div>
+                {{-- <div class="clearfix"></div>
+                <br> --}}
+
+                <div id="accordion" role="tablist" aria-multiselectable="true">
+                    @forelse ($patients as $element)
+                        <div class="panel mb5">
+                            <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
+                                <span class="badge badge-default pull-right">{{ $element->phone_number }}</span>
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->first_name }} {{ $element->last_name }}</a>
+                                </h5>
+                                <div class="mb5"></div>
+                                <span>
+                                    <span>
+                                        <strong>{{ $element->visits->count() }}</strong>
+                                        <a href="{{ url('/m/patient/'.$element->id.'/visits') }}" class="mr10 text-primary">
+                                            <span>visits</span>
+                                        </a>
+                                    </span>
+                                    @if ( $element->visits->count() > 0 )
+                                        <a href="#modal-view-{{ $element->visits->last()->id }}" data-toggle="modal" class="mr10">last visit</a>
+                                    @endif
+                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
+                                    <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
+                                    <a href="{{ url('/m/patients/delete/'.$element->id) }}" class="mr10 text-danger">
+                                        <span>delete</span>
+                                    </a>
+                                </span>
+                                <div>
+                                    @include('forms.patients-update', ['active_object' => $element])
+                                    @if ( $element->visits->count() > 0 )
+                                        @include('partials.visit-view', ['active_object' => $element->visits->last()])
+                                    @endif
+                                </div>
+                            </div>
+                            <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
+                                @include('partials.patient-inline-view', ['element' => $element])
+                            </div>
+                        </div>
+                    @empty
+                        <div class="alert alert-danger">
+                            {{-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> --}}
+                            <strong>Sorry!</strong> No Records Found
+                        </div>
+                    @endforelse
                 </div>
-                <div class="card-header">
-                    <div class="card-title">Patients</div>
+
+                <div class="text-left">
+                    {{ $patients->links('shared.pagination', ['small' => true]) }}
                 </div>
-                <div class="card-body p-0">
-                    @include('tables.patients')
-                </div>
+
+                {{-- @include('tables.patients') --}}
             </div>
+            <div class="col-md-1 col-xs-12"></div>
         </div>
     </section>
 
 @endsection
 
 @section('page_scripts')
-    @if( count($patients) > 0 )
-        <script type="text/javascript" src="{{ asset('js/datatables/datatables.min.js') }}"></script>
-        <script type="text/javascript">
-            $(".table").DataTable({
-                "pageLength": 10
-            });
-        </script>
-    @endif
+    <script type="text/javascript">
+        var base_url = '{{ url('/m/patients') }}';
+    </script>
+    <script type="text/javascript" src="{{ asset('js/toolbar.js') }}"></script>
 @endsection

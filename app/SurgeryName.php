@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SurgeryName extends Model
 {
-    protected $table = 'surgery_names';
-
     /**
      * The attributes that are mass assignable.
      *
@@ -16,4 +14,9 @@ class SurgeryName extends Model
     protected $fillable = [
         'surgery_name',
     ];
+
+    public static function table()
+    {
+        return 'surgery_names';
+    }
 }

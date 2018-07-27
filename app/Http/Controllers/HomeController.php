@@ -19,7 +19,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->page = collect();
-        $this->page->title = 'Patient Dashboard';
+        $this->page->title = 'My Dashboard';
         $this->page->view = 'home';
         $this->middleware('auth');
     }
@@ -37,7 +37,7 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $this->page->title = 'Profile';
+        $this->page->title = 'My Profile';
         $this->page->view = 'profile';
         return view($this->page->view)
             ->with('page', $this->page);

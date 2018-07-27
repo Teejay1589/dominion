@@ -16,7 +16,7 @@ class CreateSurgeriesTable extends Migration
         Schema::create('surgeries', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->index()->nullable();
-            $table->unsignedInteger('case_id')->index()->nullable();
+            $table->unsignedInteger('visit_id')->index();
             $table->unsignedInteger('surgery_id')->index()->nullable();
             $table->string('name');
             $table->date('surgery_date')->nullable();
@@ -24,7 +24,7 @@ class CreateSurgeriesTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('case_id')->references('id')->on('cases');
+            $table->foreign('visit_id')->references('id')->on('visits')->onDelete('cascade');
             $table->foreign('surgery_id')->references('id')->on('surgeries')->onDelete('cascade');
         });
     }

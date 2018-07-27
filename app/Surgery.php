@@ -6,25 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Surgery extends Model
 {
-    protected $table = 'surgeries';
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id', 'case_id', 'surgery_id', 'name', 'surgery_date', 'complications',
+        'user_id', 'visit_id', 'surgery_id', 'name', 'surgery_date', 'complications',
     ];
+
+    public static function table()
+    {
+        return 'surgeries';
+    }
 
     public function user()
     {
         return $this->belongsTo('App\User', 'user_id');
     }
 
-    public function case()
+    public function visit()
     {
-        return $this->belongsTo('App\Cases', 'case_id');
+        return $this->belongsTo('App\Visit', 'visit_id');
     }
 
     public function surgery()

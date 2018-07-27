@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function table()
+    {
+        return 'users';
+    }
+
     public function full_name()
     {
         return $this->first_name.' '.$this->last_name;
@@ -42,8 +47,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Patient');
     }
 
-    public function cases()
+    public function visits()
     {
-        return $this->hasMany('App\Cases');
+        return $this->hasMany('App\Visit');
     }
 }

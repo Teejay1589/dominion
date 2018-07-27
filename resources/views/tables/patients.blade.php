@@ -1,5 +1,5 @@
 <div class="table-wrapper">
-	<table class="table table-hover">
+	<table class="table table-hover table-condensed">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -11,7 +11,7 @@
 				<th>Blood Group</th>
 				<th>Weight</th>
 				<th>Height</th>
-				<th>No of Cases</th>
+				<th>No of Visits</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -28,7 +28,7 @@
     				<td>{{ $element->blood_group }}</td>
     				<td>{{ $element->weight }}</td>
     				<td>{{ $element->height }}</td>
-    				<td>{{ $element->cases->count() }} <small><a href="javascript:;">cases</a></small></td>
+    				<td>{{ $element->visits->count() }} <small><a href="{{ url('/m/patient/'.$element->id.'/visits') }}">visits</a></small></td>
     				<td>
     					<small>
                             <a href="#modal-view-{{ $element->id }}" data-toggle="modal">view</a>

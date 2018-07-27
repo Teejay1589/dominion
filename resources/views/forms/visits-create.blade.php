@@ -1,0 +1,101 @@
+<form action="{{ url('/m/visits/create') }}" method="post">
+	<div class="modal fade" id="modal-create">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">Create Visit Form</h4>
+				</div>
+				<div class="modal-body">
+					{{ csrf_field() }}
+
+					{{-- 'user_id', 'patient_id', 'doctor1_id', 'doctor2_id', 'doctor3_id', 'title', 'symptoms', 'treatment', 'medicine', 'is_consultation', 'is_emergency', 'is_surgery', 'is_delivery', 'is_success', 'discharged_on', --}}
+
+					<div class="row">
+						<div class="col-lg-4 col-xs-12">
+							<div class="form-group">
+								<label class="form-control-label">Type <span class="text-danger">*</span></label>
+								<select class="form-control" name="type" required>
+									@php
+										$visit_types = collect(['CONSULTATION', 'DELIVERY', 'EMERGENCY', 'OTHERS']);
+									@endphp
+									@foreach ($visit_types as $element)
+										<option value="{{ $element }}" {{ old('type') == $element ? 'selected' : '' }}>{{ $element }}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+
+						<div class="col-lg-8 col-xs-12">
+							<div class="form-group">
+								<label class="form-control-label">Title <span class="text-danger">*</span></label>
+								<input class="form-control" type="text" name="title" placeholder="Title" value="{{ old('title') }}" required>
+							</div>
+						</div>
+					</div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-xs-12">
+                            <div class="form-group">
+                            	<label class="form-control-label">Select Patient <span class="text-danger">*</span></label>
+								<select class="select-patient" name="patient" required multiple>
+									@foreach ($patients as $element)
+										<option value="{{ $element->id }}" {{ (old('patient', isset($active_object) ? $active_object->id : null) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}]</option> @endforeach
+								</select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="form-control-label">Doctors {{-- <span class="text-danger">*</span> --}}</label>
+								<select class="select-doctors" name="doctors[]" multiple>
+									@foreach ($users as $element)
+										<option value="{{ $element->id }}" {{ in_array($element->id, old('doctors', array())) ? 'selected' : '' }}>{{ $element->full_name() }} [{{ $element->role->name }}]</option>
+									@endforeach
+								</select>
+                            </div>
+                        </div>
+                    </div>
+
+					{{-- <div class="form-group">
+						<label class="form-control-label">Diagnosis </label>
+						<textarea name="diagnosis" class="form-control" rows="2" placeholder="Diagnosis">{{ old('diagnosis') }}</textarea>
+					</div>
+
+					<div class="row">
+                        <div class="col-lg-6 col-xs-12">
+                            <div class="form-group">
+								<label class="form-control-label">Complications </label>
+								<textarea name="complications" class="form-control" rows="2" placeholder="Complications">{{ old('complications') }}</textarea>
+							</div>
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            <div class="form-group">
+								<label class="form-control-label">Management </label>
+								<textarea name="management" class="form-control" rows="2" placeholder="Management">{{ old('management') }}</textarea>
+							</div>
+                        </div>
+                    </div> --}}
+
+					{{-- <div class="form-group">
+						<label class="form-control-label form-check form-check-inline">
+							<input type="checkbox" name="is_consultation" class="form-check-input" value="1" {{ old('is_consultation') == 1 ? 'checked' : '' }}> Consultation
+						</label>
+						<label class="form-control-label form-check form-check-inline">
+							<input type="checkbox" name="is_emergency" class="form-check-input" value="1" {{ old('is_emergency') == 1 ? 'checked' : '' }}> Emergency
+						</label>
+						<label class="form-control-label form-check form-check-inline">
+							<input type="checkbox" name="is_delivery" class="form-check-input" value="1" {{ old('is_delivery') == 1 ? 'checked' : '' }}> Delivery
+						</label>
+					</div> --}}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Create</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+</form>

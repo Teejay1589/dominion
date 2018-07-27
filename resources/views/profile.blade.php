@@ -1,5 +1,7 @@
 @extends('layouts.patient')
 
+@section('title', $page->title)
+
 @section('page_styles')
 @endsection
 
@@ -8,12 +10,6 @@
     <section>
         <div class="container-fluid">
             <div id="update-profile" class="card" style="width: 100%;">
-                <div class="card-close">
-                    <div class="dropdown">
-                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                        <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
-                    </div>
-                </div>
                 <div class="card-header">
                     <div class="card-title">Update Profile Form</div>
                 </div>
@@ -77,12 +73,6 @@
             <br>
 
             <div id="change-password" class="card" style="width: 100%;">
-                <div class="card-close">
-                    <div class="dropdown">
-                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                        <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
-                    </div>
-                </div>
                 <div class="card-header">
                     <div class="card-title">Change Password Form</div>
                 </div>
@@ -95,6 +85,7 @@
                         <div class="form-group">
                             <label for="current_password" class="form-control-label">Current Password: <span class="text-danger">*</span></label>
                             <input class="form-control" placeholder="Your Current Password" type="password" name="current_password" required>
+                            <span class="help-block small">Try your Phone Number</span>
                         </div>
 
                         <div class="form-group" class="form-control-label">

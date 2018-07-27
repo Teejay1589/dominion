@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Internal;
 
 use App\Surgery;
 use App\Patient;
-use App\Cases;
+use App\Visit;
 use App\SurgeryName;
 use App\Http\Requests\CreateSurgeries;
 use Illuminate\Http\Request;
@@ -35,7 +35,7 @@ class SurgeryController extends InternalControl
         return view($this->page->view)
             ->with('surgeries', Surgery::all())
             // ->with('surgeries', Surgery::orderBy('id', 'desc')->paginate(10))
-            ->with('cases', Cases::all())
+            ->with('visits', Visit::all())
             ->with('surgery_names', SurgeryName::all())
             ->with('page', $this->page);
     }
@@ -59,7 +59,7 @@ class SurgeryController extends InternalControl
     public function store(CreateSurgeries $request)
     {
         $request['user_id'] = Auth::id();
-        $request['case_id'] = $request->case;
+        $request['visit_id'] = $request->visit;
         // $request['is_success'] = isset($request->is_success) ? 1 : 0;
 
         if ( SurgeryName::where('surgery_name', $request->name)->count() == 0 ) {
@@ -77,7 +77,7 @@ class SurgeryController extends InternalControl
     public function resurgery(CreateSurgeries $request, $id)
     {
         $request['user_id'] = Auth::id();
-        $request['case_id'] = $request->case;
+        $request['visit_id'] = $request->visit;
         $request['surgery_id'] = $id;
         // $request['is_success'] = isset($request->is_success) ? 1 : 0;
 
@@ -125,7 +125,7 @@ class SurgeryController extends InternalControl
      */
     public function update(CreateSurgeries $request, $id)
     {
-        $request['case_id'] = $request->case;
+        $request['visit_id'] = $request->visit;
         $request['is_success'] = isset($request->is_success) ? 1 : 0;
 
         if ( SurgeryName::where('surgery_name', $request->name)->count() == 0 ) {

@@ -1,9 +1,9 @@
 <div class="table-wrapper">
-	<table class="table table-hover">
+	<table class="table table-hover table-condensed">
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>Case Title</th>
+				<th>Visit Title</th>
                 <th>Surgery Name</th>
 				<th>Surgery Date</th>
                 <th>Complications</th>
@@ -15,7 +15,7 @@
 			@foreach ($surgeries as $element)
     			<tr>
     				<td>{{ $loop->iteration }}</td>
-    				<td>{{ $element->case->title }}</td>
+    				<td>{{ $element->visit->title }}</td>
                     <td>{{ $element->name }}</td>
                     <td><span title="{{ is_null($element->surgery_date) ? '' : Carbon::createFromFormat('Y-m-d', $element->surgery_date)->toFormattedDateString() }}">{{ is_null($element->surgery_date) ? '' : Carbon::createFromFormat('Y-m-d', $element->surgery_date)->format('Y-m-d') }}</span></td>
                     <td>{{ str_limit($element->complications, 50) }}</td>

@@ -30,8 +30,21 @@ class PatientsController extends InternalControl
     public function index()
     {
         return view($this->page->view)
-            ->with('patients', Patient::all())
-            // ->with('patients', Patient::orderBy('id', 'desc')->paginate(10))
+            ->with('patients', Patient::latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10))
+            ->with('page', $this->page);
+    }
+
+    public function filter($filter, $searchterm = "")
+    {
+        $this->patients = Patient::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+
+        if( isset($this->patients) ) {
+            $this->patients->filter = $filter;
+            $this->patients->searchterm = $searchterm = urldecode($searchterm);
+        }
+
+        return view($this->page->view)
+            ->with('patients', $this->patients)
             ->with('page', $this->page);
     }
 
@@ -118,8 +131,8 @@ class PatientsController extends InternalControl
     public function password_reset($id)
     {
         $patient = Patient::findOrFail($id);
-        if( !is_null($patient->phone) ) {
-            $patient->password = bcrypt($patient->phone);
+        if( !is_null($patient->phone_number) ) {
+            $patient->password = bcrypt($patient->phone_number);
             $patient->update();
             session()->flash('success', 'Patient Password Reset to phone number!');
         } else {

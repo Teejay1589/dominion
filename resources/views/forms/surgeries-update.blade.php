@@ -3,28 +3,27 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">Update Surgery Form</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						<span class="sr-only">Close</span>
 					</button>
+					<h4 class="modal-title">Update Surgery Form</h4>
 				</div>
 				<div class="modal-body">
 					{{ csrf_field() }}
 
+                    <div class="form-group">
+						<label class="form-control-label">Select Visit <span class="text-danger">*</span></label>
+						<select class="form-control" name="visit_old" required disabled>
+							{{-- <option value="">NONE</option> --}}
+							@foreach (App\Visit::where('id', $active_object->visit_id)->get() as $element)
+								<option value="{{ $element->id }}" {{ (old('visit', $active_object->visit_id) == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
+							@endforeach
+						</select>
+						<input type="hidden" name="visit" value="{{ $active_object->visit_id }}">
+					</div>
+
                     <div class="row">
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="form-group">
-                            	<label class="form-control-label">Select Case <span class="text-danger">*</span></label>
-								<select class="form-control" name="case_old" required disabled>
-									{{-- <option value="">NONE</option> --}}
-									@foreach ($cases as $element)
-										<option value="{{ $element->id }}" {{ (old('case', $active_object->case_id) == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
-									@endforeach
-								</select>
-								<input type="hidden" name="case" value="{{ $active_object->case_id }}">
-                            </div>
-                        </div>
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
                                 <label class="form-control-label">Name <span class="text-danger">*</span></label>
@@ -33,7 +32,7 @@
                                 	@php
                                 		$found = 1;
                                 	@endphp
-									@foreach ($surgery_names as $element)
+									@foreach (App\SurgeryName::all() as $element)
 										<option value="{{ $element->surgery_name }}" {{ (old('name', $active_object->name) == $element->surgery_name) ? 'selected' : '' }}>{{ $element->surgery_name }}</option>
 										@php
 											if ( old('name', $active_object->name) == $element->surgery_name ) {
@@ -48,9 +47,6 @@
                                 <span class="form-text"><small>Please give this surgery a name.</small></span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
                                 <label class="form-control-label">Surgery Date <span class="text-danger">*</span></label>

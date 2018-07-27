@@ -49,6 +49,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ( ($exception->getMessage() == '' && $exception->getCode() == 0 && $exception->getLine() == 70) || ($exception->getMessage() == '' && $exception->getCode() == 0) ) {
+            return redirect()->back()->withErrors("The page has expired due to inactivity. Please refresh and try again.!");
+        }
+        if ( $exception->getMessage() == "This action is unauthorized." ) {
+            return redirect()->back()->withErrors("This action is unauthorized!");
+        }
+
         return parent::render($request, $exception);
     }
 

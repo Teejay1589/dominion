@@ -12,10 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	$page = collect();
+    $page->title = 'Home';
+    $page->view = 'welcome';
+    return view($page->view)
+	    ->with('page', $page);
 });
 
 Auth::routes();
+// Register Overwrite
+Route::get('/register', function () {
+	return redirect()->back();
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'HomeController@profile')->name('profile');
@@ -25,7 +33,7 @@ Route::post('/password/change', 'HomeController@change_password')->name('passwor
 
 
 // Cases
-Route::get('/p/cases', 'CasesController@index')->name('p.cases');
+Route::get('/p/visits', 'VisitController@index')->name('p.visits');
 
 
 
@@ -37,40 +45,54 @@ Route::get('/m/register', 'Auth\Internal\RegisterController@showRegisterForm')->
 Route::post('/m/register', 'Auth\Internal\RegisterController@register')->name('m.register');
 Route::post('/m/logout', 'Auth\Internal\LoginController@logout')->name('m.logout');
 
-Route::get('/m/profile', 'Internal\HomeController@profile')->name('m.profile');
-Route::post('/m/profile/update', 'Internal\HomeController@update')->name('m.profile.update');
-Route::post('/m/password/change', 'Internal\HomeController@change_password')->name('m.password.change');
 
-// Patients
-Route::get('/m/patients', 'Internal\PatientsController@index')->name('m.patients');
-Route::post('/m/patients/create', 'Internal\PatientsController@store')->name('m.patients.store');
-// Route::get('/m/patients/edit/{id}', 'Internal\PatientsController@edit')->name('m.patients.edit');
-Route::post('/m/patients/update/{id}', 'Internal\PatientsController@update')->name('m.patients.update');
-Route::get('/m/patients/delete/{id}', 'Internal\PatientsController@destroy')->name('m.patients.destroy');
-Route::get('/m/patients/password/reset/{id}', 'Internal\PatientsController@password_reset')->name('m.patients.password.reset');
+Route::namespace('Internal')->group(function () {
+	Route::prefix('m')->group(function () {
+		Route::get('/profile', 'HomeController@profile')->name('m.profile');
+		Route::post('/profile/update', 'HomeController@update')->name('m.profile.update');
+		Route::post('/password/change', 'HomeController@change_password')->name('m.password.change');
 
-// Cases
-Route::get('/m/cases', 'Internal\CasesController@index')->name('m.cases');
-Route::post('/m/cases/create', 'Internal\CasesController@store')->name('m.cases.store');
-// Route::get('/m/cases/edit/{id}', 'Internal\CasesController@edit')->name('m.cases.edit');
-Route::post('/m/cases/update/{id}', 'Internal\CasesController@update')->name('m.cases.update');
-Route::get('/m/cases/delete/{id}', 'Internal\CasesController@destroy')->name('m.cases.destroy');
+		// Patients
+		Route::get('/patients', 'PatientsController@index');
+		Route::post('/patients/create', 'PatientsController@store');
+		// Route::get('/patients/edit/{id}', 'PatientsController@edit');
+		Route::post('/patients/update/{id}', 'PatientsController@update');
+		Route::get('/patients/delete/{id}', 'PatientsController@destroy');
+		Route::get('/patients/password/reset/{id}', 'PatientsController@password_reset');
+		Route::get('/patients/{filter}/{searchterm?}', 'PatientsController@filter')->where('searchterm', '.*');
 
-// Surgeries
-Route::get('/m/surgeries', 'Internal\SurgeryController@index')->name('m.surgeries');
-Route::post('/m/surgeries/create', 'Internal\SurgeryController@store')->name('m.surgeries.store');
-Route::post('/m/surgeries/create/{id}', 'Internal\SurgeryController@resurgery')->name('m.surgeries.resurgery');
-// Route::get('/m/surgeries/edit/{id}', 'Internal\SurgeryController@edit')->name('m.surgeries.edit');
-Route::post('/m/surgeries/update/{id}', 'Internal\SurgeryController@update')->name('m.surgeries.update');
-Route::get('/m/surgeries/delete/{id}', 'Internal\SurgeryController@destroy')->name('m.surgeries.destroy');
+		// Patient Visits
+		Route::get('/patient/{id}/visits', 'PatientVisitsController@index');
+		Route::post('/patient/{id}/visits/create', 'PatientVisitsController@store');
+		// Route::get('/patient/{id}/visits/edit/{id}', 'PatientVisitsController@edit');
+		Route::post('/patient/{id}/visits/update/{id2}', 'PatientVisitsController@update');
+		Route::get('/patient/{id}/visits/delete/{id2}', 'PatientVisitsController@destroy');
 
-// Surgeries
-Route::get('/m/surgery_names', 'Internal\SurgeryNameController@index')->name('m.surgery_names');
-Route::post('/m/surgery_names/create', 'Internal\SurgeryNameController@store')->name('m.surgery_names.store');
-Route::post('/m/surgery_names/create/{id}', 'Internal\SurgeryNameController@resurgery')->name('m.surgery_names.resurgery');
-// Route::get('/m/surgery_names/edit/{id}', 'Internal\SurgeryNameController@edit')->name('m.surgery_names.edit');
-Route::post('/m/surgery_names/update/{id}', 'Internal\SurgeryNameController@update')->name('m.surgery_names.update');
-Route::get('/m/surgery_names/delete/{id}', 'Internal\SurgeryNameController@destroy')->name('m.surgery_names.destroy');
+		// Cases
+		Route::get('/visits', 'VisitController@index');
+		Route::post('/visits/create', 'VisitController@store');
+		// Route::get('/visits/edit/{id}', 'VisitController@edit');
+		Route::post('/visits/update/{id}', 'VisitController@update');
+		Route::get('/visits/delete/{id}', 'VisitController@destroy');
+		Route::get('/visits/{filter}/{searchterm?}', 'VisitController@filter')->where('searchterm', '.*');
+
+		// Surgeries
+		Route::get('/surgeries', 'SurgeryController@index');
+		Route::post('/surgeries/create', 'SurgeryController@store');
+		Route::post('/surgeries/create/{id}', 'SurgeryController@resurgery');
+		// Route::get('/surgeries/edit/{id}', 'SurgeryController@edit');
+		Route::post('/surgeries/update/{id}', 'SurgeryController@update');
+		Route::get('/surgeries/delete/{id}', 'SurgeryController@destroy');
+
+		// Surgeries
+		Route::get('/surgery_names', 'SurgeryNameController@index');
+		Route::post('/surgery_names/create', 'SurgeryNameController@store');
+		Route::post('/surgery_names/create/{id}', 'SurgeryNameController@resurgery');
+		// Route::get('/surgery_names/edit/{id}', 'SurgeryNameController@edit');
+		Route::post('/surgery_names/update/{id}', 'SurgeryNameController@update');
+		Route::get('/surgery_names/delete/{id}', 'SurgeryNameController@destroy');
+	});
+});
 
 
 

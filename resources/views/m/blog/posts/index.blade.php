@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('page_styles')
 	<link rel="stylesheet" type="text/css" href="{{ asset('/vendor/selectize.js-master/dist/css/selectize.bootstrap2.css') }}">
@@ -25,9 +25,9 @@
 				</thead>
 
 				<tbody>
-					
+
 					@foreach ($posts as $post)
-						
+
 						<tr>
 							<td>{{ $post->title }}</td>
 							<td>{{ substr(strip_tags($post->body), 0, 50) }}{{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }}</td>
