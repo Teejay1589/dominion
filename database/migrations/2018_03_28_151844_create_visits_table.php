@@ -23,12 +23,6 @@ class CreateVisitsTable extends Migration
             $table->text('objects')->nullable();
             $table->text('assessment')->nullable();
             $table->text('plans')->nullable();
-            $table->text('diagnosis')->nullable();
-            $table->text('complications')->nullable();
-            $table->text('management')->nullable();
-            $table->boolean('is_consultation')->default(0);
-            $table->boolean('is_emergency')->default(0);
-            $table->boolean('is_delivery')->default(0);
             $table->boolean('successful_delivery')->default(0);
             $table->datetime('discharged_on')->nullable();
             $table->timestamps();

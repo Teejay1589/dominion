@@ -64,17 +64,25 @@
                         </div>
 					</div>
 
+					<div class="text-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+
+                    <br>
+                    <h6 class=""><strong>More Details</strong></h6>
+
 					<div class="row">
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
 								<label class="form-control-label">Subjects </label>
-								<textarea name="subjects" class="form-control" rows="2" placeholder="Subjects">{{ $active_object->subjects }}</textarea>
+								<textarea name="subjects" class="form-control" rows="4" placeholder="Subjects">{{ $active_object->subjects }}</textarea>
 							</div>
                         </div>
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
 								<label class="form-control-label">Objects </label>
-								<textarea name="objects" class="form-control" rows="2" placeholder="Objects">{{ $active_object->objects }}</textarea>
+								<textarea name="objects" class="form-control" rows="4" placeholder="Objects">{{ $active_object->objects }}</textarea>
 							</div>
                         </div>
 					</div>
@@ -83,36 +91,16 @@
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
 								<label class="form-control-label">Assessment </label>
-								<textarea name="assessment" class="form-control" rows="2" placeholder="Assessment">{{ $active_object->assessment }}</textarea>
+								<textarea name="assessment" class="form-control" rows="4" placeholder="Assessment">{{ $active_object->assessment }}</textarea>
 							</div>
                         </div>
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
 								<label class="form-control-label">Plans </label>
-								<textarea name="plans" class="form-control" rows="2" placeholder="plans">{{ $active_object->plans }}</textarea>
+								<textarea name="plans" class="form-control" rows="4" placeholder="plans">{{ $active_object->plans }}</textarea>
 							</div>
                         </div>
                     </div>
-
-					{{-- <div class="form-group">
-						<label class="form-control-label">Diagnosis </label>
-						<textarea name="diagnosis" class="form-control" rows="2" placeholder="Diagnosis">{{ $active_object->diagnosis }}</textarea>
-					</div>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="form-group">
-								<label class="form-control-label">Complications </label>
-								<textarea name="complications" class="form-control" rows="2" placeholder="Complications">{{ $active_object->complications }}</textarea>
-							</div>
-                        </div>
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="form-group">
-								<label class="form-control-label">Management </label>
-								<textarea name="management" class="form-control" rows="2" placeholder="Management">{{ $active_object->management }}</textarea>
-							</div>
-                        </div>
-                    </div> --}}
 
 					<div class="form-group">
 						<label class="form-control-label form-check form-check-inline">

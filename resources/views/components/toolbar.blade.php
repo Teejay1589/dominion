@@ -1,9 +1,9 @@
 <div id="toolBar">
   <div class="row">
       @isset ( $create_form )
-        <div class="col-lg-2 col-xs-12 mb5">
+        <div class="col-lg-3 col-xs-12 mb5">
             <div>
-                <a href="#modal-create" class="btn btn-primary btn-block btn-sm" data-toggle="modal">Create {{ ucwords($data_name) }}</a>
+                <a href="#modal-create" class="btn btn-primary btn-block btn-sm" data-toggle="modal">Create {{ ucwords(str_singular(str_ireplace('_', ' ', $data_name), 1)) }}</a>
                 @include($create_form)
             </div>
         </div>
@@ -35,26 +35,20 @@
               <span class="help-block"><small><strong>{{ $data->total() }}</strong> Records Found!</small></span>
           @endisset
       </div>
-      <div class="col-lg-3 col-xs-12 mb5">
-          <div class="row">
-              <div class="col-xs-6">
-                  <div class="form-group d-inline-block px-2">
-                      <div class="input-group input-group-sm" style="width: auto;">
-                          <div class="input-group-addon">Show:</div>
-                          @php
-                              $entries = array(10, 25, 50, 100);
-                          @endphp
-                          <select class="form-control" id="searchEntries" name="entries" style="width: auto;">
-                              @foreach ($entries as $obj)
-                                  <option value="{{ $obj }}" {{ (isset($_GET['entries']) && $_GET['entries'] == $obj) ? 'selected' : '' }}>{{ $obj }}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-xs-6">
-              </div>
-          </div>
+      <div class="col-lg-2 col-xs-12 mb5">
+            <div class="form-group px-2">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-addon">Show:</div>
+                    @php
+                        $entries = array(10, 25, 50, 100);
+                    @endphp
+                    <select class="form-control" id="searchEntries" name="entries">
+                        @foreach ($entries as $obj)
+                            <option value="{{ $obj }}" {{ (isset($_GET['entries']) && $_GET['entries'] == $obj) ? 'selected' : '' }}>{{ $obj }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
       </div>
   </div>
 </div>

@@ -12,7 +12,7 @@ class SurgeryName extends Model
      * @var array
      */
     protected $fillable = [
-        'surgery_name',
+        'surgery_name', 'description',
     ];
 
     public static function table()

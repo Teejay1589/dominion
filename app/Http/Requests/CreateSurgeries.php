@@ -26,7 +26,7 @@ class CreateSurgeries extends FormRequest
         return [
             'visit' => 'required|integer|min:1|exists:visits,id',
             // 'doctors' => 'required|array|min:1|max:5',
-            'name' => 'required|string|min:2|max:191',
+            'surgery_name' => 'required|string|min:2|max:191',
             'surgery_date' => 'nullable|date_format:Y-m-d',
             'complications' => 'nullable|string|min:2',
         ];

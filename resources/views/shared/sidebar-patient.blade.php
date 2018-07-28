@@ -65,8 +65,8 @@
     <span class="heading p0"><hr style="border-color: #ccc;"></span>
     <ul class="nav">
       <!-- visits -->
-      <li class="{{ isset($page) && $page->view == 'cases' ? 'active' : '' }}">
-        <a href="{{ url('/p/cases') }}">
+      <li class="{{ isset($page) && $page->view == 'visits' ? 'active' : '' }}">
+        <a href="{{ url('/p/visits') }}">
           <i class="fa fa-child"></i>
           <span>Visits</span>
         </a>

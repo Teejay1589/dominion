@@ -18,7 +18,7 @@ class CreateSurgeriesTable extends Migration
             $table->unsignedInteger('user_id')->index()->nullable();
             $table->unsignedInteger('visit_id')->index();
             $table->unsignedInteger('surgery_id')->index()->nullable();
-            $table->string('name');
+            $table->string('surgery_name');
             $table->date('surgery_date')->nullable();
             $table->text('complications')->nullable();
             $table->timestamps();

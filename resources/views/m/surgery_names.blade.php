@@ -3,41 +3,64 @@
 @section('title', $page->title)
 
 @section('page_styles')
-    {{-- @if( count($surgery_names) > 0 )
-        <link rel="stylesheet" type="text/css" href="{{ asset('js/datatables/datatables.min.css') }}">
-        <style type="text/css">
-            .dataTables_wrapper .row {
-                width: 100%;
-            }
-        </style>
-    @endif --}}
 @endsection
 
 @section('content')
-
     <section>
-        <div class="container-fluid">
-        	<div>
-        		<a href="#modal-create" class="btn btn-link btn-block" data-toggle="modal">Create Surgery</a>
-	        	@include('forms.surgery_names-create')
-        	</div>
+        <div class="row mb15">
+            <div class="col-md-1 col-xs-12"></div>
+            <div class="col-md-10 col-xs-12">
+            	@include('components.toolbar', [
+                    'model' => new App\SurgeryName(),
+                    'create_form' => 'forms.surgery_names-create',
+                    'data_name' => 'surgery_names',
+                    'data' => $surgery_names,
+                    'removed_keys' => array('id', 'description', 'created_at', 'updated_at')
+                ])
 
-        	<div class="clearfix"></div>
-        	<br>
+                {{-- <div class="clearfix"></div>
+                <br> --}}
 
-            @include('tables.surgery_names')
+                <div>
+                    @forelse ($surgery_names as $element)
+                        <div class="panel mb5">
+                            <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
+                                <span class="pull-right">
+                                    <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
+                                    <a href="{{ url('/m/surgeries/delete/'.$element->id) }}" class="mr10 text-danger">
+                                        <span>delete</span>
+                                    </a>
+                                </span>
+                                <h5 class="panel-title">
+                                    <span class="mr10">{{ $element->surgery_name }}</span>
+                                </h5>
+                                <div class="mb5"></div>
+                                <div>
+                                    @include('forms.surgery_names-update', ['active_object' => $element])
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="alert alert-danger">
+                            {{-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> --}}
+                            <strong>Sorry!</strong> No Records Found
+                        </div>
+                    @endforelse
+                </div>
+
+                <div class="text-left">
+                    {{ $surgery_names->links('shared.pagination', ['small' => true]) }}
+                </div>
+            </div>
+            <div class="col-md-1 col-xs-12"></div>
         </div>
     </section>
 
 @endsection
 
 @section('page_scripts')
-    {{-- @if( count($surgery_names) > 0 )
-        <script type="text/javascript" src="{{ asset('js/datatables/datatables.min.js') }}"></script>
-        <script type="text/javascript">
-            $(".table").DataTable({
-                "pageLength": 10
-            });
-        </script>
-    @endif --}}
+    <script type="text/javascript">
+        var base_url = '{{ url('/m/surgery_names') }}';
+    </script>
+    <script type="text/javascript" src="{{ asset('js/toolbar.js') }}"></script>
 @endsection

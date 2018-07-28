@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Internal;
+
 use App\Post;
 use Image;
 use Illuminate\Http\Request;
 
 class PostController extends InternalControl
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth:admin');
     }
     /**
@@ -41,9 +43,9 @@ class PostController extends InternalControl
     {
         // validate the data
         $this->validate($request, array(
-            'title'         => 'required|max:255',
-            'slug'          => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-            'body'          => 'required'
+            'title' => 'required|max:255',
+            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+            'body' => 'required'
         ));
 
         // store in the database
@@ -68,7 +70,7 @@ class PostController extends InternalControl
 
         session()->flash('success', 'The blog post was successfully save!');
 
-        return redirect()->route('posts');
+        return redirect('/m/blog/posts');
     }
 
     /**
@@ -113,13 +115,13 @@ class PostController extends InternalControl
         if ($request->input('slug') == $post->slug) {
             $this->validate($request, array(
                 'title' => 'required|max:255',
-                'body'  => 'required'
+                'body' => 'required'
             ));
         } else {
             $this->validate($request, array(
                 'title' => 'required|max:255',
-                'slug'  => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-                'body'  => 'required'
+                'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'body' => 'required'
             ));
         }
 

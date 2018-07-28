@@ -12,7 +12,7 @@ class Visit extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'patient_id', 'type', 'title', 'subjects', 'objects', 'assessment', 'plans', 'diagnosis', 'complications', 'management', 'successful_delivery', 'discharged_on',
+        'user_id', 'patient_id', 'type', 'title', 'subjects', 'objects', 'assessment', 'plans', 'successful_delivery', 'discharged_on',
     ];
 
     protected $casts = [

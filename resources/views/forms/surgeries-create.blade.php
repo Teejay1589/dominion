@@ -25,11 +25,10 @@
                     <div class="row">
 						<div class="col-lg-6 col-xs-12">
 							<div class="form-group">
-								<label class="form-control-label">Name <span class="text-danger">*</span></label>
-								{{-- <input class="form-control" type="text" name="name" placeholder="Surgery Name" value="{{ old('name') }}" required> --}}
-								<select class="select-surgery_name" name="name" required multiple>
+								<label class="form-control-label">Surgery Name <span class="text-danger">*</span></label>
+								<select class="select-surgery_name" name="surgery_name" required multiple>
 									@foreach ($surgery_names as $element)
-										<option value="{{ $element->surgery_name }}" {{ (old('name') == $element->surgery_name) ? 'selected' : '' }}>{{ $element->surgery_name }}</option>
+										<option value="{{ $element->surgery_name }}" {{ (old('surgery_name') == $element->surgery_name) ? 'selected' : '' }}>{{ $element->surgery_name }}</option>
 									@endforeach
 								</select>
 								<span class="form-text"><small>Please give this surgery a name.</small></span>

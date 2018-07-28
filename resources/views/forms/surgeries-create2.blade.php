@@ -12,11 +12,13 @@
 				<div class="modal-body">
 					{{ csrf_field() }}
 
+					<input type="hidden" name="visit" value="{{ $active_object->visit_id }}">
+
 					<div class="form-group">
 						<label class="form-control-label">Select Visit <span class="text-danger">*</span></label>
-						<select class="form-control" name="visit" required readonly>
+						<select class="form-control" name="visit" required disabled>
 							<option value="">NONE</option>
-							@foreach ($visits as $element)
+							@foreach (App\Visit::where('id', $active_object->visit_id)->get() as $element)
 								<option value="{{ $element->id }}" {{ (old('visit', $active_object->visit_id) == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
 							@endforeach
 						</select>
@@ -25,8 +27,12 @@
                     <div class="row">
 						<div class="col-lg-6 col-xs-12">
 							<div class="form-group">
-								<label class="form-control-label">Name <span class="text-danger">*</span></label>
-								<input class="form-control" type="text" name="name" placeholder="Surgery Name" value="{{ old('name', $active_object->name) }}" required>
+								<label class="form-control-label">Surgery Name <span class="text-danger">*</span></label>
+								<select class="select-surgery_name" name="surgery_name" required multiple>
+									@foreach ($surgery_names as $element)
+										<option value="{{ $element->surgery_name }}" {{ (old('surgery_name') == $element->surgery_name) ? 'selected' : '' }}>{{ $element->surgery_name }}</option>
+									@endforeach
+								</select>
 								<span class="form-text"><small>Please give this surgery a name.</small></span>
 							</div>
 						</div>

@@ -40,7 +40,43 @@ class PatientVisitsController extends InternalControl
         $this->active_object = Patient::findOrFail($id);
 
         return view($this->page->view)
-            ->with('visits', Visit::all())
+            ->with('visits', Visit::where('patient_id', $id)->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10))
+            ->with('patients', Patient::all())
+            ->with('users', User::all())
+            ->with('page', $this->page)
+            ->with('active_object', $this->active_object)
+            ->with('patient_visits', $this->active_object->visits);
+    }
+
+    public function filter($id, $filter, $searchterm = "")
+    {
+        if ($id == 0) {
+            return redirect('/m/patients')->withErrors('Please, Select a Patient 1st!');
+        }
+
+        $this->active_object = Patient::findOrFail($id);
+
+        if ($filter == "successful_delivery") {
+            // Interprete
+            if (isset($searchterm[0]) && (strtolower($searchterm[0]) == 1 || strtolower($searchterm[0]) == 'y' || strtolower($searchterm[0]) == 's')) {
+                $searchterm = 1;
+            } elseif (isset($searchterm[0]) && (strtolower($searchterm[0]) == 0 || strtolower($searchterm[0]) == 'n' || strtolower($searchterm[0]) == 'u')) {
+                $searchterm = 0;
+            } else {
+                $searchterm = "";
+            }
+            $this->visits = Visit::where($filter, 'LIKE', "%$searchterm%")->where('patient_id', $id)->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } else {
+            $this->visits = Visit::where($filter, 'LIKE', "%$searchterm%")->where('patient_id', $id)->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        }
+
+        if (isset($this->visits)) {
+            $this->visits->filter = $filter;
+            $this->visits->searchterm = $searchterm = urldecode($searchterm);
+        }
+
+        return view($this->page->view)
+            ->with('visits', $this->visits)
             ->with('patients', Patient::all())
             ->with('users', User::all())
             ->with('page', $this->page)

@@ -16,6 +16,7 @@ class CreateSurgeryNamesTable extends Migration
         Schema::create('surgery_names', function (Blueprint $table) {
             $table->increments('id');
             $table->string('surgery_name');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

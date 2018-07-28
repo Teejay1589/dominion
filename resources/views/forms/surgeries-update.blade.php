@@ -26,16 +26,15 @@
                     <div class="row">
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
-                                <label class="form-control-label">Name <span class="text-danger">*</span></label>
-                                {{-- <input class="form-control" type="text" name="name" placeholder="Surgery Name" value="{{ old('name', $active_object->name) }}" required> --}}
-                                <select class="select-surgery_name" name="name" required multiple>
+                                <label class="form-control-label">Surgery Name <span class="text-danger">*</span></label>
+                                <select class="select-surgery_name" name="surgery_name" required multiple>
                                 	@php
                                 		$found = 1;
                                 	@endphp
 									@foreach (App\SurgeryName::all() as $element)
-										<option value="{{ $element->surgery_name }}" {{ (old('name', $active_object->name) == $element->surgery_name) ? 'selected' : '' }}>{{ $element->surgery_name }}</option>
+										<option value="{{ $element->surgery_name }}" {{ (old('surgery_name', $active_object->surgery_name) == $element->surgery_name) ? 'selected' : '' }}>{{ $element->surgery_name }}</option>
 										@php
-											if ( old('name', $active_object->name) == $element->surgery_name ) {
+											if ( old('surgery_name', $active_object->surgery_name) == $element->surgery_name ) {
 		                                		$found = 0;
 											}
 	                                	@endphp
@@ -57,7 +56,7 @@
 
                     <div class="form-group">
                     	<label class="form-control-label">Complications </label>
-						<textarea name="complications" class="form-control" rows="3" placeholder="Complications">{{ old('complications', $active_object->complications) }}</textarea>
+						<textarea name="complications" class="form-control" rows="5" placeholder="Complications">{{ old('complications', $active_object->complications) }}</textarea>
 					</div>
 				</div>
 				<div class="modal-footer">

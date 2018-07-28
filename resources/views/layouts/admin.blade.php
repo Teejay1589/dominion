@@ -51,6 +51,18 @@
     .main-content {
       min-height: 95vh;
     }
+    a.text-primary {
+        color: #0099cc !important;
+    }
+    a.text-primary:hover {
+        color: #007399 !important;
+    }
+    a.text-danger {
+        color: #d96557 !important;
+    }
+    a.text-danger:hover {
+        color: #ce402f !important;
+    }
     /*.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
         border-color: #2ecc71;
         background-color: #2ecc71;

@@ -26,8 +26,8 @@
 
               <div class="form-inputs">
                 <div class="form-group">
-                  <label>Last Name</label>
-                  <input type="text" class="form-control input-lg" placeholder="Last Name" name="last_name" required>
+                  <label>Phone Number</label>
+                  <input type="tel" class="form-control input-lg" placeholder="Phone Number" name="phone_number" required>
                 </div>
                 <div class="form-group">
                   <label>Password</label>

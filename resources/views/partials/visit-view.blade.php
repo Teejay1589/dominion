@@ -19,9 +19,11 @@
 					<dt>Patient</dt>
 					<dd class="mb5">{{ $active_object->patient->first_name." ".$active_object->patient->last_name }} <span class="badge badge-default">{{ $active_object->patient->phone_number }}</span></dd>
 					<dt>Discharged On</dt>
-					<dd>
+					<dd class="mb5">
 						{{ is_null($active_object->discharged_on) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->discharged_on)->toFormattedDateString() }}
 					</dd>
+					<dt>Created at</dt>
+					<dd class="mb5">{{ $element->created_at }}</dd>
 				</dl>
 
 				<div class="clearfix"></div>
@@ -59,7 +61,7 @@
 				<div class="clearfix"></div>
 				<br>
 
-				<div class="h4"><strong>Doctors</strong> <span class="badge badge-primary">{{ $active_object->visit_doctors->count() }}</span></div>
+				<div class="h4"><strong>Doctors</strong> <small><strong>{{ $active_object->visit_doctors->count() }}</strong></small></div>
 				<div>
 					@if ( $active_object->visit_doctors->count() != 0 )
 						<ol>
@@ -75,7 +77,7 @@
 				<div class="clearfix"></div>
 				<br>
 
-				<div class="h4"><strong>Surgeries</strong> <span class="badge badge-primary">{{ $active_object->surgeries->count() }}</span></div>
+				<div class="h4"><strong>Surgeries</strong> <small><strong>{{ $active_object->surgeries->count() }}</strong></small></div>
 				<div>
 					@if ( $active_object->surgeries->count() != 0 )
 						<ol>

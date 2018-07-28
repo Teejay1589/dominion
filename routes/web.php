@@ -9,14 +9,14 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
 	$page = collect();
-    $page->title = 'Home';
-    $page->view = 'welcome';
-    return view($page->view)
-	    ->with('page', $page);
+	$page->title = 'Home';
+	$page->view = 'welcome';
+	return view($page->view)
+		->with('page', $page);
 });
 
 Auth::routes();
@@ -32,7 +32,7 @@ Route::post('/password/change', 'HomeController@change_password')->name('passwor
 
 
 
-// Cases
+// Visits
 Route::get('/p/visits', 'VisitController@index')->name('p.visits');
 
 
@@ -63,10 +63,11 @@ Route::namespace('Internal')->group(function () {
 
 		// Patient Visits
 		Route::get('/patient/{id}/visits', 'PatientVisitsController@index');
-		Route::post('/patient/{id}/visits/create', 'PatientVisitsController@store');
+		// Route::post('/patient/{id}/visits/create', 'PatientVisitsController@store');
 		// Route::get('/patient/{id}/visits/edit/{id}', 'PatientVisitsController@edit');
-		Route::post('/patient/{id}/visits/update/{id2}', 'PatientVisitsController@update');
-		Route::get('/patient/{id}/visits/delete/{id2}', 'PatientVisitsController@destroy');
+		// Route::post('/patient/{id}/visits/update/{id2}', 'PatientVisitsController@update');
+		// Route::get('/patient/{id}/visits/delete/{id2}', 'PatientVisitsController@destroy');
+		Route::get('/patient/{id}/visits/{filter}/{searchterm?}', 'PatientVisitsController@filter')->where('searchterm', '.*');
 
 		// Cases
 		Route::get('/visits', 'VisitController@index');
@@ -83,6 +84,7 @@ Route::namespace('Internal')->group(function () {
 		// Route::get('/surgeries/edit/{id}', 'SurgeryController@edit');
 		Route::post('/surgeries/update/{id}', 'SurgeryController@update');
 		Route::get('/surgeries/delete/{id}', 'SurgeryController@destroy');
+		Route::get('/surgeries/{filter}/{searchterm?}', 'SurgeryController@filter')->where('searchterm', '.*');
 
 		// Surgeries
 		Route::get('/surgery_names', 'SurgeryNameController@index');
@@ -91,6 +93,8 @@ Route::namespace('Internal')->group(function () {
 		// Route::get('/surgery_names/edit/{id}', 'SurgeryNameController@edit');
 		Route::post('/surgery_names/update/{id}', 'SurgeryNameController@update');
 		Route::get('/surgery_names/delete/{id}', 'SurgeryNameController@destroy');
+		Route::get('/surgery_names/{filter}/{searchterm?}', 'SurgeryNameController@filter')->where('searchterm', '.*');
+		Route::get('/surgeries/{filter}/{searchterm?}', 'SurgeryController@filter')->where('searchterm', '.*');
 	});
 });
 

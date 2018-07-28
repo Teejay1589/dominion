@@ -12,7 +12,7 @@ class Surgery extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'visit_id', 'surgery_id', 'name', 'surgery_date', 'complications',
+        'user_id', 'visit_id', 'surgery_id', 'surgery_name', 'surgery_date', 'complications',
     ];
 
     public static function table()

@@ -25,7 +25,7 @@
                     'create_form' => 'forms.visits-create',
                     'data_name' => 'visit',
                     'data' => $visits,
-                    'removed_keys' => array('id', 'user_id', 'diagnosis', 'complications', 'management', 'created_at', 'updated_at')
+                    'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at')
                 ])
 
                 {{-- <div class="clearfix"></div>
@@ -98,6 +98,16 @@
                 plugins: ['restore_on_backspace', 'remove_button'],
                 delimiter: ','
             });
+        });
+    </script>
+    <script>
+        // TOGGLE successful_delivery checkbox if visit type is DELIVERY
+        $('select[name="type"]').change(function() {
+            if ( $(this).val() == "DELIVERY" ) {
+                $('select[name="type"]').parent().parent().parent().parent().find('input[name="successful_delivery"]').attr('disabled', false);
+            } else {
+                $('select[name="type"]').parent().parent().parent().parent().find('input[name="successful_delivery"]').attr('disabled', true);
+            }
         });
     </script>
 @endsection

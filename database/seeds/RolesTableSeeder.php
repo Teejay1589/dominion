@@ -13,15 +13,19 @@ class RolesTableSeeder extends Seeder
     {
         DB::table('roles')->insert([
             'name' => 'STAFF',
+            'created_at' => now(),
         ]);
         DB::table('roles')->insert([
             'name' => 'DOCTOR',
+            'created_at' => now(),
         ]);
         DB::table('roles')->insert([
             'name' => 'SURGEON',
+            'created_at' => now(),
         ]);
         DB::table('roles')->insert([
             'name' => 'ADMIN',
+            'created_at' => now(),
         ]);
     }
 }

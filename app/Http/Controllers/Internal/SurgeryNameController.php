@@ -28,8 +28,21 @@ class SurgeryNameController extends InternalControl
     public function index()
     {
         return view($this->page->view)
-            ->with('surgery_names', SurgeryName::all())
-            // ->with('surgery_names', SurgeryName::orderBy('id', 'desc')->paginate(10))
+            ->with('surgery_names', SurgeryName::latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10))
+            ->with('page', $this->page);
+    }
+
+    public function filter($filter, $searchterm = "")
+    {
+        $this->surgery_names = SurgeryName::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+
+        if (isset($this->surgery_names)) {
+            $this->surgery_names->filter = $filter;
+            $this->surgery_names->searchterm = $searchterm = urldecode($searchterm);
+        }
+
+        return view($this->page->view)
+            ->with('surgery_names', $this->surgery_names)
             ->with('page', $this->page);
     }
 

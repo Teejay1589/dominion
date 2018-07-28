@@ -24,7 +24,7 @@
     <span class="heading">Main Menu</span>
     <ul class="list-unstyled">
         <li class="{{ isset($page) && $page->view == 'm.patients' ? 'active' : '' }}"><a href="{{ url('/m/patients') }}"> <i class="fa fa-users"></i>Patients </a></li>
-        <li class="{{ isset($page) && $page->view == 'm.cases' ? 'active' : '' }}"><a href="{{ url('/m/cases') }}"> <i class="icon-padnote"></i>Cases </a></li>
+        <li class="{{ isset($page) && $page->view == 'm.visits' ? 'active' : '' }}"><a href="{{ url('/m/visits') }}"> <i class="icon-padnote"></i>Cases </a></li>
         <li class="{{ isset($page) && $page->view == 'm.surgeries' ? 'active' : '' }}"><a href="{{ url('/m/surgeries') }}"> <i class="fa fa-stethoscope"></i>Surgeries </a></li>
         <li class="{{ isset($page) && $page->view == 'm.surgery_names' ? 'active' : '' }}"><a href="{{ url('/m/surgery_names') }}"> <i class="fa fa-stethoscope"></i>Surgery Names </a></li>
         <li><a href="#"> <i class="fa fa-calendar-o"></i>Appointments </a></li>

@@ -3,26 +3,6 @@
 @section('title', $page->title)
 
 @section('page_styles')
-    @if( count($patients) > 0 )
-        <link rel="stylesheet" type="text/css" href="{{ asset('js/datatables/datatables.min.css') }}">
-        <style type="text/css">
-            .dataTables_wrapper .row {
-                width: 100%;
-            }
-            a.text-primary {
-                color: #0099cc !important;
-            }
-            a.text-primary:hover {
-                color: #007399 !important;
-            }
-            a.text-danger {
-                color: #d96557 !important;
-            }
-            a.text-danger:hover {
-                color: #ce402f !important;
-            }
-        </style>
-    @endif
 @endsection
 
 @section('content')
@@ -37,7 +17,7 @@
                     'create_form' => 'forms.patients-create',
                     'data_name' => 'Patient',
                     'data' => $patients,
-                    'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at')
+                    'removed_keys' => array('id', 'user_id', 'genotype', 'created_at', 'updated_at')
                 ])
 
                 {{-- <div class="clearfix"></div>

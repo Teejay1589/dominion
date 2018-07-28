@@ -21,6 +21,7 @@ class VisitsTableSeeder extends Seeder
                     'type' => $type,
                     'title' => $type . ' Visit Test ' . $i,
                     'successful_delivery' => rand(0, 1),
+                    'created_at' => now(),
                 ]);
             } else {
                 DB::table('visits')->insert([
@@ -28,6 +29,7 @@ class VisitsTableSeeder extends Seeder
                     'type' => $type,
                     'title' => $type . ' Visit Test ' . $i,
                     // 'successful_delivery' => rand(0, 1),
+                    'created_at' => now(),
                 ]);
             }
         }

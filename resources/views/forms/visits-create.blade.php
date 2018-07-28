@@ -58,38 +58,6 @@
                             </div>
                         </div>
                     </div>
-
-					{{-- <div class="form-group">
-						<label class="form-control-label">Diagnosis </label>
-						<textarea name="diagnosis" class="form-control" rows="2" placeholder="Diagnosis">{{ old('diagnosis') }}</textarea>
-					</div>
-
-					<div class="row">
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="form-group">
-								<label class="form-control-label">Complications </label>
-								<textarea name="complications" class="form-control" rows="2" placeholder="Complications">{{ old('complications') }}</textarea>
-							</div>
-                        </div>
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="form-group">
-								<label class="form-control-label">Management </label>
-								<textarea name="management" class="form-control" rows="2" placeholder="Management">{{ old('management') }}</textarea>
-							</div>
-                        </div>
-                    </div> --}}
-
-					{{-- <div class="form-group">
-						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="is_consultation" class="form-check-input" value="1" {{ old('is_consultation') == 1 ? 'checked' : '' }}> Consultation
-						</label>
-						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="is_emergency" class="form-check-input" value="1" {{ old('is_emergency') == 1 ? 'checked' : '' }}> Emergency
-						</label>
-						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="is_delivery" class="form-check-input" value="1" {{ old('is_delivery') == 1 ? 'checked' : '' }}> Delivery
-						</label>
-					</div> --}}
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
