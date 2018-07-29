@@ -3,14 +3,6 @@
 @section('title', $page->title)
 
 @section('page_styles')
-    @if( count($visits) > 0 )
-        <link rel="stylesheet" type="text/css" href="{{ asset('js/datatables/datatables.min.css') }}">
-        <style type="text/css">
-            .dataTables_wrapper .row {
-                width: 100%;
-            }
-        </style>
-    @endif
     <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/selectize.js-master/dist/css/selectize.bootstrap2.css') }}">
 @endsection
 

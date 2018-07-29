@@ -31,9 +31,11 @@ Route::post('/profile/update', 'HomeController@update')->name('profile.update');
 Route::post('/password/change', 'HomeController@change_password')->name('password.change');
 
 
-
+// Patients
 // Visits
 Route::get('/p/visits', 'VisitController@index')->name('p.visits');
+Route::get('/p/surgeries', 'SurgeryController@index')->name('p.surgeries');
+// Route::get('/p/billings', 'BillingController@index')->name('p.billings');
 
 
 
@@ -95,6 +97,15 @@ Route::namespace('Internal')->group(function () {
 		Route::get('/surgery_names/delete/{id}', 'SurgeryNameController@destroy');
 		Route::get('/surgery_names/{filter}/{searchterm?}', 'SurgeryNameController@filter')->where('searchterm', '.*');
 		Route::get('/surgeries/{filter}/{searchterm?}', 'SurgeryController@filter')->where('searchterm', '.*');
+
+		// Surgeries
+		Route::get('/billings', 'BillingController@index');
+		Route::post('/billings/create', 'BillingController@store');
+		Route::post('/billings/create/{id}', 'BillingController@resurgery');
+		// Route::get('/billings/edit/{id}', 'BillingController@edit');
+		Route::post('/billings/update/{id}', 'BillingController@update');
+		Route::get('/billings/delete/{id}', 'BillingController@destroy');
+		Route::get('/billings/{filter}/{searchterm?}', 'BillingController@filter')->where('searchterm', '.*');
 	});
 });
 

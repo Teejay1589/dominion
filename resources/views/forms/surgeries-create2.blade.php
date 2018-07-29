@@ -12,8 +12,6 @@
 				<div class="modal-body">
 					{{ csrf_field() }}
 
-					<input type="hidden" name="visit" value="{{ $active_object->visit_id }}">
-
 					<div class="form-group">
 						<label class="form-control-label">Select Visit <span class="text-danger">*</span></label>
 						<select class="form-control" name="visit" required disabled>
@@ -22,6 +20,7 @@
 								<option value="{{ $element->id }}" {{ (old('visit', $active_object->visit_id) == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
 							@endforeach
 						</select>
+						<input type="hidden" name="visit" value="{{ $active_object->visit_id }}">
 					</div>
 
                     <div class="row">

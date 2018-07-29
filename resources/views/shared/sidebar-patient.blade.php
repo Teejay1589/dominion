@@ -52,8 +52,8 @@
       <!-- logout -->
       <li class="">
         <a href="{{ route('logout') }}" class="nav-link logout"
-                            onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
+          onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
           <i class="fa fa-sign-out"></i>
           <span>Logout</span>
         </a>
@@ -68,38 +68,40 @@
       <li class="{{ isset($page) && $page->view == 'visits' ? 'active' : '' }}">
         <a href="{{ url('/p/visits') }}">
           <i class="fa fa-child"></i>
-          <span>Visits</span>
+          <span>My Visits</span>
+          <span class="label pull-right">{{ Auth::user()->visits->count() }}</span>
         </a>
       </li>
       <!-- /visits -->
 
       <!-- surgeries -->
-      {{-- <li class="{{ isset($page) && $page->view == 'surgeries' ? 'active' : '' }}">
-        <a href="javascript:;">
+      <li class="{{ isset($page) && $page->view == 'surgeries' ? 'active' : '' }}">
+        <a href="{{ url('/p/surgeries') }}">
           <i class="fa fa-stethoscope"></i>
-          <span>Surgeries</span>
-        </a>
-      </li> --}}
-      <!-- /surgeries -->
-
-      <!-- appointments -->
-      <li class="{{ isset($page) && $page->view == 'appointments' ? 'active' : '' }}">
-        <a href="javascript:;">
-          <i class="fa fa-calendar-o"></i>
-          <span>Appointments</span>
+          <span>My Surgeries</span>
+          <span class="label pull-right">{{ Auth::user()->surgeries()->count() }}</span>
         </a>
       </li>
-      <!-- /appointments -->
+      <!-- /surgeries -->
 
       <!-- billings -->
       <li class="{{ isset($page) && $page->view == 'billings' ? 'active' : '' }}">
         <a href="javascript:;">
           <i class="fa fa-money"></i>
-          <span>Billings</span>
+          <span>My Billings</span>
+          <span class="label pull-right">{{ Auth::user()->billings()->count() }}</span>
         </a>
       </li>
       <!-- /billings -->
 
+      <!-- appointments -->
+      <li class="{{ isset($page) && $page->view == 'appointments' ? 'active' : '' }}">
+        <a href="javascript:;">
+          <i class="fa fa-calendar-o"></i>
+          <span>My Appointments</span>
+        </a>
+      </li>
+      <!-- /appointments -->
     </ul>
   </nav>
   <!-- /main navigation -->

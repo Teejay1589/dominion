@@ -3,14 +3,6 @@
 @section('title', $page->title)
 
 @section('page_styles')
-    @if( count($surgeries) > 0 )
-        <link rel="stylesheet" type="text/css" href="{{ asset('js/datatables/datatables.min.css') }}">
-        <style type="text/css">
-            .dataTables_wrapper .row {
-                width: 100%;
-            }
-        </style>
-    @endif
     <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/selectize.js-master/dist/css/selectize.bootstrap2.css') }}">
 @endsection
 
@@ -24,7 +16,8 @@
                     'create_form' => 'forms.surgeries-create',
                     'data_name' => 'surgery',
                     'data' => $surgeries,
-                    'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at')
+                    'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at'),
+                    'added_keys' => array('patient_id')
                 ])
 
                 {{-- <div class="clearfix"></div>
@@ -52,7 +45,6 @@
                                 </span>
                                 <div>
                                     @include('partials.visit-view', ['active_object' => $element->visit])
-                                    @include('partials.surgery-view', ['active_object' => $element])
                                     @include('forms.surgeries-update', ['active_object' => $element])
                                     @include('forms.surgeries-create2', ['active_object' => $element])
                                 </div>

@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function full_name()
     {
-        return $this->first_name.' '.$this->last_name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function role()
@@ -50,5 +50,15 @@ class User extends Authenticatable
     public function visits()
     {
         return $this->hasMany('App\Visit');
+    }
+
+    public function surgeries()
+    {
+        return $this->hasMany('App\Surgery');
+    }
+
+    public function billings()
+    {
+        return $this->hasMany('App\Billing');
     }
 }

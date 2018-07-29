@@ -39,4 +39,9 @@ class Surgery extends Model
     {
         return $this->hasMany('App\Surgery');
     }
+
+    public function patient()
+    {
+        return $this->visit->patient;
+    }
 }

@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfile;
 use App\Http\Requests\ChangeUserPassword;
 use App\Patient;
+use App\Visit;
+use App\Surgery;
+use App\Billing;
 use Illuminate\Hashing\BcryptHasher;
 
 class HomeController extends Controller
@@ -56,7 +59,7 @@ class HomeController extends Controller
         $user = Patient::where('id', Auth::user()->id)->get()->first();
         $bcrypt = new BcryptHasher;
 
-        if( $bcrypt->check($request->current_password, $user->password) ) {
+        if ($bcrypt->check($request->current_password, $user->password)) {
             $user->password = bcrypt($request->new_password);
 
             $user->save();

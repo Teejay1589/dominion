@@ -14,10 +14,15 @@
               <input type="text" class="form-control" id="searchTerm" name="searchterm" placeholder="Search Term" style="width: 65%; padding: 0 .5rem;" value="{{ isset($data->searchterm) ? $data->searchterm : '' }}">
               @php
                   $keys = $model->getFillable();
-                  if ( $removed_keys ) {
+                  if ( isset($removed_keys) ) {
                     $removed_keys = $removed_keys;
                   } else {
                     $removed_keys = array('id', 'created_at', 'updated_at');
+                  }
+                  if ( isset($added_keys) ) {
+                      foreach ($added_keys as $key => $value) {
+                          array_push($keys, $value);
+                      }
                   }
               @endphp
               <select id="filter" class="form-control" name="filter" style="width: 35%; padding: 0 .2rem;">

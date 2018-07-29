@@ -36,6 +36,7 @@
                                     <span>
                                         <strong>{{ $element->visits->count() }}</strong>
                                         <a href="{{ url('/m/patient/'.$element->id.'/visits') }}" class="mr10 text-primary">
+                                        {{-- <a href="{{ url('/m/visits/patient_id/'.$element->full_name()) }}" class="mr10 text-primary"> --}}
                                             <span>visits</span>
                                         </a>
                                     </span>

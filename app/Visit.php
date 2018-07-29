@@ -43,4 +43,9 @@ class Visit extends Model
     {
         return $this->hasMany('App\Surgery', 'visit_id');
     }
+
+    public function billings()
+    {
+        return $this->hasMany('App\Billing', 'visit_id');
+    }
 }

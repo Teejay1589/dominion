@@ -106,6 +106,15 @@
       </li>
       <!-- /surgery_names -->
 
+      <!-- billings -->
+      <li class="{{ isset($page) && $page->view == 'm.billings' ? 'active' : '' }}">
+        <a href="{{ url('/m/billings') }}">
+          <i class="fa fa-money"></i>
+          <span>All Billings</span>
+        </a>
+      </li>
+      <!-- /billings -->
+
       <!-- blog_posts -->
       <li class="{{ isset($page) && $page->view == 'm.blog.posts' ? 'active' : '' }}">
         <a href="{{ url('/m/blog/posts') }}">

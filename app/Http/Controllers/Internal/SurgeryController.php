@@ -41,7 +41,22 @@ class SurgeryController extends InternalControl
 
     public function filter($filter, $searchterm = "")
     {
-        if ($filter == "visit_id") {
+        if ($filter == 'patient_id') {
+            $searchterms = array();
+            $searchterms = explode(' ', $searchterm);
+
+            if (count($searchterms) == 2) {
+                $object = Patient::where([["first_name", 'LIKE', "%$searchterms[0]%"], ["last_name", 'LIKE', "%$searchterms[1]%"]])->get();
+            } else {
+                $object = Patient::where("first_name", 'LIKE', "%$searchterms[0]%")->get();
+                $object2 = Patient::where("last_name", 'LIKE', "%$searchterms[0]%")->get();
+                $object->push($object2);
+                $object = $object->flatten();
+            }
+            $objects = $object;
+            $objects = Visit::whereIn($filter, $objects->pluck('id'))->get();
+            $this->surgeries = Surgery::whereIn('visit_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } elseif ($filter == "visit_id") {
             $objects = Visit::where('title', 'LIKE', "%$searchterm%")->get();
             $this->surgeries = Surgery::whereIn($filter, $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
         } elseif ($filter == "surgery_id") {
@@ -101,11 +116,10 @@ class SurgeryController extends InternalControl
         $request['user_id'] = Auth::id();
         $request['visit_id'] = $request->visit;
         $request['surgery_id'] = $id;
-        // $request['is_success'] = isset($request->is_success) ? 1 : 0;
 
-        if (SurgeryName::where('surgery_name', $request->name)->count() == 0) {
+        if (SurgeryName::where('surgery_name', $request->surgery_name)->count() == 0) {
             $obj1 = new SurgeryName();
-            $obj1->surgery_name = $request->name;
+            $obj1->surgery_name = $request->surgery_name;
             $obj1->save();
         }
 

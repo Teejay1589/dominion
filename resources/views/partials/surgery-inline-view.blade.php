@@ -2,6 +2,8 @@
     <dt></dt>
     <dd class="mb5 lead"><strong>Surgery Details</strong></dd>
 
+    <dt>Patient</dt>
+    <dd class="mb5">{{ $element->patient()->first_name." ".$element->patient()->last_name }} <span class="badge badge-default">{{ $element->patient()->phone_number }}</span></dd>
     <dt>Visit Title</dt>
     <dd class="mb5">{{ $element->visit->title }}</dd>
     <dt>Surgery Name</dt>

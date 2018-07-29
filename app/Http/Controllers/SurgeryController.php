@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Visit;
-use App\Patient;
-use App\VisitDoctors;
 use App\Surgery;
-use App\Billing;
+use App\Patient;
+use App\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class VisitController extends Controller
+class SurgeryController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -20,8 +18,8 @@ class VisitController extends Controller
     public function __construct()
     {
         $this->page = collect();
-        $this->page->title = 'My Visits';
-        $this->page->view = 'visits';
+        $this->page->title = 'My Surgeries';
+        $this->page->view = 'surgeries';
         $this->middleware('auth');
     }
 
@@ -33,7 +31,7 @@ class VisitController extends Controller
     public function index($id = '')
     {
         return view($this->page->view)
-            ->with('visits', Visit::all())
+            ->with('surgeries', Surgery::all())
             ->with('page', $this->page);
     }
 
@@ -53,17 +51,17 @@ class VisitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateVisits $request)
+    public function store(CreateSurgerys $request)
     {
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Visit  $visits
+     * @param  \App\Surgery  $surgeries
      * @return \Illuminate\Http\Response
      */
-    public function show(Visit $visits)
+    public function show(Surgery $surgeries)
     {
         //
     }
@@ -71,10 +69,10 @@ class VisitController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Visit  $visits
+     * @param  \App\Surgery  $surgeries
      * @return \Illuminate\Http\Response
      */
-    public function edit(Visit $visits)
+    public function edit(Surgery $surgeries)
     {
         //
     }
@@ -83,17 +81,17 @@ class VisitController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Visit  $visits
+     * @param  \App\Surgery  $surgeries
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateVisits $request, $id)
+    public function update(UpdateSurgerys $request, $id)
     {
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Visit  $visits
+     * @param  \App\Surgery  $surgeries
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
