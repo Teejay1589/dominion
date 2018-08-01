@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Internal;
 
 use App\User;
-// use App\Http\Requests\CreateUsers;
-// use App\Http\Requests\UpdateUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,12 +63,15 @@ class UserController extends InternalControl
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUsers $request)
+    public function store(Request $request)
     {
+        $request['role_id'] = $request->role;
+        $request['password'] = bcrypt(strtolower($request->last_name));
+
         $obj = new User($request->all());
         $obj->save();
 
-        session()->flash('success', 'New User Created!');
+        session()->flash('success', 'New User Created!<br>Account Password: <strong>'.strtolower($request->last_name).'</strong>');
         return redirect()->back();
     }
 
@@ -103,9 +104,16 @@ class UserController extends InternalControl
      * @param  \App\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUsers $request, $id)
+    public function update(Request $request, $id)
     {
+        $request['role_id'] = $request->role;
+
         $obj = User::findOrFail($id);
+        if ( $request['role_id'] != $obj->role_id ) {
+            if ( Auth::user()->role_id > 1 ) {
+                return redirect()->back()->withErrors('Only the Admin can change Users Role!');
+            }
+        }
         $obj->update($request->all());
 
         session()->flash('success', 'User Updated!');
@@ -120,9 +128,26 @@ class UserController extends InternalControl
      */
     public function destroy($id)
     {
+        if ( Auth::user()->role_id > 1 ) {
+            return redirect()->back()->withErrors('Only the Admin can delete Users!');
+        }
         User::findOrFail($id)->delete();
 
         session()->flash('success', 'User Deleted!');
+        return redirect()->back();
+    }
+
+    public function password_reset($id)
+    {
+        $user = User::findOrFail($id);
+        if (!is_null($user->last_name)) {
+            $user->password = bcrypt(strtolower($user->last_name));
+            $user->update();
+            session()->flash('success', 'User Password Successfully Reset!<br>Password Reset to: <strong>'.strtolower($user->last_name).'</strong>');
+        } else {
+            return redirect()->back()->withErrors('Users Password is unchanged! Reason: User does not have a Last Name');
+        }
+
         return redirect()->back();
     }
 }

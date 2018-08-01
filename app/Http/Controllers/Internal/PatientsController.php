@@ -134,9 +134,9 @@ class PatientsController extends InternalControl
         if (!is_null($patient->phone_number)) {
             $patient->password = bcrypt($patient->phone_number);
             $patient->update();
-            session()->flash('success', 'Patient Password Reset to phone number!');
+            session()->flash('success', 'Patient Password Reset to phone number!<br>Password Reset to: <strong>'.$patient->phone_number.'</strong>');
         } else {
-            return redirect()->back()->withErrors('Patient Password is unchanged!');
+            return redirect()->back()->withErrors('Patient Password is unchanged! Reason: Patient does not have a Phone Number');
         }
 
         return redirect()->back();

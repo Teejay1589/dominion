@@ -124,6 +124,7 @@ Route::namespace('Internal')->group(function () {
 			// Route::get('/edit/{id}', 'UserController@edit');
 			Route::post('/update/{id}', 'UserController@update')->middleware('can:update,App\User');
 			Route::get('/delete/{id}', 'UserController@destroy')->middleware('can:delete,App\User');
+			Route::get('/password/reset/{id}', 'UserController@password_reset')->middleware('can:update,App\User');
 			Route::get('/{filter}/{searchterm?}', 'UserController@filter')->where('searchterm', '.*')->middleware('can:view,App\User');
 		});
 	});
