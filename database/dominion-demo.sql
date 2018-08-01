@@ -3,14 +3,17 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2018 at 05:05 PM
+-- Generation Time: Aug 01, 2018 at 04:39 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
+SET SQL_MODE
+= "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT
+= 0;
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone
+= "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -28,15 +31,24 @@ SET time_zone = "+00:00";
 -- Table structure for table `billings`
 --
 
-CREATE TABLE `billings` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED DEFAULT NULL,
-  `visit_id` int(10) UNSIGNED DEFAULT NULL,
-  `billing_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `amount` double(8,2) NOT NULL,
-  `discount` double(8,2) DEFAULT NULL,
-  `total` double(8,2) DEFAULT NULL,
-  `is_paid` tinyint(1) NOT NULL DEFAULT '0',
+CREATE TABLE `billings`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `user_id` int
+(10) UNSIGNED DEFAULT NULL,
+  `visit_id` int
+(10) UNSIGNED DEFAULT NULL,
+  `billing_name` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `amount` double
+(8,2) NOT NULL,
+  `discount` double
+(8,2) DEFAULT NULL,
+  `total` double
+(8,2) DEFAULT NULL,
+  `is_paid` tinyint
+(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -45,7 +57,10 @@ CREATE TABLE `billings` (
 -- Dumping data for table `billings`
 --
 
-INSERT INTO `billings` (`id`, `user_id`, `visit_id`, `billing_name`, `amount`, `discount`, `total`, `is_paid`, `created_at`, `updated_at`) VALUES
+INSERT INTO `billings` (`
+id`,
+`user_id
+`, `visit_id`, `billing_name`, `amount`, `discount`, `total`, `is_paid`, `created_at`, `updated_at`) VALUES
 (1, 1, 2, 'Test Billing 1', 12000.00, NULL, NULL, 0, '2018-07-29 13:21:43', NULL),
 (2, 1, 16, 'Test Billing 2', 500.00, NULL, NULL, 0, NULL, NULL);
 
@@ -55,13 +70,19 @@ INSERT INTO `billings` (`id`, `user_id`, `visit_id`, `billing_name`, `amount`, `
 -- Table structure for table `bookings`
 --
 
-CREATE TABLE `bookings` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `patient_id` int(11) DEFAULT NULL,
-  `doctor_id` int(11) NOT NULL,
+CREATE TABLE `bookings`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `patient_id` int
+(11) DEFAULT NULL,
+  `doctor_id` int
+(11) NOT NULL,
   `date` date DEFAULT NULL,
-  `appointment_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `appointment_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON
+UPDATE CURRENT_TIMESTAMP,
+  `content
+` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -72,10 +93,14 @@ CREATE TABLE `bookings` (
 -- Table structure for table `messages`
 --
 
-CREATE TABLE `messages` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `patient_id` int(11) NOT NULL,
-  `doctor_id` int(11) NOT NULL,
+CREATE TABLE `messages`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `patient_id` int
+(11) NOT NULL,
+  `doctor_id` int
+(11) NOT NULL,
   `date` date DEFAULT NULL,
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -88,17 +113,24 @@ CREATE TABLE `messages` (
 -- Table structure for table `migrations`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
+CREATE TABLE `migrations`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `migration` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int
+(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
 --
 
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+INSERT INTO `migrations` (`
+id`,
+`migration
+`, `batch`) VALUES
 (1, '2013_03_28_152007_create_roles_table', 1),
 (2, '2014_10_12_000000_create_users_table', 1),
 (3, '2014_10_12_100000_create_password_resets_table', 1),
@@ -110,7 +142,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2018_04_06_191542_create_surgeries_table', 1),
 (10, '2018_05_05_185007_create_surgery_names_table', 1),
 (11, '2018_05_09_191801_create_posts_table', 1),
-(12, '2018_05_28_152834_create_billings_table', 1);
+(12, '2018_05_28_152834_create_billings_table', 1),
+(13, '2018_06_21_113303_create_permissions_table', 2),
+(14, '2018_06_21_115900_create_user_permissions_table', 2);
 
 -- --------------------------------------------------------
 
@@ -118,9 +152,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `password_resets`
 --
 
-CREATE TABLE `password_resets` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `password_resets`
+(
+  `email` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -130,33 +167,59 @@ CREATE TABLE `password_resets` (
 -- Table structure for table `patients`
 --
 
-CREATE TABLE `patients` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED DEFAULT NULL,
-  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone_number` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sex` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `marital_status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `patients`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `user_id` int
+(10) UNSIGNED DEFAULT NULL,
+  `first_name` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone_number` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sex` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `marital_status` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
-  `religion` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nationality` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state_of_origin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `LGA` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `occupation` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `office_address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `next_of_kin_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `next_of_kin_relationship` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `next_of_kin_address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `next_of_kin_phone_number` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `blood_group` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `weight` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `height` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `genotype` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `religion` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nationality` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state_of_origin` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `LGA` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `occupation` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `office_address` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `next_of_kin_name` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `next_of_kin_relationship` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `next_of_kin_address` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `next_of_kin_phone_number` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `blood_group` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `weight` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `height` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `genotype` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar
+(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -165,7 +228,10 @@ CREATE TABLE `patients` (
 -- Dumping data for table `patients`
 --
 
-INSERT INTO `patients` (`id`, `user_id`, `first_name`, `last_name`, `phone_number`, `email`, `sex`, `marital_status`, `date_of_birth`, `religion`, `address`, `nationality`, `state_of_origin`, `LGA`, `occupation`, `office_address`, `next_of_kin_name`, `next_of_kin_relationship`, `next_of_kin_address`, `next_of_kin_phone_number`, `blood_group`, `weight`, `height`, `genotype`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+INSERT INTO `patients` (`
+id`,
+`user_id
+`, `first_name`, `last_name`, `phone_number`, `email`, `sex`, `marital_status`, `date_of_birth`, `religion`, `address`, `nationality`, `state_of_origin`, `LGA`, `occupation`, `office_address`, `next_of_kin_name`, `next_of_kin_relationship`, `next_of_kin_address`, `next_of_kin_phone_number`, `blood_group`, `weight`, `height`, `genotype`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Olayi', 'Codenon', '0816655950', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$YCrb1Lehgh6Hr1g16VKKeucvNVVG9Jw6LGA3XjjxXGlwzV/wiN7nm', NULL, '2018-07-29 12:16:29', NULL),
 (2, 1, 'Olayinka', 'Codenoni', '0816655951', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$A6n.Ccxe1hjrkJ.CUlPHy.3bxOUwGhCX8p7wG6b6DGMV6XRUVqd72', NULL, '2018-07-29 12:16:29', NULL),
 (3, 1, 'Olayinka', 'Codenoni', '0816655952', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$HPtIWe4RkTJaEqzW2TsxxuthucBpc4QgIgQ2Yhy2u98p2q8jyyXhm', NULL, '2018-07-29 12:16:29', NULL),
@@ -195,16 +261,88 @@ INSERT INTO `patients` (`id`, `user_id`, `first_name`, `last_name`, `phone_numbe
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `table` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `action` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `permit` int
+(10) UNSIGNED NOT NULL DEFAULT '1' COMMENT 'ADMIN ROLE TO PERMIT',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`
+id`,
+`table`,
+`action
+`, `permit`, `created_at`, `updated_at`) VALUES
+(1, 'billings', 'view', 4, '2018-08-01 11:04:09', NULL),
+(2, 'billings', 'create', 4, '2018-08-01 11:04:09', NULL),
+(3, 'billings', 'update', 4, '2018-08-01 11:04:09', NULL),
+(4, 'billings', 'delete', 1, '2018-08-01 11:04:09', NULL),
+(5, 'patients', 'view', 4, '2018-08-01 11:04:09', NULL),
+(6, 'patients', 'create', 4, '2018-08-01 11:04:09', NULL),
+(7, 'patients', 'update', 4, '2018-08-01 11:04:09', NULL),
+(8, 'patients', 'delete', 1, '2018-08-01 11:04:09', NULL),
+(9, 'permissions', 'view', 1, '2018-08-01 11:04:09', NULL),
+(10, 'permissions', 'create', 1, '2018-08-01 11:04:09', NULL),
+(11, 'permissions', 'update', 1, '2018-08-01 11:04:09', NULL),
+(12, 'permissions', 'delete', 1, '2018-08-01 11:04:09', NULL),
+(13, 'posts', 'view', 3, '2018-08-01 11:04:09', NULL),
+(14, 'posts', 'create', 3, '2018-08-01 11:04:09', NULL),
+(15, 'posts', 'update', 3, '2018-08-01 11:04:10', NULL),
+(16, 'posts', 'delete', 3, '2018-08-01 11:04:10', NULL),
+(17, 'surgeries', 'view', 4, '2018-08-01 11:04:10', NULL),
+(18, 'surgeries', 'create', 4, '2018-08-01 11:04:10', NULL),
+(19, 'surgeries', 'update', 4, '2018-08-01 11:04:10', NULL),
+(20, 'surgeries', 'delete', 1, '2018-08-01 11:04:10', NULL),
+(21, 'surgery_names', 'view', 4, '2018-08-01 11:04:10', NULL),
+(22, 'surgery_names', 'create', 4, '2018-08-01 11:04:10', NULL),
+(23, 'surgery_names', 'update', 4, '2018-08-01 11:04:10', NULL),
+(24, 'surgery_names', 'delete', 4, '2018-08-01 11:04:10', NULL),
+(25, 'users', 'view', 1, '2018-08-01 11:04:10', NULL),
+(26, 'users', 'create', 1, '2018-08-01 11:04:10', NULL),
+(27, 'users', 'update', 1, '2018-08-01 11:04:10', NULL),
+(28, 'users', 'delete', 1, '2018-08-01 11:04:10', NULL),
+(29, 'user_permissions', 'view', 1, '2018-08-01 11:04:10', NULL),
+(30, 'user_permissions', 'create', 1, '2018-08-01 11:04:10', NULL),
+(31, 'user_permissions', 'update', 1, '2018-08-01 11:04:10', NULL),
+(32, 'user_permissions', 'delete', 1, '2018-08-01 11:04:10', NULL),
+(33, 'visits', 'view', 4, '2018-08-01 11:04:10', NULL),
+(34, 'visits', 'create', 4, '2018-08-01 11:04:10', NULL),
+(35, 'visits', 'update', 4, '2018-08-01 11:04:10', NULL),
+(36, 'visits', 'delete', 1, '2018-08-01 11:04:10', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
-CREATE TABLE `posts` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `posts`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `user_id` int
+(10) UNSIGNED NOT NULL,
+  `title` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -213,7 +351,10 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `user_id`, `title`, `body`, `slug`, `image`, `created_at`, `updated_at`) VALUES
+INSERT INTO `posts` (`
+id`,
+`user_id
+`, `title`, `body`, `slug`, `image`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Blog Post Test', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat temporibus atque quibusdam dolores libero tempore eum laborum, id voluptatem illo debitis veniam, tenetur amet non unde nulla architecto. Beatae, dolorem!', 'blog-post-test', NULL, '2018-07-28 02:47:17', '2018-07-28 02:47:17'),
 (2, 1, 'Blog Post Test2', '<h1>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</h1>\r\n\r\n<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href=\"#\">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>\r\n\r\n<h2>Header Level 2</h2>\r\n\r\n<ol>\r\n	<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>\r\n	<li>Aliquam tincidunt mauris eu risus.</li>\r\n</ol>\r\n\r\n<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>\r\n\r\n<h3>Header Level 3</h3>\r\n\r\n<ul>\r\n	<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>\r\n	<li>Aliquam tincidunt mauris eu risus.</li>\r\n</ul>\r\n\r\n<pre><code>\r\n#header h1 a { \r\n	display: block; \r\n	width: 300px; \r\n	height: 80px; \r\n}\r\n</code></pre>', 'blog-post-test2', NULL, '2018-07-28 03:02:19', '2018-07-28 03:02:19');
 
@@ -223,9 +364,12 @@ INSERT INTO `posts` (`id`, `user_id`, `title`, `body`, `slug`, `image`, `created
 -- Table structure for table `roles`
 --
 
-CREATE TABLE `roles` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `roles`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `name` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -234,11 +378,14 @@ CREATE TABLE `roles` (
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'STAFF', '2018-07-29 12:16:28', NULL),
-(2, 'DOCTOR', '2018-07-29 12:16:28', NULL),
-(3, 'SURGEON', '2018-07-29 12:16:28', NULL),
-(4, 'ADMIN', '2018-07-29 12:16:28', NULL);
+INSERT INTO `roles` (`
+id`,
+`name
+`, `created_at`, `updated_at`) VALUES
+(1, 'ADMIN', '2018-07-29 12:16:28', NULL),
+(2, 'SURGEON', '2018-07-29 12:16:28', NULL),
+(3, 'DOCTOR', '2018-07-29 12:16:28', NULL),
+(4, 'STAFF', '2018-07-29 12:16:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -246,12 +393,18 @@ INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `surgeries`
 --
 
-CREATE TABLE `surgeries` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED DEFAULT NULL,
-  `visit_id` int(10) UNSIGNED NOT NULL,
-  `surgery_id` int(10) UNSIGNED DEFAULT NULL,
-  `surgery_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `surgeries`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `user_id` int
+(10) UNSIGNED DEFAULT NULL,
+  `visit_id` int
+(10) UNSIGNED NOT NULL,
+  `surgery_id` int
+(10) UNSIGNED DEFAULT NULL,
+  `surgery_name` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `surgery_date` date DEFAULT NULL,
   `complications` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -262,7 +415,10 @@ CREATE TABLE `surgeries` (
 -- Dumping data for table `surgeries`
 --
 
-INSERT INTO `surgeries` (`id`, `user_id`, `visit_id`, `surgery_id`, `surgery_name`, `surgery_date`, `complications`, `created_at`, `updated_at`) VALUES
+INSERT INTO `surgeries` (`
+id`,
+`user_id
+`, `visit_id`, `surgery_id`, `surgery_name`, `surgery_date`, `complications`, `created_at`, `updated_at`) VALUES
 (1, 1, 5, NULL, 'Femoral head ostectomy', '2018-07-11', NULL, '2018-07-28 01:51:32', '2018-07-28 01:51:32'),
 (2, 1, 21, NULL, 'Jejunostomy', '2018-07-18', NULL, '2018-07-29 13:04:12', '2018-07-29 13:04:12');
 
@@ -272,9 +428,12 @@ INSERT INTO `surgeries` (`id`, `user_id`, `visit_id`, `surgery_id`, `surgery_nam
 -- Table structure for table `surgery_names`
 --
 
-CREATE TABLE `surgery_names` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `surgery_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `surgery_names`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `surgery_name` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -284,7 +443,10 @@ CREATE TABLE `surgery_names` (
 -- Dumping data for table `surgery_names`
 --
 
-INSERT INTO `surgery_names` (`id`, `surgery_name`, `description`, `created_at`, `updated_at`) VALUES
+INSERT INTO `surgery_names` (`
+id`,
+`surgery_name
+`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'Genital', NULL, '2018-07-29 12:16:32', NULL),
 (2, 'Female', NULL, '2018-07-29 12:16:32', NULL),
 (3, 'Cervicectomy', NULL, '2018-07-29 12:16:32', NULL),
@@ -448,23 +610,39 @@ INSERT INTO `surgery_names` (`id`, `surgery_name`, `description`, `created_at`, 
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role_id` int(10) UNSIGNED NOT NULL,
-  `identity_number` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gender` enum('MALE','FEMALE') COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `users`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `first_name` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role_id` int
+(10) UNSIGNED NOT NULL,
+  `identity_number` varchar
+(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` enum
+('MALE','FEMALE') COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_of_birth` date DEFAULT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `job` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `profile_picture` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'img/default.png',
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `job` varchar
+(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profile_picture` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'img/default.png',
+  `remember_token` varchar
+(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -473,7 +651,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `role_id`, `identity_number`, `gender`, `date_of_birth`, `phone`, `address`, `state`, `country`, `job`, `profile_picture`, `remember_token`, `created_at`, `updated_at`) VALUES
+INSERT INTO `users` (`
+id`,
+`first_name
+`, `last_name`, `email`, `password`, `role_id`, `identity_number`, `gender`, `date_of_birth`, `phone`, `address`, `state`, `country`, `job`, `profile_picture`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Tunji', 'Oyeniran', 'oyenirantunji2339@gmail.com', '$2y$10$iYsRIuS4UbAyjwKCm/5oNeYd91MyYDMwuZqrk3YFpaVE43mROYRBO', 4, NULL, 'MALE', NULL, '090', NULL, NULL, NULL, NULL, 'img/default.png', NULL, '2018-07-29 12:16:28', NULL),
 (2, 'Test', 'Admin', 'test@admin.com', '$2y$10$lI/ENx9eJBy5SKY1uK6sqeuqQviAXWqbESJCGuPJMFv.z5pYU2kSe', 4, NULL, 'MALE', NULL, '080', NULL, NULL, NULL, NULL, 'img/default.png', NULL, '2018-07-29 12:16:28', NULL),
 (3, 'Test', 'Staff', 'test@staff.com', '$2y$10$UY4pJ.5IQJN2FyRNbhriIenDp0xiEhuyGX.hy8Be6GpJTf9XnJ1Z.', 1, NULL, 'FEMALE', NULL, '080', NULL, NULL, NULL, NULL, 'img/default.png', NULL, '2018-07-29 12:16:28', NULL);
@@ -481,20 +662,69 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `role
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_permissions`
+--
+
+CREATE TABLE `user_permissions`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `table` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `action` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int
+(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_permissions`
+--
+
+INSERT INTO `user_permissions` (`
+id`,
+`table`,
+`action
+`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'patients', 'delete', 3, '2018-08-01 13:32:32', '2018-08-01 13:32:32'),
+(2, 'user_permissions', 'view', 1, '2018-08-01 13:32:41', '2018-08-01 13:32:41'),
+(3, 'user_permissions', 'create', 1, '2018-08-01 13:32:52', '2018-08-01 13:32:52'),
+(4, 'user_permissions', 'update', 1, '2018-08-01 13:33:22', '2018-08-01 13:33:22'),
+(5, 'user_permissions', 'delete', 1, '2018-08-01 13:33:31', '2018-08-01 13:33:31'),
+(6, 'users', 'view', 1, '2018-08-01 13:33:41', '2018-08-01 13:33:41'),
+(7, 'users', 'create', 1, '2018-08-01 13:33:53', '2018-08-01 13:33:53'),
+(8, 'users', 'update', 1, '2018-08-01 13:34:02', '2018-08-01 13:34:02'),
+(9, 'users', 'delete', 1, '2018-08-01 13:34:13', '2018-08-01 13:34:13'),
+(10, 'billings', 'delete', 1, '2018-08-01 13:36:50', '2018-08-01 13:36:50'),
+(11, 'patients', 'delete', 1, '2018-08-01 13:37:02', '2018-08-01 13:37:02'),
+(12, 'surgeries', 'delete', 1, '2018-08-01 13:37:21', '2018-08-01 13:37:21');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `visits`
 --
 
-CREATE TABLE `visits` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED DEFAULT NULL,
-  `patient_id` int(10) UNSIGNED NOT NULL,
-  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `visits`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `user_id` int
+(10) UNSIGNED DEFAULT NULL,
+  `patient_id` int
+(10) UNSIGNED NOT NULL,
+  `type` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar
+(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `subjects` text COLLATE utf8mb4_unicode_ci,
   `objects` text COLLATE utf8mb4_unicode_ci,
   `assessment` text COLLATE utf8mb4_unicode_ci,
   `plans` text COLLATE utf8mb4_unicode_ci,
-  `successful_delivery` tinyint(1) NOT NULL DEFAULT '0',
+  `successful_delivery` tinyint
+(1) NOT NULL DEFAULT '0',
   `discharged_on` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -504,7 +734,10 @@ CREATE TABLE `visits` (
 -- Dumping data for table `visits`
 --
 
-INSERT INTO `visits` (`id`, `user_id`, `patient_id`, `type`, `title`, `subjects`, `objects`, `assessment`, `plans`, `successful_delivery`, `discharged_on`, `created_at`, `updated_at`) VALUES
+INSERT INTO `visits` (`
+id`,
+`user_id
+`, `patient_id`, `type`, `title`, `subjects`, `objects`, `assessment`, `plans`, `successful_delivery`, `discharged_on`, `created_at`, `updated_at`) VALUES
 (1, NULL, 7, 'DELIVERY', 'DELIVERY Visit Test 0', NULL, NULL, NULL, NULL, 1, NULL, '2018-07-29 12:16:32', NULL),
 (2, NULL, 17, 'OTHERS', 'OTHERS Visit Test 1', NULL, NULL, NULL, NULL, 0, NULL, '2018-07-29 12:16:32', NULL),
 (3, NULL, 12, 'CONSULTATION', 'CONSULTATION Visit Test 2', NULL, NULL, NULL, NULL, 0, NULL, '2018-07-29 12:16:32', NULL),
@@ -537,11 +770,16 @@ INSERT INTO `visits` (`id`, `user_id`, `patient_id`, `type`, `title`, `subjects`
 -- Table structure for table `visit_doctors`
 --
 
-CREATE TABLE `visit_doctors` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED DEFAULT NULL,
-  `visit_id` int(10) UNSIGNED NOT NULL,
-  `doctor_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE `visit_doctors`
+(
+  `id` int
+(10) UNSIGNED NOT NULL,
+  `user_id` int
+(10) UNSIGNED DEFAULT NULL,
+  `visit_id` int
+(10) UNSIGNED NOT NULL,
+  `doctor_id` int
+(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -554,94 +792,138 @@ CREATE TABLE `visit_doctors` (
 -- Indexes for table `billings`
 --
 ALTER TABLE `billings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `billings_user_id_index` (`user_id`),
-  ADD KEY `billings_visit_id_index` (`visit_id`);
+ADD PRIMARY KEY
+(`id`),
+ADD KEY `billings_user_id_index`
+(`user_id`),
+ADD KEY `billings_visit_id_index`
+(`visit_id`);
 
 --
 -- Indexes for table `bookings`
 --
 ALTER TABLE `bookings`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY
+(`id`);
 
 --
 -- Indexes for table `messages`
 --
 ALTER TABLE `messages`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY
+(`id`);
 
 --
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY
+(`id`);
 
 --
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
+ADD KEY `password_resets_email_index`
+(`email`);
 
 --
 -- Indexes for table `patients`
 --
 ALTER TABLE `patients`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `patients_user_id_index` (`user_id`);
+ADD PRIMARY KEY
+(`id`),
+ADD KEY `patients_user_id_index`
+(`user_id`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+ADD PRIMARY KEY
+(`id`);
 
 --
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `posts_slug_unique` (`slug`),
-  ADD KEY `posts_user_id_index` (`user_id`);
+ADD PRIMARY KEY
+(`id`),
+ADD UNIQUE KEY `posts_slug_unique`
+(`slug`),
+ADD KEY `posts_user_id_index`
+(`user_id`);
 
 --
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY
+(`id`);
 
 --
 -- Indexes for table `surgeries`
 --
 ALTER TABLE `surgeries`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `surgeries_user_id_index` (`user_id`),
-  ADD KEY `surgeries_visit_id_index` (`visit_id`),
-  ADD KEY `surgeries_surgery_id_index` (`surgery_id`);
+ADD PRIMARY KEY
+(`id`),
+ADD KEY `surgeries_user_id_index`
+(`user_id`),
+ADD KEY `surgeries_visit_id_index`
+(`visit_id`),
+ADD KEY `surgeries_surgery_id_index`
+(`surgery_id`);
 
 --
 -- Indexes for table `surgery_names`
 --
 ALTER TABLE `surgery_names`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY
+(`id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`),
-  ADD KEY `users_role_id_index` (`role_id`);
+ADD PRIMARY KEY
+(`id`),
+ADD UNIQUE KEY `users_email_unique`
+(`email`),
+ADD KEY `users_role_id_index`
+(`role_id`);
+
+--
+-- Indexes for table `user_permissions`
+--
+ALTER TABLE `user_permissions`
+ADD PRIMARY KEY
+(`id`),
+ADD KEY `user_permissions_user_id_index`
+(`user_id`);
 
 --
 -- Indexes for table `visits`
 --
 ALTER TABLE `visits`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `visits_user_id_index` (`user_id`),
-  ADD KEY `visits_patient_id_index` (`patient_id`);
+ADD PRIMARY KEY
+(`id`),
+ADD KEY `visits_user_id_index`
+(`user_id`),
+ADD KEY `visits_patient_id_index`
+(`patient_id`);
 
 --
 -- Indexes for table `visit_doctors`
 --
 ALTER TABLE `visit_doctors`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `visit_doctors_user_id_index` (`user_id`),
-  ADD KEY `visit_doctors_visit_id_index` (`visit_id`),
-  ADD KEY `visit_doctors_doctor_id_index` (`doctor_id`);
+ADD PRIMARY KEY
+(`id`),
+ADD KEY `visit_doctors_user_id_index`
+(`user_id`),
+ADD KEY `visit_doctors_visit_id_index`
+(`visit_id`),
+ADD KEY `visit_doctors_doctor_id_index`
+(`doctor_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -651,62 +933,86 @@ ALTER TABLE `visit_doctors`
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `surgeries`
 --
 ALTER TABLE `surgeries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `surgery_names`
 --
 ALTER TABLE `surgery_names`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `user_permissions`
+--
+ALTER TABLE `user_permissions`
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `visits`
 --
 ALTER TABLE `visits`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `visit_doctors`
 --
 ALTER TABLE `visit_doctors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int
+(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
@@ -715,43 +1021,80 @@ ALTER TABLE `visit_doctors`
 -- Constraints for table `billings`
 --
 ALTER TABLE `billings`
-  ADD CONSTRAINT `billings_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `billings_visit_id_foreign` FOREIGN KEY (`visit_id`) REFERENCES `visits` (`id`) ON DELETE CASCADE;
+ADD CONSTRAINT `billings_user_id_foreign` FOREIGN KEY
+(`user_id`) REFERENCES `users`
+(`id`),
+ADD CONSTRAINT `billings_visit_id_foreign` FOREIGN KEY
+(`visit_id`) REFERENCES `visits`
+(`id`) ON
+DELETE CASCADE;
 
 --
 -- Constraints for table `patients`
 --
 ALTER TABLE `patients`
-  ADD CONSTRAINT `patients_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ADD CONSTRAINT `patients_user_id_foreign` FOREIGN KEY
+(`user_id`) REFERENCES `users`
+(`id`);
 
 --
 -- Constraints for table `surgeries`
 --
 ALTER TABLE `surgeries`
-  ADD CONSTRAINT `surgeries_surgery_id_foreign` FOREIGN KEY (`surgery_id`) REFERENCES `surgeries` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `surgeries_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `surgeries_visit_id_foreign` FOREIGN KEY (`visit_id`) REFERENCES `visits` (`id`) ON DELETE CASCADE;
+ADD CONSTRAINT `surgeries_surgery_id_foreign` FOREIGN KEY
+(`surgery_id`) REFERENCES `surgeries`
+(`id`) ON
+DELETE CASCADE,
+ADD CONSTRAINT `surgeries_user_id_foreign` FOREIGN KEY
+(`user_id`) REFERENCES `users`
+(`id`),
+ADD CONSTRAINT `surgeries_visit_id_foreign` FOREIGN KEY
+(`visit_id`) REFERENCES `visits`
+(`id`) ON
+DELETE CASCADE;
 
 --
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
+ADD CONSTRAINT `users_role_id_foreign` FOREIGN KEY
+(`role_id`) REFERENCES `roles`
+(`id`);
+
+--
+-- Constraints for table `user_permissions`
+--
+ALTER TABLE `user_permissions`
+ADD CONSTRAINT `user_permissions_user_id_foreign` FOREIGN KEY
+(`user_id`) REFERENCES `users`
+(`id`);
 
 --
 -- Constraints for table `visits`
 --
 ALTER TABLE `visits`
-  ADD CONSTRAINT `visits_patient_id_foreign` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `visits_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ADD CONSTRAINT `visits_patient_id_foreign` FOREIGN KEY
+(`patient_id`) REFERENCES `patients`
+(`id`) ON
+DELETE CASCADE,
+ADD CONSTRAINT `visits_user_id_foreign` FOREIGN KEY
+(`user_id`) REFERENCES `users`
+(`id`);
 
 --
 -- Constraints for table `visit_doctors`
 --
 ALTER TABLE `visit_doctors`
-  ADD CONSTRAINT `visit_doctors_doctor_id_foreign` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `visit_doctors_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `visit_doctors_visit_id_foreign` FOREIGN KEY (`visit_id`) REFERENCES `visits` (`id`) ON DELETE CASCADE;
+ADD CONSTRAINT `visit_doctors_doctor_id_foreign` FOREIGN KEY
+(`doctor_id`) REFERENCES `users`
+(`id`),
+ADD CONSTRAINT `visit_doctors_user_id_foreign` FOREIGN KEY
+(`user_id`) REFERENCES `users`
+(`id`),
+ADD CONSTRAINT `visit_doctors_visit_id_foreign` FOREIGN KEY
+(`visit_id`) REFERENCES `visits`
+(`id`) ON
+DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
