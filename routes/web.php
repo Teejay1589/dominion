@@ -114,7 +114,17 @@ Route::namespace('Internal')->group(function () {
 			// Route::get('/edit/{id}', 'UserPermissionController@edit');
 			Route::post('/update/{id}', 'UserPermissionController@update')->middleware('can:update,App\UserPermission');
 			Route::get('/delete/{id}', 'UserPermissionController@destroy')->middleware('can:delete,App\UserPermission');
-			Route::get('/{filter}/{searchterm?}', 'UserPermissionController@filtered')->where('searchterm', '.*')->middleware('can:view,App\UserPermission');
+			Route::get('/{filter}/{searchterm?}', 'UserPermissionController@filter')->where('searchterm', '.*')->middleware('can:view,App\UserPermission');
+		});
+
+		// Users
+		Route::prefix('users')->group(function () {
+			Route::get('/', 'UserController@index')->middleware('can:view,App\User');
+			Route::post('/create', 'UserController@store')->middleware('can:create,App\User');
+			// Route::get('/edit/{id}', 'UserController@edit');
+			Route::post('/update/{id}', 'UserController@update')->middleware('can:update,App\User');
+			Route::get('/delete/{id}', 'UserController@destroy')->middleware('can:delete,App\User');
+			Route::get('/{filter}/{searchterm?}', 'UserController@filter')->where('searchterm', '.*')->middleware('can:view,App\User');
 		});
 	});
 });

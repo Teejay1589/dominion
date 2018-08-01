@@ -162,13 +162,15 @@
       @can('view', App\User::class)
         <!-- users -->
         <li class="{{ isset($page) && $page->view == 'm.users' ? 'active' : '' }}">
-          <a href="javascript:;">
+          <a href="{{ url('/m/users') }}">
             <i class="fa fa-group"></i>
-            <span>Staff Management</span>
+            <span>Users / Staff Management</span>
           </a>
         </li>
         <!-- /users -->
       @endcan
+
+      <li class="m15"></li>
     </ul>
   </nav>
   <!-- /main navigation -->

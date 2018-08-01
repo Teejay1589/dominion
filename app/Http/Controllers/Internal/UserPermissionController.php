@@ -39,7 +39,7 @@ class UserPermissionController extends InternalControl
             ->with('page', $this->page);
     }
 
-    public function filtered($filter, $searchterm = "")
+    public function filter($filter, $searchterm = "")
     {
         if ($filter == 'user_id') {
             $objects = User::where('first_name', 'LIKE', "%$searchterm%")->whereOr('last_name', 'LIKE', "%$searchterm%")->get();

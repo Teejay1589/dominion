@@ -13,7 +13,7 @@
 					{{ csrf_field() }}
 
 					<div class="form-group">
-						<label class="form-control-label">Select Table: <span class="text-error">*</span></label>
+						<label class="form-control-label">Select Table: <span class="text-danger">*</span></label>
 						<select class="form-control" name="table" required>
 							<option value="">NONE</option>
 							@php
@@ -26,7 +26,7 @@
 					</div>
 
 					<div class="form-group">
-						<label class="form-control-label">Select Action: <span class="text-error">*</span></label>
+						<label class="form-control-label">Select Action: <span class="text-danger">*</span></label>
 						<select class="form-control" name="action" required>
 							<option value="">NONE</option>
 							@php
