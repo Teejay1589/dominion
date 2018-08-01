@@ -13,15 +13,17 @@ class CreateBookingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookings', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('patient_id')->nullable();
-            $table->integer('doctor_id');
-            $table->date('date')->nullable();
-            $table->timestamp('appointment_time');
-            $table->text('content');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('bookings')) {
+            Schema::create('bookings', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('patient_id')->nullable();
+                $table->integer('doctor_id');
+                $table->date('date')->nullable();
+                $table->timestamp('appointment_time');
+                $table->text('content');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

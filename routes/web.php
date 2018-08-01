@@ -54,14 +54,17 @@ Route::namespace('Internal')->group(function () {
 		Route::post('/profile/update', 'HomeController@update')->name('m.profile.update');
 		Route::post('/password/change', 'HomeController@change_password')->name('m.password.change');
 
+		// Manage My Permissions
+		Route::get('/my-permissions', 'HomeController@my_permissions');
+
 		// Patients
-		Route::get('/patients', 'PatientsController@index');
-		Route::post('/patients/create', 'PatientsController@store');
+		Route::get('/patients', 'PatientsController@index')->middleware('can:view,App\Patient');
+		Route::post('/patients/create', 'PatientsController@store')->middleware('can:create,App\Patient');
 		// Route::get('/patients/edit/{id}', 'PatientsController@edit');
-		Route::post('/patients/update/{id}', 'PatientsController@update');
-		Route::get('/patients/delete/{id}', 'PatientsController@destroy');
-		Route::get('/patients/password/reset/{id}', 'PatientsController@password_reset');
-		Route::get('/patients/{filter}/{searchterm?}', 'PatientsController@filter')->where('searchterm', '.*');
+		Route::post('/patients/update/{id}', 'PatientsController@update')->middleware('can:update,App\Patient');
+		Route::get('/patients/delete/{id}', 'PatientsController@destroy')->middleware('can:delete,App\Patient');
+		Route::get('/patients/password/reset/{id}', 'PatientsController@password_reset')->middleware('can:update,App\Patient');
+		Route::get('/patients/{filter}/{searchterm?}', 'PatientsController@filter')->where('searchterm', '.*')->middleware('can:view,App\Patient');
 
 		// Patient Visits
 		Route::get('/patient/{id}/visits', 'PatientVisitsController@index');
@@ -72,40 +75,47 @@ Route::namespace('Internal')->group(function () {
 		Route::get('/patient/{id}/visits/{filter}/{searchterm?}', 'PatientVisitsController@filter')->where('searchterm', '.*');
 
 		// Cases
-		Route::get('/visits', 'VisitController@index');
-		Route::post('/visits/create', 'VisitController@store');
+		Route::get('/visits', 'VisitController@index')->middleware('can:view,App\Visit');
+		Route::post('/visits/create', 'VisitController@store')->middleware('can:create,App\Visit');
 		// Route::get('/visits/edit/{id}', 'VisitController@edit');
-		Route::post('/visits/update/{id}', 'VisitController@update');
-		Route::get('/visits/delete/{id}', 'VisitController@destroy');
-		Route::get('/visits/{filter}/{searchterm?}', 'VisitController@filter')->where('searchterm', '.*');
+		Route::post('/visits/update/{id}', 'VisitController@update')->middleware('can:update,App\Visit');
+		Route::get('/visits/delete/{id}', 'VisitController@destroy')->middleware('can:delete,App\Visit');
+		Route::get('/visits/{filter}/{searchterm?}', 'VisitController@filter')->where('searchterm', '.*')->middleware('can:view,App\Visit');
 
 		// Surgeries
-		Route::get('/surgeries', 'SurgeryController@index');
-		Route::post('/surgeries/create', 'SurgeryController@store');
-		Route::post('/surgeries/create/{id}', 'SurgeryController@resurgery');
+		Route::get('/surgeries', 'SurgeryController@index')->middleware('can:view,App\Surgery');
+		Route::post('/surgeries/create', 'SurgeryController@store')->middleware('can:create,App\Surgery');
+		Route::post('/surgeries/create/{id}', 'SurgeryController@resurgery')->middleware('can:create,App\Surgery');
 		// Route::get('/surgeries/edit/{id}', 'SurgeryController@edit');
-		Route::post('/surgeries/update/{id}', 'SurgeryController@update');
-		Route::get('/surgeries/delete/{id}', 'SurgeryController@destroy');
-		Route::get('/surgeries/{filter}/{searchterm?}', 'SurgeryController@filter')->where('searchterm', '.*');
+		Route::post('/surgeries/update/{id}', 'SurgeryController@update')->middleware('can:update,App\Surgery');
+		Route::get('/surgeries/delete/{id}', 'SurgeryController@destroy')->middleware('can:delete,App\Surgery');
+		Route::get('/surgeries/{filter}/{searchterm?}', 'SurgeryController@filter')->where('searchterm', '.*')->middleware('can:view,App\Surgery');
 
 		// Surgeries
-		Route::get('/surgery_names', 'SurgeryNameController@index');
-		Route::post('/surgery_names/create', 'SurgeryNameController@store');
-		Route::post('/surgery_names/create/{id}', 'SurgeryNameController@resurgery');
+		Route::get('/surgery_names', 'SurgeryNameController@index')->middleware('can:view,App\SurgeryName');
+		Route::post('/surgery_names/create', 'SurgeryNameController@store')->middleware('can:create,App\SurgeryName');
 		// Route::get('/surgery_names/edit/{id}', 'SurgeryNameController@edit');
-		Route::post('/surgery_names/update/{id}', 'SurgeryNameController@update');
-		Route::get('/surgery_names/delete/{id}', 'SurgeryNameController@destroy');
-		Route::get('/surgery_names/{filter}/{searchterm?}', 'SurgeryNameController@filter')->where('searchterm', '.*');
-		Route::get('/surgeries/{filter}/{searchterm?}', 'SurgeryController@filter')->where('searchterm', '.*');
+		Route::post('/surgery_names/update/{id}', 'SurgeryNameController@update')->middleware('can:update,App\SurgeryName');
+		Route::get('/surgery_names/delete/{id}', 'SurgeryNameController@destroy')->middleware('can:delete,App\SurgeryName');
+		Route::get('/surgery_names/{filter}/{searchterm?}', 'SurgeryNameController@filter')->where('searchterm', '.*')->middleware('can:view,App\SurgeryName');
 
-		// Surgeries
-		Route::get('/billings', 'BillingController@index');
-		Route::post('/billings/create', 'BillingController@store');
-		Route::post('/billings/create/{id}', 'BillingController@resurgery');
+		// Billings
+		Route::get('/billings', 'BillingController@index')->middleware('can:view,App\Billing');
+		Route::post('/billings/create', 'BillingController@store')->middleware('can:create,App\Billing');
 		// Route::get('/billings/edit/{id}', 'BillingController@edit');
-		Route::post('/billings/update/{id}', 'BillingController@update');
-		Route::get('/billings/delete/{id}', 'BillingController@destroy');
-		Route::get('/billings/{filter}/{searchterm?}', 'BillingController@filter')->where('searchterm', '.*');
+		Route::post('/billings/update/{id}', 'BillingController@update')->middleware('can:update,App\Billing');
+		Route::get('/billings/delete/{id}', 'BillingController@destroy')->middleware('can:delete,App\Billing');
+		Route::get('/billings/{filter}/{searchterm?}', 'BillingController@filter')->where('searchterm', '.*')->middleware('can:view,App\Billing');
+
+		// User Permissions
+		Route::prefix('user-permissions')->group(function () {
+			Route::get('/', 'UserPermissionController@index')->middleware('can:view,App\UserPermission');
+			Route::post('/create', 'UserPermissionController@store')->middleware('can:create,App\UserPermission');
+			// Route::get('/edit/{id}', 'UserPermissionController@edit');
+			Route::post('/update/{id}', 'UserPermissionController@update')->middleware('can:update,App\UserPermission');
+			Route::get('/delete/{id}', 'UserPermissionController@destroy')->middleware('can:delete,App\UserPermission');
+			Route::get('/{filter}/{searchterm?}', 'UserPermissionController@filtered')->where('searchterm', '.*')->middleware('can:view,App\UserPermission');
+		});
 	});
 });
 

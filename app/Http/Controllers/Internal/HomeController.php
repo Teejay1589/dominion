@@ -69,4 +69,12 @@ class HomeController extends InternalControl
             return redirect()->back()->withErrors(array('current_password' => 'Current Password entered is incorrect, PASSWORD UNCHANGED!'))->withInput();
         }
     }
+
+    public function my_permissions()
+    {
+        $this->page->title = 'My Permissions';
+        $this->page->view = 'm.my_permissions';
+        return view($this->page->view)
+            ->with('page', $this->page);
+    }
 }

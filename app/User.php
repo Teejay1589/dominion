@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Permission;
+use App\UserPermission;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,6 +28,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function is_permitted_to($action, $table)
+    {
+        $permission = Permission::where('action', $action)
+            ->where('table', $table)
+            ->first();
+        $user_permission = UserPermission::where('action', $action)
+            ->where('table', $table)
+            ->where('user_id', $this->id)
+            ->first();
+        return ((isset($permission->permit) && $permission->permit >= $this->role_id) || isset($user_permission));
+    }
 
     public static function table()
     {

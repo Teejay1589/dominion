@@ -49,6 +49,16 @@
       </li>
       <!-- /profile -->
 
+      <!-- my permissions -->
+      <li class="{{ isset($page) && $page->view == 'm.my_permissions' ? 'active' : '' }}">
+        <a href="{{ url('/m/my-permissions') }}">
+          <i class="fa fa-info"></i>
+          <span>My Permissions</span>
+          <span class="label pull-right">{{ App\Permission::where('permit', '>=', Auth::user()->role_id)->count() + App\UserPermission::where('user_id', Auth::id())->count() }}</span>
+        </a>
+      </li>
+      <!-- /my permissions -->
+
       <!-- logout -->
       <li class="">
         <a href="{{ url('/m/logout') }}">
@@ -60,60 +70,72 @@
 
       <li class="m15"></li>
 
-      <!-- patients -->
-      <li class="{{ isset($page) && $page->view == 'm.patients' ? 'active' : '' }}">
-        <a href="{{ url('/m/patients') }}">
-          <i class="fa fa-users"></i>
-          <span>Patients</span>
-          <span class="label pull-right">{{ App\Patient::count() }}</span>
-        </a>
-      </li>
-      <!-- /patients -->
+      @can('view', App\Patient::class)
+        <!-- patients -->
+        <li class="{{ isset($page) && $page->view == 'm.patients' ? 'active' : '' }}">
+          <a href="{{ url('/m/patients') }}">
+            <i class="fa fa-users"></i>
+            <span>Patients</span>
+            <span class="label pull-right">{{ App\Patient::count() }}</span>
+          </a>
+        </li>
+        <!-- /patients -->
+      @endcan
 
-      <!-- patient_visits -->
-      <li class="{{ isset($page) && $page->view == 'm.patient_visits' ? 'active' : '' }}">
-        <a href="{{ url('/m/patient/0/visits') }}">
-          <i class="fa fa-child"></i>
-          <span>Patient Visits</span>
-        </a>
-      </li>
-      <!-- /patient_visits -->
+      @can('view', App\Visit::class)
+        <!-- patient_visits -->
+        <li class="{{ isset($page) && $page->view == 'm.patient_visits' ? 'active' : '' }}">
+          <a href="{{ url('/m/patient/0/visits') }}">
+            <i class="fa fa-child"></i>
+            <span>Patient Visits</span>
+          </a>
+        </li>
+        <!-- /patient_visits -->
+      @endcan
 
-      <!-- visits -->
-      <li class="{{ isset($page) && $page->view == 'm.visits' ? 'active' : '' }}">
-        <a href="{{ url('/m/visits') }}">
-          <i class="fa fa-child"></i>
-          <span>All Visits</span>
-        </a>
-      </li>
-      <!-- /visits -->
+      @can('view', App\Visit::class)
+        <!-- visits -->
+        <li class="{{ isset($page) && $page->view == 'm.visits' ? 'active' : '' }}">
+          <a href="{{ url('/m/visits') }}">
+            <i class="fa fa-child"></i>
+            <span>All Visits</span>
+          </a>
+        </li>
+        <!-- /visits -->
+      @endcan
 
-      <!-- surgeries -->
-      <li class="{{ isset($page) && $page->view == 'm.surgeries' ? 'active' : '' }}">
-        <a href="{{ url('/m/surgeries') }}">
-          <i class="fa fa-stethoscope"></i>
-          <span>All Surgeries</span>
-        </a>
-      </li>
-      <!-- /surgeries -->
+      @can('view', App\Surgery::class)
+        <!-- surgeries -->
+        <li class="{{ isset($page) && $page->view == 'm.surgeries' ? 'active' : '' }}">
+          <a href="{{ url('/m/surgeries') }}">
+            <i class="fa fa-stethoscope"></i>
+            <span>All Surgeries</span>
+          </a>
+        </li>
+        <!-- /surgeries -->
+      @endcan
 
-      <!-- surgery_names -->
-      <li class="{{ isset($page) && $page->view == 'm.surgery_names' ? 'active' : '' }}">
-        <a href="{{ url('/m/surgery_names') }}">
-          <i class="fa fa-bolt"></i>
-          <span>Surgery Names</span>
-        </a>
-      </li>
-      <!-- /surgery_names -->
+      @can('view', App\SurgeryName::class)
+        <!-- surgery_names -->
+        <li class="{{ isset($page) && $page->view == 'm.surgery_names' ? 'active' : '' }}">
+          <a href="{{ url('/m/surgery_names') }}">
+            <i class="fa fa-bolt"></i>
+            <span>Surgery Names</span>
+          </a>
+        </li>
+        <!-- /surgery_names -->
+      @endcan
 
-      <!-- billings -->
-      <li class="{{ isset($page) && $page->view == 'm.billings' ? 'active' : '' }}">
-        <a href="{{ url('/m/billings') }}">
-          <i class="fa fa-money"></i>
-          <span>All Billings</span>
-        </a>
-      </li>
-      <!-- /billings -->
+      @can('view', App\Billing::class)
+        <!-- billings -->
+        <li class="{{ isset($page) && $page->view == 'm.billings' ? 'active' : '' }}">
+          <a href="{{ url('/m/billings') }}">
+            <i class="fa fa-money"></i>
+            <span>All Billings</span>
+          </a>
+        </li>
+        <!-- /billings -->
+      @endcan
 
       <!-- blog_posts -->
       <li class="{{ isset($page) && $page->view == 'm.blog.posts' ? 'active' : '' }}">
@@ -124,6 +146,29 @@
       </li>
       <!-- /blog_posts -->
 
+      <li class="m15"></li>
+
+      @can('view', App\UserPermission::class)
+        <!-- user permissions -->
+        <li class="{{ isset($page) && $page->view == 'm.user_permissions' ? 'active' : '' }}">
+          <a href="{{ url('/m/user-permissions') }}">
+            <i class="fa fa-check"></i>
+            <span>User Permissions</span>
+          </a>
+        </li>
+        <!-- /user permissions -->
+      @endcan
+
+      @can('view', App\User::class)
+        <!-- users -->
+        <li class="{{ isset($page) && $page->view == 'm.users' ? 'active' : '' }}">
+          <a href="javascript:;">
+            <i class="fa fa-group"></i>
+            <span>Staff Management</span>
+          </a>
+        </li>
+        <!-- /users -->
+      @endcan
     </ul>
   </nav>
   <!-- /main navigation -->

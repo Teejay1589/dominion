@@ -81,7 +81,7 @@
     @foreach ($element->visits as $value)
       <dt>{{ $loop->iteration }}</dt>
       <dd class="mb5">
-        <strong>{{ $value->title }}</strong> [{{ $value->visit_doctors->count() }} assigned {{ str_plural('doctor', $value->visit_doctors->count()) }} | {{ $value->surgeries->count() }} performed {{ str_plural('surgery', $value->surgeries->count()) }}]
+        <strong>{{ $value->title }}</strong> [{{ $value->visit_doctors->count() }} assigned {{ str_plural('doctor', $value->visit_doctors->count()) }} | {{ $value->surgeries->count() }} performed {{ str_plural('surgery', $value->surgeries->count()) }} | {{ $value->billings->count() }} {{ str_plural('billing', $value->billings->count()) }}]
       </dd>
     @endforeach
   @else

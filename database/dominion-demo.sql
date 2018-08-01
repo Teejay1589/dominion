@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2018 at 03:17 PM
+-- Generation Time: Jul 29, 2018 at 05:05 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -32,13 +32,22 @@ CREATE TABLE `billings` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
   `visit_id` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `billing_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `amount` double(8,2) NOT NULL,
   `discount` double(8,2) DEFAULT NULL,
   `total` double(8,2) DEFAULT NULL,
+  `is_paid` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `billings`
+--
+
+INSERT INTO `billings` (`id`, `user_id`, `visit_id`, `billing_name`, `amount`, `discount`, `total`, `is_paid`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 'Test Billing 1', 12000.00, NULL, NULL, 0, '2018-07-29 13:21:43', NULL),
+(2, 1, 16, 'Test Billing 2', 500.00, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -171,9 +180,9 @@ INSERT INTO `patients` (`id`, `user_id`, `first_name`, `last_name`, `phone_numbe
 (12, 1, 'Olayinka', 'Codenoni', '08166559511', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$Og7oSJQQDD96NfFsPhIJ2u8GkAW2mSnq360SzJzMA2dWh1FRNo4OC', NULL, '2018-07-29 12:16:30', NULL),
 (13, 1, 'Olayinka', 'Codeno', '08166559512', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$YGjbMpnbS6c/lRF3ho8i8uOQGGfFhU2ymXNq4KzFpiwXxznQphbky', NULL, '2018-07-29 12:16:30', NULL),
 (14, 1, 'Olayin', 'Codenoni', '08166559513', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$OIiDVV2GPwL1qHW7Nrdp.O0qCRrXV97rlWVHsZXD4z05YlKnVFjSC', NULL, '2018-07-29 12:16:30', NULL),
-(15, 1, 'Olayinka', 'Codeno', '08166559514', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$jx1mil4WvrSuLA.eWuTGGegnKtv/yZWIk8Uq.QeVwkIQKExuAMQlO', NULL, '2018-07-29 12:16:30', NULL),
+(15, 1, 'Olayinka', 'Codeno', '08166559514', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$jx1mil4WvrSuLA.eWuTGGegnKtv/yZWIk8Uq.QeVwkIQKExuAMQlO', 'LadOl5xGO75nhHy1GmbRhRMcyewsZte5iUEAlTIH1rf4GCWtLbzWUsoRJGzI', '2018-07-29 12:16:30', NULL),
 (16, 1, 'Olayin', 'Codenoni', '08166559515', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$SdTBBSNeEDEnRUY5Ov9SuuffdYCDiotrBj3UuxUwvA1cVNuug3Y7.', NULL, '2018-07-29 12:16:31', NULL),
-(17, 1, 'Olayinka', 'Codenon', '08166559516', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$ZaGBn2Fdl1skacwgT.nkHumJVXhXpeU4NymphShGVAhMBokCn/rxe', NULL, '2018-07-29 12:16:31', NULL),
+(17, 1, 'Olayinka', 'Codenon', '08166559516', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$ZaGBn2Fdl1skacwgT.nkHumJVXhXpeU4NymphShGVAhMBokCn/rxe', 'ZJkkp8jskHcrY8s672zUyQK3XGgvViX7nNKxu7OgQaFWbYgCOM4rC9wsQeHS', '2018-07-29 12:16:31', NULL),
 (18, 1, 'Olay', 'Codenon', '08166559517', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$Up5P5DNKnZm30WSeGz5e/ufHRTD8tsMRARrPmB2YV3vgbhFhzy2L6', NULL, '2018-07-29 12:16:31', NULL),
 (19, 1, 'Olayinka', 'Codenoni', '08166559518', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$uq9ZZB5k9g5ny4wGe1o6Bu1RZdGRPTK0DWgUwSp6UQVehoPqadMRC', NULL, '2018-07-29 12:16:31', NULL),
 (20, 1, 'Ola', 'Codenoni', '08166559519', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$LUCb5i.jy5a9Nky6ldrFBu9eBESuKYkyvwHJ/JglXyLQxuHkkiJW6', NULL, '2018-07-29 12:16:31', NULL),
@@ -254,7 +263,8 @@ CREATE TABLE `surgeries` (
 --
 
 INSERT INTO `surgeries` (`id`, `user_id`, `visit_id`, `surgery_id`, `surgery_name`, `surgery_date`, `complications`, `created_at`, `updated_at`) VALUES
-(1, 1, 5, NULL, 'Femoral head ostectomy', '2018-07-11', NULL, '2018-07-28 01:51:32', '2018-07-28 01:51:32');
+(1, 1, 5, NULL, 'Femoral head ostectomy', '2018-07-11', NULL, '2018-07-28 01:51:32', '2018-07-28 01:51:32'),
+(2, 1, 21, NULL, 'Jejunostomy', '2018-07-18', NULL, '2018-07-29 13:04:12', '2018-07-29 13:04:12');
 
 -- --------------------------------------------------------
 
@@ -641,7 +651,7 @@ ALTER TABLE `visit_doctors`
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `bookings`
 --
@@ -676,7 +686,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `surgeries`
 --
 ALTER TABLE `surgeries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `surgery_names`
 --

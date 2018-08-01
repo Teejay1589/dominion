@@ -13,17 +13,19 @@ class CreateVisitDoctorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('visit_doctors', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id')->index()->nullable();
-            $table->unsignedInteger('visit_id')->index();
-            $table->unsignedInteger('doctor_id')->index();
-            $table->timestamps();
+        if (!Schema::hasTable('visit_doctors')) {
+            Schema::create('visit_doctors', function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('user_id')->index()->nullable();
+                $table->unsignedInteger('visit_id')->index();
+                $table->unsignedInteger('doctor_id')->index();
+                $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('visit_id')->references('id')->on('visits')->onDelete('cascade');
-            $table->foreign('doctor_id')->references('id')->on('users');
-        });
+                $table->foreign('user_id')->references('id')->on('users');
+                $table->foreign('visit_id')->references('id')->on('visits')->onDelete('cascade');
+                $table->foreign('doctor_id')->references('id')->on('users');
+            });
+        }
     }
 
     /**

@@ -90,6 +90,21 @@
 					@endif
 				</div>
 
+				<div class="clearfix"></div>
+				<br>
+
+				<div class="h4"><strong>Billings</strong> <small><strong>{{ $active_object->billings->count() }}</strong></small></div>
+				<div>
+					@if ( $active_object->billings->count() != 0 )
+						<ol>
+							@foreach ($active_object->billings as $element)
+								<li>{{ $element->billing_name }} <span>[<strong>N</strong>{{ $element->amount }}]</span></li>
+							@endforeach
+						</ol>
+					@else
+						<div class="text-danger">No Surgeries performed YET!</div>
+					@endif
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

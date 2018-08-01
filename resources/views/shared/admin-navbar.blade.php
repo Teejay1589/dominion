@@ -109,6 +109,9 @@
             <a href="{{ url('/m/profile') }}">Profile</a>
           </li>
           <li>
+          <a href="{{ url('/m/my-permissions') }}">My Permissions <strong class="">{{ App\Permission::where('permit', '>=', Auth::user()->role_id)->count() + App\UserPermission::where('user_id', Auth::id())->count() }}</strong></a>
+          </li>
+          <li>
             <a href="javascript:;">Settings</a>
           </li>
           <li>

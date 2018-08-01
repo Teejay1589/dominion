@@ -13,12 +13,14 @@ class CreateSurgeryNamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('surgery_names', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('surgery_name');
-            $table->text('description')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('surgery_names')) {
+            Schema::create('surgery_names', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('surgery_name');
+                $table->text('description')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**
