@@ -57,7 +57,10 @@
                                 </div>
                             </div>
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
-                                @include('partials.patient-inline-view', ['element' => $element])
+                                <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printPatientDiv('patient{{ $element->id }}');">Print</button>
+                                <div id="patient{{ $element->id }}">
+                                    @include('partials.patient-inline-view', ['element' => $element])
+                                </div>
                             </div>
                         </div>
                     @empty
@@ -85,4 +88,31 @@
         var base_url = '{{ url('/m/patients') }}';
     </script>
     <script type="text/javascript" src="{{ asset('js/toolbar.js') }}"></script>
+    <script type="text/javascript">
+        // For Printing
+        function printPatientDiv(divName) {
+            w=window.open();
+            w.document.write("<!DOCTYPE html><html><head><title>Patient Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
+            // "<h2 style='text-align:center;font-weight:bold;'>DOMINION MEDICAL CENTER</h2>" +
+            // "<h5 style='text-align:center;font-weight:light;'>Specialist Medical And Diagonistics Center</h5>" +
+            // "<h5 style='text-align:center;font-weight:light;'>" +
+            // "<span class='mr10'> 4 Nova Road Ado-Ekiti, Ekiti State. </span>" +
+            // "<strong class='mr10'> +234(0)8177433899 </strong>" +
+            // "</h5>" +
+            // "<div class='clearfix'></div>" +
+            // "<br>" +
+            "@include('shared.print-header')" +
+            document.getElementById(divName).innerHTML + "</body></html>");
+            w.print();
+            // w.close();
+        }
+        function printVisitDiv(divName) {
+            w=window.open();
+            w.document.write("<!DOCTYPE html><html><head><title>Visit Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
+            "@include('shared.print-header')" +
+            document.getElementById(divName).innerHTML + "</body></html>");
+            w.print();
+            // w.close();
+        }
+    </script>
 @endsection

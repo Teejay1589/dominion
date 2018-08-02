@@ -10,100 +10,143 @@
 			</div>
 			<div class="modal-body">
 
-				<div class="h4"><strong>Case Details</strong></div>
-				<dl class="dl-horizontal">
-					<dt>Type</dt>
-					<dd class="mb5"><span class="badge badge-primary">{{ $active_object->type }}</span></dd>
-					<dt>Title</dt>
-					<dd class="mb5">{{ $active_object->title }}</dd>
-					<dt>Patient</dt>
-					<dd class="mb5">{{ $active_object->patient->first_name." ".$active_object->patient->last_name }} <span class="badge badge-default">{{ $active_object->patient->phone_number }}</span></dd>
-					<dt>Discharged On</dt>
-					<dd class="mb5">
-						{{ is_null($active_object->discharged_on) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->discharged_on)->toFormattedDateString() }}
-					</dd>
-					<dt>Created at</dt>
-					<dd class="mb5">{{ $element->created_at }}</dd>
-				</dl>
+				<button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printVisitDiv('visit{{ $element->id }}');">Print</button>
 
-				<div class="clearfix"></div>
-				<br>
+				<div id="visit{{ $element->id }}">
+					{{-- <div class="h4"><strong>Visit Details</strong></div> --}}
+					<dl class="dl-horizontal">
+						<dt></dt>
+						<dd class="mb5 lead"><strong>Visit Details</strong></dd>
 
-				<div class="h4"><strong>Subjects</strong></div>
-				<div>
-					{{ $active_object->subjects }}
-				</div>
+						<dt>Type</dt>
+						<dd class="mb5"><span class="badge badge-primary">{{ $active_object->type }}</span></dd>
+						<dt>Title</dt>
+						<dd class="mb5">{{ $active_object->title }}</dd>
+						<dt>Patient</dt>
+						<dd class="mb5">{{ $active_object->patient->first_name." ".$active_object->patient->last_name }} <span class="badge badge-default">{{ $active_object->patient->phone_number }}</span></dd>
+						<dt>Discharged On</dt>
+						<dd class="mb5">
+							{{ is_null($active_object->discharged_on) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->discharged_on)->toFormattedDateString() }}
+						</dd>
+						<dt>Created at</dt>
+						<dd class="mb5">{{ $element->created_at }}</dd>
 
-				<div class="clearfix"></div>
-				<br>
+						<dt><br></dt>
+						<dd class="mb5 lead"></dd>
 
-				<div class="h4"><strong>Objects</strong></div>
-				<div>
-					{{ $active_object->objects }}
-				</div>
+						<dt style="width: 5%; max-width: 5%;"></dt>
+						<dd class="mb5 lead" style="margin-left: 10%; width: 90%;"><strong>Subjects</strong></dd>
 
-				<div class="clearfix"></div>
-				<br>
+						<dt style="width: 5%; max-width: 5%;"><span class="lead hidden-xs">&gt;&gt;</span></dt>
+						<dd class="mb5" style="margin-left: 10%; width: 90%;">{{ $active_object->subjects }}</dd>
 
-				<div class="h4"><strong>Assessment</strong></div>
-				<div>
-					{{ $active_object->assessment }}
-				</div>
+						<dt><br></dt>
+						<dd class="mb5 lead"></dd>
 
-				<div class="clearfix"></div>
-				<br>
+						<dt style="width: 5%; max-width: 5%;"></dt>
+						<dd class="mb5 lead" style="margin-left: 10%; width: 90%;"><strong>Objects</strong></dd>
 
-				<div class="h4"><strong>Plans</strong></div>
-				<div>
-					{{ $active_object->plans }}
-				</div>
+						<dt style="width: 5%; max-width: 5%;"><span class="lead hidden-xs">&gt;&gt;</span></dt>
+						<dd class="mb5" style="margin-left: 10%; width: 90%;">{{ $active_object->objects }}</dd>
 
-				<div class="clearfix"></div>
-				<br>
+						<dt><br></dt>
+						<dd class="mb5 lead"></dd>
 
-				<div class="h4"><strong>Doctors</strong> <small><strong>{{ $active_object->visit_doctors->count() }}</strong></small></div>
-				<div>
-					@if ( $active_object->visit_doctors->count() != 0 )
-						<ol>
-							@foreach ($active_object->visit_doctors as $element)
-								<li>{{ $element->doctor->first_name." ".$element->doctor->first_name }} [{{ $element->doctor->role->name }}]</li>
-							@endforeach
-						</ol>
-					@else
-						<div class="text-danger">No Doctors assigned YET!</div>
-					@endif
-				</div>
+						<dt style="width: 5%; max-width: 5%;"></dt>
+						<dd class="mb5 lead" style="margin-left: 10%; width: 90%;"><strong>Assessment</strong></dd>
 
-				<div class="clearfix"></div>
-				<br>
+						<dt style="width: 5%; max-width: 5%;"><span class="lead hidden-xs">&gt;&gt;</span></dt>
+						<dd class="mb5" style="margin-left: 10%; width: 90%;">{{ $active_object->assessment }}</dd>
 
-				<div class="h4"><strong>Surgeries</strong> <small><strong>{{ $active_object->surgeries->count() }}</strong></small></div>
-				<div>
-					@if ( $active_object->surgeries->count() != 0 )
-						<ol>
-							@foreach ($active_object->surgeries as $element)
-								<li>{{ $element->surgery_name }} on <span title="{{ is_null($element->surgery_date) ? '' : Carbon::createFromFormat('Y-m-d', $element->surgery_date)->toFormattedDateString() }}">{{ $element->surgery_date }}</span> [<strong>{!! (blank($element->complications)) ? '' : '<span title="'.$element->complications.'">SOME COMPLICATIONS</span>' !!}</strong>]</li>
-							@endforeach
-						</ol>
-					@else
-						<div class="text-danger">No Surgeries performed YET!</div>
-					@endif
-				</div>
+						<dt><br></dt>
+						<dd class="mb5 lead"></dd>
 
-				<div class="clearfix"></div>
-				<br>
+						<dt style="width: 5%; max-width: 5%;"></dt>
+						<dd class="mb5 lead" style="margin-left: 10%; width: 90%;"><strong>Plans</strong></dd>
 
-				<div class="h4"><strong>Billings</strong> <small><strong>{{ $active_object->billings->count() }}</strong></small></div>
-				<div>
-					@if ( $active_object->billings->count() != 0 )
-						<ol>
-							@foreach ($active_object->billings as $element)
-								<li>{{ $element->billing_name }} <span>[<strong>N</strong>{{ $element->amount }}]</span></li>
-							@endforeach
-						</ol>
-					@else
-						<div class="text-danger">No Surgeries performed YET!</div>
-					@endif
+						<dt style="width: 5%; max-width: 5%;"><span class="lead hidden-xs">&gt;&gt;</span></dt>
+						<dd class="mb5" style="margin-left: 10%; width: 90%;">{{ $active_object->plans }}</dd>
+					</dl>
+
+					{{-- <div class="clearfix"></div>
+					<br>
+
+					<div class="h4"><strong>Subjects</strong></div>
+					<div>
+						{{ $active_object->subjects }}
+					</div>
+
+					<div class="clearfix"></div>
+					<br>
+
+					<div class="h4"><strong>Objects</strong></div>
+					<div>
+						{{ $active_object->objects }}
+					</div>
+
+					<div class="clearfix"></div>
+					<br>
+
+					<div class="h4"><strong>Assessment</strong></div>
+					<div>
+						{{ $active_object->assessment }}
+					</div>
+
+					<div class="clearfix"></div>
+					<br>
+
+					<div class="h4"><strong>Plans</strong></div>
+					<div>
+						{{ $active_object->plans }}
+					</div> --}}
+
+					<div class="clearfix"></div>
+					<br>
+
+					<div class="h4"><strong>Doctors</strong> <small><strong>{{ $active_object->visit_doctors->count() }}</strong></small></div>
+					<div>
+						@if ( $active_object->visit_doctors->count() != 0 )
+							<ol>
+								@foreach ($active_object->visit_doctors as $element)
+									<li>{{ $element->doctor->first_name." ".$element->doctor->first_name }} [{{ $element->doctor->role->name }}]</li>
+								@endforeach
+							</ol>
+						@else
+							<div class="text-danger">No Doctors assigned YET!</div>
+						@endif
+					</div>
+
+					<div class="clearfix"></div>
+					<br>
+
+					<div class="h4"><strong>Surgeries</strong> <small><strong>{{ $active_object->surgeries->count() }}</strong></small></div>
+					<div>
+						@if ( $active_object->surgeries->count() != 0 )
+							<ol>
+								@foreach ($active_object->surgeries as $element)
+									<li>{{ $element->surgery_name }} on <span title="{{ is_null($element->surgery_date) ? '' : Carbon::createFromFormat('Y-m-d', $element->surgery_date)->toFormattedDateString() }}">{{ $element->surgery_date }}</span> [<strong>{!! (blank($element->complications)) ? '' : '<span title="'.$element->complications.'">SOME COMPLICATIONS</span>' !!}</strong>]</li>
+								@endforeach
+							</ol>
+						@else
+							<div class="text-danger">No Surgeries performed YET!</div>
+						@endif
+					</div>
+
+					<div class="clearfix"></div>
+					<br>
+
+					<div class="h4"><strong>Billings</strong> <small><strong>{{ $active_object->billings->count() }}</strong></small></div>
+					<div>
+						@if ( $active_object->billings->count() != 0 )
+							<ol>
+								@foreach ($active_object->billings as $element)
+									<li>{{ $element->billing_name }} <span>[<strong>N</strong>{{ $element->amount }}]</span></li>
+								@endforeach
+							</ol>
+						@else
+							<div class="text-danger">No Surgeries performed YET!</div>
+						@endif
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">

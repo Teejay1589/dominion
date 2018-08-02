@@ -7,7 +7,7 @@
   <dt>Last Name</dt>
   <dd class="mb5">{{ $element->last_name }}</dd>
   <dt>Phone Number</dt>
-  <dd class="mb5">{{ $element->phone_number }} <a href="{{ url('/m/patients/password/reset/'.$element->id) }}" class="text-primary">reset password</a></dd>
+  <dd class="mb5">{{ $element->phone_number }} <a href="{{ url('/m/patients/password/reset/'.$element->id) }}" class="text-primary hidden-print">reset password</a></dd>
   <dt>Email</dt>
   <dd class="mb5">{{ $element->email }}</dd>
   <dt>Sex</dt>
@@ -68,26 +68,28 @@
   <dt>Created at</dt>
   <dd class="mb5">{{ $element->created_at }}</dd>
 
-  <dt><br></dt>
-  <dd class="mb5 lead"></dd>
+  <div class="hidden-print">
+    <dt><br></dt>
+    <dd class="mb5 lead"></dd>
 
-  <dt></dt>
-  <dd class="mb5 lead"><strong>Visits</strong> <small><strong>{{ $element->visits->count() }}</strong></small></dd>
-
-  <dt>Visits List</dt>
-  <dd class="mb5">List of Patient visits in summary</dd>
-
-  @if ( $element->visits->count() != 0 )
-    @foreach ($element->visits as $value)
-      <dt>{{ $loop->iteration }}</dt>
-      <dd class="mb5">
-        <strong>{{ $value->title }}</strong> [{{ $value->visit_doctors->count() }} assigned {{ str_plural('doctor', $value->visit_doctors->count()) }} | {{ $value->surgeries->count() }} performed {{ str_plural('surgery', $value->surgeries->count()) }} | {{ $value->billings->count() }} {{ str_plural('billing', $value->billings->count()) }}]
-      </dd>
-    @endforeach
-  @else
     <dt></dt>
-    <dd class="mb5">
-      <div class="text-danger">No Visits Found!</div>
-    </dd>
-  @endif
+    <dd class="mb5 lead"><strong>Visits</strong> <small><strong>{{ $element->visits->count() }}</strong></small></dd>
+
+    <dt>Visits List</dt>
+    <dd class="mb5">List of Patient visits in summary</dd>
+
+    @if ( $element->visits->count() != 0 )
+      @foreach ($element->visits as $value)
+        <dt>{{ $loop->iteration }}</dt>
+        <dd class="mb5">
+          <strong>{{ $value->title }}</strong> [{{ $value->visit_doctors->count() }} assigned {{ str_plural('doctor', $value->visit_doctors->count()) }} | {{ $value->surgeries->count() }} performed {{ str_plural('surgery', $value->surgeries->count()) }} | {{ $value->billings->count() }} {{ str_plural('billing', $value->billings->count()) }}]
+        </dd>
+      @endforeach
+    @else
+      <dt></dt>
+      <dd class="mb5">
+        <div class="text-danger">No Visits Found!</div>
+      </dd>
+    @endif
+  </div>
 </dl>
