@@ -137,7 +137,7 @@ class SurgeryController extends InternalControl
     /**
      * Display the specified resource.
      *
-     * @param  \App\Surgeries  $surgeries
+     * @param  \App\Surgery  $surgeries
      * @return \Illuminate\Http\Response
      */
     public function show(Surgeries $surgeries)

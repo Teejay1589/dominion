@@ -47,11 +47,11 @@
                                     </span>
                                     <a href="#modal-view-{{ $element->visit->id }}" data-toggle="modal" class="mr10 text-primary">visit</a>
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
-                                    {{-- <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a> --}}
+                                    <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
+                                    <a href="{{ url('/m/billings/toggle_status/'.$element->id) }}" class="mr10">toggle status</a>
                                     <a href="{{ url('/m/billings/delete/'.$element->id) }}" class="mr10 text-danger">
                                         <span>delete</span>
                                     </a>
-                                    <a href="{{ url('/m/billings/toggle_status/'.$element->id) }}" class="mr10">change status</a>
                                 </span>
                                 <div>
                                     @include('partials.visit-view', ['active_object' => $element->visit])

@@ -6,7 +6,7 @@ use App\Billing;
 use App\Patient;
 use App\Visit;
 use App\Surgery;
-// use App\Http\Requests\CreateBillings;
+use App\Http\Requests\CreateBillings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -85,6 +85,89 @@ class BillingController extends InternalControl
             ->with('billings', $this->billings)
             ->with('visits', Visit::all())
             ->with('page', $this->page);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateBillings $request)
+    {
+        $request['user_id'] = Auth::id();
+        $request['visit_id'] = $request->visit;
+
+        $obj = new Billing($request->all());
+        $obj->save();
+
+        session()->flash('success', 'New Billing Created!');
+        return redirect()->back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Billing  $billings
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Surgeries $billings)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Billing  $billings
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Billing $billings)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Billing  $billings
+     * @return \Illuminate\Http\Response
+     */
+    public function update(CreateBillings $request, $id)
+    {
+        $request['user_id'] = Auth::id();
+        $request['visit_id'] = $request->visit;
+
+        $obj = Billing::findOrFail($id);
+        $obj->update($request->all());
+
+        session()->flash('success', 'Billing Updated!');
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Billing  $billings
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        Billing::findOrFail($id)->delete();
+
+        session()->flash('success', 'Billing Deleted!');
+        return redirect()->back();
     }
 
     public function toggle_is_paid($id)

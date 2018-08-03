@@ -39,7 +39,21 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+					</div>
+
+					<div class="form-group">
+						<label class="form-control-label">Status </label>
+						<div>
+							<label class="form-control-label form-radio">
+								<input type="radio" name="is_paid" class="form-radio-input" value="0" {{ old('is_paid') == 0 ? 'checked' : '' }}> <strong class="text-danger">UNPAID</strong>
+							</label>
+						</div>
+						<div>
+							<label class="form-control-label form-radio">
+								<input type="radio" name="is_paid" class="form-radio-input" value="1" {{ old('is_paid') == 1 ? 'checked' : '' }}> <strong class="text-success">PAID</strong>
+							</label>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
