@@ -140,7 +140,7 @@ trait AuthenticatesUsers
      */
     public function username()
     {
-        return 'phone_number';
+        return 'file_number';
     }
 
     /**

@@ -26,8 +26,9 @@
 
               <div class="form-inputs">
                 <div class="form-group">
-                  <label>Phone Number</label>
-                  <input type="tel" class="form-control input-lg" placeholder="Phone Number" name="phone_number" required>
+                  <label>Hospital File Number</label>
+                  <input type="tel" class="form-control input-lg" placeholder="File Number" name="file_number" required>
+                  <span class="help-block">looks like <code>DMC00000X</code></span>
                 </div>
                 <div class="form-group">
                   <label>Password</label>
