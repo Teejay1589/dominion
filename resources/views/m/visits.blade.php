@@ -42,6 +42,18 @@
                                     {{-- <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10 text-primary">
                                         <span>patient</span>
                                     </a> --}}
+                                    <span>
+                                        <a href="{{ url('/m/surgeries/visit_id/'.$element->id.'?default') }}" class="mr10 text-primary">
+                                            <strong style="color: #555;">{{ $element->surgeries->count() }}</strong>
+                                            <span>surgeries</span>
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <a href="{{ url('/m/billings/visit_id/'.$element->id.'?default') }}" class="mr10 text-primary">
+                                            <strong style="color: #555;">{{ $element->billings->count() }}</strong>
+                                            <span>billings</span>
+                                        </a>
+                                    </span>
                                     <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">view</a>
                                     <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
                                     <a href="{{ url('/m/visits/delete/'.$element->id) }}" class="mr10 text-danger">

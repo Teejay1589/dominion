@@ -60,8 +60,12 @@ class BillingController extends InternalControl
             $objects = Visit::whereIn('patient_id', $objects->pluck('id'))->get();
             $this->billings = Billing::whereIn('visit_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
         } elseif ($filter == "visit_id") {
-            $objects = Visit::where('title', 'LIKE', "%$searchterm%")->get();
-            $this->billings = Billing::whereIn($filter, $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            if (isset($_GET['default'])) {
+                $this->billings = Billing::where($filter, $searchterm)->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            } else {
+                $objects = Visit::where('title', 'LIKE', "%$searchterm%")->get();
+                $this->billings = Billing::whereIn($filter, $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            }
         } elseif ($filter == "status") {
             // Interpret
             if (isset($searchterm[0]) && (strtolower($searchterm[0]) == 1 || strtolower($searchterm[0]) == 'y' || strtolower($searchterm[0]) == 'p')) {

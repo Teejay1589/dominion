@@ -61,8 +61,12 @@ class SurgeryController extends InternalControl
             $objects = Visit::whereIn('patient_id', $objects->pluck('id'))->get();
             $this->surgeries = Surgery::whereIn('visit_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
         } elseif ($filter == "visit_id") {
-            $objects = Visit::where('title', 'LIKE', "%$searchterm%")->get();
-            $this->surgeries = Surgery::whereIn($filter, $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            if (isset($_GET['default'])) {
+                $this->surgeries = Surgery::where($filter, $searchterm)->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            } else {
+                $objects = Visit::where('title', 'LIKE', "%$searchterm%")->get();
+                $this->surgeries = Surgery::whereIn($filter, $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            }
         } elseif ($filter == "surgery_id") {
             $objects = Surgery::where('surgery_name', 'LIKE', "%$searchterm%")->get();
             $this->surgeries = Surgery::whereIn($filter, $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);

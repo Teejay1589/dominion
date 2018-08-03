@@ -11,7 +11,7 @@
       <div class="col-lg-7 col-xs-12 mb5">
           <div class="input-group input-group-sm" style="width: auto;">
               <div class="input-group-addon hidden-xs"><span class="glyphicon glyphicon-search"></span></div>
-              <input type="text" class="form-control" id="searchTerm" name="searchterm" placeholder="Search Term" style="width: 65%; padding: 0 .5rem;" value="{{ isset($data->searchterm) ? $data->searchterm : '' }}">
+              <input type="text" class="form-control" id="searchTerm" name="searchterm" placeholder="Search Term" style="width: 65%; padding: 0 .5rem;" value="{{ isset($data->searchterm) && !isset($_GET['default']) ? $data->searchterm : '' }}">
               @php
                   $keys = $model->getFillable();
                   if ( isset($removed_keys) ) {
