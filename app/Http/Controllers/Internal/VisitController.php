@@ -105,7 +105,7 @@ class VisitController extends InternalControl
     {
         $request['user_id'] = Auth::id();
         $request['patient_id'] = $request['patient'];
-        $request['successful_delivery'] = isset($request->is_success) ? 1 : 0;
+        // $request['successful_delivery'] = isset($request->successful_delivery) ? 1 : 0;
 
         $obj = new Visit($request->all());
         $obj->save();
@@ -155,7 +155,7 @@ class VisitController extends InternalControl
      */
     public function update(UpdateVisits $request, $id)
     {
-        $request['successful_delivery'] = isset($request->is_success) ? 1 : 0;
+        $request['successful_delivery'] = isset($request->successful_delivery) ? 1 : 0;
 
         $obj = Visit::findOrFail($id);
         $obj->update($request->all());
