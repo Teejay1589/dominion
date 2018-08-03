@@ -82,7 +82,7 @@
         <!-- /patients -->
       @endcan
 
-      @can('view', App\Visit::class)
+      {{-- @can('view', App\Visit::class)
         <!-- patient_visits -->
         <li class="{{ isset($page) && $page->view == 'm.patient_visits' ? 'active' : '' }}">
           <a href="{{ url('/m/patient/0/visits') }}">
@@ -91,7 +91,7 @@
           </a>
         </li>
         <!-- /patient_visits -->
-      @endcan
+      @endcan --}}
 
       @can('view', App\Visit::class)
         <!-- visits -->
