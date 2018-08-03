@@ -26,7 +26,7 @@
                     @forelse ($users as $element)
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
-                                <span class="badge badge-default pull-right" title="user role">{{ optional($element->role)->name }}</span>
+                                <span class="badge pull-right" title="user role">{{ optional($element->role)->name }}</span>
                                 <h5 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ str_ireplace('_', ' ', $element->full_name()) }} <small><span>{{ $element->email }}</span></small></a>
                                 </h5>

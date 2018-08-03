@@ -17,7 +17,8 @@
                     'data_name' => 'billing',
                     'data' => $billings,
                     'removed_keys' => array('id', 'user_id', 'discount', 'total', 'is_paid', 'created_at', 'updated_at'),
-                    'added_keys' => array('patient_id')
+                    'added_keys' => array('status'),
+                    'addup_keys' => array('patient_id', 'patient_file_number')
                 ])
 
                 {{-- <div class="clearfix"></div>
@@ -27,13 +28,23 @@
                     @forelse ($billings as $element)
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
-                                {{-- <span class="badge badge-default pull-right">{{ isset( $element->is_paid ) ? 'PAID' : 'UNPAID' }}</span> --}}
-                                <span class="badge badge-default pull-right"><strong>N</strong>{{ $element->amount }}</span>
+                                <span class="pull-right">
+                                    <span class="badge"><strong>N</strong>{{ $element->amount }}</span>
+                                    <br>
+                                    <div class="text-center">
+                                        <strong class="text-{{ ( $element->is_paid ) ? 'success' : 'danger' }}" title="STATUS">{{ ( $element->is_paid ) ? 'PAID' : 'UNPAID' }}</strong>
+                                    </div>
+                                </span>
                                 <h5 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->billing_name }} <small><span title="Visit Title">{{ optional($element->visit)->title }}</span></small></a>
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>
+                                    <span>
+                                        <a href="{{ url('/m/patients/file_number/'.optional($element->patient())->file_number) }}" class="mr10 text-primary">
+                                            <span>patient</span>
+                                        </a>
+                                    </span>
                                     <a href="#modal-view-{{ $element->visit->id }}" data-toggle="modal" class="mr10 text-primary">visit</a>
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
                                     {{-- <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a> --}}

@@ -42,7 +42,10 @@ class VisitController extends InternalControl
 
     public function filter($filter, $searchterm = "")
     {
-        if ($filter == 'patient_id') {
+        if ($filter == 'patient_file_number') {
+            $objects = Patient::where("file_number", 'LIKE', "%$searchterm%")->get();
+            $this->visits = Visit::whereIn('patient_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } elseif ($filter == 'patient_id') {
             $searchterms = array();
             $searchterms = explode(' ', $searchterm);
 
@@ -55,7 +58,7 @@ class VisitController extends InternalControl
                 $object = $object->flatten();
             }
             $objects = $object;
-            $this->visits = Visit::whereIn($filter, $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            $this->visits = Visit::whereIn('patient_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
         } elseif ($filter == "successful_delivery") {
             // Interprete
             if (isset($searchterm[0]) && (strtolower($searchterm[0]) == 1 || strtolower($searchterm[0]) == 'y' || strtolower($searchterm[0]) == 's')) {

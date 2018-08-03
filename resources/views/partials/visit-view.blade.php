@@ -23,7 +23,7 @@
 						<dt>Title</dt>
 						<dd class="mb5">{{ $active_object->title }}</dd>
 						<dt>Patient</dt>
-						<dd class="mb5">{{ $active_object->patient->first_name." ".$active_object->patient->last_name }} <span class="badge badge-default">{{ $active_object->patient->phone_number }}</span></dd>
+						<dd class="mb5">{{ $active_object->patient->full_name() }} <span title="Phone Number">{{ $active_object->patient->phone_number }}</span> <code title="File Number">{{ $active_object->patient->file_number }}</code></dd>
 						<dt>Discharged On</dt>
 						<dd class="mb5">
 							{{ is_null($active_object->discharged_on) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->discharged_on)->toFormattedDateString() }}
@@ -140,11 +140,18 @@
 						@if ( $active_object->billings->count() != 0 )
 							<ol>
 								@foreach ($active_object->billings as $element)
-									<li>{{ $element->billing_name }} <span>[<strong>N</strong>{{ $element->amount }}]</span></li>
+								<li>{{ $element->billing_name }} <span>[<strong>N</strong>{{ $element->amount }}]</span></li>
 								@endforeach
 							</ol>
+							<div class="ml20 h5">
+								<strong>TOTAL BILLS &rarr; </strong>
+								<span>
+									<strong>N</strong>
+									<strong>{{ $active_object->billings->sum('amount') }}</strong>
+								</span>
+							</div>
 						@else
-							<div class="text-danger">No Surgeries performed YET!</div>
+							<div class="text-danger">No Billings added YET!</div>
 						@endif
 					</div>
 				</div>

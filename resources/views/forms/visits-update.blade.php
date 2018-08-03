@@ -40,8 +40,8 @@
                             <div class="form-group">
                             	<label class="form-control-label">Select Patient <span class="text-danger">*</span></label>
 								<select class="form-control" name="patient" required disabled>
-									@foreach ($patients as $element)
-										<option value="{{ $element->id }}" {{ (old('patient', $active_object->patient_id) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}]</option>
+									@foreach ($patients->where('id', $active_object->patient_id) as $element)
+										<option value="{{ $element->id }}" {{ (old('patient', $active_object->patient_id) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
 									@endforeach
 								</select>
                             </div>

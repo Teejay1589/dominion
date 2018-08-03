@@ -17,6 +17,7 @@ class VisitsTableSeeder extends Seeder
             $type = $visit_types->random();
             if ($type == 'DELIVERY') {
                 DB::table('visits')->insert([
+                    'user_id' => 1,
                     'patient_id' => rand(1, 25),
                     'type' => $type,
                     'title' => $type . ' Visit Test ' . $i,
@@ -25,6 +26,7 @@ class VisitsTableSeeder extends Seeder
                 ]);
             } else {
                 DB::table('visits')->insert([
+                    'user_id' => 1,
                     'patient_id' => rand(1, 25),
                     'type' => $type,
                     'title' => $type . ' Visit Test ' . $i,

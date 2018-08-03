@@ -48,8 +48,8 @@
                         </div>
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
-                                <label class="form-control-label">Surgery Date <span class="text-danger">*</span></label>
-                                <input class="form-control" type="date" name="surgery_date" placeholder="YYYY-MM-DD" value="{{ old('surgery_date', $active_object->surgery_date) }}" required>
+                                <label class="form-control-label">Surgery Date </label>
+                                <input class="form-control" type="date" name="surgery_date" placeholder="YYYY-MM-DD" value="{{ old('surgery_date', $active_object->surgery_date) }}">
                             </div>
                         </div>
                     </div>

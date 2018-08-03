@@ -17,7 +17,7 @@
                     'data_name' => 'surgery',
                     'data' => $surgeries,
                     'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at'),
-                    'added_keys' => array('patient_id')
+                    'addup_keys' => array('patient_id', 'patient_file_number')
                 ])
 
                 {{-- <div class="clearfix"></div>
@@ -27,13 +27,21 @@
                     @forelse ($surgeries as $element)
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
-                                <span class="badge badge-default pull-right">{{ isset( $element->surgery ) ? 'RESURGERY' : '' }}</span>
+                                <span class="badge pull-right" title="NUMBER OF RESURGERIES PERFORMED">{{ ($element->surgeries->count() > 0) ? $element->surgeries->count() : '' }}</span>
+                                @if( isset($element->surgery) )
+                                    <span class="pull-right" title="A RESURGERY OF ANOTHER SURGERY"><code>{{ isset( $element->surgery ) ? 'A RESURGERY' : '' }}</code></span>
+                                @endif
                                 <h5 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->surgery_name }} <small><span title="Visit Title">{{ optional($element->visit)->title }}</span></small></a>
                                     {{-- <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">{{ $element->name }}</a> --}}
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>
+                                    <span>
+                                        <a href="{{ url('/m/patients/file_number/'.optional($element->patient())->file_number) }}" class="mr10 text-primary">
+                                            <span>patient</span>
+                                        </a>
+                                    </span>
                                     <a href="#modal-view-{{ $element->visit->id }}" data-toggle="modal" class="mr10 text-primary">visit</a>
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
                                     <a href="#modal-create-{{ $element->id }}" data-toggle="modal" class="mr10">resurgery</a>
@@ -50,7 +58,10 @@
                                 </div>
                             </div>
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
-                                @include('partials.surgery-inline-view', ['element' => $element])
+                                <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printSurgeryDiv('surgery{{ $element->id }}');">Print</button>
+                                <div id="surgery{{ $element->id }}">
+                                    @include('partials.surgery-inline-view', ['element' => $element])
+                                </div>
                             </div>
                         </div>
                     @empty
@@ -92,5 +103,24 @@
                 delimiter: ','
             });
         });
+    </script>
+    <script type="text/javascript">
+        // For Printing
+        function printSurgeryDiv(divName) {
+            w=window.open();
+            w.document.write("<!DOCTYPE html><html><head><title>Surgery Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
+            "@include('shared.print-header')" +
+            document.getElementById(divName).innerHTML + "</body></html>");
+            w.print();
+            // w.close();
+        }
+        function printVisitDiv(divName) {
+            w=window.open();
+            w.document.write("<!DOCTYPE html><html><head><title>Visit Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
+            "@include('shared.print-header')" +
+            document.getElementById(divName).innerHTML + "</body></html>");
+            w.print();
+            // w.close();
+        }
     </script>
 @endsection

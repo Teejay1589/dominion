@@ -12,8 +12,6 @@
 				<div class="modal-body">
 					{{ csrf_field() }}
 
-					{{-- 'user_id', 'patient_id', 'doctor1_id', 'doctor2_id', 'doctor3_id', 'title', 'symptoms', 'treatment', 'medicine', 'is_consultation', 'is_emergency', 'is_surgery', 'is_delivery', 'is_success', 'discharged_on', --}}
-
 					<div class="row">
 						<div class="col-lg-4 col-xs-12">
 							<div class="form-group">
@@ -42,8 +40,8 @@
                             <div class="form-group">
                             	<label class="form-control-label">Select Patient <span class="text-danger">*</span></label>
 								<select class="select-patient" name="patient" required multiple>
-									@foreach ($patients as $element)
-										<option value="{{ $element->id }}" {{ (old('patient', isset($active_object) ? $active_object->id : null) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}]</option> @endforeach
+									@foreach ($patients->sortByDesc('id') as $element)
+										<option value="{{ $element->id }}" {{ (old('patient', isset($active_object) ? $active_object->id : null) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option> @endforeach
 								</select>
                             </div>
                         </div>

@@ -27,22 +27,34 @@
                     @forelse ($patients as $element)
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
-                                <span class="badge badge-default pull-right" title="File Number">{{ $element->file_number }}</span>
+                                <span class="pull-right" title="File Number"><code>{{ $element->file_number }}</code></span>
                                 <h5 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->full_name() }} <small><span title="Phone Number">{{ $element->phone_number }}</span></small></a>
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>
                                     <span>
-                                        <strong>{{ $element->visits->count() }}</strong>
-                                        <a href="{{ url('/m/patient/'.$element->id.'/visits') }}" class="mr10 text-primary">
-                                        {{-- <a href="{{ url('/m/visits/patient_id/'.$element->full_name()) }}" class="mr10 text-primary"> --}}
+                                        {{-- <a href="{{ url('/m/patient/'.$element->id.'/visits') }}" class="mr10 text-primary"> --}}
+                                        <a href="{{ url('/m/visits/patient_file_number/'.$element->file_number) }}" class="mr10 text-primary">
+                                            <strong style="color: #555;">{{ $element->visits->count() }}</strong>
                                             <span>visits</span>
                                         </a>
                                     </span>
                                     @if ( $element->visits->count() > 0 )
                                         <a href="#modal-view-{{ $element->visits->last()->id }}" data-toggle="modal" class="mr10">last visit</a>
                                     @endif
+                                    <span>
+                                        <a href="{{ url('/m/surgeries/patient_file_number/'.$element->file_number) }}" class="mr10 text-primary">
+                                            <strong style="color: #555;">{{ $element->surgeries()->count() }}</strong>
+                                            <span>surgeries</span>
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <a href="{{ url('/m/billings/patient_file_number/'.$element->file_number) }}" class="mr10 text-primary">
+                                            <strong style="color: #555;">{{ $element->billings()->count() }}</strong>
+                                            <span>billings</span>
+                                        </a>
+                                    </span>
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
                                     <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
                                     <a href="{{ url('/m/patients/delete/'.$element->id) }}" class="mr10 text-danger">

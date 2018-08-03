@@ -27,7 +27,7 @@
                     @forelse ($visits as $element)
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
-                                <span class="badge badge-default pull-right">{{ $element->type }}</span>
+                                <span class="badge pull-right">{{ $element->type }}</span>
                                 <h5 class="panel-title">
                                     <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">{{ $element->title }}</a>
                                 </h5>

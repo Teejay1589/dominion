@@ -24,6 +24,11 @@
                           array_push($keys, $value);
                       }
                   }
+                  if ( isset($addup_keys) ) {
+                      foreach ($addup_keys as $key => $value) {
+                          array_unshift($keys, $value);
+                      }
+                  }
               @endphp
               <select id="filter" class="form-control" name="filter" style="width: 35%; padding: 0 .2rem;">
                   {{-- <option value="">ALL</option> --}}

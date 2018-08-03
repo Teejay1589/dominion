@@ -19,7 +19,7 @@
 					@forelse (Auth::user()->surgeries()->sortByDesc('id') as $element)
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
-                                <span class="badge badge-default pull-right">{{ isset( $element->surgery ) ? 'RESURGERY' : '' }}</span>
+                                <span class="badge pull-right">{{ isset( $element->surgery ) ? 'RESURGERY' : '' }}</span>
                                 <h5 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->surgery_name }} <small><span title="Visit Title">{{ optional($element->visit)->title }}</span></small></a>
                                     {{-- <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">{{ $element->name }}</a> --}}

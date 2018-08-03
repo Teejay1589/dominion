@@ -17,7 +17,8 @@
                     'create_form' => 'forms.visits-create',
                     'data_name' => 'visit',
                     'data' => $visits,
-                    'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at')
+                    'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at'),
+                    'addup_keys' => array('patient_file_number')
                 ])
 
                 {{-- <div class="clearfix"></div>
@@ -27,15 +28,20 @@
                     @forelse ($visits as $element)
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
-                                <span class="badge badge-default pull-right">{{ $element->type }}</span>
+                                <span class="badge pull-right">{{ $element->type }}</span>
                                 <h5 class="panel-title">
                                     <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">{{ $element->title }}</a>
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>
-                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10 text-primary">
+                                    <span>
+                                        <a href="{{ url('/m/patients/file_number/'.optional($element->patient)->file_number) }}" class="mr10 text-primary">
+                                            <span>patient</span>
+                                        </a>
+                                    </span>
+                                    {{-- <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10 text-primary">
                                         <span>patient</span>
-                                    </a>
+                                    </a> --}}
                                     <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">view</a>
                                     <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
                                     <a href="{{ url('/m/visits/delete/'.$element->id) }}" class="mr10 text-danger">
@@ -48,10 +54,10 @@
                                 </div>
                             </div>
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
-                                <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printPatientDiv('patient{{ $element->id }}');">Print</button>
+                                {{-- <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printPatientDiv('patient{{ $element->id }}');">Print</button>
                                 <div id="patient{{ $element->id }}">
                                     @include('partials.patient-inline-view', ['element' => $element->patient])
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     @empty

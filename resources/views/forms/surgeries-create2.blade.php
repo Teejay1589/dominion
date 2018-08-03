@@ -37,11 +37,16 @@
 						</div>
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
-                                <label class="form-control-label">Surgery Date <span class="text-danger">*</span></label>
-                                <input class="form-control" type="date" name="surgery_date" placeholder="YYYY-MM-DD" value="{{ old('surgery_date') }}" required>
+                                <label class="form-control-label">Surgery Date </label>
+                                <input class="form-control" type="date" name="surgery_date" placeholder="YYYY-MM-DD" value="{{ old('surgery_date') }}">
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                    	<label class="form-control-label">Complications </label>
+						<textarea name="complications" class="form-control" rows="5" placeholder="Complications">{{ old('complications') }}</textarea>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
