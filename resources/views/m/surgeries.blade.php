@@ -44,11 +44,7 @@
                                     </span>
                                     {{-- <a href="#modal-view-{{ $element->visit->id }}" data-toggle="modal" class="mr10 text-primary">visit</a> --}}
                                     <span>
-<<<<<<< HEAD
                                         <a href="{{ url('/m/visits/id/'.$element->visit->id.'?default') }}" class="mr10 text-primary">
-=======
-                                        <a href="{{ url('/m/visit/id/'.$element->visit->id.'?default') }}" class="mr10 text-primary">
->>>>>>> 6e1eb15cdaa1f6da179a8fe978d0ff5d7bb5e473
                                             <span>visit</span>
                                         </a>
                                     </span>

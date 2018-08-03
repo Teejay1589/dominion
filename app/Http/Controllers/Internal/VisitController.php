@@ -59,6 +59,12 @@ class VisitController extends InternalControl
             }
             $objects = $object;
             $this->visits = Visit::whereIn('patient_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } elseif ($filter == 'id') {
+            if (isset($_GET['default'])) {
+                $this->visits = Visit::where($filter, $searchterm)->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            } else {
+                $this->visits = Visit::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            }
         } elseif ($filter == "successful_delivery") {
             // Interprete
             if (isset($searchterm[0]) && (strtolower($searchterm[0]) == 1 || strtolower($searchterm[0]) == 'y' || strtolower($searchterm[0]) == 's')) {

@@ -43,11 +43,7 @@
                                     @if ( $element->visits->count() > 0 )
                                         {{-- <a href="#modal-view-{{ $element->visits->last()->id }}" data-toggle="modal" class="mr10">last visit</a> --}}
                                         <span>
-<<<<<<< HEAD
                                             <a href="{{ url('/m/visits/id/'.$element->visits->last()->id.'?default') }}" class="mr10 text-primary">
-=======
-                                            <a href="{{ url('/m/visit/id/'.$element->visits->last()->id.'?default') }}" class="mr10 text-primary">
->>>>>>> 6e1eb15cdaa1f6da179a8fe978d0ff5d7bb5e473
                                                 <span>last visit</span>
                                             </a>
                                         </span>
