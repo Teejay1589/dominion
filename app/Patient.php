@@ -15,7 +15,7 @@ class Patient extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_id', 'first_name', 'last_name', 'phone_number', 'email', 'sex', 'marital_status', 'date_of_birth', 'religion', 'address', 'nationality', 'state_of_origin', 'LGA', 'occupation', 'office_address', 'next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_address', 'next_of_kin_phone_number', 'blood_group', 'weight', 'height', 'genotype',
+        'user_id', 'file_number', 'first_name', 'last_name', 'phone_number', 'email', 'sex', 'marital_status', 'date_of_birth', 'religion', 'address', 'nationality', 'state_of_origin', 'LGA', 'occupation', 'office_address', 'next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_address', 'next_of_kin_phone_number', 'blood_group', 'weight', 'height', 'genotype',
     ];
     protected $hidden = [
         'password', 'remember_token',
@@ -24,6 +24,25 @@ class Patient extends Authenticatable
     public static function table()
     {
         return 'patients';
+    }
+
+    public static function generate_file_number()
+    {
+        $count = Patient::count();
+        if ($count < 10) {
+            $placeholder = '00000';
+        } elseif ($count < 100) {
+            $placeholder = '0000';
+        } elseif ($count < 1000) {
+            $placeholder = '000';
+        } elseif ($count < 10000) {
+            $placeholder = '00';
+        } elseif ($count < 100000) {
+            $placeholder = '0';
+        } else {
+            $placeholder = '';
+        }
+        return 'DMC' . $placeholder . '' . ($count + 1);
     }
 
     public function full_name()

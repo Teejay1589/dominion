@@ -2,6 +2,8 @@
   <dt></dt>
   <dd class="mb5 lead"><strong>Personal Details</strong></dd>
 
+  <dt>File Number</dt>
+  <dd class="mb5"><span class="badge">{{ $element->file_number }}</span></dd>
   <dt>First Name</dt>
   <dd class="mb5">{{ $element->first_name }}</dd>
   <dt>Last Name</dt>

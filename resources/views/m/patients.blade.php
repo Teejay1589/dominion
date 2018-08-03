@@ -27,9 +27,9 @@
                     @forelse ($patients as $element)
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
-                                <span class="badge badge-default pull-right">{{ $element->phone_number }}</span>
+                                <span class="badge badge-default pull-right" title="File Number">{{ $element->file_number }}</span>
                                 <h5 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->first_name }} {{ $element->last_name }}</a>
+                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->full_name() }} <small><span title="Phone Number">{{ $element->phone_number }}</span></small></a>
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>

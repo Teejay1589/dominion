@@ -67,6 +67,7 @@ class PatientsController extends InternalControl
     public function store(CreatePatients $request)
     {
         $request['user_id'] = Auth::id();
+        $request['file_number'] = Patient::generate_file_number();
 
         $obj = new Patient($request->all());
         $obj->password = bcrypt($obj->telephone);
@@ -134,7 +135,7 @@ class PatientsController extends InternalControl
         if (!is_null($patient->phone_number)) {
             $patient->password = bcrypt($patient->phone_number);
             $patient->update();
-            session()->flash('success', 'Patient Password Reset to phone number!<br>Password Reset to: <strong>'.$patient->phone_number.'</strong>');
+            session()->flash('success', 'Patient Password Reset to phone number!<br>Password Reset to: <strong>' . $patient->phone_number . '</strong>');
         } else {
             return redirect()->back()->withErrors('Patient Password is unchanged! Reason: Patient does not have a Phone Number');
         }
