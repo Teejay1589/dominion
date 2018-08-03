@@ -105,6 +105,7 @@ Route::namespace('Internal')->group(function () {
 		// Route::get('/billings/edit/{id}', 'BillingController@edit');
 		Route::post('/billings/update/{id}', 'BillingController@update')->middleware('can:update,App\Billing');
 		Route::get('/billings/delete/{id}', 'BillingController@destroy')->middleware('can:delete,App\Billing');
+		Route::get('/billings/toggle_status/{id}', 'BillingController@toggle_is_paid')->middleware('can:update,App\Billing');
 		Route::get('/billings/{filter}/{searchterm?}', 'BillingController@filter')->where('searchterm', '.*')->middleware('can:view,App\Billing');
 
 		// User Permissions

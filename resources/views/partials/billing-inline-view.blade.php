@@ -11,7 +11,7 @@
     <dt>Amount</dt>
     <dd class="mb5"><strong>N</strong>{{ $element->amount }}</dd>
     <dt>status</dt>
-    <dd class="mb5"><strong class="text-{{ ($element->is_paid) ? 'success' : 'danger' }}" title="STATUS">{{ ($element->is_paid) ? 'PAID' : 'UNPAID' }}</strong></dd>
+    <dd class="mb5"><strong class="text-{{ ($element->is_paid) ? 'success' : 'danger' }}" title="STATUS">{{ ($element->is_paid) ? 'PAID' : 'UNPAID' }}</strong> <a href="{{ url('/m/billings/toggle_status/'.$element->id) }}" class="text-primary hidden-print">change</a></dd>
     <dt>Created at</dt>
     <dd class="mb5">{{ $element->created_at }}</dd>
 </dl>

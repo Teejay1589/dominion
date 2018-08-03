@@ -51,6 +51,7 @@
                                     <a href="{{ url('/m/billings/delete/'.$element->id) }}" class="mr10 text-danger">
                                         <span>delete</span>
                                     </a>
+                                    <a href="{{ url('/m/billings/toggle_status/'.$element->id) }}" class="mr10">change status</a>
                                 </span>
                                 <div>
                                     @include('partials.visit-view', ['active_object' => $element->visit])

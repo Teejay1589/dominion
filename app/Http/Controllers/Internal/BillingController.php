@@ -86,4 +86,14 @@ class BillingController extends InternalControl
             ->with('visits', Visit::all())
             ->with('page', $this->page);
     }
+
+    public function toggle_is_paid($id)
+    {
+        $billing = Billing::findOrFail($id);
+        $billing->is_paid = ($billing->is_paid) ? 0 : 1;
+        $billing->update();
+
+        session()->flash('success', 'Billing Status is Changed!');
+        return redirect()->back();
+    }
 }
