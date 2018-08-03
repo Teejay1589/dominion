@@ -30,7 +30,8 @@
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
                                 <span class="badge pull-right">{{ $element->type }}</span>
                                 <h5 class="panel-title">
-                                    <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">{{ $element->title }} <small><span title="Patient">{{ $element->patient->full_name() }}</span></small></a>
+                                    {{-- <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">{{ $element->title }} <small><span title="Patient">{{ $element->patient->full_name() }}</span></small></a> --}}
+                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->title }} <small><span title="Patient">{{ $element->patient->full_name() }}</span></small></a>
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>
@@ -54,22 +55,23 @@
                                             <span>billings</span>
                                         </a>
                                     </span>
-                                    <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">view</a>
+                                    {{-- <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">view</a> --}}
+                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
                                     <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
                                     <a href="{{ url('/m/visits/delete/'.$element->id) }}" class="mr10 text-danger">
                                         <span>delete</span>
                                     </a>
                                 </span>
                                 <div>
-                                    @include('partials.visit-view', ['active_object' => $element])
+                                    {{-- @include('partials.visit-view', ['active_object' => $element]) --}}
                                     @include('forms.visits-update', ['active_object' => $element])
                                 </div>
                             </div>
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
-                                {{-- <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printPatientDiv('patient{{ $element->id }}');">Print</button>
-                                <div id="patient{{ $element->id }}">
-                                    @include('partials.patient-inline-view', ['element' => $element->patient])
-                                </div> --}}
+                                <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printVisitDiv('visit{{ $element->id }}');">Print</button>
+                                <div id="visit{{ $element->id }}">
+                                    @include('partials.visit-inline-view', ['active_object' => $element])
+                                </div>
                             </div>
                         </div>
                     @empty
@@ -125,22 +127,6 @@
     </script>
     <script type="text/javascript">
         // For Printing
-        function printPatientDiv(divName) {
-            w=window.open();
-            w.document.write("<!DOCTYPE html><html><head><title>Patient Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
-            // "<h2 style='text-align:center;font-weight:bold;'>DOMINION MEDICAL CENTER</h2>" +
-            // "<h5 style='text-align:center;font-weight:light;'>Specialist Medical And Diagonistics Center</h5>" +
-            // "<h5 style='text-align:center;font-weight:light;'>" +
-            // "<span class='mr10'> 4 Nova Road Ado-Ekiti, Ekiti State. </span>" +
-            // "<strong class='mr10'> +234(0)8177433899 </strong>" +
-            // "</h5>" +
-            // "<div class='clearfix'></div>" +
-            // "<br>" +
-            "@include('shared.print-header')" +
-            document.getElementById(divName).innerHTML + "</body></html>");
-            w.print();
-            // w.close();
-        }
         function printVisitDiv(divName) {
             w=window.open();
             w.document.write("<!DOCTYPE html><html><head><title>Visit Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
