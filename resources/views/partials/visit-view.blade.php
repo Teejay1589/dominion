@@ -66,6 +66,15 @@
 
 						<dt style="width: 5%; max-width: 5%;"><span class="lead hidden-xs">&gt;&gt;</span></dt>
 						<dd class="mb5" style="margin-left: 10%; width: 90%;">{{ $active_object->plans }}</dd>
+
+						<dt><br></dt>
+						<dd class="mb5 lead"></dd>
+
+						<dt style="width: 5%; max-width: 5%;"></dt>
+						<dd class="mb5 lead" style="margin-left: 10%; width: 90%;"><strong>Summary</strong></dd>
+
+						<dt style="width: 5%; max-width: 5%;"><span class="lead hidden-xs">&gt;&gt;</span></dt>
+						<dd class="mb5" style="margin-left: 10%; width: 90%;">{{ $active_object->summary }}</dd>
 					</dl>
 
 					{{-- <div class="clearfix"></div>

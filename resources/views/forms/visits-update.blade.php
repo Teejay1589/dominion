@@ -102,6 +102,15 @@
                         </div>
                     </div>
 
+					<div class="row">
+                        <div class="col-lg-12 col-xs-12">
+                            <div class="form-group">
+								<label class="form-control-label">Summary </label>
+								<textarea name="summary" class="form-control" rows="4" placeholder="Summary">{{ $active_object->summary }}</textarea>
+							</div>
+                        </div>
+                    </div>
+
 					<div class="form-group">
 						<label class="form-control-label form-check form-check-inline">
 							<input type="checkbox" name="successful_delivery" class="form-check-input" value="1" {{ old('successful_delivery', $active_object->successful_delivery) == 1 ? 'checked' : '' }} {{ ($active_object->type == 'DELIVERY') ? '' : 'disabled' }}> Successful Delivery?

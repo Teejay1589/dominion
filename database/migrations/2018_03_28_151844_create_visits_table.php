@@ -24,6 +24,7 @@ class CreateVisitsTable extends Migration
                 $table->text('objects')->nullable();
                 $table->text('assessment')->nullable();
                 $table->text('plans')->nullable();
+                $table->text('summary')->nullable();
                 $table->boolean('successful_delivery')->default(0);
                 $table->datetime('discharged_on')->nullable();
                 $table->timestamps();

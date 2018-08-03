@@ -27,9 +27,11 @@ class CreateVisits extends FormRequest
             'patient' => 'required|integer|min:1|exists:patients,id',
             'doctors' => 'nullable|array|min:0|max:5',
             'title' => 'required|string|min:2|max:191',
-            'diagnosis' => 'nullable|string|min:2',
-            'complications' => 'nullable|string|min:2',
-            'management' => 'nullable|string|min:2',
+            'subjects' => 'nullable|string|min:2',
+            'objects' => 'nullable|string|min:2',
+            'assessment' => 'nullable|string|min:2',
+            'plans' => 'nullable|string|min:2',
+            'summary' => 'nullable|string|min:2',
             // 'successful_delivery' => 'nullable|boolean',
             // 'discharged_on' => 'nullable|date_format:Y-m-d'
         ];
