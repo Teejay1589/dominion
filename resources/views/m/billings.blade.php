@@ -59,7 +59,10 @@
                                 </div>
                             </div>
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
-                                @include('partials.billing-inline-view', ['element' => $element])
+                                <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printBillingDiv('billing{{ $element->id }}');">Print</button>
+                                <div id="billing{{ $element->id }}">
+                                    @include('partials.billing-inline-view', ['element' => $element])
+                                </div>
                             </div>
                         </div>
                     @empty
@@ -94,12 +97,31 @@
                 plugins: ['restore_on_backspace', 'remove_button'],
                 delimiter: ','
             });
-            $('select.select-surgery_name').selectize({
-                maxItems: 1,
-                create: true,
-                plugins: ['restore_on_backspace', 'remove_button'],
-                delimiter: ','
-            });
+            // $('select.select-billing_name').selectize({
+            //     maxItems: 1,
+            //     create: true,
+            //     plugins: ['restore_on_backspace', 'remove_button'],
+            //     delimiter: ','
+            // });
         });
+    </script>
+    <script type="text/javascript">
+        // For Printing
+        function printBillingDiv(divName) {
+            w=window.open();
+            w.document.write("<!DOCTYPE html><html><head><title>Billing Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
+            "@include('shared.print-header')" +
+            document.getElementById(divName).innerHTML + "</body></html>");
+            w.print();
+            // w.close();
+        }
+        function printVisitDiv(divName) {
+            w=window.open();
+            w.document.write("<!DOCTYPE html><html><head><title>Visit Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
+            "@include('shared.print-header')" +
+            document.getElementById(divName).innerHTML + "</body></html>");
+            w.print();
+            // w.close();
+        }
     </script>
 @endsection

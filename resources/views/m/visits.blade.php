@@ -30,7 +30,7 @@
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
                                 <span class="badge pull-right">{{ $element->type }}</span>
                                 <h5 class="panel-title">
-                                    <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">{{ $element->title }}</a>
+                                    <a href="#modal-view-{{ $element->id }}" data-toggle="modal" class="mr10">{{ $element->title }} <small><span title="Patient">{{ $element->patient->full_name() }}</span></small></a>
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>
