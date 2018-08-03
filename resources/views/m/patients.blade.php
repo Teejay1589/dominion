@@ -41,7 +41,12 @@
                                         </a>
                                     </span>
                                     @if ( $element->visits->count() > 0 )
-                                        <a href="#modal-view-{{ $element->visits->last()->id }}" data-toggle="modal" class="mr10">last visit</a>
+                                        {{-- <a href="#modal-view-{{ $element->visits->last()->id }}" data-toggle="modal" class="mr10">last visit</a> --}}
+                                        <span>
+                                            <a href="{{ url('/m/visits/id/'.$element->visits->last()->id.'?default') }}" class="mr10 text-primary">
+                                                <span>last visit</span>
+                                            </a>
+                                        </span>
                                     @endif
                                     <span>
                                         <a href="{{ url('/m/surgeries/patient_file_number/'.$element->file_number) }}" class="mr10 text-primary">
@@ -63,9 +68,9 @@
                                 </span>
                                 <div>
                                     @include('forms.patients-update', ['active_object' => $element])
-                                    @if ( $element->visits->count() > 0 )
+                                    {{-- @if ( $element->visits->count() > 0 )
                                         @include('partials.visit-view', ['active_object' => $element->visits->last()])
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
@@ -118,13 +123,13 @@
             w.print();
             // w.close();
         }
-        function printVisitDiv(divName) {
-            w=window.open();
-            w.document.write("<!DOCTYPE html><html><head><title>Visit Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
-            "@include('shared.print-header')" +
-            document.getElementById(divName).innerHTML + "</body></html>");
-            w.print();
-            // w.close();
-        }
+        // function printVisitDiv(divName) {
+        //     w=window.open();
+        //     w.document.write("<!DOCTYPE html><html><head><title>Visit Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
+        //     "@include('shared.print-header')" +
+        //     document.getElementById(divName).innerHTML + "</body></html>");
+        //     w.print();
+        //     // w.close();
+        // }
     </script>
 @endsection
