@@ -36,7 +36,7 @@
                                 <div class="mb5"></div>
                                 <span>
                                     <span>
-                                        <a href="{{ url('/m/patients/file_number/'.optional($element->patient)->file_number) }}" class="mr10 text-primary">
+                                        <a href="{{ url('/m/patients/file_number/'.optional($element->patient)->file_number.'?default') }}" class="mr10 text-primary">
                                             <span>patient</span>
                                         </a>
                                     </span>
@@ -67,7 +67,7 @@
                                     @include('forms.visits-update', ['active_object' => $element])
                                 </div>
                             </div>
-                            <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
+                            <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse {{ (isset($_GET['default']) && $visits->total() == 1) ? 'in' : '' }}" role="tabpanel">
                                 <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printVisitDiv('visit{{ $element->id }}');">Print</button>
                                 <div id="visit{{ $element->id }}">
                                     @include('partials.visit-inline-view', ['active_object' => $element])

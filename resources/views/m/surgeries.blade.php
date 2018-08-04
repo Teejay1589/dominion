@@ -38,7 +38,7 @@
                                 <div class="mb5"></div>
                                 <span>
                                     <span>
-                                        <a href="{{ url('/m/patients/file_number/'.optional($element->patient())->file_number) }}" class="mr10 text-primary">
+                                        <a href="{{ url('/m/patients/file_number/'.optional($element->patient())->file_number.'?default') }}" class="mr10 text-primary">
                                             <span>patient</span>
                                         </a>
                                     </span>
