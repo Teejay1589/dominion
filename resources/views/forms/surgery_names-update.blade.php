@@ -14,7 +14,7 @@
 
                     <div class="form-group">
                         <label class="form-control-label">Surgery Name <span class="text-danger">*</span></label>
-                        <input class="form-control" type="text" name="surgery_name" placeholder="Surgery Name" value="{{ old('surgery_name', $active_object->surgery_name) }}" required>
+                        <input class="form-control" type="text" name="surgery_name" placeholder="Surgery Name" value="{{ $active_object->surgery_name }}" required>
                     </div>
 				</div>
 				<div class="modal-footer">

@@ -17,7 +17,7 @@
 						<select class="form-control" name="visit_old" required disabled>
 							{{-- <option value="">NONE</option> --}}
 							@foreach ($visits->where('id', $active_object->visit_id) as $element)
-								<option value="{{ $element->id }}" {{ (old('visit', $active_object->visit_id) == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
+								<option value="{{ $element->id }}" {{ ($active_object->visit_id == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
 							@endforeach
 						</select>
 						<input type="hidden" name="visit" value="{{ $active_object->visit_id }}">

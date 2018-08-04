@@ -16,8 +16,8 @@
 						<label class="form-control-label">Select Visit <span class="text-danger">*</span></label>
 						<select class="form-control" name="visit_old" required disabled>
 							{{-- <option value="">NONE</option> --}}
-							@foreach (App\Visit::where('id', $active_object->visit_id)->get() as $element)
-								<option value="{{ $element->id }}" {{ (old('visit', $active_object->visit_id) == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
+							@foreach ($visits->where('id', $active_object->visit_id) as $element)
+								<option value="{{ $element->id }}" {{ ($active_object->visit_id == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
 							@endforeach
 						</select>
 						<input type="hidden" name="visit" value="{{ $active_object->visit_id }}">
@@ -32,9 +32,9 @@
                                 		$found = 1;
                                 	@endphp
 									@foreach (App\SurgeryName::all() as $element)
-										<option value="{{ $element->surgery_name }}" {{ (old('surgery_name', $active_object->surgery_name) == $element->surgery_name) ? 'selected' : '' }}>{{ $element->surgery_name }}</option>
+										<option value="{{ $element->surgery_name }}" {{ ($active_object->surgery_name == $element->surgery_name) ? 'selected' : '' }}>{{ $element->surgery_name }}</option>
 										@php
-											if ( old('surgery_name', $active_object->surgery_name) == $element->surgery_name ) {
+											if ( $active_object->surgery_name == $element->surgery_name ) {
 		                                		$found = 0;
 											}
 	                                	@endphp
@@ -49,14 +49,14 @@
                         <div class="col-lg-6 col-xs-12">
                             <div class="form-group">
                                 <label class="form-control-label">Surgery Date </label>
-                                <input class="form-control" type="date" name="surgery_date" placeholder="YYYY-MM-DD" value="{{ old('surgery_date', $active_object->surgery_date) }}">
+                                <input class="form-control" type="date" name="surgery_date" placeholder="YYYY-MM-DD" value="{{ $active_object->surgery_date }}">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                     	<label class="form-control-label">Complications </label>
-						<textarea name="complications" class="form-control" rows="5" placeholder="Complications">{{ old('complications', $active_object->complications) }}</textarea>
+						<textarea name="complications" class="form-control" rows="5" placeholder="Complications">{{ $active_object->complications }}</textarea>
 					</div>
 				</div>
 				<div class="modal-footer">

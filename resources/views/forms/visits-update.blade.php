@@ -21,7 +21,7 @@
 										$visit_types = collect(['CONSULTATION', 'DELIVERY', 'EMERGENCY', 'OTHERS']);
 									@endphp
 									@foreach ($visit_types as $element)
-										<option value="{{ $element }}" {{ old('type', $active_object->type) == $element ? 'selected' : '' }}>{{ $element }}</option>
+										<option value="{{ $element }}" {{ ($active_object->type == $element) ? 'selected' : '' }}>{{ $element }}</option>
 									@endforeach
 								</select>
 							</div>
@@ -30,7 +30,7 @@
 						<div class="col-lg-8 col-xs-12">
 							<div class="form-group">
 								<label class="form-control-label">Title <span class="text-danger">*</span></label>
-								<input class="form-control" type="text" name="title" placeholder="Title" value="{{ old('title', $active_object->title) }}" required>
+								<input class="form-control" type="text" name="title" placeholder="Title" value="{{ $active_object->title }}" required>
 							</div>
 						</div>
 					</div>
@@ -41,7 +41,7 @@
                             	<label class="form-control-label">Select Patient <span class="text-danger">*</span></label>
 								<select class="form-control" name="patient" required disabled>
 									@foreach ($patients->where('id', $active_object->patient_id) as $element)
-										<option value="{{ $element->id }}" {{ (old('patient', $active_object->patient_id) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
+										<option value="{{ $element->id }}" {{ ($active_object->patient_id == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
 									@endforeach
 								</select>
                             </div>
@@ -113,13 +113,13 @@
 
 					<div class="form-group">
 						<label class="form-control-label form-check form-check-inline">
-							<input type="checkbox" name="successful_delivery" class="form-check-input" value="1" {{ old('successful_delivery', $active_object->successful_delivery) == 1 ? 'checked' : '' }} {{ ($active_object->type == 'DELIVERY') ? '' : 'disabled' }}> Successful Delivery?
+							<input type="checkbox" name="successful_delivery" class="form-check-input" value="1" {{ ($active_object->successful_delivery == 1) ? 'checked' : '' }} {{ ($active_object->type == 'DELIVERY') ? '' : 'disabled' }}> Successful Delivery?
 						</label>
 					</div>
 
 					<div class="form-group">
 						<label class="form-control-label">Discharged On </label>
-						<input class="form-control" type="date" name="discharged_on" placeholder="Date Discharged (Y-m-d)" value="{{ is_null(old('started_at', $active_object->discharged_on)) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", old('started_at', $active_object->discharged_on))->format("Y-m-d") }}">
+						<input class="form-control" type="date" name="discharged_on" placeholder="Date Discharged (Y-m-d)" value="{{ is_null($active_object->discharged_on) ? '' : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->discharged_on)->format("Y-m-d") }}">
 					</div>
 				</div>
 				<div class="modal-footer">

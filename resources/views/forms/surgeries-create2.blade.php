@@ -16,8 +16,8 @@
 						<label class="form-control-label">Select Visit <span class="text-danger">*</span></label>
 						<select class="form-control" name="visit" required disabled>
 							<option value="">NONE</option>
-							@foreach (App\Visit::where('id', $active_object->visit_id)->get() as $element)
-								<option value="{{ $element->id }}" {{ (old('visit', $active_object->visit_id) == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
+							@foreach ($visits->where('id', $active_object->visit_id) as $element)
+								<option value="{{ $element->id }}" {{ ($active_object->visit_id == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
 							@endforeach
 						</select>
 						<input type="hidden" name="visit" value="{{ $active_object->visit_id }}">
