@@ -48,6 +48,17 @@ class PatientsController extends InternalControl
             ->with('page', $this->page);
     }
 
+    public function medical_history($id)
+    {
+        $this->page->title = 'Medical History';
+        $this->page->view = 'm.medical_history';
+        $this->active_object = Patient::findOrFail($id);
+
+        return view($this->page->view)
+            ->with('active_object', $this->active_object)
+            ->with('page', $this->page);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

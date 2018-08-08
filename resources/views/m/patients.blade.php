@@ -75,6 +75,7 @@
                             </div>
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse {{ ((isset($patients->filter) && $patients->filter == 'file_number') && $patients->total() == 1) ? 'in' : '' }}" role="tabpanel">
                                 <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printPatientDiv('patient{{ $element->id }}');">Print</button>
+                                <a role="button" class="btn btn-danger btn-xs mb10" href="{{ url('/m/medical-history/'.$element->id) }}">Medical History</a>
                                 <div id="patient{{ $element->id }}">
                                     @include('partials.patient-inline-view', ['element' => $element])
                                 </div>

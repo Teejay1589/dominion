@@ -58,6 +58,7 @@ Route::namespace('Internal')->group(function () {
 		Route::get('/my-permissions', 'HomeController@my_permissions');
 
 		// Patients
+		Route::get('/medical-history/{id}', 'PatientsController@medical_history')->middleware('can:update,App\Patient');
 		Route::get('/patients', 'PatientsController@index')->middleware('can:view,App\Patient');
 		Route::post('/patients/create', 'PatientsController@store')->middleware('can:create,App\Patient');
 		// Route::get('/patients/edit/{id}', 'PatientsController@edit');
