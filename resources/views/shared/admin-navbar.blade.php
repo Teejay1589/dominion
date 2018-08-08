@@ -98,7 +98,7 @@
 
       <li>
         <a href="javascript:;" data-toggle="dropdown">
-          <img src="{{ asset('urban/images/avatar.jpg') }}" class="header-avatar img-circle ml10" alt="user" title="user">
+          <img src="{{ asset(Auth::guard('admin')->user()->profile_picture) }}" class="header-avatar img-circle ml10" alt="user" title="user" style="max-height: 32px;">
           <span class="">{{ Auth::guard('admin')->user()->first_name }} {{ Auth::guard('admin')->user()->last_name[0] }}.</span>
         </a>
         <ul class="dropdown-menu">

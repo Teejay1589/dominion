@@ -128,6 +128,9 @@ Route::namespace('Internal')->group(function () {
 			Route::get('/password/reset/{id}', 'UserController@password_reset')->middleware('can:update,App\User');
 			Route::get('/{filter}/{searchterm?}', 'UserController@filter')->where('searchterm', '.*')->middleware('can:view,App\User');
 		});
+
+		// AJAX Uploads
+		Route::post('/upload/profile_picture', 'HomeController@ajax_upload_profile_picture');
 	});
 });
 

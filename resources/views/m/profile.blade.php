@@ -21,6 +21,20 @@
                                 {{ csrf_field() }}
                             </div>
 
+                            <div class="form-group">
+                                <label class="form-control-label">Profile Picture: <span class="text-danger">*</span></label>
+                                <div class="center-block text-center">
+                                    <span style="cursor: pointer;" onclick="document.getElementById('input_profile_picture').click();">
+                                        @if (session()->has('active_profile_picture'))
+                                            <img src="{{ asset(session('active_profile_picture')) }}" alt="Profile Picture" style="max-height: 7rem;" class="img profile_picture_img">
+                                        @else
+                                            <img src="{{ asset(Auth::user()->profile_picture) }}" alt="Profile Picture" style="max-height: 7rem;" class="img profile_picture_img">
+                                        @endif
+                                        <div class="help-block">click to change</div>
+                                    </span>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-lg-6 col-xs-12">
                                     <div class="form-group">
@@ -138,4 +152,35 @@
 @endsection
 
 @section('page_scripts')
+<input id="input_profile_picture" type="file" name="profile_picture" class="form-input d-invisible m-0 p-0" accept="image/*" style="margin-top: -40px; z-index: -1;">
+<script type="text/javascript">
+	$('input[name="profile_picture"]').change(function() {
+		var formData = new FormData();
+		formData.append('image', $(this)[0].files[0]);
+
+		// AJAX Upload Profile Picture
+		$.ajax({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+			url: '{{ url('/m/upload/profile_picture') }}',
+			type: 'POST',
+			dataType: 'json',
+			data: formData,
+		    cache: false,
+			contentType: false,
+		    processData: false,
+		})
+		.done(function(response) {
+			$('.profile_picture_img').attr('src', response.imagepath);
+			console.log("success");
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+	});
+</script>
 @endsection

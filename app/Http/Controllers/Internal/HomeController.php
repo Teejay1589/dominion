@@ -46,6 +46,12 @@ class HomeController extends InternalControl
     // public function update(UpdateProfile $request) // to be used later
     public function update(Request $request)
     {
+        if (session()->has('active_profile_picture')) {
+            $request['profile_picture'] = session('active_profile_picture');
+            session()->forget('active_profile_picture');
+            Auth::user()->profile_picture = $request['profile_picture'];
+        }
+
         Auth::user()->update($request->all());
 
         session()->flash('success', 'Profile SUCCESSFULLY updated!');
@@ -57,7 +63,7 @@ class HomeController extends InternalControl
         $user = User::where('id', Auth::user()->id)->get()->first();
         $bcrypt = new BcryptHasher;
 
-        if( $bcrypt->check($request->current_password, $user->password) ) {
+        if ($bcrypt->check($request->current_password, $user->password)) {
             $user->password = bcrypt($request->new_password);
 
             $user->save();
@@ -76,5 +82,20 @@ class HomeController extends InternalControl
         $this->page->view = 'm.my_permissions';
         return view($this->page->view)
             ->with('page', $this->page);
+    }
+
+    public function ajax_upload_profile_picture(Request $request)
+    {
+        $filePath = 'img/default.png';
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = strtolower(str_ireplace(' ', '_', pathinfo($request->image->getClientOriginalName(), PATHINFO_FILENAME))) . time() . '.' . request()->image->getClientOriginalExtension();
+            $destinationPath = 'uploads/m/pp/';
+            $filePath = $destinationPath . $filename;
+            $file->move($destinationPath, $filename);
+
+            session()->put('active_profile_picture', $filePath);
+        }
+        return response()->json(['imagepath' => asset($filePath)]);
     }
 }
