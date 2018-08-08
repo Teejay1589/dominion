@@ -40,8 +40,8 @@
                 <div class="widget-icon bg-success pull-left">
                 </div>
                 <div class="overflow-hidden">
-                  <span class="widget-title">{{ App\Visit::where('discharged_on', null)->count() }}</span>
-                  <span class="widget-subtitle">Opened Visits</span>
+                  <span class="widget-title">{{ App\Visit::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->count() }}</span>
+                  <span class="widget-subtitle">Consultations this Month</span>
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="overflow-hidden">
                   <span class="widget-title">{{ App\Billing::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->count() }}</span>
-                  <span class="widget-subtitle">New Invoices</span>
+                  <span class="widget-subtitle">New Billings this Month</span>
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="overflow-hidden">
                   <span class="widget-title">{{ App\Billing::where('is_paid', 0)->count() }}</span>
-                  <span class="widget-subtitle">Unpaid Invoices</span>
+                  <span class="widget-subtitle"><a href="{{ url('/m/billings/status/0?entries=10') }}" class="text-primary">All Unpaid Bills</a></span>
                 </div>
               </div>
             </div>
