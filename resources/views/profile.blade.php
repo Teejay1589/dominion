@@ -16,6 +16,16 @@
                         <div class="panel-title">Update Profile Form</div>
                     </div>
                     <div class="panel-body">
+                        <div class="text-center">
+                            <p class="text-danger"><strong>PROFILE IS LOCKED and can only be updated by Admin.</strong></p>
+                            <div class="text-dark">
+                                <span>Do you have an important information you would like to update yourself?</span>
+                            </div>
+                            <div class="mb20">
+                                <span>If you do, </span>
+                                <a href="javascript:;" class="text-primary">request profile unlock</a>
+                            </div>
+                        </div>
                         <form class="" action="{{ url('/profile/update') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
