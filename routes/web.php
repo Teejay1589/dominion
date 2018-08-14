@@ -50,6 +50,9 @@ Route::post('/m/logout', 'Auth\Internal\LoginController@logout')->name('m.logout
 
 Route::namespace('Internal')->group(function () {
 	Route::prefix('m')->group(function () {
+		Route::get('/', function() {
+			return redirect('/m/login');
+		});
 		Route::get('/profile', 'HomeController@profile')->name('m.profile');
 		Route::post('/profile/update', 'HomeController@update')->name('m.profile.update');
 		Route::post('/password/change', 'HomeController@change_password')->name('m.password.change');
