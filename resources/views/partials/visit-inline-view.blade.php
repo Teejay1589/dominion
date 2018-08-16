@@ -13,7 +13,7 @@
         {{ is_null($active_object->discharged_on) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->discharged_on)->toFormattedDateString() }}
     </dd>
     <dt>Created at</dt>
-    <dd class="mb5">{{ $element->created_at }}</dd>
+    <dd class="mb5">{{ $active_object->created_at }}</dd>
 
     <dt><br></dt>
     <dd class="mb5 lead"></dd>
