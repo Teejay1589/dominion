@@ -56,6 +56,7 @@ Route::namespace('Internal')->group(function () {
 		Route::get('/profile', 'HomeController@profile')->name('m.profile');
 		Route::post('/profile/update', 'HomeController@update')->name('m.profile.update');
 		Route::post('/password/change', 'HomeController@change_password')->name('m.password.change');
+		Route::post('/upload/cv', 'HomeController@upload_cv')->name('m.upload.cv');
 
 		// Manage My Permissions
 		Route::get('/my-permissions', 'HomeController@my_permissions');

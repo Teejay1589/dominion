@@ -76,6 +76,29 @@ class HomeController extends InternalControl
         }
     }
 
+    public function upload_cv(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:pdf|max:1024',
+        ]);
+
+        $filePath = null;
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = strtolower(str_ireplace(' ', '_', pathinfo($request->file->getClientOriginalName(), PATHINFO_FILENAME))) . time() . '.' . request()->file->getClientOriginalExtension();
+            $destinationPath = 'uploads/m/cv/';
+            $filePath = $destinationPath . $filename;
+            $file->move($destinationPath, $filename);
+        }
+
+        $user = User::where('id', Auth::user()->id)->get()->first();
+        $user->cv = $filePath;
+        $user->update();
+
+        session()->flash('success', 'CV SUCCESSFULLY Uploaded!');
+        return redirect()->back();
+    }
+
     public function my_permissions()
     {
         $this->page->title = 'My Permissions';

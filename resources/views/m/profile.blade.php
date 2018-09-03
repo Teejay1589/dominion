@@ -110,6 +110,38 @@
                     </div>
                 </div>
 
+                @if (Auth::user()->role_id > 1)
+                    <div class="clearfix"></div>
+                    <br>
+
+                    <div id="upload-cv" class="panel">
+                        <div class="panel-heading border">
+                            <div class="panel-title">Upload CV</div>
+                        </div>
+                        <div class="panel-body">
+                            <form class="" action="{{ url('/m/upload/cv') }}" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    {{ csrf_field() }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="file" class="form-control-label">CV FIle: <span class="text-danger">*</span></label>
+                                    <input class="form-control" placeholder="Your CV" type="file" name="file" required>
+                                    <span class="help-block">accepted formats: <code>.pdf</code></span>
+                                </div>
+
+                                <div class="text-right">
+                                    @if (Auth::user()->cv)
+                                        <button type="submit" class="btn btn-success">Upload New</button>
+                                    @else
+                                        <button type="submit" class="btn btn-success">Upload</button>
+                                    @endif
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="clearfix"></div>
                 <br>
 
