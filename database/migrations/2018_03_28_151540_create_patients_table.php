@@ -18,6 +18,7 @@ class CreatePatientsTable extends Migration
                 $table->increments('id');
                 $table->unsignedInteger('user_id')->index()->nullable();
                 $table->string('file_number');
+                $table->string('passport')->default('img/default.png');
                 $table->string('first_name');
                 $table->string('last_name')->nullable();
                 $table->string('phone_number');
