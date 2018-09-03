@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
                 $table->string('country')->nullable();
                 $table->string('job')->nullable();
                 $table->string('profile_picture')->default('img/default.png');
+                $table->string('cv')->nullable();
                 $table->rememberToken();
                 $table->timestamps();
 
