@@ -33,6 +33,9 @@
                                 <div class="mb5"></div>
                                 <span>
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
+                                    @if ($element->cv)
+                                        <a href="{{ url($element->cv) }}" class="mr10">cv</a>
+                                    @endif
                                     <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
                                     <a href="{{ url('/m/users/delete/'.$element->id) }}" class="mr10 text-danger">
                                         <span>delete</span>
