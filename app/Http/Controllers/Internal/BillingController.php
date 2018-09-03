@@ -180,7 +180,11 @@ class BillingController extends InternalControl
         $billing->is_paid = ($billing->is_paid) ? 0 : 1;
         $billing->update();
 
-        session()->flash('success', 'Billing Status is Changed!');
+        if ($billing->is_paid) {
+            session()->flash('success', 'Billing Status is Changed to PAID!');
+        } else {
+            session()->flash('success', 'Billing Status is Changed to UNPAID!');
+        }
         return redirect()->back();
     }
 }

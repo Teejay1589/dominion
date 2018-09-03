@@ -20,13 +20,31 @@
                         <nav>
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <span class="text-primary">brief information about patient</span>
+                                    <span class="text-primary">Medical History Summary</span>
                                 </li>
                                 <li class="nav-item">
-                                    <em>
-                                        patient info, visits, surgeries (except billings) shows up as
-                                    </em>
-                                    <strong> patient medical history</strong>
+                                    <span>Last Visit was on</span>
+                                    @if($active_object->last_visit())
+                                        <abbr title="{{ Carbon::createFromFormat('Y-m-d H:i:s', $active_object->last_visit()->created_at)->format('l, g M Y @ h:i A') }}">{{ $active_object->last_visit()->created_at }}</abbr>
+                                    @else
+                                    <span class="text-danger">NO Visits Yet!</span>
+                                    @endif
+                                </li>
+                                <li class="nav-item">
+                                    <strong>{{ $active_object->visits->count() }}</strong>
+                                    <span>Visits</span>
+                                </li>
+                                <li class="nav-item">
+                                    <strong>{{ $active_object->surgeries()->count() }}</strong>
+                                    <span>Surgeries</span>
+                                </li>
+                                <li class="nav-item">
+                                    <strong>{{ $active_object->billings()->count() }}</strong>
+                                    <span>Billings</span>
+                                </li>
+                                <li class="nav-item">
+                                    <strong>{{ $active_object->unpaid_bills()->count() }}</strong>
+                                    <span>Unpaid BIlls</span>
                                 </li>
                                 <li><br></li>
                                 <li>
@@ -52,7 +70,7 @@
                         <a href="#info" data-toggle="tab" aria-expanded="true">Patient Info</a>
                     </li>
                     <li class="">
-                        <a href="#lastvisit" data-toggle="tab" aria-expanded="false">Last Visit</a>
+                        <a href="#lastVisit" data-toggle="tab" aria-expanded="false">Last Visit</a>
                     </li>
                     <li class="">
                         <a href="#visits" data-toggle="tab" aria-expanded="false">Visits</a>
@@ -64,27 +82,90 @@
                         <a href="#billings" data-toggle="tab">Billings</a>
                     </li>
                     <li>
-                        <a href="#outstanding" data-toggle="tab">Outstanding</a>
+                        <a href="#unpaidBIlls" data-toggle="tab">Unpaid Bills</a>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="info">
                         @include('partials.patient-inline-view', ['element' => $active_object])
                     </div>
-                    <div class="tab-pane" id="lastvisit">
-                        @includeWhen($active_object->visits->last(), 'partials.visit-inline-view', ['active_object' => $active_object->visits->last()])
+                    <div class="tab-pane" id="lastVisit">
+                        @includeWhen($active_object->last_visit(), 'partials.visit-inline-view', ['active_object' => optional($active_object->visits->last())])
                     </div>
                     <div class="tab-pane" id="visits">
-                        <p>List of Visits</p>
+                        <p>List of Visits <strong>{{ $active_object->visits->count() }}</strong></p>
+                        <ul class="nav">
+                            @forelse ($active_object->visits as $element)
+                                <li class="nav-item">
+                                    <a href="{{ url('/m/visits/id/'.$element->id.'?default') }}">
+                                        {{ $element->title }}
+                                        <span class="badge badge-primary">{{ $element->type }}</span>
+                                        <small>{{ $active_object->created_at }}</small>
+                                    </a>
+                                </li>
+                            @empty
+                                <li class="nav-item">
+                                    <span class="text-danger">NO Visits Yet!</span>
+                                </li>
+                            @endforelse
+                        </ul>
                     </div>
                     <div class="tab-pane" id="surgeries">
-                        <p>List of Surgeries</p>
+                        <p>List of Surgeries <strong>{{ $active_object->surgeries()->count() }}</strong></p>
+                        <ul class="nav">
+                            @forelse ($active_object->surgeries() as $element)
+                                <li class="nav-item">
+                                    <a href="{{ url('/m/surgeries/visit_id/'.$element->visit_id.'?default') }}">
+                                        @if( isset($element->surgery) )
+                                            <span title="A RESURGERY OF ANOTHER SURGERY"><code>{{ isset( $element->surgery ) ? 'A RESURGERY' : '' }}</code></span>
+                                        @endif
+                                        {{ $element->surgery_name }}
+                                        <span class="badge badge-primary" title="NUMBER OF RESURGERIES PERFORMED">{{ ($element->surgeries->count() > 0) ? $element->surgeries->count() : '' }}</span>
+                                        <small>{{ $active_object->created_at }}</small>
+                                    </a>
+                                </li>
+                            @empty
+                                <li class="nav-item">
+                                    <span class="text-danger">NO Surgeries Yet!</span>
+                                </li>
+                            @endforelse
+                        </ul>
                     </div>
                     <div class="tab-pane" id="billings">
-                        <p>List of Billings</p>
+                        <p>List of Billings <strong>{{ $active_object->billings()->count() }}</strong></p>
+                        <ul class="nav">
+                            @forelse ($active_object->billings() as $element)
+                                <li class="nav-item">
+                                    <a href="{{ url('/m/billings/visit_id/'.$element->visit_id.'?default') }}">
+                                        <span class="badge badge-primary">N{{ $element->amount }}</span>
+                                        {{ $element->billing_name }}
+                                        <small>{{ $active_object->created_at }}</small>
+                                    </a>
+                                </li>
+                            @empty
+                                <li class="nav-item">
+                                    <span class="text-danger">NO Bills Yet!</span>
+                                </li>
+                            @endforelse
+                        </ul>
                     </div>
-                    <div class="tab-pane" id="outstanding">
-                        <p>List of Outstanding Billings</p>
+                    <div class="tab-pane" id="unpaidBIlls">
+                        <p>List of Unpaid Bills <strong>{{ $active_object->unpaid_bills()->count() }}</strong></p>
+                        <ul class="nav">
+                            @forelse ($active_object->unpaid_bills() as $element)
+                                <li class="nav-item">
+                                    <a href="{{ url('/m/billings/visit_id/'.$element->visit_id.'?default') }}">
+                                        <span class="badge badge-primary">N{{ $element->amount }}</span>
+                                        {{ $element->billing_name }}
+                                        <small>{{ $active_object->created_at }}</small>
+                                    </a>
+                                </li>
+                            @empty
+                                <li class="nav-item">
+                                    <span class="text-success">NO Unpaid Bills!</span>
+                                </li>
+                            @endforelse
+                        </ul>
                     </div>
                 </div>
                 </div>

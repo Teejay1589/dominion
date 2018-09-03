@@ -60,6 +60,11 @@ class Patient extends Authenticatable
         return $this->hasMany('App\Visit', 'patient_id');
     }
 
+    public function last_visit()
+    {
+        return $this->visits->last();
+    }
+
     public function surgeries()
     {
         return $this->visits->reject(function ($value, $key) {
@@ -74,5 +79,10 @@ class Patient extends Authenticatable
         return $this->visits->pipe(function ($filtered) {
             return $filtered->pluck('billings');
         })->flatten();
+    }
+
+    public function unpaid_bills()
+    {
+        return $this->billings()->where('is_paid', 0);
     }
 }

@@ -87,6 +87,7 @@
             @foreach ($active_object->surgeries as $element)
                 <li>{{ $element->surgery_name }} on <span title="{{ is_null($element->surgery_date) ? '' : Carbon::createFromFormat('Y-m-d', $element->surgery_date)->toFormattedDateString() }}">{{ $element->surgery_date }}</span> [<strong>{!! (blank($element->complications)) ? '' : '<span title="'.$element->complications.'">SOME COMPLICATIONS</span>' !!}</strong>]</li>
             @endforeach
+            <span><a href="{{ url('/m/surgeries/visit_id/'.$active_object->id.'?default') }}" class="text-primary">surgeries in details</a></span>
         </ol>
     @else
         <div class="text-danger">No Surgeries performed YET!</div>
@@ -101,8 +102,9 @@
     @if ( $active_object->billings->count() != 0 )
         <ol>
             @foreach ($active_object->billings as $element)
-            <li>{{ $element->billing_name }} <span>[<strong>N</strong>{{ $element->amount }}]</span></li>
+            <li>{{ $element->billing_name }} <span>[<strong>N</strong>{{ $element->amount }}]</span> {!! ($element->is_paid) ? '' : '<span class="text-danger">UNPAID</span> <a href="'.url('/m/billings/toggle_status/'.$element->id).'" class="text-primary">toggle</a>' !!}</li>
             @endforeach
+            <span><a href="{{ url('/m/billings/visit_id/'.$active_object->id.'?default') }}" class="text-primary">billings in details</a></span>
         </ol>
         <div class="ml20 h5">
             <strong>TOTAL BILLS &rarr; </strong>
