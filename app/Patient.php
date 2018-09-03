@@ -15,7 +15,7 @@ class Patient extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_id', 'file_number', 'first_name', 'last_name', 'phone_number', 'email', 'sex', 'marital_status', 'date_of_birth', 'religion', 'address', 'nationality', 'state_of_origin', 'LGA', 'occupation', 'office_address', 'next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_address', 'next_of_kin_phone_number', 'blood_group', 'weight', 'height', 'genotype',
+        'user_id', 'file_number', 'passport', 'first_name', 'last_name', 'phone_number', 'email', 'sex', 'marital_status', 'date_of_birth', 'religion', 'address', 'nationality', 'state_of_origin', 'LGA', 'occupation', 'office_address', 'next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_address', 'next_of_kin_phone_number', 'blood_group', 'weight', 'height', 'genotype',
     ];
     protected $hidden = [
         'password', 'remember_token',
