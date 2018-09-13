@@ -12,6 +12,8 @@ use App\Permision;
 use App\Policies\PermisionPolicy;
 use App\Setting;
 use App\Policies\SettingPolicy;
+use App\Sms;
+use App\Policies\SmsPolicy;
 use App\SurgeryName;
 use App\Policies\SurgeryNamePolicy;
 use App\Surgery;
@@ -36,6 +38,7 @@ class AuthServiceProvider extends ServiceProvider
         Patient::class => PatientPolicy::class,
         Permision::class => PermisionPolicy::class,
         Setting::class => SettingPolicy::class,
+        Sms::class => SmsPolicy::class,
         SurgeryName::class => SurgeryNamePolicy::class,
         Surgery::class => SurgeryPolicy::class,
         UserPermission::class => UserPermissionPolicy::class,

@@ -137,6 +137,17 @@
         <!-- /billings -->
       @endcan
 
+      @can('view', App\Sms::class)
+        <!-- sms -->
+        <li class="{{ isset($page) && $page->view == 'm.sms' ? 'active' : '' }}">
+          <a href="{{ url('/m/sms') }}">
+            <i class="fa fa-envelope"></i>
+            <span>All SMS</span>
+          </a>
+        </li>
+        <!-- /sms -->
+      @endcan
+
       <!-- blog_posts -->
       <li class="{{ isset($page) && $page->view == 'm.blog.posts' ? 'active' : '' }}">
         <a href="{{ url('/m/blog/posts') }}">

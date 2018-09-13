@@ -113,6 +113,14 @@ Route::namespace('Internal')->group(function () {
 		Route::get('/billings/toggle_status/{id}', 'BillingController@toggle_is_paid')->middleware('can:update,App\Billing');
 		Route::get('/billings/{filter}/{searchterm?}', 'BillingController@filter')->where('searchterm', '.*')->middleware('can:view,App\Billing');
 
+		// Sms
+		Route::get('/sms', 'SmsController@index')->middleware('can:view,App\Sms');
+		Route::post('/sms/create', 'SmsController@store')->middleware('can:create,App\Sms');
+		// Route::get('/sms/edit/{id}', 'SmsController@edit');
+		Route::post('/sms/update/{id}', 'SmsController@update')->middleware('can:update,App\Sms');
+		Route::get('/sms/delete/{id}', 'SmsController@destroy')->middleware('can:delete,App\Sms');
+		Route::get('/sms/{filter}/{searchterm?}', 'SmsController@filter')->where('searchterm', '.*')->middleware('can:view,App\Sms');
+
 		// User Permissions
 		Route::prefix('user-permissions')->group(function () {
 			Route::get('/', 'UserPermissionController@index')->middleware('can:view,App\UserPermission');
