@@ -37,7 +37,7 @@
                                     </div>
                                 </span>
                                 <h5 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->from }} <small><span title="{!! str_ireplace('<br />', ' ', nl2br($element->message)) !!}">{{ str_limit($element->message, 50) }}</span></small></a>
+                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->from }} <small><span title="{!! str_ireplace('<br />', '', nl2br($element->message)) !!}">{{ str_limit($element->message, 50) }}</span></small></a>
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>
@@ -53,7 +53,7 @@
                                     </a>
                                 </span>
                                 <div>
-                                    {{-- @include('forms.sms-update', ['active_object' => $element]) --}}
+                                    @include('forms.sms-update', ['active_object' => $element])
                                 </div>
                             </div>
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
