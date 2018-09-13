@@ -3,7 +3,11 @@
       @isset ( $create_form )
         <div class="col-lg-3 col-xs-12 mb5">
             <div>
-                <a href="#modal-create" class="btn btn-primary btn-block btn-sm" data-toggle="modal">Create {{ ucwords(str_singular(str_ireplace('_', ' ', $data_name), 1)) }}</a>
+                @if ( isset($create_text) )
+                    <a href="#modal-create" class="btn btn-primary btn-block btn-sm" data-toggle="modal">{{ $create_text }}</a>
+                @else
+                    <a href="#modal-create" class="btn btn-primary btn-block btn-sm" data-toggle="modal">Create {{ ucwords(str_singular(str_ireplace('_', ' ', $data_name), 1)) }}</a>
+                @endif
                 @include($create_form)
             </div>
         </div>

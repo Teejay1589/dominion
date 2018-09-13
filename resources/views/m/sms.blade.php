@@ -13,11 +13,12 @@
             <div class="col-md-10 col-xs-12">
             	@include('components.toolbar', [
                     'model' => new App\Sms(),
-                    // 'create_form' => 'forms.sms-create',
-                    'data_name' => 'sms',
+                    'create_form' => 'forms.sms-create',
+                    'create_text' => 'Send SMS',
+                    'data_name' => 'SMS',
                     'data' => $sms,
-                    'removed_keys' => array('id', 'from', 'user_id', 'created_at', 'updated_at'),
-                    // 'added_keys' => array('from'),
+                    'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at'),
+                    'added_keys' => array(),
                     'addup_keys' => array()
                 ])
 
@@ -29,10 +30,10 @@
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
                                 <span class="pull-right">
-                                    <span class="badge" title="No of Patients">{{ $element->sms_patients->count() }}</span>
+                                    <span class="badge" title="No of Patients">{{ $element->sms_patients->count() }} {{ str_plural('PATIENT', $element->sms_patients->count()) }}</span>
                                     <br>
                                     <div class="text-center">
-                                        <strong title="COST PER Patient">{{ ceil(str_len($element->message) / 160) }}</strong>
+                                        <strong title="COST PER Patient">{{ ceil(strlen($element->message) / 160) }} {{ str_plural('UNIT', ceil(strlen($element->message) / 160)) }}</strong>
                                     </div>
                                 </span>
                                 <h5 class="panel-title">
@@ -88,18 +89,12 @@
     <script type="text/javascript" src="{{ asset('/vendor/selectize.js-master/dist/js/standalone/selectize.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('select.select-visit').selectize({
-                maxItems: 1,
+            $('select.select-patients').selectize({
+                maxItems: 200,
                 create: false,
                 plugins: ['restore_on_backspace', 'remove_button'],
                 delimiter: ','
             });
-            // $('select.select-sms_name').selectize({
-            //     maxItems: 1,
-            //     create: true,
-            //     plugins: ['restore_on_backspace', 'remove_button'],
-            //     delimiter: ','
-            // });
         });
     </script>
     <script type="text/javascript">
