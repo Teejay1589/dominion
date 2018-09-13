@@ -92,10 +92,25 @@ class SmsController extends InternalControl
     {
         $request['user_id'] = Auth::id();
 
-        $obj = new Sms($request->all());
-        $obj->save();
+        $obj1 = new Sms($request->all());
+        $obj1->save();
 
-        session()->flash('success', 'New Sms Created!');
+        // Save Sms Patients
+        $request['sms_id'] = $obj1->id;
+        $counter = 0;
+        foreach ($request->patients as $key => $value) {
+            $request['patient_id'] = $value;
+            // Send SMS Message
+
+            // If Message is sent
+            if (true) {
+                $obj2 = new SmsPatient($request->all());
+                $obj2->firstOrCreate($obj2->toArray());
+                $counter++;
+            }
+        }
+
+        session()->flash('success', 'New Sms Created and Successfuly Sent to <strong>' . $counter .'</strong> Patients!');
         return redirect()->back();
     }
 
@@ -132,10 +147,28 @@ class SmsController extends InternalControl
     {
         $request['user_id'] = Auth::id();
 
-        $obj = Sms::findOrFail($id);
-        $obj->update($request->all());
+        // $obj1 = Sms::findOrFail($id);
+        // $obj1->update($request->all());
+        $obj1 = new Sms($request->all());
+        $obj1->save();
 
-        session()->flash('success', 'Sms Updated!');
+        // Save Sms Patients
+        $request['sms_id'] = $obj1->id;
+        $counter = 0;
+        foreach ($request->patients as $key => $value) {
+            $request['patient_id'] = $value;
+            // Send SMS Message
+
+            // If Message is sent
+            if (true) {
+                $obj2 = new SmsPatient($request->all());
+                $obj2->firstOrCreate($obj2->toArray());
+                $counter++;
+            }
+        }
+
+        // session()->flash('success', 'Sms Updated and Successfuly Sent to <strong>' . $counter .'</strong> Patients!');
+        session()->flash('success', 'New Sms Created and Successfuly Sent to <strong>' . $counter .'</strong> Patients!');
         return redirect()->back();
     }
 
@@ -147,6 +180,10 @@ class SmsController extends InternalControl
      */
     public function destroy($id)
     {
+        // First delete all Sms Patients
+        foreach (Sms::findOrFail($id)->sms_patients as $key => $value) {
+            $value->delete();
+        }
         Sms::findOrFail($id)->delete();
 
         session()->flash('success', 'Sms Deleted!');
