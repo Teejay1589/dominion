@@ -19,7 +19,7 @@
                     'data' => $sms,
                     'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at'),
                     'added_keys' => array(),
-                    'addup_keys' => array()
+                    'addup_keys' => array('patient_id', 'patient_file_number')
                 ])
 
                 {{-- <div class="clearfix"></div>
