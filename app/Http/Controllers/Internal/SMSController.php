@@ -36,6 +36,42 @@ class SmsController extends InternalControl
             ->with('page', $this->page);
     }
 
+    public function filter($filter, $searchterm = "")
+    {
+        if ($filter == 'patient_file_number') {
+            $objects = Patient::where("file_number", 'LIKE', "%$searchterm%")->get();
+            $objects = SmsPatient::whereIn('patient_id', $objects->pluck('id'))->get();
+            $this->sms = Sms::whereIn('visit_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } elseif ($filter == 'patient_id') {
+            $searchterms = array();
+            $searchterms = explode(' ', $searchterm);
+
+            if (count($searchterms) == 2) {
+                $object = Patient::where([["first_name", 'LIKE', "%$searchterms[0]%"], ["last_name", 'LIKE', "%$searchterms[1]%"]])->get();
+            } else {
+                $object = Patient::where("first_name", 'LIKE', "%$searchterms[0]%")->get();
+                $object2 = Patient::where("last_name", 'LIKE', "%$searchterms[0]%")->get();
+                $object->push($object2);
+                $object = $object->flatten();
+            }
+            $objects = $object;
+            $objects = SmsPatient::whereIn('patient_id', $objects->pluck('id'))->get();
+            $this->sms = Sms::whereIn('visit_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } else {
+            $this->sms = Sms::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        }
+
+        if (isset($this->sms)) {
+            $this->sms->filter = $filter;
+            $this->sms->searchterm = $searchterm = urldecode($searchterm);
+        }
+
+        return view($this->page->view)
+            ->with('sms', $this->sms)
+            ->with('patients', Patient::all())
+            ->with('page', $this->page);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
