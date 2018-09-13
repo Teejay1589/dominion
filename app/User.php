@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Billing');
     }
+
+    public function sms()
+    {
+        return $this->hasMany('App\Sms', 'user_id');
+    }
 }

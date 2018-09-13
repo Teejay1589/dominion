@@ -85,4 +85,9 @@ class Patient extends Authenticatable
     {
         return $this->billings()->where('is_paid', 0);
     }
+
+    public function sms_patients()
+    {
+        return $this->hasMany('App\SmsPatient', 'patient_id');
+    }
 }
