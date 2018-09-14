@@ -97,20 +97,26 @@ class SmsController extends InternalControl
         $obj1 = new Sms($request->all());
         $obj1->save();
 
-        // Save Sms Patients
-        $request['sms_id'] = $obj1->id;
-        $counter = 0;
-        foreach ($request->patients as $key => $value) {
-            $request['patient_id'] = $value;
-            // Send SMS Message
+        // Send SMS Message
+        $setting = Setting::findOrFail(1);
+        $xmx = new SmartXmx($setting->sms_username, $setting->sms_password);
+        $response = $xmx->sendSms($request->from, array_flatten(Patient::whereIn('id', $request->patients)->select('phone_number')->get()->toArray()), $request->message);
 
-            // If Message is sent
-            if (true) {
+
+        // If Message is sent
+        if (true) {
+            // Save Sms Patients
+            $request['sms_id'] = $obj1->id;
+            $counter = 0;
+            foreach ($request->patients as $key => $value) {
+                $request['patient_id'] = $value;
+
                 $obj2 = new SmsPatient($request->all());
                 $obj2->firstOrCreate($obj2->toArray());
                 $counter++;
             }
         }
+        dd($response);
 
         session()->flash('success', 'New Sms Created and Successfuly Sent to <strong>' . $counter .'</strong> Patients!');
         return redirect()->back();
@@ -154,15 +160,19 @@ class SmsController extends InternalControl
         $obj1 = new Sms($request->all());
         $obj1->save();
 
-        // Save Sms Patients
-        $request['sms_id'] = $obj1->id;
-        $counter = 0;
-        foreach ($request->patients as $key => $value) {
-            $request['patient_id'] = $value;
-            // Send SMS Message
+        // Send SMS Message
+        $setting = Setting::findOrFail(1);
+        $xmx = new SmartXmx($setting->sms_username, $setting->sms_password);
+        $response = $xmx->sendSms($request->from, $request->patients, $request->message);
 
-            // If Message is sent
-            if (true) {
+        // If Message is sent
+        if (true) {
+            // Save Sms Patients
+            $request['sms_id'] = $obj1->id;
+            $counter = 0;
+            foreach ($request->patients as $key => $value) {
+                $request['patient_id'] = $value;
+
                 $obj2 = new SmsPatient($request->all());
                 $obj2->firstOrCreate($obj2->toArray());
                 $counter++;
