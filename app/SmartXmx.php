@@ -38,7 +38,6 @@ class SmartXmx
         self::$password = $password;
     }
 
-    // http://api.smartsmssolutions.com/smsapi.php?username=YourUsername&password=YourPassword&sender=SenderID&recipient=234809xxxxxxx,2348030000000&message=YourMessage
     /**
      * send
      *
@@ -47,20 +46,17 @@ class SmartXmx
      * @param mixed $message
      * @return void
      */
-    public function send($sender, $recipent, $message) {
-        // $json = json_decode(file_get_contents('http://api.smartsmssolutions.com/smsapi.php?username='.$this->username.'&password='.$this->password.'&balance=true'), true);
-
-        return false;
+    public function sendSms($sender, $recipent, $message) {
+        return json_decode(file_get_contents(urlencode('http://api.smartsmssolutions.com/smsapi.php?username='.urlencode(self::$username).'&password='.urlencode(self::$password).'&sender='.urlencode($this->sender).'&recipent='.urlencode($this->recipent).'&message='.urlencode($this->message))), true);
     }
 
-    // http://api.smartsmssolutions.com/smsapi.php?username=YourUsername&password=YourPassword&balance=true&
     /**
      * checkSmsBalance
      *
      * @return void
      */
     public static function checkSmsBalance() {
-        return json_decode(file_get_contents('http://api.smartsmssolutions.com/smsapi.php?username='.self::$username.'&password='.self::$password.'&balance=true'));
+        return json_decode(file_get_contents('http://api.smartsmssolutions.com/smsapi.php?username='.urlencode(self::$username).'&password='.urlencode(self::$password).'&balance=true'), true);
     }
 
     /**
