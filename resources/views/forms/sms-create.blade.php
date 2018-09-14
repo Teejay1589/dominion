@@ -23,7 +23,7 @@
 
 					<div class="form-group">
 						<label class="form-control-label">SMS From </label>
-						<input class="form-control" type="text" name="from" placeholder="Sms From" value="{{ old('from', 'DMC') }}" >
+						<input class="form-control" type="text" name="from" placeholder="Sms From" value="{{ old('from', App\Setting::find(1)->sms_from) }}" >
 						{{-- <span class="form-text"><small><strong>DMC</strong> by default.</small></span> --}}
 					</div>
 
