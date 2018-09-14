@@ -13,7 +13,7 @@
             <div class="col-md-10 col-sm-12">
                 <div id="update-profile" class="panel">
                     <div class="panel-heading border">
-                        <div class="panel-title">Update Settings Form</div>
+                        <div class="panel-title">Hospital Information Settings Form</div>
                     </div>
                     <div class="panel-body">
                         <form class="" action="{{ url('/m/settings/update') }}" method="POST" enctype="multipart/form-data">
@@ -31,7 +31,6 @@
                                             <img src="{{ asset(App\Setting::find(1)->hospital_logo) }}" alt="Hospital Logo" style="max-height: 7rem;" class="img hospital_logo_img">
                                         @endif
                                         <div class="help-block">click to change</div>
-                                        <div class="help-block text-danger">not yet working</div>
                                     </span>
                                 </div>
                             </div>
