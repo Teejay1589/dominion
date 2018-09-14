@@ -85,6 +85,18 @@ class PermissionsTableSeeder extends Seeder
 				]
 			],
 			[
+				'table' => 'settings',
+				'actions' => [
+					[
+						'action' => 'view',
+						'permit' => 1,
+					], [
+						'action' => 'update',
+						'permit' => 1,
+					]
+				]
+			],
+			[
 				'table' => 'sms',
 				'actions' => [
 					[

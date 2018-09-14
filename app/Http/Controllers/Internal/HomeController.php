@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfile;
 use App\Http\Requests\ChangeUserPassword;
 use App\User;
+use App\Setting;
 use Illuminate\Hashing\BcryptHasher;
 
 class HomeController extends InternalControl
@@ -55,6 +56,22 @@ class HomeController extends InternalControl
         Auth::user()->update($request->all());
 
         session()->flash('success', 'Profile SUCCESSFULLY updated!');
+        return redirect()->back();
+    }
+
+    public function settings()
+    {
+        $this->page->title = 'Settings';
+        $this->page->view = 'm.settings';
+        return view($this->page->view)
+            ->with('page', $this->page);
+    }
+
+    public function update_settings(Request $request)
+    {
+        Setting::findOrFail(1)->update($request->all());
+
+        session()->flash('success', 'Settings SUCCESSFULLY updated!');
         return redirect()->back();
     }
 
