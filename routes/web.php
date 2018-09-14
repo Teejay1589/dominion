@@ -121,6 +121,7 @@ Route::namespace('Internal')->group(function () {
 		// Route::get('/sms/edit/{id}', 'SmsController@edit');
 		Route::post('/sms/update/{id}', 'SmsController@update')->middleware('can:update,App\Sms');
 		Route::get('/sms/delete/{id}', 'SmsController@destroy')->middleware('can:delete,App\Sms');
+		Route::get('/sms/balance', 'SmsController@balance')->middleware('can:view,App\Sms');
 		Route::get('/sms/{filter}/{searchterm?}', 'SmsController@filter')->where('searchterm', '.*')->middleware('can:view,App\Sms');
 
 		// User Permissions

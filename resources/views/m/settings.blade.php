@@ -111,6 +111,7 @@
                             </div>
 
                             <div class="text-right">
+                                <a href="{{ url('/m/sms/balance') }}" class="btn btn-default">Check Balance</a>
                                 <button type="submit" class="btn btn-success">Update</button>
                             </div>
                         </form>

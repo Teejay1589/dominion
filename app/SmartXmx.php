@@ -2,8 +2,6 @@
 
 namespace App;
 
-// use GuzzleHttp\Client;
-
 class SmartXmx
 {
     public static $username = "";
@@ -38,6 +36,47 @@ class SmartXmx
     public function __construct($username, $password) {
         self::$username = $username;
         self::$password = $password;
+    }
+
+    // http://api.smartsmssolutions.com/smsapi.php?username=YourUsername&password=YourPassword&sender=SenderID&recipient=234809xxxxxxx,2348030000000&message=YourMessage
+    /**
+     * send
+     *
+     * @param mixed $sender
+     * @param mixed $recipent
+     * @param mixed $message
+     * @return void
+     */
+    public function send($sender, $recipent, $message) {
+        // $json = json_decode(file_get_contents('http://api.smartsmssolutions.com/smsapi.php?username='.$this->username.'&password='.$this->password.'&balance=true'), true);
+
+        return false;
+    }
+
+    // http://api.smartsmssolutions.com/smsapi.php?username=YourUsername&password=YourPassword&balance=true&
+    /**
+     * checkSmsBalance
+     *
+     * @return void
+     */
+    public static function checkSmsBalance() {
+        return json_decode(file_get_contents('http://api.smartsmssolutions.com/smsapi.php?username='.self::$username.'&password='.self::$password.'&balance=true'));
+    }
+
+    /**
+     * interpreteResponse
+     *
+     * @param mixed $response
+     * @return void
+     */
+    public static function interpreteResponse($response) {
+        foreach (self::$response as $key => $value) {
+            if ($response == $key) {
+                return $value;
+            }
+        }
+
+        return null;
     }
 
     /**

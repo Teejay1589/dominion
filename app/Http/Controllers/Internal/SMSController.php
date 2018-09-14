@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Internal;
 
 use App\Sms;
+use App\SmartXmx;
 use App\SmsPatient;
 use App\Patient;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -187,6 +189,24 @@ class SmsController extends InternalControl
         Sms::findOrFail($id)->delete();
 
         session()->flash('success', 'Sms Deleted!');
+        return redirect()->back();
+    }
+
+    public function balance()
+    {
+        $setting = Setting::findOrFail(1);
+        $xmx = new SmartXmx($setting->sms_username, $setting->sms_password);
+        $response = $xmx->checkSmsBalance();
+
+        if (is_null(SmartXmx::interpreteResponse($response))) {
+            $balance = $response;
+            session()->flash('success', 'Your Sms Balance is <strong>' . $balance . '</strong>');
+        } else {
+            if (SmartXmx::interpreteResponse($response) != 'Successful') {
+                return redirect()->back()->withErrors('Error ' . $response . ' ' . SmartXmx::interpreteResponse($response));
+            }
+        }
+
         return redirect()->back();
     }
 }
