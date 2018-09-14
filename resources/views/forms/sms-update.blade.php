@@ -22,7 +22,7 @@
 						<label class="form-control-label">Select Patients <span class="text-danger">*</span></label>
 						<select class="select-patients" name="patients[]" required multiple>
 							@foreach ($patients->sortByDesc('id') as $element)
-								<option value="{{ $element->phone_number }}" {{ in_array($element->id, old('patients', $sms_patients)) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
+								<option value="{{ $element->id }}" {{ in_array($element->id, old('patients', $sms_patients)) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
 							@endforeach
 						</select>
 					</div>
