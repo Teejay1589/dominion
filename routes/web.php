@@ -146,6 +146,7 @@ Route::namespace('Internal')->group(function () {
 
 		// AJAX Uploads
 		Route::post('/upload/profile_picture', 'HomeController@ajax_upload_profile_picture');
+		Route::post('/upload/hospital_logo', 'HomeController@ajax_upload_hospital_logo');
 	});
 });
 

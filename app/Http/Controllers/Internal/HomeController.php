@@ -50,7 +50,7 @@ class HomeController extends InternalControl
         if (session()->has('active_profile_picture')) {
             $request['profile_picture'] = session('active_profile_picture');
             session()->forget('active_profile_picture');
-            Auth::user()->profile_picture = $request['profile_picture'];
+            // Auth::user()->profile_picture = $request['profile_picture'];
         }
 
         Auth::user()->update($request->all());
@@ -69,6 +69,12 @@ class HomeController extends InternalControl
 
     public function update_settings(Request $request)
     {
+        if (session()->has('active_hospital_logo')) {
+            $request['hospital_logo'] = session('active_hospital_logo');
+            session()->forget('active_hospital_logo');
+            // Setting::findOrFail(1)->hospital_logo = $request['hospital_logo'];
+        }
+
         Setting::findOrFail(1)->update($request->all());
 
         session()->flash('success', 'Settings SUCCESSFULLY updated!');
@@ -135,6 +141,22 @@ class HomeController extends InternalControl
             $file->move($destinationPath, $filename);
 
             session()->put('active_profile_picture', $filePath);
+        }
+        return response()->json(['imagepath' => asset($filePath)]);
+    }
+
+    public function ajax_upload_hospital_logo(Request $request)
+    {
+        // $filePath = 'img/default.png';
+        $filePath = null;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = strtolower(str_ireplace(' ', '_', pathinfo($request->image->getClientOriginalName(), PATHINFO_FILENAME))) . time() . '.' . request()->image->getClientOriginalExtension();
+            $destinationPath = 'uploads/logo/';
+            $filePath = $destinationPath . $filename;
+            $file->move($destinationPath, $filename);
+
+            session()->put('active_hospital_logo', $filePath);
         }
         return response()->json(['imagepath' => asset($filePath)]);
     }
