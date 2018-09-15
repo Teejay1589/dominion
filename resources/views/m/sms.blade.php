@@ -47,7 +47,7 @@
                                         </a>
                                     </span> --}}
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
-                                    <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
+                                    <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">reuse</a>
                                     <a href="{{ url('/m/sms/delete/'.$element->id) }}" class="mr10 text-danger">
                                         <span>delete</span>
                                     </a>
