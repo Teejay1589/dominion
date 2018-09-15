@@ -77,6 +77,17 @@
             </div>
             <div class="col-md-1 col-xs-12"></div>
         </div>
+
+        <div class="clearfix"></div>
+        <br>
+
+        <div class="row mb15">
+            <div class="col-md-1 col-xs-12"></div>
+            <div class="col-md-10 col-xs-12">
+                <a href="{{ url('/m/sms/balance') }}" class="btn btn-default">Check Balance</a>
+            </div>
+            <div class="col-md-1 col-xs-12"></div>
+        </div>
     </section>
 
 @endsection
