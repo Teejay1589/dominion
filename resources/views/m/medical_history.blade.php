@@ -20,7 +20,33 @@
                         <nav>
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <span class="text-primary">Medical History Summary</span>
+                                    <div class="row mb5">
+                                        <div class="col-md-6">
+                                            <div class="widget bg-danger mb10">
+                                                <div class="widget-bg-icon">
+                                                    <i class="fa fa-money"></i>
+                                                </div>
+                                                <div class="widget-details">
+                                                    <span class="widget-title" style="color: #fff">N{{ $active_object->unpaid_bills()->sum('amount') }}</span>
+                                                    <span class="widget-subtitle" style="color: #fff">Total Unpaid Bills</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="widget bg-success mb10">
+                                                <div class="widget-bg-icon">
+                                                    <i class="fa fa-money"></i>
+                                                </div>
+                                                <div class="widget-details">
+                                                    <span class="widget-title" style="color: #fff">N{{ $active_object->billings()->sum('amount') }}</span>
+                                                    <span class="widget-subtitle" style="color: #fff">Total Bills</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <span class="h4">Medical History Summary</span>
                                 </li>
                                 <li class="nav-item">
                                     <span>Last Visit was on</span>
@@ -84,6 +110,9 @@
                     <li>
                         <a href="#unpaidBIlls" data-toggle="tab">Unpaid Bills</a>
                     </li>
+                    <li>
+                        <a href="#sms" data-toggle="tab">SMS</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="info">
@@ -93,7 +122,7 @@
                         @includeWhen($active_object->last_visit(), 'partials.visit-inline-view', ['active_object' => optional($active_object->visits->last())])
                     </div>
                     <div class="tab-pane" id="visits">
-                        <p>List of Visits <strong>{{ $active_object->visits->count() }}</strong></p>
+                        <p class="h4">List of Visits <strong>{{ $active_object->visits->count() }}</strong></p>
                         <ul class="nav">
                             @forelse ($active_object->visits as $element)
                                 <li class="nav-item">
@@ -111,7 +140,7 @@
                         </ul>
                     </div>
                     <div class="tab-pane" id="surgeries">
-                        <p>List of Surgeries <strong>{{ $active_object->surgeries()->count() }}</strong></p>
+                        <p class="h4">List of Surgeries <strong>{{ $active_object->surgeries()->count() }}</strong></p>
                         <ul class="nav">
                             @forelse ($active_object->surgeries() as $element)
                                 <li class="nav-item">
@@ -132,7 +161,7 @@
                         </ul>
                     </div>
                     <div class="tab-pane" id="billings">
-                        <p>List of Billings <strong>{{ $active_object->billings()->count() }}</strong></p>
+                        <p class="h4">List of Billings <strong>{{ $active_object->billings()->count() }}</strong></p>
                         <ul class="nav">
                             @forelse ($active_object->billings() as $element)
                                 <li class="nav-item">
@@ -150,7 +179,7 @@
                         </ul>
                     </div>
                     <div class="tab-pane" id="unpaidBIlls">
-                        <p>List of Unpaid Bills <strong>{{ $active_object->unpaid_bills()->count() }}</strong></p>
+                        <p class="h4">List of Unpaid Bills <strong>{{ $active_object->unpaid_bills()->count() }}</strong></p>
                         <ul class="nav">
                             @forelse ($active_object->unpaid_bills() as $element)
                                 <li class="nav-item">
@@ -163,6 +192,24 @@
                             @empty
                                 <li class="nav-item">
                                     <span class="text-success">NO Unpaid Bills!</span>
+                                </li>
+                            @endforelse
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="sms">
+                        <p class="h4">List of Sent Sms <strong>{{ $active_object->sms_patients->count() }}</strong></p>
+                        <ul class="nav">
+                            @forelse ($active_object->sms_patients as $element)
+                                <li class="nav-item">
+                                    <a href="{{ url('/m/sms/id/'.$element->sms->id.'?default') }}">
+                                        <strong>{{ $element->sms->from }}</strong>
+                                        <br>
+                                        <span>{!! nl2br($element->sms->message) !!}</span>
+                                    </a>
+                                </li>
+                            @empty
+                                <li class="nav-item">
+                                    <span class="text-danger">NO SMS!</span>
                                 </li>
                             @endforelse
                         </ul>

@@ -59,6 +59,12 @@ class SmsController extends InternalControl
             $objects = $object;
             $objects = SmsPatient::whereIn('patient_id', $objects->pluck('id'))->get();
             $this->sms = Sms::whereIn('visit_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } elseif ($filter == 'id') {
+            if (isset($_GET['default'])) {
+                $this->sms = Sms::where($filter, $searchterm)->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            } else {
+                $this->sms = Sms::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            }
         } else {
             $this->sms = Sms::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
         }
