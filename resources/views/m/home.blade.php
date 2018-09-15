@@ -139,7 +139,7 @@
             </div>
           </div>
 
-          <!-- Appointments Section-->
+          {{-- <!-- Appointments Section-->
           <section class="projects no-padding-top">
               <div class="container-fluid">
                   <!-- Project-->
@@ -226,7 +226,7 @@
                       </div>
                   </div>
               </div>
-          </section>
+          </section> --}}
         </div>
       </div>
     </section>
