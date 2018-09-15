@@ -16,7 +16,8 @@
 						<label class="form-control-label">Select Patients <span class="text-danger">*</span></label>
 						<select class="select-patients" name="patients[]" required multiple>
 							@foreach ($patients->sortByDesc('id') as $element)
-								<option value="{{ $element->id }}" {{ (old('patient', isset($active_object) ? $active_object->id : null) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option> @endforeach
+								<option value="{{ $element->id }}" {{ (old('patient', isset($active_object) ? $active_object->id : null) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
+							@endforeach
 						</select>
 						<span class="form-text"><small><span class="text-danger">min: 1, max: 200</span></small></span>
 					</div>

@@ -81,7 +81,15 @@ class SmsController extends InternalControl
      */
     public function create()
     {
-        //
+        if (!isset($_GET['patient_id'])) {
+            return redirect()->back()->withErrors('Invalid Parameters!');
+        }
+
+        $this->page->action = "create";
+        return view($this->page->view)
+            ->with('sms', Sms::latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10))
+            ->with('patients', Patient::all())
+            ->with('page', $this->page);
     }
 
     /**
@@ -92,6 +100,7 @@ class SmsController extends InternalControl
      */
     public function store(Request $request)
     {
+        dd($request);
         $request['user_id'] = Auth::id();
 
         $obj1 = new Sms($request->all());

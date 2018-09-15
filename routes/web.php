@@ -117,6 +117,7 @@ Route::namespace('Internal')->group(function () {
 
 		// Sms
 		Route::get('/sms', 'SmsController@index')->middleware('can:view,App\Sms');
+		Route::get('/sms/create', 'SmsController@create')->middleware('can:create,App\Sms');
 		Route::post('/sms/create', 'SmsController@store')->middleware('can:create,App\Sms');
 		// Route::get('/sms/edit/{id}', 'SmsController@edit');
 		Route::post('/sms/update/{id}', 'SmsController@update')->middleware('can:update,App\Sms');

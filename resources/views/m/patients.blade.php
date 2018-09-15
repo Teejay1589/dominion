@@ -60,6 +60,12 @@
                                             <span>billings</span>
                                         </a>
                                     </span>
+                                    <span>
+                                        <a href="{{ url('/m/sms/create?patient_id='.$element->id) }}" class="mr10 text-primary">
+                                            <strong style="color: #555;">{{ $element->sms_patients->count() }}</strong>
+                                            <span>send sms</span>
+                                        </a>
+                                    </span>
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
                                     <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
                                     <a href="{{ url('/m/patients/delete/'.$element->id) }}" class="mr10 text-danger">
