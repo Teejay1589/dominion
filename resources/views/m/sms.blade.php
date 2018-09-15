@@ -8,7 +8,7 @@
 
 @section('content')
     <section>
-        @if (isset($page) && strtolower($page->action) == "create")
+        @if (isset($page->action) && strtolower($page->action) == "create")
         <div class="row mb15">
             <div class="col-md-1 col-xs-12"></div>
             <div class="col-md-10 col-xs-12">
@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label class="form-control-label">SMS Message <span class="text-danger">*</span></label>
                                 <textarea name="message" class="form-control" rows="5" placeholder="Message">{{ old('message') }}</textarea>
-                                <span class="form-text"><small>160 characters = 1 message unit.</small></span>
+                                <span class="form-text"><small class="msg-characters">160 characters = 1 message unit</small></span>
                             </div>
                         </div>
                         <div class="panel-footer">
@@ -138,6 +138,11 @@
 @endsection
 
 @section('page_scripts')
+    <script type="text/javascript">
+        $('textarea[name="message"]').keyup(function() {
+            $(this).parent().find('.msg-characters').text($(this).val().length + ' characters = ' + Math.ceil($(this).val().length/160) + ' message unit');
+        });
+    </script>
     <script type="text/javascript">
         var base_url = '{{ url('/m/sms') }}';
     </script>
