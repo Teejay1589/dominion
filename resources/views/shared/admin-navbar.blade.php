@@ -111,9 +111,11 @@
           <li>
           <a href="{{ url('/m/my-permissions') }}">My Permissions <strong class="">{{ App\Permission::where('permit', '>=', Auth::user()->role_id)->count() + App\UserPermission::where('user_id', Auth::id())->count() }}</strong></a>
           </li>
+          @can('view', App\Setting::class)
           <li>
             <a href="{{ url('/m/settings') }}">Settings</a>
           </li>
+          @endcan
           <li>
             <a rel="nofollow" class="dropdown-item" href="{{ route('m.logout') }}"
               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

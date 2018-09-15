@@ -59,6 +59,7 @@
       </li>
       <!-- /my permissions -->
 
+      @can('view', App\Setting::class)
       <!-- settings -->
       <li class="{{ isset($page) && $page->view == 'm.settings' ? 'active' : '' }}">
         <a href="{{ url('/m/settings') }}">
@@ -67,6 +68,7 @@
         </a>
       </li>
       <!-- /settings -->
+      @endcan
 
       <!-- logout -->
       <li class="">
