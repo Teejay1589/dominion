@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use  Illuminate\Auth\AuthenticationException as AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -48,6 +49,30 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ( ($exception->getMessage() == '' && $exception->getCode() == 0 && $exception->getLine() == 70) || ($exception->getMessage() == '' && $exception->getCode() == 0) ) {
+            return redirect()->back()->withErrors("The page has expired due to inactivity. Please refresh and try again.!");
+        }
+        if ( $exception->getMessage() == "This action is unauthorized." ) {
+            return redirect()->back()->withErrors("This action is unauthorized!");
+        }
+
         return parent::render($request, $exception);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+        $guard = array_get($exception->guards(), 0);
+        switch ($guard) {
+            case 'admin':
+                $login = 'm/login';
+                break;
+            default:
+                $login = 'login';
+                break;
+        }
+        return redirect()->guest(url($login));
     }
 }

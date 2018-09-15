@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('page_styles')
 	<link rel="stylesheet" type="text/css" href="{{ asset('/vendor/selectize.js-master/dist/css/selectize.bootstrap2.css') }}">
@@ -43,12 +43,12 @@
 
 			<div class="col-md-4">
 					<div class="well">
-						
+
 						<dl class="dl-horizontal">
 							<dt>Created At:</dt>
 							<dd>{{ date('M j, Y h:ia'), strtotime($post->created_at)) }}</dd>
 						</dl>
-		
+
 						<dl class="dl-horizontal">
 							<dt>Last Updated:</dt>
 							<dd>{{ date('M j, Y h:ia'), strtotime($post->updated_at)) }}</dd>
@@ -62,7 +62,7 @@
 								<button type="submit" class="btn btn-success btn-block">Save Changes</button>
 							</div>
 						</div>
-		
+
 					</div>
 				</div>
 		</form>

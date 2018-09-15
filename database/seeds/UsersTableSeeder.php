@@ -13,12 +13,13 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'role_id' => 4,
-            'first_name' => '',
-            'last_name' => 'Awoleke',
-            'email' => 'awoleke@dominionmc.org',
+            'first_name' => 'Tunji',
+            'last_name' => 'Oyeniran',
+            'email' => 'oyenirantunji2339@gmail.com',
             'gender' => 'MALE',
             'phone' => '090',
-            'password' => bcrypt('awoleke'),
+            'password' => bcrypt('kooler'),
+            'created_at' => now(),
         ]);
         DB::table('users')->insert([
             'role_id' => 4,
@@ -28,6 +29,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'MALE',
             'phone' => '080',
             'password' => bcrypt('testadmin'),
+            'created_at' => now(),
         ]);
         DB::table('users')->insert([
             'role_id' => 1,
@@ -37,6 +39,7 @@ class UsersTableSeeder extends Seeder
             'gender' => 'FEMALE',
             'phone' => '080',
             'password' => bcrypt('teststaff'),
+            'created_at' => now(),
         ]);
     }
 }

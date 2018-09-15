@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('page_styles')
     <link rel="stylesheet" type="text/css"

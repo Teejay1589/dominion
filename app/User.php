@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Permission;
+use App\UserPermission;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -15,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'role_id', 'gender', 'phone', 'date_of_birth', 'address', 'country', 'state', 'job',
+        'first_name', 'last_name', 'email', 'password', 'role_id', 'gender', 'phone', 'date_of_birth', 'address', 'country', 'state', 'job', 'cv',
     ];
 
     /**
@@ -27,9 +29,26 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function is_permitted_to($action, $table)
+    {
+        $permission = Permission::where('action', $action)
+            ->where('table', $table)
+            ->first();
+        $user_permission = UserPermission::where('action', $action)
+            ->where('table', $table)
+            ->where('user_id', $this->id)
+            ->first();
+        return ((isset($permission->permit) && $permission->permit >= $this->role_id) || isset($user_permission));
+    }
+
+    public static function table()
+    {
+        return 'users';
+    }
+
     public function full_name()
     {
-        return $this->first_name.' '.$this->last_name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function role()
@@ -42,8 +61,23 @@ class User extends Authenticatable
         return $this->hasMany('App\Patient');
     }
 
-    public function cases()
+    public function visits()
     {
-        return $this->hasMany('App\Cases');
+        return $this->hasMany('App\Visit');
+    }
+
+    public function surgeries()
+    {
+        return $this->hasMany('App\Surgery');
+    }
+
+    public function billings()
+    {
+        return $this->hasMany('App\Billing');
+    }
+
+    public function sms()
+    {
+        return $this->hasMany('App\Sms', 'user_id');
     }
 }

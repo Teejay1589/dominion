@@ -1,0 +1,7 @@
+{
+    "platform": "Smart Sms Solutions",
+    "url": "https://smartsmssolutions.com/apis",
+    "sendBulkSms": "http://api.smartsmssolutions.com/smsapi.php?username=YourUsername&password=YourPassword&sender=SenderID&recipient=234809xxxxxxx,2348030000000&message=YourMessage",
+    "checkSmsBalance": "http://api.smartsmssolutions.com/smsapi.php?username=YourUsername&password=YourPassword&balance=true",
+    "note": "remember to urlencode when sending Bulk Sms"
+}

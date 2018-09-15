@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfile;
 use App\Http\Requests\ChangeUserPassword;
 use App\Patient;
-use App\Post;
+use App\Visit;
+use App\Surgery;
+use App\Billing;
 use Illuminate\Hashing\BcryptHasher;
 
 class HomeController extends Controller
@@ -20,9 +22,9 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->page = collect();
-        $this->page->title = 'Patient Dashboard';
+        $this->page->title = 'My Dashboard';
         $this->page->view = 'home';
-        $this->middleware('auth')->except('blog');
+        $this->middleware('auth');
     }
 
     /**
@@ -38,16 +40,10 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $this->page->title = 'Profile';
+        $this->page->title = 'My Profile';
         $this->page->view = 'profile';
         return view($this->page->view)
             ->with('page', $this->page);
-    }
-
-    public function blog()
-    {
-        $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
-        return view('blog.home')->withPosts($posts);
     }
 
     public function update(UpdateProfile $request)
@@ -63,7 +59,7 @@ class HomeController extends Controller
         $user = Patient::where('id', Auth::user()->id)->get()->first();
         $bcrypt = new BcryptHasher;
 
-        if( $bcrypt->check($request->current_password, $user->password) ) {
+        if ($bcrypt->check($request->current_password, $user->password)) {
             $user->password = bcrypt($request->new_password);
 
             $user->save();

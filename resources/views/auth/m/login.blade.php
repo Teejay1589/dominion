@@ -1,35 +1,39 @@
-@extends('layouts.app')
+@extends('layouts.admin-auth')
+
+@section('title', 'Login')
+
+@section('page_styles')
+@endsection
 
 @section('content')
-<div class="page login-page">
-    <div class="container d-flex align-items-center">
-        <div class="form-holder has-shadow">
-            <div class="row">
-                
-                <!-- Form Panel    -->
-                <div class="col-lg-6 bg-white">
-                    <div class="form d-flex align-items-center">
-                        <div class="content">
-                            <form id="login-form" method="POST" action="{{ route('m.login') }}">
-                                {{ csrf_field() }}
+  <form role="form" action="{{ route('m.login') }}" class="form-layout" method="POST">
+    {{ csrf_field() }}
 
-                                <div class="form-group">
-                                    <input id="login-username" type="text" name="email" required="" class="input-material">
-                                    <label for="login-username" class="label-material">Email</label>
-                                </div>
-                                <div class="form-group">
-                                    <input id="login-password" type="password" name="password" required="" class="input-material">
-                                    <label for="login-password" class="label-material">Password</label>
-                                </div><button type="submit" class="btn btn-info">Login</button>
-                            </form>{{-- <a href="#" class="forgot-pass">Forgot Password?</a> --}}<br><small>Do not have an account? </small><a href="{{ route('m.register') }}" class="text-info">Signup</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="text-center mb15">
+      <h3>{{ env('APP_FULLNAME', 'DOMINION MEDICAL CENTER') }}</h3>
+      {{-- <img src="{{ asset('urban/images/logo-dark.png') }}" /> --}}
     </div>
-    <div class="copyrights text-center">
-         <p>Dominion Specialist Medical And Diagnostics Center &copy; {{ Carbon::createFromFormat("Y-m-d H:i:s", now())->year }}</p>
+    <p class="text-center mb30">Welcome to {{ env('APP_FULLNAME', 'DOMINION MEDICAL CENTER') }}. Please Login to your account</p>
+
+    <div class="form-inputs">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control input-lg" placeholder="Email Address" name="email" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control input-lg" placeholder="Password" name="password" required>
+      </div>
     </div>
-</div>
+
+    <button class="btn btn-success btn-block btn-lg mb15" type="submit">Login</button>
+
+    <p>
+      <a href="{{ route('m.register') }}">Register Here</a> &bull;
+      <a href="javascript:;">Forgot your password?</a>
+    </p>
+  </form>
+@endsection
+
+@section('page_scripts')
 @endsection

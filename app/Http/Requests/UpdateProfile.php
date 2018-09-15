@@ -25,9 +25,11 @@ class UpdateProfile extends FormRequest
     {
         return [
             'first_name' => 'required|string|min:2|max:191',
-            'last_name' => 'required|string|min:2|max:191',
-            'email' => 'required|email|max:191',
-            'gender' => 'required|string|min:4|max:6',
+            'last_name' => 'nullable|string|min:2|max:191',
+            'email' => 'nullable|email|max:191',
+            'sex' => 'required|string|min:4|max:12',
+            // 'last_name' => 'required|string|min:2|max:191',
+            // 'email' => 'required|email|max:191',
         ];
     }
 }

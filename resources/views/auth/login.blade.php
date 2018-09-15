@@ -1,47 +1,58 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="page login-page">
-    <div class="container d-flex align-items-center">
-        <div class="form-holder has-shadow">
-            <div class="row">
-                <!-- Logo & Information Panel-->
-                <div class="col-lg-6">
-                            <div class="info d-flex align-items-center">
-                                <div class="content">
-                                    <div class="logo">
-                                        <h1>Dominion<span>Medical Center</span></h1>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <h4>Health is the only wealth we know.</h4>
-                                    <p>Dr. Awoleke J.O</p>
-                                </div>
-                            </div>
-                        </div>
-                <!-- Form Panel    -->
-                <div class="col-lg-6 bg-white">
-                    <div class="form d-flex align-items-center">
-                        <div class="content">
-                            <form id="login-form" method="POST" action="{{ route('login') }}">
-                                {{ csrf_field() }}
+@section('title', 'Login')
 
-                                <div class="form-group">
-                                    <input id="login-username" type="text" name="email" required="" class="input-material">
-                                    <label for="login-username" class="label-material">Email</label>
-                                </div>
-                                <div class="form-group">
-                                    <input id="login-password" type="password" name="password" required="" class="input-material">
-                                    <label for="login-password" class="label-material">Password</label>
-                                </div><button type="submit" class="btn btn-primary">Login</button>
-                            </form>{{-- <a href="#" class="forgot-pass">Forgot Password?</a> --}}<br><small>Do not have an account? </small><a href="register.html" class="{{ route('register') }}">Signup</a>
-                        </div>
-                    </div>
+@section('page_styles')
+@endsection
+
+@section('content')
+  <div class="clearfix"></div>
+  <br>
+
+  <div class="full-height" style="margin: auto -20px; margin-top: 20px;">
+    <div class="center-wrapper">
+      <div class="center-content">
+        <div class="row no-margin">
+          <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+
+            <form role="form" action="{{ route('login') }}" class="form-layout" method="POST">
+              {{ csrf_field() }}
+
+              <div class="text-center mb15">
+                <h3>{{ env('APP_FULLNAME', 'DOMINION MEDICAL CENTER') }}</h3>
+                {{-- <img src="{{ asset('urban/images/logo-dark.png') }}" /> --}}
+              </div>
+              <p class="text-center mb30">Welcome to {{ env('APP_FULLNAME', 'DOMINION MEDICAL CENTER') }}. Please Login to your account</p>
+
+              <div class="form-inputs">
+                <div class="form-group">
+                  <label>Hospital File Number</label>
+                  <input type="tel" class="form-control input-lg" placeholder="File Number" name="file_number" required>
+                  <span class="help-block">looks like <code>DMC00000X</code></span>
                 </div>
-            </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control input-lg" placeholder="Password" name="password" required>
+                </div>
+              </div>
+
+              <button class="btn btn-primary btn-block btn-lg mb15" type="submit">Login</button>
+
+              <p>
+                <a href="{{ route('password.request') }}">Forgot your password?</a>
+              </p>
+            </form>
+
+          </div>
         </div>
+      </div>
     </div>
-    <div class="copyrights text-center">
-        <p>Dominion Specialist Medical And Diagnostics Center &copy; {{ Carbon::createFromFormat("Y-m-d H:i:s", now())->year }}</p>
-    </div>
-</div>
+  </div>
+
+
+  <div class="clearfix"></div>
+  <br>
+@endsection
+
+@section('page_scripts')
 @endsection

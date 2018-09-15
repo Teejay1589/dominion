@@ -1,48 +1,76 @@
 @extends('layouts.patient')
 
+@section('title', $page->title)
+
 @section('page_styles')
 @endsection
 
 @section('content')
-    <!-- Dashboard Header Section    -->
-    <section class="dashboard-header">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Statistics -->
-                <div class="statistics col-lg-3 col-12">
-                    <div class="statistic d-flex align-items-center bg-white has-shadow">
-                        <div class="icon bg-violet"><i class="fa fa-tasks"></i></div>
-                        <div class="text"><strong>5</strong><br>
-                            <small>My Cases</small>
-                        </div>
-                    </div>
-                    <div class="statistic d-flex align-items-center bg-white has-shadow">
-                        <div class="icon bg-orange"><i class="fa icon-user"></i></div>
-                        <div class="text"><strong>5</strong><br>
-                            <small>My Billings</small>
-                        </div>
-                    </div>
+
+<section>
+    <div class="row mb15">
+        <div class="col-md-1 col-xs-12"></div>
+        <div class="col-md-10 col-xs-12">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="widget bg-white">
+                <div class="widget-icon bg-success pull-left fa fa-child">
                 </div>
-                <!-- Line Chart -->
-                <div class="chart col-lg-6 col-12">
+                <div class="overflow-hidden">
+                  <span class="widget-title">{{ Auth::user()->visits->count() }}</span>
+                  <span class="widget-subtitle">
+                    <a href="{{ url('/p/visits') }}" class="text-primary pull-right ml5">view</a>
+                    <span class="mr5">Visits</span>
+                  </span>
                 </div>
-                <div class="chart col-lg-3 col-12">
-                    <div class="statistic d-flex align-items-center bg-white has-shadow">
-                        <div class="icon bg-blue"><i class="fa fa-calendar"></i></div>
-                        <div class="text"><strong>4</strong><br>
-                            <small>My Appointments</small>
-                        </div>
-                    </div>
-                    <div class="statistic d-flex align-items-center bg-white has-shadow">
-                        <div class="icon bg-red"><i class="fa fa-calendar"></i></div>
-                        <div class="text"><strong>1</strong><br>
-                            <small>Upcoming Appointments</small>
-                        </div>
-                    </div>
+              </div>
+              <div class="widget bg-white">
+                <div class="widget-icon bg-success pull-left">
                 </div>
+                <div class="overflow-hidden">
+                  <span class="widget-title">{{ Auth::user()->surgeries()->count() }}</span>
+                  <span class="widget-subtitle">
+                    <a href="{{ url('/p/surgeries') }}" class="text-primary pull-right ml5">view</a>
+                    <span class="mr5">Surgeries</span>
+                  </span>
+                </div>
+              </div>
+              <div class="widget bg-white">
+                <div class="widget-icon bg-success pull-left">
+                </div>
+                <div class="overflow-hidden">
+                  <span class="widget-title">{{ Auth::user()->billings()->count() }}</span>
+                  <span class="widget-subtitle">Billings</span>
+                </div>
+              </div>
             </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+              <div class="widget bg-white">
+                <div class="widget-icon bg-success pull-left fa fa-calendar-o">
+                </div>
+                <div class="overflow-hidden">
+                  <span class="widget-title">0</span>
+                  <span class="widget-subtitle">Appointments</span>
+                </div>
+              </div>
+              <div class="widget bg-white">
+                <div class="widget-icon bg-success pull-left">
+                </div>
+                <div class="overflow-hidden">
+                  <span class="widget-title">0</span>
+                  <span class="widget-subtitle">Upcoming Appointments</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+        <div class="col-md-1 col-xs-12"></div>
+    </div>
+</section>
+
 @endsection
 
 @section('page_scripts')

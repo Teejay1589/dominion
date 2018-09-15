@@ -30,7 +30,32 @@ class PatientsController extends InternalControl
     public function index()
     {
         return view($this->page->view)
-            ->with('patients', Patient::all())
+            ->with('patients', Patient::latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10))
+            ->with('page', $this->page);
+    }
+
+    public function filter($filter, $searchterm = "")
+    {
+        $this->patients = Patient::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+
+        if (isset($this->patients)) {
+            $this->patients->filter = $filter;
+            $this->patients->searchterm = $searchterm = urldecode($searchterm);
+        }
+
+        return view($this->page->view)
+            ->with('patients', $this->patients)
+            ->with('page', $this->page);
+    }
+
+    public function medical_history($id)
+    {
+        $this->page->title = 'Medical History';
+        $this->page->view = 'm.medical_history';
+        $this->active_object = Patient::findOrFail($id);
+
+        return view($this->page->view)
+            ->with('active_object', $this->active_object)
             ->with('page', $this->page);
     }
 
@@ -53,6 +78,7 @@ class PatientsController extends InternalControl
     public function store(CreatePatients $request)
     {
         $request['user_id'] = Auth::id();
+        $request['file_number'] = Patient::generate_file_number();
 
         $obj = new Patient($request->all());
         $obj->password = bcrypt($obj->telephone);
@@ -117,12 +143,12 @@ class PatientsController extends InternalControl
     public function password_reset($id)
     {
         $patient = Patient::findOrFail($id);
-        if( !is_null($patient->phone) ) {
-            $patient->password = bcrypt($patient->phone);
+        if (!is_null($patient->phone_number)) {
+            $patient->password = bcrypt($patient->phone_number);
             $patient->update();
-            session()->flash('success', 'Patient Password Reset to phone number!');
+            session()->flash('success', 'Patient Password Reset to phone number!<br>Password Reset to: <strong>' . $patient->phone_number . '</strong>');
         } else {
-            session()->flash('success', 'Patient Password is unchanged!');
+            return redirect()->back()->withErrors('Patient Password is unchanged! Reason: Patient does not have a Phone Number');
         }
 
         return redirect()->back();

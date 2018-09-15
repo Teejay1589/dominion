@@ -17,7 +17,7 @@
                 <span class="pull-right"> {{ \Carbon\Carbon::parse($post->created_at)
                                                     ->diffForHumans() }}</span>
                 <p>{{ substr(strip_tags($post->body), 0, random_int(90, 250)) }}{{ strlen(strip_tags($post->body)) > 150 ? "..." : "" }}</p>
-                <a href="{{ url('/m/blog/'.$post->slug) }}" class="btn btn-primary">Read More</a>
+                <a href="{{ url('/blog/'.$post->slug) }}" class="btn btn-primary">Read More</a>
             </div>
 
             <hr>
