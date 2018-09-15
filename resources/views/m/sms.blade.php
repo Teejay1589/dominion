@@ -59,7 +59,7 @@
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
                                 <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printSmsDiv('sms{{ $element->id }}');">Print</button>
                                 <div id="sms{{ $element->id }}">
-                                    {{-- @include('partials.sms-inline-view', ['element' => $element]) --}}
+                                    @include('partials.sms-inline-view', ['active_object' => $element])
                                 </div>
                             </div>
                         </div>

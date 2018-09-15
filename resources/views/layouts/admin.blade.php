@@ -68,6 +68,9 @@
         background-color: #2ecc71;
         color: white;
     }*/
+    ol {
+      padding-left: 30px;
+    }
   </style>
 
   {{-- Page Styles --}}

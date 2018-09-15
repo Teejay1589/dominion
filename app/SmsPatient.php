@@ -22,12 +22,12 @@ class SmsPatient extends Model
 
     public function sms()
     {
-        return $this->belongsTo('App\Sms', 'user_id');
+        return $this->belongsTo('App\Sms', 'sms_id');
     }
 
     public function patient()
     {
-        return $this->belongsTo('App\Patient', 'user_id');
+        return $this->belongsTo('App\Patient', 'patient_id');
     }
 
     public function user()
