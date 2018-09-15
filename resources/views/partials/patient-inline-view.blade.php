@@ -3,7 +3,7 @@
   <dd class="mb5 lead"><strong>Personal Details</strong></dd>
 
   <dt>File Number</dt>
-  <dd class="mb5"><code title="File Number">{{ $element->file_number }}</code></dd>
+  <dd class="mb5">{!! $element->file_number(true) !!}</dd>
   <dt>First Name</dt>
   <dd class="mb5">{{ $element->first_name }}</dd>
   <dt>Last Name</dt>

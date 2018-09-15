@@ -13,7 +13,7 @@
 				<div class="panel">
                     <div class="panel-heading border">
                         <div class="panel-title h5 mb5"><strong>{{ $active_object->full_name() }}</strong></div>
-                        <div class="panel-subtitle"><code>{{ $active_object->file_number }}</code></div>
+                        <div class="panel-subtitle">{!! $active_object->file_number(true) !!}</div>
                     </div>
                     <div class="panel-body">
 

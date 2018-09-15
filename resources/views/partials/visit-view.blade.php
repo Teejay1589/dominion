@@ -23,7 +23,7 @@
 						<dt>Title</dt>
 						<dd class="mb5">{{ $active_object->title }}</dd>
 						<dt>Patient</dt>
-						<dd class="mb5">{{ $active_object->patient->full_name() }} <span title="Phone Number">{{ $active_object->patient->phone_number }}</span> <code title="File Number">{{ $active_object->patient->file_number }}</code></dd>
+						<dd class="mb5">{{ $active_object->patient->full_name() }} <span title="Phone Number">{{ $active_object->patient->phone_number }}</span> {!! $active_object->patient->file_number(true) !!}</dd>
 						<dt>Discharged On</dt>
 						<dd class="mb5">
 							{{ is_null($active_object->discharged_on) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->discharged_on)->toFormattedDateString() }}

@@ -18,7 +18,7 @@
     @if ( $active_object->sms_patients->count() != 0 )
         <ol>
             @foreach ($active_object->sms_patients as $element)
-                <li class="mb5">{{ $element->patient->full_name() }} <span class="badge" title="Phone Number">{{ $element->patient->phone_number }}</span> <code title="File Number">{{ $element->patient->file_number }}</code></li>
+                <li class="mb5">{{ $element->patient->full_name() }} <span class="badge" title="Phone Number">{{ $element->patient->phone_number }}</span> {!! $element->patient->file_number(true) !!}</li>
             @endforeach
         </ol>
     @else

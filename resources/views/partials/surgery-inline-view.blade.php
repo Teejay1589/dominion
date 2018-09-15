@@ -7,7 +7,7 @@
     @endif
 
     <dt>Patient</dt>
-    <dd class="mb5">{{ $element->patient()->full_name() }} <span class="badge" title="Phone Number">{{ $element->patient()->phone_number }}</span> <code title="File Number">{{ $element->patient()->file_number }}</code></dd>
+    <dd class="mb5">{{ $element->patient()->full_name() }} <span class="badge" title="Phone Number">{{ $element->patient()->phone_number }}</span> {!! $element->patient()->file_number(true) !!}</dd>
     <dt>Visit Title</dt>
     <dd class="mb5">{{ $element->visit->title }}</dd>
     <dt>Surgery Name</dt>

@@ -45,6 +45,11 @@ class Patient extends Authenticatable
         return 'DMC' . $placeholder . '' . ($count + 1);
     }
 
+    public function file_number($link = false) {
+        return ($link) ? "<a href=" . url('/m/medical-history/'.$this->id) . "><code title='File Number'>" . $this->file_number . "</code></a>" : "<code>" . $this->file_number . "</code>";
+
+    }
+
     public function full_name()
     {
         return $this->first_name . ' ' . $this->last_name;
