@@ -59,6 +59,15 @@
       </li>
       <!-- /my permissions -->
 
+      <!-- settings -->
+      <li class="{{ isset($page) && $page->view == 'm.settings' ? 'active' : '' }}">
+        <a href="{{ url('/m/settings') }}">
+          <i class="fa fa-wrench"></i>
+          <span>Settings</span>
+        </a>
+      </li>
+      <!-- /settings -->
+
       <!-- logout -->
       <li class="">
         <a href="{{ url('/m/logout') }}">
