@@ -33,6 +33,7 @@
                 <div class="form-group">
                   <label>Password</label>
                   <input type="password" class="form-control input-lg" placeholder="Password" name="password" required>
+                  <span class="help-block">use your phone number e.g. <code>0803344XXXX</code></span>
                 </div>
               </div>
 
