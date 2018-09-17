@@ -1,6 +1,6 @@
 <dl class="dl-horizontal">
     <dt></dt>
-    <dd class="mb5 lead"><strong>Billing Details</strong></dd>
+    <dd class="mb5 lead"><strong>SMS Details</strong></dd>
 
     <dt>SMS From</dt>
     <dd class="mb5">{{ $active_object->from }}</dd>
