@@ -81,7 +81,7 @@ class PatientsController extends InternalControl
         $request['file_number'] = Patient::generate_file_number();
 
         $obj = new Patient($request->all());
-        $obj->password = bcrypt($obj->telephone);
+        $obj->password = bcrypt($obj->phone_number);
         $obj->save();
 
         session()->flash('success', 'New Patient Created!');
