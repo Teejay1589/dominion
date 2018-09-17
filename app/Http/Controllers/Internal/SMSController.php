@@ -106,6 +106,7 @@ class SmsController extends InternalControl
      */
     public function store(Request $request)
     {
+        dd($request);
         $request->validate([
             'message' => 'required|string|min:2'
         ]);
@@ -118,7 +119,11 @@ class SmsController extends InternalControl
         // Send SMS Message
         $setting = Setting::findOrFail(1);
         $xmx = new SmartXmx($setting->sms_username, $setting->sms_password);
-        $response = $xmx->sendSms($request->from, array_flatten(Patient::whereIn('id', $request->patients)->select('phone_number')->get()->toArray()), $request->message);
+        if ( isset($request->all_patients) ) {
+            $response = $xmx->sendSms($request->from, array_flatten(Patient::all()->select('phone_number')->get()->toArray()), $request->message);
+        } else {
+            $response = $xmx->sendSms($request->from, array_flatten(Patient::whereIn('id', $request->patients)->select('phone_number')->get()->toArray()), $request->message);
+        }
 
 
         // If Message is sent
@@ -195,7 +200,11 @@ class SmsController extends InternalControl
         // Send SMS Message
         $setting = Setting::findOrFail(1);
         $xmx = new SmartXmx($setting->sms_username, $setting->sms_password);
-        $response = $xmx->sendSms($request->from, $request->patients, $request->message);
+        if ( isset($request->all_patients) ) {
+            $response = $xmx->sendSms($request->from, array_flatten(Patient::all()->select('phone_number')->get()->toArray()), $request->message);
+        } else {
+            $response = $xmx->sendSms($request->from, array_flatten(Patient::whereIn('id', $request->patients)->select('phone_number')->get()->toArray()), $request->message);
+        }
 
         // If Message is sent
         if ( count($response) > 1 ) {

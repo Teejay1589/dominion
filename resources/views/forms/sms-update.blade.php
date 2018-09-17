@@ -12,7 +12,7 @@
 				<div class="modal-body">
 					{{ csrf_field() }}
 
-					<div class="form-group">
+					<div class="form-group select-patients">
 						@php
 							$sms_patients = array();
 							foreach ($active_object->sms_patients as $value) {
@@ -20,11 +20,19 @@
 							}
 						@endphp
 						<label class="form-control-label">Select Patients <span class="text-danger">*</span></label>
-						<select class="select-patients" name="patients[]" required multiple>
+						<select class="select-patients" name="patients[]" multiple>
 							@foreach ($patients->sortByDesc('id') as $element)
 								<option value="{{ $element->id }}" {{ in_array($element->id, old('patients', $sms_patients)) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
 							@endforeach
 						</select>
+						<span class="form-text"><small><span class="text-danger">min: 1, max: 200</span></small></span>
+					</div>
+
+					<div class="form-group">
+						<label class="form-control-label">
+							<input type="checkbox" id="checkAllPatients" name="all_patients">
+							<span>all patients</span>
+						</label>
 					</div>
 
 					<div class="form-group">
@@ -35,7 +43,7 @@
 
 					<div class="form-group">
 						<label class="form-control-label">SMS Message <span class="text-danger">*</span></label>
-						<textarea name="message" class="form-control" rows="5" placeholder="Message">{{ $active_object->message }}</textarea>
+						<textarea name="message" class="form-control" rows="5" placeholder="Message" required>{{ $active_object->message }}</textarea>
 						<span class="form-text"><small class="msg-characters">160 characters = 1 message unit</small></span>
 					</div>
 				</div>

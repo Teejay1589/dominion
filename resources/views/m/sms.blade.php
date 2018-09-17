@@ -38,7 +38,7 @@
 
                             <div class="form-group">
                                 <label class="form-control-label">SMS Message <span class="text-danger">*</span></label>
-                                <textarea name="message" class="form-control" rows="5" placeholder="Message">{{ old('message') }}</textarea>
+                                <textarea name="message" class="form-control" rows="5" placeholder="Message" required>{{ old('message') }}</textarea>
                                 <span class="form-text"><small class="msg-characters">160 characters = 1 message unit</small></span>
                             </div>
                         </div>
@@ -141,6 +141,14 @@
     <script type="text/javascript">
         $('textarea[name="message"]').keyup(function() {
             $(this).parent().find('.msg-characters').text($(this).val().length + ' characters = ' + Math.ceil($(this).val().length/160) + ' message unit');
+        });
+
+        $('#checkAllPatients').click(function() {
+            if ($(this).is(':checked')) {
+                $('.form-group.select-patients').addClass('hidden');
+            } else {
+                $('.form-group.select-patients').addClass('hidden');
+            }
         });
     </script>
     <script type="text/javascript">
