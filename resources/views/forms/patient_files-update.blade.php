@@ -35,7 +35,7 @@
 
 					<div class="form-group">
 						<label class="form-control-label">Replace File <span class="text-danger">*</span></label>
-						<input class="form-control" type="file" name="file" placeholder="File" >
+						<input class="form-control" type="file" name="file" placeholder="File" accept="image/*" >
 						<span class="help-block">accepted formats: <code>.jpg, .jpeg, .png</code></span>
 					</div>
 				</div>

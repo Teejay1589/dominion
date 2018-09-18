@@ -15,6 +15,7 @@
 					<div class="form-group select-patients">
 						<label class="form-control-label">Select Patient <span class="text-danger">*</span></label>
 						<select class="select-patient" name="patient" required>
+							<option value="">Select a Patient</option>
 							@foreach ($patients->sortByDesc('id') as $element)
 								<option value="{{ $element->id }}" {{ (old('patient', isset($active_object) ? $active_object->id : null) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
 							@endforeach
@@ -29,7 +30,7 @@
 
 					<div class="form-group">
 						<label class="form-control-label">File <span class="text-danger">*</span></label>
-						<input class="form-control" type="file" name="file" placeholder="File" >
+						<input class="form-control" type="file" name="file" placeholder="File" accept="image/*" >
 						<span class="help-block">accepted formats: <code>.jpg, .jpeg, .png</code></span>
 					</div>
 				</div>
