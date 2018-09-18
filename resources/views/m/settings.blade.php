@@ -21,7 +21,7 @@
                                 {{ csrf_field() }}
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="form-control-label">Hospital Logo: <span class="text-danger">*</span></label>
                                 <div class="center-block text-center">
                                     <span style="cursor: pointer;" onclick="document.getElementById('input_hospital_logo').click();">
@@ -33,7 +33,7 @@
                                         <div class="help-block">click to change</div>
                                     </span>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row">
                                 <div class="col-lg-12 col-xs-12">
