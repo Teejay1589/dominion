@@ -18,11 +18,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-spacing-top">Slug:</label>
-                        <input class="form-control" type="text" name="slug" value="{{ $active_object->slug }}">
-                    </div>
-
-                    <div class="form-group">
                         <label class="form-spacing-top">Body:</label>
                         <textarea class="form-control" name="body" rows="5">{{ $active_object->body }}</textarea>
                     </div>

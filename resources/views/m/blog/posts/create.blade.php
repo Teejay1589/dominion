@@ -3,11 +3,11 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Create New Post</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
+                    <h4 class="modal-title">Create New Post</h4>
                 </div>
                 <div class="modal-body">
                     {{ csrf_field() }}
@@ -18,16 +18,10 @@
                                value="{{ old('title') }}" required maxlength="255">
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-control-label">Slug: <span class="text-danger">*</span></label>
-                        <input class="form-control" type="text" name="slug" placeholder="Slug" value="{{ old('slug') }}"
-                               required minlength="5" maxlength="255">
-                    </div>
-
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label class="form-control-label">Upload a Featured Image:</label>
                         <input type='file' id="uploadImg" name="featured_img"/>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label class="form-control-label">Post Body: <span class="text-danger">*</span></label>
