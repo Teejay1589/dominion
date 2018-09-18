@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Internl;
+namespace App\Http\Controllers\Internal;
 
 use App\PatientFIle;
 use App\Patient;
