@@ -93,16 +93,16 @@
         <!-- /patients -->
       @endcan
 
-      {{-- @can('view', App\Visit::class)
-        <!-- patient_visits -->
-        <li class="{{ isset($page) && $page->view == 'm.patient_visits' ? 'active' : '' }}">
-          <a href="{{ url('/m/patient/0/visits') }}">
-            <i class="fa fa-child"></i>
-            <span>Patient Visits</span>
+      @can('view', App\PatientFile::class)
+        <!-- patients -->
+        <li class="{{ isset($page) && $page->view == 'm.patient_files' ? 'active' : '' }}">
+          <a href="{{ url('/m/patient_files') }}">
+            <i class="fa fa-file"></i>
+            <span>Patient Files</span>
           </a>
         </li>
-        <!-- /patient_visits -->
-      @endcan --}}
+        <!-- /patients -->
+      @endcan
 
       @can('view', App\Visit::class)
         <!-- visits -->

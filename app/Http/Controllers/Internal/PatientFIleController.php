@@ -28,7 +28,10 @@ class PatientFIleController extends InternalControl
      */
     public function index()
     {
-        //
+        return view($this->page->view)
+            ->with('patient_files', PatientFile::latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10))
+            ->with('patients', Patient::all())
+            ->with('page', $this->page);
     }
 
     /**
