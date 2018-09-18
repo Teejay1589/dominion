@@ -163,9 +163,10 @@ Route::get('/blog/{slug}', ['as' => '/blog/blog.single', 'uses' => 'PublicContro
 // Blog Post
 Route::resource('/m/blog/posts', 'Internal\PostController');
 Route::post('/m/blog/post/create', 'Internal\PostController@store')->name('m/blog/posts.show');
-Route::get('/m/blog/post/edit/{id}', 'Internal\PostController@update');
+Route::get('/m/blog/post/edit/{id}', 'Internal\PostController@edit')->name('/m/blog/posts.edit');
+Route::post('/m/blog/post/edit/{id}', 'Internal\PostController@update');
 Route::get('/m/blog/post/delete/{id}', 'Internal\PostController@destroy')->name('/m/blog/posts.destroy');
-Route::post('/m/blog/post/{id}/edit', 'Internal\PostController@update')->name('/m/blog/posts.edit');
+Route::get('/m/blog/posts/{filter}/{searchterm?}', 'Internal\PostController@filter')->where('searchterm', '.*');
 
 // Blog
 Route::get('/m/blog', ['uses' => 'Internal\BlogController@getIndex', 'as' => '/m/blog/blog.index']);
