@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Internal;
 
 use App\Post;
+use App\User;
 use Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends InternalControl
 {
@@ -21,6 +23,23 @@ class PostController extends InternalControl
     {
         $posts = Post::orderBy('id', 'desc')->paginate(10);
         return view('m/blog/posts.index')->withPosts($posts);
+    }
+
+    public function filter($filter, $searchterm = "")
+    {
+        if ($filter == "user_id") {
+            $objects = User::where("name", 'LIKE', "%$searchterm%")->get();
+            $this->posts = Post::whereIn($filter, $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } else {
+            $this->posts = Post::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        }
+
+        if (isset($this->posts)) {
+            $this->posts->filter = $filter;
+            $this->posts->searchterm = $searchterm = urldecode($searchterm);
+        }
+
+        return view('m/blog/posts.index')->withPosts($this->posts);
     }
 
     /**
@@ -42,35 +61,19 @@ class PostController extends InternalControl
     public function store(Request $request)
     {
         // validate the data
-        $this->validate($request, array(
-            'title' => 'required|max:255',
-            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-            'body' => 'required'
-        ));
+        $request->validate([
+            'title' => 'required|string|unique:posts|max:191',
+            'body' => 'required|string',
+        ]);
 
-        // store in the database
-        $post = new Post;
+        $request['user_id'] = Auth::id();
+        $request['slug'] = str_slug($request->title);
 
-        if ($request->hasFile('featured_img')) {
+        $obj = new Post($request->all());
+        $obj->save();
 
-            $image = $request->file('featured_img');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $location = public_path('img/' . $filename);
-            Image::make($image)->save($location);
-
-            $post->image = $filename;
-        }
-
-        $post->user_id = auth()->id();
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->body = $request->body;
-
-        $post->save();
-
-        session()->flash('success', 'The blog post was successfully save!');
-
-        return redirect('/m/blog/posts');
+        session()->flash('success', 'Blog Post Created Successfully!');
+        return redirect()->back();
     }
 
     /**
@@ -110,35 +113,27 @@ class PostController extends InternalControl
     public function update(Request $request, $id)
     {
         // Validate the data
-        $post = Post::find($id);
+        $request->validate([
+            'title' => 'required|string|max:191',
+            'body' => 'required|string',
+        ]);
 
-        if ($request->input('slug') == $post->slug) {
-            $this->validate($request, array(
-                'title' => 'required|max:255',
-                'body' => 'required'
-            ));
-        } else {
-            $this->validate($request, array(
-                'title' => 'required|max:255',
-                'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-                'body' => 'required'
-            ));
+        if (Post::where('title', $request->title)->count() >= 1) {
+            if (Post::where('title', $request->title)->first()->id != $id) {
+                return redirect()->back()->withErrors('The title provided is already used.')->withInput();
+            }
+        }
+        if (session()->has('update_id')) {
+            session()->forget('update_id');
         }
 
-        // Save the data to the database
-        $post = Post::find($id);
+        // $request['user_id'] = Auth::id();
+        $request['slug'] = str_slug($request->title);
 
-        $post->title = $request->input('title');
-        $post->slug = $request->input('slug');
-        $post->body = $request->input('body');
+        Post::findOrFail($id)->update($request->all());
 
-        $post->save();
-
-        // set flash data with success message
-        session()->flash('success', 'This post was successfully saved.');
-
-        // redirect with flash data to posts.show
-        return redirect()->route('posts.show', $post->id);
+        session()->flash('success', 'Blog Post Updated Successfully!');
+        return redirect()->back();
     }
 
     /**
@@ -149,9 +144,9 @@ class PostController extends InternalControl
      */
     public function destroy($id)
     {
-        $post = Post::find($id)->delete();
+        Post::findOrFail($id)->delete();
 
-        session()->flash('success', 'The post was successfully deleted.');
-        return view('m/blog/posts.index');
+        session()->flash('success', 'Blog Post Deleted Successfully!');
+        return redirect()->back();
     }
 }
