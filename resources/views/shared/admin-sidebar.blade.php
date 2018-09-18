@@ -159,6 +159,7 @@
         <!-- /sms -->
       @endcan
 
+      @can('view', App\Post::class)
       <!-- blog_posts -->
       <li class="{{ isset($page) && $page->view == 'm.blog.posts' ? 'active' : '' }}">
         <a href="{{ url('/m/blog/posts') }}">
@@ -167,6 +168,7 @@
         </a>
       </li>
       <!-- /blog_posts -->
+      @endcan
 
       <li class="m15"></li>
 

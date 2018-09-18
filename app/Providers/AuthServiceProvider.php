@@ -8,6 +8,8 @@ use App\Billing;
 use App\Policies\BillingPolicy;
 use App\Patient;
 use App\Policies\PatientPolicy;
+use App\Post;
+use App\Policies\PostPolicy;
 use App\Permision;
 use App\Policies\PermisionPolicy;
 use App\Setting;
@@ -36,6 +38,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model' => 'App\Policies\ModelPolicy',
         Billing::class => BillingPolicy::class,
         Patient::class => PatientPolicy::class,
+        Post::class => PostPolicy::class,
         Permision::class => PermisionPolicy::class,
         Setting::class => SettingPolicy::class,
         Sms::class => SmsPolicy::class,

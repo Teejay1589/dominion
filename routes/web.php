@@ -162,11 +162,11 @@ Route::get('/blog/{slug}', ['as' => '/blog/blog.single', 'uses' => 'PublicContro
 
 // Blog Post
 Route::resource('/m/blog/posts', 'Internal\PostController');
-Route::post('/m/blog/post/create', 'Internal\PostController@store')->name('m/blog/posts.show');
-Route::get('/m/blog/post/edit/{id}', 'Internal\PostController@edit')->name('/m/blog/posts.edit');
-Route::post('/m/blog/post/edit/{id}', 'Internal\PostController@update');
-Route::get('/m/blog/post/delete/{id}', 'Internal\PostController@destroy')->name('/m/blog/posts.destroy');
-Route::get('/m/blog/posts/{filter}/{searchterm?}', 'Internal\PostController@filter')->where('searchterm', '.*');
+Route::post('/m/blog/post/create', 'Internal\PostController@store')->name('m/blog/posts.store')->middleware('can:create,App\Post');
+Route::get('/m/blog/post/edit/{id}', 'Internal\PostController@edit')->name('/m/blog/posts.edit')->middleware('can:update,App\Post');
+Route::post('/m/blog/post/edit/{id}', 'Internal\PostController@update')->name('/m/blog/posts.update')->middleware('can:update,App\Post');
+Route::get('/m/blog/post/delete/{id}', 'Internal\PostController@destroy')->name('/m/blog/posts.destroy')->middleware('can:delete,App\Post');
+Route::get('/m/blog/posts/{filter}/{searchterm?}', 'Internal\PostController@filter')->where('searchterm', '.*')->middleware('can:view,App\Post');
 
 // Blog
 Route::get('/m/blog', ['uses' => 'Internal\BlogController@getIndex', 'as' => '/m/blog/blog.index']);
