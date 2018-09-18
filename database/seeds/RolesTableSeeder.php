@@ -16,11 +16,11 @@ class RolesTableSeeder extends Seeder
             'created_at' => now(),
         ]);
         DB::table('roles')->insert([
-            'name' => 'DOCTOR',
+            'name' => 'SURGEON',
             'created_at' => now(),
         ]);
         DB::table('roles')->insert([
-            'name' => 'SURGEON',
+            'name' => 'DOCTOR',
             'created_at' => now(),
         ]);
         DB::table('roles')->insert([
