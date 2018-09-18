@@ -17,7 +17,7 @@
                     'create_text' => 'Add Patient File',
                     'data_name' => 'SMS',
                     'data' => $patient_files,
-                    'removed_keys' => array('id', 'user_id', 'created_at', 'updated_at'),
+                    'removed_keys' => array('id', 'user_id', 'file', 'created_at', 'updated_at'),
                     'added_keys' => array(),
                     'addup_keys' => array('patient_file_number')
                 ])
