@@ -73,13 +73,13 @@ Route::namespace('Internal')->group(function () {
 		Route::get('/patients/password/reset/{id}', 'PatientsController@password_reset')->middleware('can:update,App\Patient');
 		Route::get('/patients/{filter}/{searchterm?}', 'PatientsController@filter')->where('searchterm', '.*')->middleware('can:view,App\Patient');
 
-		// // Patient Visits
-		// Route::get('/patient/{id}/visits', 'PatientVisitsController@index');
-		// // Route::post('/patient/{id}/visits/create', 'PatientVisitsController@store');
-		// // Route::get('/patient/{id}/visits/edit/{id}', 'PatientVisitsController@edit');
-		// // Route::post('/patient/{id}/visits/update/{id2}', 'PatientVisitsController@update');
-		// // Route::get('/patient/{id}/visits/delete/{id2}', 'PatientVisitsController@destroy');
-		// Route::get('/patient/{id}/visits/{filter}/{searchterm?}', 'PatientVisitsController@filter')->where('searchterm', '.*');
+		// Patient Files
+		Route::get('/patient_files', 'PatientFileController@index')->middleware('can:view,App\PatientFile');
+		Route::post('/patient_files/create', 'PatientFileController@store')->middleware('can:create,App\PatientFile');
+		// Route::get('/patient_files/edit/{id}', 'PatientFileController@edit');
+		Route::post('/patient_files/update/{id}', 'PatientFileController@update')->middleware('can:update,App\PatientFile');
+		Route::get('/patient_files/delete/{id}', 'PatientFileController@destroy')->middleware('can:delete,App\PatientFile');
+		Route::get('/patient_files/{filter}/{searchterm?}', 'PatientFileController@filter')->where('searchterm', '.*')->middleware('can:view,App\PatientFile');
 
 		// Cases
 		Route::get('/visits', 'VisitController@index')->middleware('can:view,App\Visit');
