@@ -24,7 +24,7 @@
 
 					<div class="form-group">
 						<label class="form-control-label">File name </label>
-						<input class="form-control" type="text" name="file_name" placeholder="File name" value="{{ $active_object->file_name }}" >
+						<input class="form-control" type="text" name="file_name" placeholder="File name" value="" >
 					</div>
 
 					<div class="form-group">
