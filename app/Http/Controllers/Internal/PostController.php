@@ -21,7 +21,7 @@ class PostController extends InternalControl
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(10);
+        $posts = Post::orderBy('id', 'desc')->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
         return view('m/blog/posts.index')->withPosts($posts);
     }
 
