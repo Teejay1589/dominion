@@ -109,7 +109,7 @@ class HomeController extends InternalControl
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $filename = strtolower(str_ireplace(' ', '_', pathinfo($request->file->getClientOriginalName(), PATHINFO_FILENAME))) . time() . '.' . request()->file->getClientOriginalExtension();
-            $destinationPath = 'uploads/m/cv/';
+            $destinationPath = 'uploads/mcv/';
             $filePath = $destinationPath . $filename;
             $file->move($destinationPath, $filename);
         }
@@ -136,7 +136,7 @@ class HomeController extends InternalControl
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = strtolower(str_ireplace(' ', '_', pathinfo($request->image->getClientOriginalName(), PATHINFO_FILENAME))) . time() . '.' . request()->image->getClientOriginalExtension();
-            $destinationPath = 'uploads/m/pp/';
+            $destinationPath = 'uploads/mpp/';
             $filePath = $destinationPath . $filename;
             $file->move($destinationPath, $filename);
 

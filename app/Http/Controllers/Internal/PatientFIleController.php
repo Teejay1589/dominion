@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Internal;
-
 use App\PatientFile;
 use App\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 class PatientFIleController extends InternalControl
 {
     /**
@@ -21,7 +18,6 @@ class PatientFIleController extends InternalControl
         $this->page->view = 'm.patient_files';
         $this->middleware('auth:admin');
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +30,6 @@ class PatientFIleController extends InternalControl
             ->with('patients', Patient::all())
             ->with('page', $this->page);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -44,7 +39,6 @@ class PatientFIleController extends InternalControl
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -58,11 +52,9 @@ class PatientFIleController extends InternalControl
             'file_name' => 'required|string|min:2|max:100',
             'file' => 'required|file|mimes:jpeg,jpg,png|max:1024',
         ]);
-
         $request['user_id'] = Auth::id();
         $request['patient_id'] = $request['patient'];
         $req = collect($request->all());
-
         $filePath = null;
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -70,17 +62,13 @@ class PatientFIleController extends InternalControl
             $destinationPath = 'uploads/patient_files/';
             $filePath = $destinationPath . $filename;
             $file->move($destinationPath, $filename);
-
             $req['file'] = $filePath;
         }
-
         $obj = new PatientFile($req->all());
         $obj->save();
-
         session()->flash('success', 'New Patient File Added!');
         return redirect()->back();
     }
-
     /**
      * Display the specified resource.
      *
@@ -91,7 +79,6 @@ class PatientFIleController extends InternalControl
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -102,7 +89,6 @@ class PatientFIleController extends InternalControl
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -117,11 +103,9 @@ class PatientFIleController extends InternalControl
             'file_name' => 'required|string|min:2|max:100',
             'file' => 'required|file|mimes:jpeg,jpg,png|max:1024',
         ]);
-
         $request['user_id'] = Auth::id();
         $request['patient_id'] = $request['patient'];
         $req = collect($request->all());
-
         $filePath = null;
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -129,17 +113,13 @@ class PatientFIleController extends InternalControl
             $destinationPath = 'uploads/patient_files/';
             $filePath = $destinationPath . $filename;
             $file->move($destinationPath, $filename);
-
             $req['file'] = $filePath;
         }
-
         $obj = PatientFile::findOrFail($id);
         $obj->update($req->all());
-
         session()->flash('success', 'Patient File Updated!');
         return redirect()->back();
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -149,7 +129,6 @@ class PatientFIleController extends InternalControl
     public function destroy($id)
     {
         PatientFile::findOrFail($id)->delete();
-
         session()->flash('success', 'Patient File Deleted!');
         return redirect()->back();
     }

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Patient extends Authenticatable
 {
@@ -24,6 +25,21 @@ class Patient extends Authenticatable
     public static function table()
     {
         return 'patients';
+    }
+
+    public function passport_thumb()
+    {
+        if ( $this->passport == 'img/default.png' ) {
+            return 'img/default.png';
+        } else {
+            if ( !file_exists(str_ireplace('uploads/pp/', 'uploads/pp/thumbs/', $this->passport)) && file_exists($this->passport) ) {
+                // generate thumb
+                Image::configure(array('driver' => 'gd'));
+                Image::make($this->passport)->fit(200, 200)->save(str_ireplace('uploads/pp/', 'uploads/pp/thumbs/', $this->passport));
+            }
+
+            return str_ireplace('uploads/pp/', 'uploads/pp/thumbs/', $this->passport);
+        }
     }
 
     public static function generate_file_number()

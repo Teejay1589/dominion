@@ -6,6 +6,7 @@ use App\Permission;
 use App\UserPermission;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class User extends Authenticatable
 {
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'role_id', 'gender', 'phone', 'date_of_birth', 'address', 'country', 'state', 'job', 'cv',
+        'first_name', 'last_name', 'email', 'password', 'role_id', 'gender', 'phone', 'date_of_birth', 'address', 'country', 'state', 'job', 'profile_picture', 'cv',
     ];
 
     /**
@@ -44,6 +45,21 @@ class User extends Authenticatable
     public static function table()
     {
         return 'users';
+    }
+
+    public function profile_picture_thumb()
+    {
+        if ( $this->profile_picture == 'img/default.png' ) {
+            return 'img/default.png';
+        } else {
+            if ( !file_exists(str_ireplace('uploads/mpp/', 'uploads/mpp/thumbs/', $this->profile_picture)) && file_exists($this->profile_picture) ) {
+                // generate thumb
+                Image::configure(array('driver' => 'gd'));
+                Image::make($this->profile_picture)->fit(200, 200)->save(str_ireplace('uploads/mpp/', 'uploads/mpp/thumbs/', $this->profile_picture));
+            }
+
+            return str_ireplace('uploads/mpp/', 'uploads/mpp/thumbs/', $this->profile_picture);
+        }
     }
 
     public function full_name()

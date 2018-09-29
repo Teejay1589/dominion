@@ -91,7 +91,6 @@
         $('textarea[name="message"]').keyup(function() {
             $(this).parent().find('.msg-characters').text($(this).val().length + ' characters = ' + Math.ceil($(this).val().length/160) + ' message unit');
         });
-
         $('#checkAllPatients').click(function() {
             if ($(this).is(':checked')) {
                 $('.form-group.select-patients').addClass('hidden');

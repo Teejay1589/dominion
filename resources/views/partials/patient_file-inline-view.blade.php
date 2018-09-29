@@ -8,7 +8,7 @@
   <dd class="mb5">{!! $active_object->file_name !!}</dd>
   <dt>File</dt>
   <dd class="mb5">
-    <img src="{{ asset($active_object->file) }}" alt="file image" class="img-responsive">
+    <img src="{{ asset($active_object->file_thumb()) }}" alt="file image" class="img-responsive">
   </dd>
   <dt>Created at</dt>
   <dd class="mb5">{{ $active_object->created_at }}</dd>

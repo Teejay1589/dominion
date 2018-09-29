@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Setting extends Model
 {
@@ -19,4 +20,20 @@ class Setting extends Model
     {
         return 'settings';
     }
+
+    // public function hospital_logo_thumb()
+    // {
+    //     // get a default image for hospital logo
+    //     if ( $this->hospital_logo == 'img/default.png' ) {
+    //         return 'img/default.png';
+    //     } else {
+    //         if ( !file_exists(str_ireplace('uploads/logo/', 'uploads/logo/thumbs/', $this->hospital_logo)) && file_exists($this->hospital_logo) ) {
+    //             // generate thumb
+    //             Image::configure(array('driver' => 'gd'));
+    //             Image::make($this->hospital_logo)->fit(200, 200)->save(str_ireplace('uploads/logo/', 'uploads/logo/thumbs/', $this->hospital_logo));
+    //         }
+
+    //         return str_ireplace('uploads/logo/', 'uploads/logo/thumbs/', $this->hospital_logo);
+    //     }
+    // }
 }
