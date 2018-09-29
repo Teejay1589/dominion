@@ -1,4 +1,4 @@
-<form action="{{ url('/m/patient_files/create') }}" method="post">
+<form action="{{ url('/m/patient_files/create') }}" method="post" enctype="multipart/form-data">
 	<div class="modal fade" id="modal-create">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">

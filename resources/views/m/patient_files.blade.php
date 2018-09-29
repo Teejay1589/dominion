@@ -30,17 +30,22 @@
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
                                 <span class="pull-right">
-                                    <span class="badge" title="No of Patients">{{ $element->patient_files_patients->count() }} {{ str_plural('PATIENT', $element->patient_files_patients->count()) }}</span>
-                                    <br>
-                                    <div class="text-center">
-                                        <strong title="COST PER Patient">{{ ceil(strlen($element->message) / 160) }} {{ str_plural('UNIT', ceil(strlen($element->message) / 160)) }}</strong>
-                                    </div>
+                                    @php
+                                        $file_parts = explode('.', $element->file);
+                                        $file_type = $file_parts[count($file_parts) - 1];
+                                    @endphp
+                                    <span class="badge" title="File Type">{{ $file_type }}</span>
                                 </span>
                                 <h5 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->from }} <small><span title="{!! str_ireplace('<br />', '', nl2br($element->message)) !!}">{{ str_limit($element->message, 50) }}</span></small></a>
+                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->file_name }} <small><span title="Patient">{{ $element->patient->full_name() }}</span></small></a>
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>
+                                    <span>
+                                        <a href="{{ url('/m/patients/file_number/'.optional($element->patient)->file_number.'?default') }}" class="mr10 text-primary">
+                                            <span>patient</span>
+                                        </a>
+                                    </span>
                                     {{-- <span>
                                         <a href="{{ url('/m/users/id/'.optional($element->user)->id.'?default') }}" class="mr10 text-primary">
                                             <span>user</span>
@@ -57,9 +62,9 @@
                                 </div>
                             </div>
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
-                                <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printPatioentFileDiv('patient_files{{ $element->id }}');">Print</button>
+                                <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printPatientFileDiv('patient_files{{ $element->id }}');">Print</button>
                                 <div id="patient_files{{ $element->id }}">
-                                    {{-- @include('partials.patient_files-inline-view', ['active_object' => $element]) --}}
+                                    @include('partials.patient_file-inline-view', ['active_object' => $element])
                                 </div>
                             </div>
                         </div>
@@ -111,7 +116,7 @@
     </script>
     <script type="text/javascript">
         // For Printing
-        function printPatioentFileDiv(divName) {
+        function printPatientFileDiv(divName) {
             w=window.open();
             w.document.write("<!DOCTYPE html><html><head><title>PatioentFile Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
             "@include('shared.print-header')" +
