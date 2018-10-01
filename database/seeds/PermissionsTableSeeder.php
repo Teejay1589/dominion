@@ -103,6 +103,24 @@ class PermissionsTableSeeder extends Seeder
 				]
 			],
 			[
+				'table' => 'reminders',
+				'actions' => [
+					[
+						'action' => 'view',
+						'permit' => 4,
+					], [
+						'action' => 'create',
+						'permit' => 4,
+					], [
+						'action' => 'update',
+						'permit' => 4,
+					], [
+						'action' => 'delete',
+						'permit' => 4,
+					]
+				]
+			],
+			[
 				'table' => 'settings',
 				'actions' => [
 					[
