@@ -14,6 +14,8 @@ use App\Post;
 use App\Policies\PostPolicy;
 use App\Permision;
 use App\Policies\PermisionPolicy;
+use App\Reminder;
+use App\Policies\ReminderPolicy;
 use App\Setting;
 use App\Policies\SettingPolicy;
 use App\Sms;
@@ -43,6 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         PatientFile::class => PatientFilePolicy::class,
         Post::class => PostPolicy::class,
         Permision::class => PermisionPolicy::class,
+        Reminder::class => ReminderPolicy::class,
         Setting::class => SettingPolicy::class,
         Sms::class => SmsPolicy::class,
         SurgeryName::class => SurgeryNamePolicy::class,
