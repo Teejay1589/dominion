@@ -30,6 +30,46 @@ class PatientFIleController extends InternalControl
             ->with('patients', Patient::all())
             ->with('page', $this->page);
     }
+
+    public function filter($filter, $searchterm = "")
+    {
+        if ($filter == 'patient_file_number') {
+            $objects = Patient::where("file_number", 'LIKE', "%$searchterm%")->get();
+            $this->patient_files = PatientFile::whereIn('patient_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } elseif ($filter == 'patient_id') {
+            $searchterms = array();
+            $searchterms = explode(' ', $searchterm);
+
+            if (count($searchterms) == 2) {
+                $object = Patient::where([["first_name", 'LIKE', "%$searchterms[0]%"], ["last_name", 'LIKE', "%$searchterms[1]%"]])->get();
+            } else {
+                $object = Patient::where("first_name", 'LIKE', "%$searchterms[0]%")->get();
+                $object2 = Patient::where("last_name", 'LIKE', "%$searchterms[0]%")->get();
+                $object->push($object2);
+                $object = $object->flatten();
+            }
+            $objects = $object;
+            $this->patient_files = PatientFile::whereIn('patient_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } elseif ($filter == 'id') {
+            if (isset($_GET['default'])) {
+                $this->patient_files = PatientFile::where($filter, $searchterm)->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            } else {
+                $this->patient_files = PatientFile::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            }
+        } else {
+            $this->patient_files = PatientFile::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        }
+
+        if (isset($this->patient_files)) {
+            $this->patient_files->filter = $filter;
+            $this->patient_files->searchterm = $searchterm = urldecode($searchterm);
+        }
+
+        return view($this->page->view)
+            ->with('patient_files', $this->patient_files)
+            ->with('patients', Patient::all())
+            ->with('page', $this->page);
+    }
     /**
      * Show the form for creating a new resource.
      *
