@@ -35,6 +35,51 @@ class ReminderController extends InternalControl
             ->with('page', $this->page);
     }
 
+    public function filter($filter, $searchterm = "")
+    {
+        if ($filter == 'user_id') {
+            $searchterms = array();
+            $searchterms = explode(' ', $searchterm);
+
+            if (count($searchterms) == 2) {
+                $objects = User::where([["first_name", 'LIKE', "%$searchterms[0]%"], ["last_name", 'LIKE', "%$searchterms[1]%"]])->get();
+            } else {
+                $objects = User::where("first_name", 'LIKE', "%$searchterms[0]%")->get();
+                $object2 = User::where("last_name", 'LIKE', "%$searchterms[0]%")->get();
+                $objects->push($object2);
+                $objects = $objects->flatten();
+            }
+            $this->reminders = Reminder::whereIn('user_id', $objects->pluck('id'))->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } elseif ($filter == 'done') {
+            // Interprete
+            if (strtolower($searchterm[0]) == 'y' || $searchterm[0] == 1) {
+                $searchterm = 1;
+            } elseif (strtolower($searchterm[0]) == 'n' || $searchterm[0] == 0) {
+                $searchterm = 0;
+            }
+
+            $this->reminders = Reminder::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        } elseif ($filter == 'id') {
+            if (isset($_GET['default'])) {
+                $this->reminders = Reminder::where($filter, $searchterm)->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            } else {
+                $this->reminders = Reminder::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+            }
+        } else {
+            $this->reminders = Reminder::where($filter, 'LIKE', "%$searchterm%")->latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10);
+        }
+
+        if (isset($this->reminders)) {
+            $this->reminders->filter = $filter;
+            $this->reminders->searchterm = $searchterm = urldecode($searchterm);
+        }
+
+        return view($this->page->view)
+            ->with('reminders', $this->reminders)
+            ->with('users', User::all())
+            ->with('page', $this->page);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
