@@ -3,6 +3,7 @@
 @section('title', $page->title)
 
 @section('page_styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/selectize.js-master/dist/css/selectize.bootstrap2.css') }}">
 @endsection
 
 @section('content')
@@ -81,6 +82,16 @@
         var base_url = '{{ url('/m/reminders') }}';
     </script>
     <script type="text/javascript" src="{{ asset('js/toolbar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/vendor/selectize.js-master/dist/js/standalone/selectize.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select.select-user').selectize({
+                create: false,
+                plugins: ['restore_on_backspace', 'remove_button'],
+                delimiter: ','
+            });
+        });
+    </script>
     <script type="text/javascript">
         // For Printing
         function printReminderDiv(divName) {
