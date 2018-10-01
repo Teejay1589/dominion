@@ -30,10 +30,10 @@
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
                                 <span class="pull-right">
-                                    <span class="badge" title="DONE OR NOT">{{ 'NO' }}</span>
+                                    <span class="badge {{ ($element->done) ? 'bg-success' : 'bg-danger' }}" title="DONE OR NOT">{{ ($element->done) ? 'YES' : 'NO' }}</span>
                                 </span>
                                 <h5 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->file_name }} <small><span title="User">{{ $element->user->full_name() }}</span></small></a>
+                                    <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->label }} <small><span title="User">{{ $element->user->full_name() }}</span></small></a>
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>
@@ -44,6 +44,7 @@
                                     </span> --}}
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
                                     <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
+                                    <a href="{{ url('/m/reminders/toggle_status/'.$element->id) }}" class="mr10">toggle status</a>
                                     <a href="{{ url('/m/reminders/delete/'.$element->id) }}" class="mr10 text-danger">
                                         <span>delete</span>
                                     </a>

@@ -131,6 +131,7 @@ Route::namespace('Internal')->group(function () {
 		// Route::get('/reminders/edit/{id}', 'ReminderController@edit');
 		Route::post('/reminders/update/{id}', 'ReminderController@update')->middleware('can:update,App\Reminder');
 		Route::get('/reminders/delete/{id}', 'ReminderController@destroy')->middleware('can:delete,App\Reminder');
+		Route::get('/reminders/toggle_status/{id}', 'ReminderController@toggle_done')->middleware('can:update,App\Reminder');
 		Route::get('/reminders/{filter}/{searchterm?}', 'ReminderController@filter')->where('searchterm', '.*')->middleware('can:view,App\Reminder');
 
 		// User Permissions

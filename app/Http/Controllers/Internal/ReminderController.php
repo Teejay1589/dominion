@@ -124,4 +124,18 @@ class ReminderController extends InternalControl
         session()->flash('success', 'Reminder Deleted!');
         return redirect()->back();
     }
+
+    public function toggle_done($id)
+    {
+        $reminder = Reminder::findOrFail($id);
+        $reminder->done = ($reminder->done) ? 0 : 1;
+        $reminder->update();
+
+        if ($reminder->done) {
+            session()->flash('success', 'Reminder DONE Status is Changed to YES!');
+        } else {
+            session()->flash('success', 'Reminder DONE Status is Changed to NO!');
+        }
+        return redirect()->back();
+    }
 }

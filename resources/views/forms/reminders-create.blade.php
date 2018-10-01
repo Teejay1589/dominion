@@ -12,7 +12,7 @@
 				<div class="modal-body">
 					{{ csrf_field() }}
 
-					<div class="form-group select-users">
+					{{-- <div class="form-group select-users">
 						<label class="form-control-label">Select User <span class="text-danger">*</span></label>
 						<select class="select-user" name="user" required>
 							<option value="">Select a User</option>
@@ -20,11 +20,12 @@
 								<option value="{{ $element->id }}" {{ (old('user', isset($active_object) ? $active_object->id : null) == $element->id) ? 'selected' : '' }}>{{ $element->full_name() }} [{{ optional($element->role)->name }}]</option>
 							@endforeach
 						</select>
-					</div>
+					</div> --}}
 
 					<div class="form-group">
 						<label class="form-control-label">Label <span class="text-danger">*</span></label>
 						<input class="form-control" type="text" name="label" placeholder="Label" value="" required>
+						<span class="form-text"><small><span class="text-danger">max: 180</span></small></span>
 					</div>
 
 					<div class="form-group">

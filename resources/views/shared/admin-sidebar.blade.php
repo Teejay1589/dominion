@@ -163,7 +163,7 @@
         <!-- reminder -->
         <li class="{{ isset($page) && $page->view == 'm.reminders' ? 'active' : '' }}">
           <a href="{{ url('/m/reminders') }}">
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-dot-circle-o"></i>
             <span>All Reminder</span>
           </a>
         </li>
