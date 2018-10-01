@@ -159,6 +159,17 @@
         <!-- /sms -->
       @endcan
 
+      @can('view', App\Reminder::class)
+        <!-- reminder -->
+        <li class="{{ isset($page) && $page->view == 'm.reminders' ? 'active' : '' }}">
+          <a href="{{ url('/m/reminders') }}">
+            <i class="fa fa-envelope"></i>
+            <span>All Reminder</span>
+          </a>
+        </li>
+        <!-- /reminder -->
+      @endcan
+
       @can('view', App\Post::class)
       <!-- blog_posts -->
       <li class="{{ isset($page) && $page->view == 'm.blog.posts' ? 'active' : '' }}">
