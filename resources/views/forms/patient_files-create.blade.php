@@ -20,7 +20,6 @@
 								<option value="{{ $element->id }}" {{ (old('patient', isset($active_object) ? $active_object->id : null) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
 							@endforeach
 						</select>
-						<span class="form-text"><small><span class="text-danger">min: 1, max: 200</span></small></span>
 					</div>
 
 					<div class="form-group">
