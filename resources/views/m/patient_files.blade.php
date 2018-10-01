@@ -15,7 +15,7 @@
                     'model' => new App\PatientFile(),
                     'create_form' => 'forms.patient_files-create',
                     'create_text' => 'Add Patient File',
-                    'data_name' => 'SMS',
+                    'data_name' => 'Patient File',
                     'data' => $patient_files,
                     'removed_keys' => array('id', 'user_id', 'file', 'created_at', 'updated_at'),
                     'added_keys' => array(),
