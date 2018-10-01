@@ -88,18 +88,6 @@
 
 @section('page_scripts')
     <script type="text/javascript">
-        $('textarea[name="message"]').keyup(function() {
-            $(this).parent().find('.msg-characters').text($(this).val().length + ' characters = ' + Math.ceil($(this).val().length/160) + ' message unit');
-        });
-        $('#checkAllPatients').click(function() {
-            if ($(this).is(':checked')) {
-                $('.form-group.select-patients').addClass('hidden');
-            } else {
-                $('.form-group.select-patients').addClass('hidden');
-            }
-        });
-    </script>
-    <script type="text/javascript">
         var base_url = '{{ url('/m/patient_files') }}';
     </script>
     <script type="text/javascript" src="{{ asset('js/toolbar.js') }}"></script>
