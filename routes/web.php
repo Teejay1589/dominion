@@ -125,6 +125,14 @@ Route::namespace('Internal')->group(function () {
 		Route::get('/sms/balance', 'SmsController@balance')->middleware('can:view,App\Sms');
 		Route::get('/sms/{filter}/{searchterm?}', 'SmsController@filter')->where('searchterm', '.*')->middleware('can:view,App\Sms');
 
+		// Reminders
+		Route::get('/reminders', 'ReminderController@index')->middleware('can:view,App\Reminder');
+		Route::post('/reminders/create', 'ReminderController@store')->middleware('can:create,App\Reminder');
+		// Route::get('/reminders/edit/{id}', 'ReminderController@edit');
+		Route::post('/reminders/update/{id}', 'ReminderController@update')->middleware('can:update,App\Reminder');
+		Route::get('/reminders/delete/{id}', 'ReminderController@destroy')->middleware('can:delete,App\Reminder');
+		Route::get('/reminders/{filter}/{searchterm?}', 'ReminderController@filter')->where('searchterm', '.*')->middleware('can:view,App\Reminder');
+
 		// User Permissions
 		Route::prefix('user-permissions')->group(function () {
 			Route::get('/', 'UserPermissionController@index')->middleware('can:view,App\UserPermission');
