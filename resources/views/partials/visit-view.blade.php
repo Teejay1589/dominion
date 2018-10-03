@@ -10,7 +10,7 @@
 			</div>
 			<div class="modal-body">
 
-				<button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printVisitDiv('visit{{ $element->id }}');">Print</button>
+				{{-- <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printVisitDiv('visit{{ $element->id }}');">Print</button> --}}
 
 				<div id="visit{{ $element->id }}">
 					{{-- <div class="h4"><strong>Visit Details</strong></div> --}}
@@ -133,7 +133,7 @@
 						@if ( $active_object->surgeries->count() != 0 )
 							<ol>
 								@foreach ($active_object->surgeries as $element)
-									<li>{{ $element->surgery_name }} on <span title="{{ is_null($element->surgery_date) ? '' : Carbon::createFromFormat('Y-m-d', $element->surgery_date)->toFormattedDateString() }}">{{ $element->surgery_date }}</span> [<strong>{!! (blank($element->complications)) ? '' : '<span title="'.$element->complications.'">SOME COMPLICATIONS</span>' !!}</strong>]</li>
+									<li>{{ $element->surgery_name }} on <span title="{{ is_null($element->surgery_date) ? '' : Carbon::createFromFormat('Y-m-d', $element->surgery_date)->toFormattedDateString() }}">{{ $element->surgery_date }}</span> {!! (blank($element->complications)) ? '' : '[<strong><span title="'.$element->complications.'">SOME COMPLICATIONS</span></strong>]' !!}</li>
 								@endforeach
 							</ol>
 						@else
