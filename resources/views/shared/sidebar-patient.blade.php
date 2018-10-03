@@ -96,7 +96,7 @@
 
       <!-- appointments -->
       <li class="{{ isset($page) && $page->view == 'appointments' ? 'active' : '' }}">
-        <a href="javascript:;">
+        <a href="javascript:alert('work in progress!');">
           <i class="fa fa-calendar-o"></i>
           <span>My Appointments</span>
         </a>

@@ -46,7 +46,7 @@
                                     </span> --}}
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
                                     <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
-                                    <a href="{{ url('/m/reminders/toggle_status/'.$element->id) }}" class="mr10">toggle status</a>
+                                    <a href="{{ url('/m/reminders/toggle_status/'.$element->id) }}" class="mr10">toggle done</a>
                                     <a href="{{ url('/m/reminders/delete/'.$element->id) }}" class="mr10 text-danger">
                                         <span>delete</span>
                                     </a>
@@ -58,7 +58,7 @@
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse" role="tabpanel">
                                 <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printReminderDiv('reminders{{ $element->id }}');">Print</button>
                                 <div id="reminders{{ $element->id }}">
-                                    {{-- @include('partials.reminder-inline-view', ['active_object' => $element]) --}}
+                                    @include('partials.reminder-inline-view', ['active_object' => $element])
                                 </div>
                             </div>
                         </div>
