@@ -30,7 +30,9 @@
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
                                 <span class="pull-right">
-                                    <span class="badge {{ ($element->done) ? 'bg-success' : 'bg-danger' }}" title="DONE OR NOT">{{ ($element->done) ? 'YES' : 'NO' }}</span>
+                                    <a href="{{ url('/m/reminders/toggle_status/'.$element->id) }}">
+                                        <span class="badge {{ ($element->done) ? 'bg-success' : 'bg-danger' }}" title="DONE OR NOT">{{ ($element->done) ? 'YES' : 'NO' }}</span>
+                                    </a>
                                 </span>
                                 <h5 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">{{ $element->label }} <small><span title="User">{{ $element->user->full_name() }}</span></small></a>

@@ -96,4 +96,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Sms', 'user_id');
     }
+
+    public function reminders()
+    {
+        return $this->hasMany('App\Reminder', 'user_id');
+    }
+
+    public function undone_reminders()
+    {
+        return $this->reminders->where('done', 0);
+    }
 }

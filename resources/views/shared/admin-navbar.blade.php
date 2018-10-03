@@ -42,18 +42,35 @@
 
   @auth('admin')
     <ul class="nav navbar-nav navbar-right hidden-xs">
-      {{-- <li>
+      <li>
         <a href="javascript:;" data-toggle="dropdown">
           <i class="fa fa-bell-o"></i>
-          <div class="status bg-danger border-danger animated bounce"></div>
+          @if (Auth::user()->undone_reminders()->count() > 0)
+            <div class="status bg-danger border-danger animated bounce"></div>
+          @endif
         </a>
         <ul class="dropdown-menu notifications">
           <li class="notifications-header">
-            <p class="text-muted small">You have 3 new messages</p>
+            <p class="text-muted small">You have {{ Auth::user()->undone_reminders()->count() }} new reminders</p>
           </li>
           <li>
             <ul class="notifications-list">
-              <li>
+              @foreach (Auth::user()->undone_reminders() as $element)
+                <li>
+                  <a href="{{ url('m/reminders/id/'.$element->id.'?default') }}">
+                    <span class="pull-left mt2 mr15">
+                      <div class="circle-icon bg-danger">
+                        <i class="fa fa-dot-circle-o"></i>
+                      </div>
+                    </span>
+                    <div class="overflow-hidden">
+                      <span>{{ $element->label }}</span>
+                      <span class="time">{{ $element->created_at }}</span>
+                    </div>
+                  </a>
+                </li>
+              @endforeach
+              {{-- <li>
                 <a href="javascript:;">
                   <span class="pull-left mt2 mr15">
                     <img src="{{ asset('urban/images/avatar.jpg') }}" class="avatar avatar-xs img-circle" alt="">
@@ -87,14 +104,14 @@
                     <span class="time">9 hours ago</span>
                   </div>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
           <li class="notifications-footer">
-            <a href="javascript:;">See all messages</a>
+            <a href="{{ url('/m/reminders') }}">See all reminders</a>
           </li>
         </ul>
-      </li> --}}
+      </li>
 
       <li>
         <a href="javascript:;" data-toggle="dropdown">
