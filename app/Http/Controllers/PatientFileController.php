@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Sms;
+use App\PatientFile;
 use App\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SmsController extends Controller
+class PatientFileController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,8 +17,8 @@ class SmsController extends Controller
     public function __construct()
     {
         $this->page = collect();
-        $this->page->title = 'My SMS';
-        $this->page->view = 'sms';
+        $this->page->title = 'My Files';
+        $this->page->view = 'patient_files';
         $this->middleware('auth');
     }
 
@@ -30,7 +30,7 @@ class SmsController extends Controller
     public function index($id = '')
     {
         return view($this->page->view)
-            ->with('sms', Sms::all())
+            ->with('patient_files', PatientFile::all())
             ->with('page', $this->page);
     }
 
@@ -48,10 +48,10 @@ class SmsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Sms  $sms
+     * @param  \App\PatientFile  $patientFile
      * @return \Illuminate\Http\Response
      */
-    public function show(Sms $sms)
+    public function show(PatientFile $patientFile)
     {
         //
     }
@@ -59,10 +59,10 @@ class SmsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Sms  $sms
+     * @param  \App\PatientFile  $patientFile
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sms $sms)
+    public function edit(PatientFile $patientFile)
     {
         //
     }
@@ -71,10 +71,10 @@ class SmsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Sms  $sms
+     * @param  \App\PatientFile  $patientFile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sms $sms)
+    public function update(Request $request, PatientFile $patientFile)
     {
         //
     }
@@ -82,10 +82,10 @@ class SmsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Sms  $sms
+     * @param  \App\PatientFile  $patientFile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sms $sms)
+    public function destroy(PatientFile $patientFile)
     {
         //
     }

@@ -94,6 +94,26 @@
       </li>
       <!-- /billings -->
 
+      <!-- sms -->
+      <li class="{{ isset($page) && $page->view == 'sms' ? 'active' : '' }}">
+        <a href="{{ url('/p/sms') }}">
+          <i class="fa fa-envelope"></i>
+          <span>My SMS</span>
+          <span class="label pull-right">{{ Auth::user()->sms_patients->count() }}</span>
+        </a>
+      </li>
+      <!-- /sms -->
+
+      <!-- patient_files -->
+      <li class="{{ isset($page) && $page->view == 'patient_files' ? 'active' : '' }}">
+        <a href="{{ url('/p/patient_files') }}">
+          <i class="fa fa-file"></i>
+          <span>My Files</span>
+          <span class="label pull-right">{{ Auth::user()->patient_files->count() }}</span>
+        </a>
+      </li>
+      <!-- /patient_files -->
+
       <!-- appointments -->
       <li class="{{ isset($page) && $page->view == 'appointments' ? 'active' : '' }}">
         <a href="javascript:alert('work in progress!');">
