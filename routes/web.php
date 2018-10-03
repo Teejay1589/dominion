@@ -35,7 +35,7 @@ Route::post('/password/change', 'HomeController@change_password')->name('passwor
 // Visits
 Route::get('/p/visits', 'VisitController@index')->name('p.visits');
 Route::get('/p/surgeries', 'SurgeryController@index')->name('p.surgeries');
-// Route::get('/p/billings', 'BillingController@index')->name('p.billings');
+Route::get('/p/billings', 'BillingController@index')->name('p.billings');
 
 
 

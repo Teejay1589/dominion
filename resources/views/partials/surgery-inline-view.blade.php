@@ -6,8 +6,11 @@
         <dd class="mb5 lead"><strong>Surgery Details</strong></dd>
     @endif
 
-    <dt>Patient</dt>
-    <dd class="mb5">{{ $element->patient()->full_name() }} <span class="badge" title="Phone Number">{{ $element->patient()->phone_number }}</span> {!! $element->patient()->file_number(true) !!}</dd>
+
+    @if (get_class(Auth::user()) == "App\User")
+        <dt>Patient</dt>
+        <dd class="mb5">{{ $element->patient()->full_name() }} <span class="badge" title="Phone Number">{{ $element->patient()->phone_number }}</span> {!! $element->patient()->file_number(true) !!}</dd>
+    @endif
     <dt>Visit Title</dt>
     <dd class="mb5">{{ $element->visit->title }}</dd>
     <dt>Surgery Name</dt>
@@ -18,8 +21,10 @@
     </dd>
     <dt>Complications</dt>
     <dd class="mb5">{{ $element->complications }}</dd>
-    <dt>Created at</dt>
-    <dd class="mb5">{{ $element->created_at }}</dd>
+    @if (get_class(Auth::user()) == "App\User")
+        <dt>Created at</dt>
+        <dd class="mb5">{{ $element->created_at }}</dd>
+    @endif
 
     @foreach ($element->surgeries->sortBy('id') as $item)
         <dt><br></dt>
@@ -38,8 +43,10 @@
         </dd>
         <dt>Complications</dt>
         <dd class="mb5">{{ $item->complications }}</dd>
-        <dt>Created at</dt>
-        <dd class="mb5">{{ $item->created_at }}</dd>
+        @if (get_class(Auth::user()) == "App\User")
+            <dt>Created at</dt>
+            <dd class="mb5">{{ $item->created_at }}</dd>
+        @endif
     @endforeach
 
     <dt><br></dt>
@@ -59,7 +66,9 @@
         </dd>
         <dt>Complications</dt>
         <dd class="mb5">{{ $element->surgery->complications }}</dd>
-        <dt>Created at</dt>
-        <dd class="mb5">{{ $element->created_at }}</dd>
+        @if (get_class(Auth::user()) == "App\User")
+            <dt>Created at</dt>
+            <dd class="mb5">{{ $element->created_at }}</dd>
+        @endif
     @endisset
 </dl>

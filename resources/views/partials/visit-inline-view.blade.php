@@ -6,14 +6,18 @@
     <dd class="mb5"><span class="badge badge-primary">{{ $active_object->type }}</span></dd>
     <dt>Title</dt>
     <dd class="mb5">{{ $active_object->title }}</dd>
-    <dt>Patient</dt>
-    <dd class="mb5">{{ $active_object->patient->full_name() }} <span title="Phone Number">{{ $active_object->patient->phone_number }}</span> {!! $active_object->patient->file_number(true) !!}</dd>
+    @if (get_class(Auth::user()) == "App\User")
+        <dt>Patient</dt>
+        <dd class="mb5">{{ $active_object->patient->full_name() }} <span title="Phone Number">{{ $active_object->patient->phone_number }}</span> {!! $active_object->patient->file_number(true) !!}</dd>
+    @endif
     <dt>Discharged On</dt>
     <dd class="mb5">
         {{ is_null($active_object->discharged_on) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->discharged_on)->toFormattedDateString() }}
     </dd>
-    <dt>Created at</dt>
-    <dd class="mb5">{{ $active_object->created_at }}</dd>
+    @if (get_class(Auth::user()) == "App\User")
+        <dt>Created at</dt>
+        <dd class="mb5">{{ $active_object->created_at }}</dd>
+    @endif
 
     <dt><br></dt>
     <dd class="mb5 lead"></dd>

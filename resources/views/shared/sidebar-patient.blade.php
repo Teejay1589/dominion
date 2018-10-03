@@ -86,7 +86,7 @@
 
       <!-- billings -->
       <li class="{{ isset($page) && $page->view == 'billings' ? 'active' : '' }}">
-        <a href="javascript:;">
+        <a href="{{ url('/p/billings') }}">
           <i class="fa fa-money"></i>
           <span>My Billings</span>
           <span class="label pull-right">{{ Auth::user()->billings()->count() }}</span>
