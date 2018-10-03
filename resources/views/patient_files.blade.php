@@ -31,7 +31,7 @@
                                 </h5>
                                 <div class="mb5"></div>
                                 <span>
-                                    {{-- <a href="{{ $element->visit->id }}" data-toggle="modal" class="mr10 text-primary">view original file</a> --}}
+                                    <a href="{{ asset($element->file) }}" target="_blank" class="mr10 text-primary">view original file</a>
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
                                 </span>
                             </div>

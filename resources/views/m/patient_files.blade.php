@@ -51,6 +51,7 @@
                                             <span>user</span>
                                         </a>
                                     </span> --}}
+                                    <a href="{{ asset($element->file) }}" target="_blank" class="mr10 text-primary">view original file</a>
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
                                     <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
                                     <a href="{{ url('/m/patient_files/delete/'.$element->id) }}" class="mr10 text-danger">
