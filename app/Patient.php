@@ -111,4 +111,9 @@ class Patient extends Authenticatable
     {
         return $this->hasMany('App\SmsPatient', 'patient_id');
     }
+
+    public function patient_files()
+    {
+        return $this->hasMany('App\PatientFile', 'patient_id');
+    }
 }

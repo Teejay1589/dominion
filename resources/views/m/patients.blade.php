@@ -66,6 +66,12 @@
                                             <span>send sms</span>
                                         </a>
                                     </span>
+                                    <span>
+                                        <a href="{{ url('/m/patient_files/patient_file_number/'.$element->file_number) }}" class="mr10 text-primary">
+                                            <strong style="color: #555;">{{ $element->patient_files->count() }}</strong>
+                                            <span>patient files</span>
+                                        </a>
+                                    </span>
                                     <a data-toggle="collapse" data-parent="#accordio" href="#collapse{{ $element->id }}" aria-expanded="true" aria-controls="collapse{{ $element->id }}" class="mr10">view</a>
                                     <a href="#modal-update-{{ $element->id }}" data-toggle="modal" class="mr10">update</a>
                                     <a href="{{ url('/m/patients/delete/'.$element->id) }}" class="mr10 text-danger">
