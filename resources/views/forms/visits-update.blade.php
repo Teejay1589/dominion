@@ -64,6 +64,11 @@
                         </div>
 					</div>
 
+						<div class="form-group">
+							<label class="form-control-label">Admission Date </label>
+							<input class="form-control" type="date" name="admission_date" placeholder="Admission Date (Y-m-d)" value="{{ is_null($active_object->admission_date) ? '' : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->admission_date)->format("Y-m-d") }}">
+						</div>
+
 					<div class="text-right">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Update</button>

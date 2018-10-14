@@ -10,6 +10,10 @@
         <dt>Patient</dt>
         <dd class="mb5">{{ $active_object->patient->full_name() }} <span title="Phone Number">{{ $active_object->patient->phone_number }}</span> {!! $active_object->patient->file_number(true) !!}</dd>
     @endif
+    <dt>Admission Date</dt>
+    <dd class="mb5">
+        {{ is_null($active_object->admission_date) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->admission_date)->toFormattedDateString() }}
+    </dd>
     <dt>Discharged On</dt>
     <dd class="mb5">
         {{ is_null($active_object->discharged_on) ? "" : Carbon::createFromFormat("Y-m-d H:i:s", $active_object->discharged_on)->toFormattedDateString() }}

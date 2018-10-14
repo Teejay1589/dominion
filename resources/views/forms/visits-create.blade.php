@@ -56,6 +56,11 @@
                             </div>
                         </div>
                     </div>
+
+						<div class="form-group">
+							<label class="form-control-label">Admission Date </label>
+							<input class="form-control" type="date" name="admission_date" placeholder="Admission Date (Y-m-d)" value="{{ old('admission_date') }}">
+						</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
