@@ -4,6 +4,8 @@
 
     <dt>Title</dt>
     <dd class="mb5">{{ $element->title }}</dd>
+    <dt>By</dt>
+    <dd class="mb5"><span class="badge">{{ optional(optional($element->user)->role)->name }}</span> {{ optional($element->user)->full_name() }}</dd>
     <dt>Body</dt>
     <dd class="mb5">{!! $element->body !!}</dd>
     <dt>Created at</dt>

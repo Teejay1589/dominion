@@ -25,8 +25,10 @@
                 <div class="overflow-hidden">
                   <span class="widget-title">{{ Auth::user()->visits->count() }}</span>
                   <span class="widget-subtitle">
-                    <a href="#modal-view-{{ optional($element)->id }}" data-toggle="modal" class="text-primary pull-right ml5">last visit</a>
-                    <br>
+                    @if (Auth::user()->last_visit())
+                      <a href="#modal-view-{{ optional($element)->id }}" data-toggle="modal" class="text-primary pull-right ml5">last visit</a>
+                      <br>
+                    @endif
                     <a href="{{ url('/p/visits') }}" class="text-primary pull-right ml5">view</a>
                     <span class="mr5">Visits</span>
                   </span>
