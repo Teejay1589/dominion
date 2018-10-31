@@ -20,14 +20,14 @@
       <li>
         <a href="javascript:;"><i class="fa fa-copyright"></i> 2018. All rights reserved</a>
       </li>
-      <li>
+      {{-- <li>
         <a href="javascript:;">Terms</a>
-      </li>
-      <li>
+      </li> --}}
+      {{-- <li>
         <a href="javascript:;">
             Privacy Policy
         </a>
-      </li>
+      </li> --}}
     </ul>
   </nav>
 </footer>
