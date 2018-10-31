@@ -19,8 +19,8 @@
     <dd class="mb5">
         {{ is_null($element->surgery_date) ? '' : Carbon::createFromFormat('Y-m-d', $element->surgery_date)->toFormattedDateString() }}
     </dd>
-    <dt>Complications</dt>
-    <dd class="mb5">{{ $element->complications }}</dd>
+    <dt class="text-danger">Complications</dt>
+    <dd class="mb5 text-danger">{{ $element->complications }}</dd>
     @if (get_class(Auth::user()) == "App\User")
         <dt>Created at</dt>
         <dd class="mb5">{{ $element->created_at }}</dd>
@@ -41,8 +41,8 @@
         <dd class="mb5">
             {{ is_null($item->surgery_date) ? '' : Carbon::createFromFormat('Y-m-d', $item->surgery_date)->toFormattedDateString() }}
         </dd>
-        <dt>Complications</dt>
-        <dd class="mb5">{{ $item->complications }}</dd>
+        <dt class="text-danger">Complications</dt>
+        <dd class="mb5 text-danger">{{ $item->complications }}</dd>
         @if (get_class(Auth::user()) == "App\User")
             <dt>Created at</dt>
             <dd class="mb5">{{ $item->created_at }}</dd>
@@ -64,8 +64,8 @@
         <dd class="mb5">
             {{ is_null($element->surgery->surgery_date) ? '' : Carbon::createFromFormat('Y-m-d', $element->surgery->surgery_date)->toFormattedDateString() }}
         </dd>
-        <dt>Complications</dt>
-        <dd class="mb5">{{ $element->surgery->complications }}</dd>
+        <dt class="text-danger">Complications</dt>
+        <dd class="mb5 text-danger">{{ $element->surgery->complications }}</dd>
         @if (get_class(Auth::user()) == "App\User")
             <dt>Created at</dt>
             <dd class="mb5">{{ $element->created_at }}</dd>
