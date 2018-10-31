@@ -17,6 +17,9 @@
                     </div>
                     <div class="col-md-12">
 					@forelse (Auth::user()->surgeries()->sortByDesc('id') as $element)
+                        @if (isset($_GET['filter']) && $_GET['filter'] = 'complications')
+                            @continue($element->complications == '')
+                        @endif
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
                                 <span class="badge pull-right">{{ isset( $element->surgery ) ? 'RESURGERY' : '' }}</span>
