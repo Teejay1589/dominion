@@ -13,10 +13,13 @@
 			<div class="col-md-10 col-xs-12">
 				<div class="row mb20">
 					<div class="col-md-12">
-                        <h4>You have <strong>{{ Auth::user()->billings()->count() }}</strong> bills <strong class="text-danger">{{ Auth::user()->unpaid_bills()->count() }}</strong> unpaid</h4>
+                        <h4>You have <strong>{{ Auth::user()->billings()->count() }}</strong> bills <strong class="text-danger">{{ Auth::user()->unpaid_bills()->count() }}</strong> <span class="text-danger">unpaid</span></h4>
                     </div>
                     <div class="col-md-12">
 					@forelse (Auth::user()->billings()->sortByDesc('id') as $element)
+                        @if (isset($_GET['filter']) && $_GET['filter'] = 'unpaid')
+                            @continue($element->is_paid == 1)
+                        @endif
                         <div class="panel mb5">
                             <div class="panel-heading p10 pb5" role="tab" id="panel-heading{{ $element->id }}">
                                 <span class="pull-right">
