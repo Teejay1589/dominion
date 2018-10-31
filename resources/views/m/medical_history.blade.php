@@ -48,6 +48,7 @@
                                 <li class="nav-item">
                                     <span class="h4">Medical History Summary</span>
                                 </li>
+                                <li><br></li>
                                 <li class="nav-item">
                                     <span>Last Visit was on</span>
                                     @if($active_object->last_visit())
