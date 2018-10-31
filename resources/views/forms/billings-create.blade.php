@@ -22,38 +22,185 @@
 						</select>
 					</div>
 
-                    <div class="row">
-						<div class="col-lg-6 col-xs-12">
-							<div class="form-group">
-								<label class="form-control-label">Billing Name <span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" name="billing_name" placeholder="Billing Name" value="{{ old('billing_name') }}" required>
-								<span class="form-text"><small>Please give this bill a name.</small></span>
+          <div class="form-group">
+          	<div class="row">
+							<div class="col-lg-6 col-xs-12">
+								<div class="form-group">
+									<label class="form-control-label">Billing Name {{-- <span class="text-danger">*</span> --}}</label>
+	                <input class="form-control" type="text" name="billing_name[]" placeholder="Billing Name" value="{{ old('billing_name.0') }}">
+									<span class="form-text"><small>Please give this bill a name.</small></span>
+								</div>
+							</div>
+	            <div class="col-lg-6 col-xs-12">
+	                <div class="form-group">
+	                    <label class="form-control-label">Amount {{-- <span class="text-danger">*</span> --}}</label>
+	                    <div class="input-group">
+	                        <div class="input-group-addon">N</div>
+	                        <input class="form-control" type="number" name="amount[]" placeholder="Amount" value="{{ old('amount.0') }}">
+	                    </div>
+	                </div>
+	            </div>
+						</div>
+
+						<div class="form-group">
+							<label class="form-control-label">Status </label>
+							<div>
+								<label class="form-control-label form-radio">
+									<input type="radio" name="is_paid_0" class="form-radio-input" value="0" {{ old('is_paid_0') == 0 ? 'checked' : '' }}> <strong class="text-danger">UNPAID</strong>
+								</label>
+							</div>
+							<div>
+								<label class="form-control-label form-radio">
+									<input type="radio" name="is_paid_0" class="form-radio-input" value="1" {{ old('is_paid_0') == 1 ? 'checked' : '' }}> <strong class="text-success">PAID</strong>
+								</label>
 							</div>
 						</div>
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="form-control-label">Amount <span class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">N</div>
-                                    <input class="form-control" type="number" name="amount" placeholder="Amount" value="{{ old('amount') }}" required>
-                                </div>
-                            </div>
-                        </div>
-					</div>
+          </div>
 
-					<div class="form-group">
-						<label class="form-control-label">Status </label>
-						<div>
-							<label class="form-control-label form-radio">
-								<input type="radio" name="is_paid" class="form-radio-input" value="0" {{ old('is_paid') == 0 ? 'checked' : '' }}> <strong class="text-danger">UNPAID</strong>
-							</label>
+          <div class="form-group">
+          	<div class="row">
+							<div class="col-lg-6 col-xs-12">
+								<div class="form-group">
+									<label class="form-control-label">Billing Name {{-- <span class="text-danger">*</span> --}}</label>
+	                <input class="form-control" type="text" name="billing_name[]" placeholder="Billing Name" value="{{ old('billing_name.1') }}">
+									<span class="form-text"><small>Please give this bill a name.</small></span>
+								</div>
+							</div>
+	            <div class="col-lg-6 col-xs-12">
+	                <div class="form-group">
+	                    <label class="form-control-label">Amount {{-- <span class="text-danger">*</span> --}}</label>
+	                    <div class="input-group">
+	                        <div class="input-group-addon">N</div>
+	                        <input class="form-control" type="number" name="amount[]" placeholder="Amount" value="{{ old('amount.1') }}">
+	                    </div>
+	                </div>
+	            </div>
 						</div>
-						<div>
-							<label class="form-control-label form-radio">
-								<input type="radio" name="is_paid" class="form-radio-input" value="1" {{ old('is_paid') == 1 ? 'checked' : '' }}> <strong class="text-success">PAID</strong>
-							</label>
+
+						<div class="form-group">
+							<label class="form-control-label">Status </label>
+							<div>
+								<label class="form-control-label form-radio">
+									<input type="radio" name="is_paid_1" class="form-radio-input" value="0" {{ old('is_paid_1') == 0 ? 'checked' : '' }}> <strong class="text-danger">UNPAID</strong>
+								</label>
+							</div>
+							<div>
+								<label class="form-control-label form-radio">
+									<input type="radio" name="is_paid_1" class="form-radio-input" value="1" {{ old('is_paid_1') == 1 ? 'checked' : '' }}> <strong class="text-success">PAID</strong>
+								</label>
+							</div>
 						</div>
-					</div>
+          </div>
+
+          <div class="text-right">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+
+          <div class="form-group">
+          	<div class="row">
+							<div class="col-lg-6 col-xs-12">
+								<div class="form-group">
+									<label class="form-control-label">Billing Name {{-- <span class="text-danger">*</span> --}}</label>
+	                <input class="form-control" type="text" name="billing_name[]" placeholder="Billing Name" value="{{ old('billing_name.2') }}">
+									<span class="form-text"><small>Please give this bill a name.</small></span>
+								</div>
+							</div>
+	            <div class="col-lg-6 col-xs-12">
+	                <div class="form-group">
+	                    <label class="form-control-label">Amount {{-- <span class="text-danger">*</span> --}}</label>
+	                    <div class="input-group">
+	                        <div class="input-group-addon">N</div>
+	                        <input class="form-control" type="number" name="amount[]" placeholder="Amount" value="{{ old('amount.2') }}">
+	                    </div>
+	                </div>
+	            </div>
+						</div>
+
+						<div class="form-group">
+							<label class="form-control-label">Status </label>
+							<div>
+								<label class="form-control-label form-radio">
+									<input type="radio" name="is_paid_2" class="form-radio-input" value="0" {{ old('is_paid_2') == 0 ? 'checked' : '' }}> <strong class="text-danger">UNPAID</strong>
+								</label>
+							</div>
+							<div>
+								<label class="form-control-label form-radio">
+									<input type="radio" name="is_paid_2" class="form-radio-input" value="1" {{ old('is_paid_2') == 1 ? 'checked' : '' }}> <strong class="text-success">PAID</strong>
+								</label>
+							</div>
+						</div>
+          </div>
+
+          <div class="form-group">
+          	<div class="row">
+							<div class="col-lg-6 col-xs-12">
+								<div class="form-group">
+									<label class="form-control-label">Billing Name {{-- <span class="text-danger">*</span> --}}</label>
+	                <input class="form-control" type="text" name="billing_name[]" placeholder="Billing Name" value="{{ old('billing_name.3') }}">
+									<span class="form-text"><small>Please give this bill a name.</small></span>
+								</div>
+							</div>
+	            <div class="col-lg-6 col-xs-12">
+	                <div class="form-group">
+	                    <label class="form-control-label">Amount {{-- <span class="text-danger">*</span> --}}</label>
+	                    <div class="input-group">
+	                        <div class="input-group-addon">N</div>
+	                        <input class="form-control" type="number" name="amount[]" placeholder="Amount" value="{{ old('amount.3') }}">
+	                    </div>
+	                </div>
+	            </div>
+						</div>
+
+						<div class="form-group">
+							<label class="form-control-label">Status </label>
+							<div>
+								<label class="form-control-label form-radio">
+									<input type="radio" name="is_paid_3" class="form-radio-input" value="0" {{ old('is_paid_3') == 0 ? 'checked' : '' }}> <strong class="text-danger">UNPAID</strong>
+								</label>
+							</div>
+							<div>
+								<label class="form-control-label form-radio">
+									<input type="radio" name="is_paid_3" class="form-radio-input" value="1" {{ old('is_paid_3') == 1 ? 'checked' : '' }}> <strong class="text-success">PAID</strong>
+								</label>
+							</div>
+						</div>
+          </div>
+
+          <div class="form-group">
+          	<div class="row">
+							<div class="col-lg-6 col-xs-12">
+								<div class="form-group">
+									<label class="form-control-label">Billing Name {{-- <span class="text-danger">*</span> --}}</label>
+	                <input class="form-control" type="text" name="billing_name[]" placeholder="Billing Name" value="{{ old('billing_name.4') }}">
+									<span class="form-text"><small>Please give this bill a name.</small></span>
+								</div>
+							</div>
+	            <div class="col-lg-6 col-xs-12">
+	                <div class="form-group">
+	                    <label class="form-control-label">Amount {{-- <span class="text-danger">*</span> --}}</label>
+	                    <div class="input-group">
+	                        <div class="input-group-addon">N</div>
+	                        <input class="form-control" type="number" name="amount[]" placeholder="Amount" value="{{ old('amount.4') }}">
+	                    </div>
+	                </div>
+	            </div>
+						</div>
+
+						<div class="form-group">
+							<label class="form-control-label">Status </label>
+							<div>
+								<label class="form-control-label form-radio">
+									<input type="radio" name="is_paid_4" class="form-radio-input" value="0" {{ old('is_paid_4') == 0 ? 'checked' : '' }}> <strong class="text-danger">UNPAID</strong>
+								</label>
+							</div>
+							<div>
+								<label class="form-control-label form-radio">
+									<input type="radio" name="is_paid_4" class="form-radio-input" value="1" {{ old('is_paid_4') == 1 ? 'checked' : '' }}> <strong class="text-success">PAID</strong>
+								</label>
+							</div>
+						</div>
+          </div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

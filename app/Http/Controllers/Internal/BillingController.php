@@ -107,15 +107,38 @@ class BillingController extends InternalControl
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateBillings $request)
+    // public function store(CreateBillings $request)
+    public function store(Request $request)
     {
+        // dd($request);
+        // return redirect()->back()->withInput();
+
         $request['user_id'] = Auth::id();
         $request['visit_id'] = $request->visit;
+        $request['is_paid'] = collect();
+        $request->is_paid->push($request->is_paid_0);
+        $request->is_paid->push($request->is_paid_1);
+        $request->is_paid->push($request->is_paid_2);
+        $request->is_paid->push($request->is_paid_3);
+        $request->is_paid->push($request->is_paid_4);
 
-        $obj = new Billing($request->all());
-        $obj->save();
+        $counter = 0;
+        for ($i = 0; $i < count($request->billing_name); $i++) {
+            if ($request->billing_name[$i] == null) {
+                continue;
+            }
 
-        session()->flash('success', 'New Billing Created!');
+            $obj = new Billing($request->all());
+            $obj->billing_name = $request->billing_name[$i];
+            $obj->amount = $request->amount[$i];
+            $obj->is_paid = $request->is_paid[$i];
+
+            // dd($obj);
+            $obj->save();
+            $counter++;
+        }
+
+        session()->flash('success', $counter . ' New Billings Created!');
         return redirect()->back();
     }
 
