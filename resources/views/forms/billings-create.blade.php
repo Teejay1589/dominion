@@ -17,7 +17,13 @@
 						<select class="select-visit" name="visit" required multiple>
 							{{-- <option value="">NONE</option> --}}
 							@foreach ($visits as $element)
-								<option value="{{ $element->id }}" {{ (old('visit') == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
+								@if (isset($billings->filter) && $billings->filter == "visit_id")
+									@if (isset($_GET['default']))
+										<option value="{{ $element->id }}" {{ (old('visit') == $element->id || isset($billings->searchterm) && $billings->searchterm == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
+									@endif
+								@else
+									<option value="{{ $element->id }}" {{ (old('visit') == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
+								@endif
 							@endforeach
 						</select>
 					</div>

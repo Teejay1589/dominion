@@ -35,27 +35,32 @@
 						</div>
 					</div>
 
-                    <div class="row">
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="form-group">
-                            	<label class="form-control-label">Select Patient <span class="text-danger">*</span></label>
-								<select class="select-patient" name="patient" required multiple>
-									@foreach ($patients->sortByDesc('id') as $element)
-										<option value="{{ $element->id }}" {{ (old('patient', isset($active_object) ? $active_object->id : null) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option> @endforeach
-								</select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="form-control-label">Doctors {{-- <span class="text-danger">*</span> --}}</label>
-								<select class="select-doctors" name="doctors[]" multiple>
-									@foreach ($users as $element)
-										<option value="{{ $element->id }}" {{ in_array($element->id, old('doctors', array())) ? 'selected' : '' }}>{{ $element->full_name() }} [{{ $element->role->name }}]</option>
-									@endforeach
-								</select>
-                            </div>
-                        </div>
+      	<div class="row">
+          <div class="col-lg-6 col-xs-12">
+              <div class="form-group">
+              	<label class="form-control-label">Select Patient <span class="text-danger">*</span></label>
+									<select class="select-patient" name="patient" required multiple>
+										@foreach ($patients->sortByDesc('id') as $element)
+											@if (isset($visits->filter) && $visits->filter == "patient_file_number")
+												<option value="{{ $element->id }}" {{ (old('patient', isset($active_object) ? $active_object->id : null) == $element->id || isset($visits->searchterm) && $visits->searchterm == $element->file_number) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
+											@else
+												<option value="{{ $element->id }}" {{ (old('patient', isset($active_object) ? $active_object->id : null) == $element->id) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
+											@endif
+										@endforeach
+									</select>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12">
+                <div class="form-group">
+                    <label class="form-control-label">Doctors {{-- <span class="text-danger">*</span> --}}</label>
+											<select class="select-doctors" name="doctors[]" multiple>
+												@foreach ($users as $element)
+													<option value="{{ $element->id }}" {{ in_array($element->id, old('doctors', array())) ? 'selected' : '' }}>{{ $element->full_name() }} [{{ $element->role->name }}]</option>
+												@endforeach
+											</select>
                     </div>
+                </div>
+            </div>
 
 						<div class="form-group">
 							<label class="form-control-label">Admission Date </label>

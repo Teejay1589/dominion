@@ -17,12 +17,18 @@
 						<select class="select-visit" name="visit" required multiple>
 							{{-- <option value="">NONE</option> --}}
 							@foreach ($visits as $element)
-								<option value="{{ $element->id }}" {{ (old('visit') == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
+								@if (isset($surgeries->filter) && $surgeries->filter == "visit_id")
+									@if (isset($_GET['default']))
+										<option value="{{ $element->id }}" {{ (old('visit') == $element->id || isset($surgeries->searchterm) && $surgeries->searchterm == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
+									@endif
+								@else
+									<option value="{{ $element->id }}" {{ (old('visit') == $element->id) ? 'selected' : '' }}>{{ $element->title }}</option>
+								@endif
 							@endforeach
 						</select>
 					</div>
 
-                    <div class="row">
+          <div class="row">
 						<div class="col-lg-6 col-xs-12">
 							<div class="form-group">
 								<label class="form-control-label">Surgery Name <span class="text-danger">*</span></label>
@@ -34,12 +40,12 @@
 								<span class="form-text"><small>Please give this surgery a name.</small></span>
 							</div>
 						</div>
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="form-control-label">Surgery Date </label>
-                                <input class="form-control" type="date" name="surgery_date" placeholder="YYYY-MM-DD" value="{{ old('surgery_date') }}">
-                            </div>
-                        </div>
+              <div class="col-lg-6 col-xs-12">
+                  <div class="form-group">
+                      <label class="form-control-label">Surgery Date </label>
+                      <input class="form-control" type="date" name="surgery_date" placeholder="YYYY-MM-DD" value="{{ old('surgery_date') }}">
+                  </div>
+              </div>
 					</div>
 
 					<div class="form-group">
