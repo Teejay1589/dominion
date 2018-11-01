@@ -35,7 +35,7 @@
       <div class="row mb15">
         <div class="col-md-12 col-xs-12">
           <div class="row">
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-6">
               <div class="widget bg-white">
                 <div class="widget-icon bg-success pull-left">
                 </div>
@@ -45,7 +45,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-6">
               <div class="widget bg-white">
                 <div class="widget-icon bg-success pull-left">
                 </div>
@@ -55,7 +55,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
               <div class="widget bg-white">
                 <div class="widget-icon bg-success pull-left">
                 </div>
@@ -65,13 +67,17 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-6">
               <div class="widget bg-white">
                 <div class="widget-icon bg-danger pull-left fa fa-check">
                 </div>
                 <div class="overflow-hidden">
                   <span class="widget-title">{{ App\Billing::where('is_paid', 0)->count() }}</span>
-                  <span class="widget-subtitle"><a href="{{ url('/m/billings/status/0?entries=10') }}" class="text-primary">All Unpaid Bills</a></span>
+                  <span class="widget-subtitle">
+                    <a href="{{ url('/m/sms/unpaid') }}" class="text-primary">Send SMS to Patients with unpaid bills</a>
+                    <br>
+                    <a href="{{ url('/m/billings/status/0?entries=10') }}" class="text-primary">All Unpaid Bills</a>
+                  </span>
                 </div>
               </div>
             </div>

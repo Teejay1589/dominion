@@ -98,6 +98,15 @@ class SmsController extends InternalControl
             ->with('page', $this->page);
     }
 
+    public function unpaid()
+    {
+        $this->page->action = "unpaid";
+        return view($this->page->view)
+            ->with('sms', Sms::latest()->paginate(isset($_GET['entries']) ? $_GET['entries'] : 10))
+            ->with('patients', Patient::all())
+            ->with('page', $this->page);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

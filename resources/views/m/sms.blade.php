@@ -51,6 +51,49 @@
             </div>
             <div class="col-md-1 col-xs-12"></div>
         </div>
+        @elseif (isset($page->action) && strtolower($page->action) == "unpaid")
+        <div class="row mb15">
+            <div class="col-md-1 col-xs-12"></div>
+            <div class="col-md-10 col-xs-12">
+                <form action="{{ url('/m/sms/create') }}" method="post">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">Send Sms to <strong>Patients with unpaid bills</strong></div>
+                        </div>
+                        <div class="panel-body">
+                            {{ csrf_field() }}
+
+                            <div class="form-group">
+                                <label class="form-control-label">Select Patients <span class="text-danger">*</span></label>
+                                <select class="select-patients" name="patients[]" required multiple>
+                                    @foreach ($patients as $element)
+                                        <option value="{{ $element->id }}" {{ ($element->unpaid_bills()->count() > 0) ? 'selected' : '' }}>{{ $element->first_name.' '.$element->last_name }} [{{ $element->phone_number }}] [{{ $element->file_number }}]</option>
+                                    @endforeach
+                                </select>
+                                <span class="form-text"><small><span class="text-danger">min: 1, max: 200</span></small></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">SMS From </label>
+                                <input class="form-control" type="text" name="from" placeholder="Sms From" value="{{ old('from', App\Setting::find(1)->sms_from) }}" >
+                                {{-- <span class="form-text"><small><strong>DMC</strong> by default.</small></span> --}}
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">SMS Message <span class="text-danger">*</span></label>
+                                <textarea name="message" class="form-control" rows="5" placeholder="Message" required>{{ old('message') }}</textarea>
+                                <span class="form-text"><small class="msg-characters">160 characters = 1 message unit</small></span>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <a class="btn btn-secondary" onclick="javascript: window.history.back();">Back</a>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-1 col-xs-12"></div>
+        </div>
         @else
             <div class="row mb15">
                 <div class="col-md-1 col-xs-12"></div>
