@@ -23,7 +23,7 @@
 						<input type="hidden" name="visit" value="{{ $active_object->visit_id }}">
 					</div>
 
-                    <div class="row">
+          <div class="row">
 						<div class="col-lg-6 col-xs-12">
 							<div class="form-group">
 								<label class="form-control-label">Surgery Name <span class="text-danger">*</span></label>
@@ -35,16 +35,16 @@
 								<span class="form-text"><small>Please give this surgery a name.</small></span>
 							</div>
 						</div>
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="form-control-label">Surgery Date </label>
-                                <input class="form-control" type="date" name="surgery_date" placeholder="YYYY-MM-DD" value="{{ old('surgery_date') }}">
-                            </div>
-                        </div>
-                    </div>
+              <div class="col-lg-6 col-xs-12">
+                  <div class="form-group">
+                      <label class="form-control-label">Surgery Date </label>
+                      <input class="form-control" type="date" name="surgery_date" placeholder="YYYY-MM-DD" value="{{ old('surgery_date') }}">
+                  </div>
+              </div>
+          </div>
 
-                    <div class="form-group">
-                    	<label class="form-control-label">Complications </label>
+          <div class="form-group">
+          	<label class="form-control-label">Complications </label>
 						<textarea name="complications" class="form-control" rows="5" placeholder="Complications">{{ old('complications') }}</textarea>
 					</div>
 				</div>
