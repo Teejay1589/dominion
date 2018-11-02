@@ -35,23 +35,33 @@
       <div class="row mb15">
         <div class="col-md-12 col-xs-12">
           <div class="row">
-            <div class="col-sm-6 col-md-6">
+            <div class="col-sm-6 col-md-4">
               <div class="widget bg-white">
                 <div class="widget-icon bg-success pull-left">
                 </div>
                 <div class="overflow-hidden">
-                  <span class="widget-title">{{ App\Visit::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->count() }}</span>
-                  <span class="widget-subtitle">Consultations this Month</span>
+                  <span class="widget-title">{{ App\Visit::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->count() }} | {{ App\Visit::whereDate('created_at', today())->count() }}</span>
+                  <span class="widget-subtitle">Visits this Month | TODAY</span>
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-6">
+            <div class="col-sm-6 col-md-4">
               <div class="widget bg-white">
                 <div class="widget-icon bg-success pull-left">
                 </div>
                 <div class="overflow-hidden">
-                  <span class="widget-title">{{ App\Visit::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->count() }}</span>
-                  <span class="widget-subtitle">New Patients this Month</span>
+                  <span class="widget-title">{{ App\Visit::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->whereNotNull('admission_date')->count() }} | {{ App\Visit::whereDate('created_at', today())->whereNotNull('admission_date')->count() }}</span>
+                  <span class="widget-subtitle">Visits with Admissions this Month | TODAY</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="widget bg-white">
+                <div class="widget-icon bg-success pull-left">
+                </div>
+                <div class="overflow-hidden">
+                  <span class="widget-title">{{ App\Patient::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->count() }} | {{ App\Patient::whereDate('created_at', today())->count() }}</span>
+                  <span class="widget-subtitle">New Patients this Month | TODAY</span>
                 </div>
               </div>
             </div>
@@ -62,8 +72,8 @@
                 <div class="widget-icon bg-success pull-left">
                 </div>
                 <div class="overflow-hidden">
-                  <span class="widget-title">{{ App\Billing::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->count() }}</span>
-                  <span class="widget-subtitle">New Billings this Month</span>
+                  <span class="widget-title">{{ App\Billing::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->count() }} | {{ App\Billing::whereDate('created_at', today())->count() }}</span>
+                  <span class="widget-subtitle">New Billings this Month | TODAY</span>
                 </div>
               </div>
             </div>
@@ -82,6 +92,61 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-4">
+              <div class="widget bg-white">
+                <div class="widget-icon bg-success pull-left">
+                </div>
+                <div class="overflow-hidden">
+                  <span class="widget-title">N{{ App\Billing::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->sum('amount') }} | N{{ App\Billing::whereDate('created_at', today())->sum('amount') }}</span>
+                  <span class="widget-subtitle">Total Bills this Month | TODAY</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="widget bg-white">
+                <div class="widget-icon bg-success pull-left">
+                </div>
+                <div class="overflow-hidden">
+                  <span class="widget-title">N{{ App\Billing::whereMonth('created_at', Carbon::createFromFormat('Y-m-d H:i:s', today())->format('m'))->where('is_paid', 1)->sum('amount') }} | N{{ App\Billing::whereDate('created_at', today())->where('is_paid', 1)->sum('amount') }}</span>
+                  <span class="widget-subtitle">Total Paid Bills this Month | TODAY</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="widget bg-white">
+                <div class="widget-icon bg-danger pull-left fa fa-check">
+                </div>
+                <div class="overflow-hidden">
+                  <span class="widget-title">N{{ App\Billing::where('is_paid', 0)->sum('amount') }}</span>
+                  <span class="widget-subtitle">Total Unpaid Bills <a href="{{ url('/m/billings/status/0?entries=10') }}" class="text-primary ml5">view</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{-- Not sure if this is necessary --}}
+          {{-- <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <div class="widget bg-white">
+                <div class="widget-icon bg-success pull-left fa fa-envelope">
+                </div>
+                <div class="overflow-hidden">
+                  <span class="widget-title">{{ App\Sms::count() }}</span>
+                  <span class="widget-subtitle">Total Sent SMS</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div class="widget bg-white">
+                <div class="widget-icon bg-success pull-left fa fa-file">
+                </div>
+                <div class="overflow-hidden">
+                  <span class="widget-title">{{ App\PatientFile::count() }}</span>
+                  <span class="widget-subtitle">Total Uploaded Patient Files</span>
+                </div>
+              </div>
+            </div>
+          </div> --}}
 
           <div class="row">
             <div class="col-md-3">
