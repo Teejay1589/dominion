@@ -24,7 +24,7 @@
     <ul class="nav">
 
     	<li class="text-center">
-        <img src="{{ asset(Auth::guard('admin')->user()->profile_picture) }}" class="header-avatar img-circle ml10" alt="avata" title="user" width="50px" height="50px">
+        <img src="{{ asset(Auth::guard('admin')->user()->profile_picture_thumb()) }}" class="header-avatar img-circle ml10" alt="avata" title="user" width="50px" height="50px">
         <p class="" style="color: #fff; padding: 5px; margin: 0;">{{ Auth::guard('admin')->user()->first_name }} {{ Auth::guard('admin')->user()->last_name }}</p>
         <span class="bg-white" style="padding: 2px 5px; margin: 0;">{{ Auth::guard('admin')->user()->role->name }}</span>
         <div class="clearfix"></div>
