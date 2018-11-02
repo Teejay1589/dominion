@@ -113,7 +113,7 @@
         @if ( $active_object->billings->count() != 0 )
             <ol>
                 @foreach ($active_object->billings as $element)
-                <li>{{ $element->billing_name }} <span>[<strong>N</strong>{{ $element->amount }}]</span> {!! ($element->is_paid) ? '' : '<span class="text-danger">UNPAID</span> <a href="'.url('/m/billings/toggle_status/'.$element->id).'" class="text-primary">toggle</a>' !!}</li>
+                <li>{{ $element->billing_name }} <span>[<strong>N</strong>{{ $element->amount }}]</span> {!! ($element->is_paid) ? '' : '<span class="text-danger">UNPAID</span> <a href="'.url('/m/billings/toggle_status/'.$element->id).'" class="text-primary hidden-print">toggle</a>' !!}</li>
                 @endforeach
                 <span class="hidden-print"><a href="{{ url('/m/billings/visit_id/'.$active_object->id.'?default') }}" class="text-primary">billings in details</a></span>
             </ol>
