@@ -118,11 +118,23 @@
                 <span class="hidden-print"><a href="{{ url('/m/billings/visit_id/'.$active_object->id.'?default') }}" class="text-primary">billings in details</a></span>
             </ol>
             <div class="ml20 h5">
-                <strong>TOTAL BILLS &rarr; </strong>
-                <span>
-                    <strong>N</strong>
-                    <strong>{{ $active_object->billings->sum('amount') }}</strong>
-                </span>
+                <div>
+                    <strong>TOTAL BILLS &rarr; </strong>
+                    <span>
+                        <strong>N</strong>
+                        <strong>{{ $active_object->billings->sum('amount') }}</strong>
+                    </span>
+                </div>
+                @if ($active_object->billings->where('is_paid', 0)->sum('amount') > 0)
+                    <br>
+                    <div class="text-danger">
+                        <strong>TOTAL UNPAID BILLS &rarr; </strong>
+                        <span>
+                            <strong>N</strong>
+                            <strong>{{ $active_object->billings->where('is_paid', 0)->sum('amount') }}</strong>
+                        </span>
+                    </div>
+                @endif
             </div>
         @else
             <div class="text-danger">No Billings added YET!</div>
