@@ -69,6 +69,7 @@
                             </div>
                             <div id="collapse{{ $element->id }}" class="panel-body panel-collapse collapse {{ (isset($_GET['default']) && $visits->total() == 1) ? 'in' : '' }}" role="tabpanel">
                                 <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printVisitDiv('visit{{ $element->id }}');">Print</button>
+                                <button role="button" class="btn btn-primary btn-xs mb10" onclick="javascript:printVisitPlanDiv('visitPlan{{ $element->id }}');">Print Plan</button>
                                 <div id="visit{{ $element->id }}">
                                     @include('partials.visit-inline-view', ['active_object' => $element])
                                 </div>
@@ -130,6 +131,15 @@
         function printVisitDiv(divName) {
             w=window.open();
             w.document.write("<!DOCTYPE html><html><head><title>Visit Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
+            "@include('shared.print-header')" +
+            document.getElementById(divName).innerHTML + "</body></html>");
+            w.print();
+            // w.close();
+        }
+        // For Printing
+        function printVisitPlanDiv(divName) {
+            w=window.open();
+            w.document.write("<!DOCTYPE html><html><head><title>Visit Plan Printout | DMC</title><link href='{{ asset('urban/vendor/bootstrap/dist/css/bootstrap.css') }}' rel='stylesheet'><link href='{{ asset('urban/styles/urban.css') }}' rel='stylesheet'><style type='text/css'>a.text-primary{color:#0099cc!important;}a.text-primary:hover{color:#007399!important;}a.text-danger{color:#d96557!important;}a.text-danger:hover{color:#ce402f!important;}@media(min-width: 768px){.dl-horizontal dt{width:40%;}.dl-horizontal dd{margin-left:44%;width:55%;}}</style></head><body>" +
             "@include('shared.print-header')" +
             document.getElementById(divName).innerHTML + "</body></html>");
             w.print();
