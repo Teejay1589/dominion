@@ -115,7 +115,7 @@ class SmsController extends InternalControl
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         $request->validate([
             'message' => 'required|string|min:2'
         ]);
@@ -125,15 +125,28 @@ class SmsController extends InternalControl
         $obj1 = new Sms($request->all());
         $obj1->save();
 
-        // Send SMS Message
-        $setting = Setting::findOrFail(1);
-        $xmx = new SmartXmx($setting->sms_username, $setting->sms_password);
-        if ( isset($request->all_patients) ) {
-            $response = $xmx->sendSms($request->from, array_flatten(Patient::all()->select('phone_number')->get()->toArray()), $request->message);
-        } else {
-            $response = $xmx->sendSms($request->from, array_flatten(Patient::whereIn('id', $request->patients)->select('phone_number')->get()->toArray()), $request->message);
-        }
 
+        // Send SMS Message
+        if (str_contains($request->message, '[total_unpaid_bills]')) {
+            $setting = Setting::findOrFail(1);
+            $xmx = new SmartXmx($setting->sms_username, $setting->sms_password);
+
+            foreach ($request->patients as $val) {
+                if(Patient::find($val)) {
+                    $value = Patient::find($val);
+                    $custom_message = str_ireplace('[total_unpaid_bills]', 'N'.$value->unpaid_bills()->sum('amount'), $request->message);
+                    $response = $xmx->sendSms($request->from, array($value->phone_number), $custom_message);
+                }
+            }
+        } else {
+            $setting = Setting::findOrFail(1);
+            $xmx = new SmartXmx($setting->sms_username, $setting->sms_password);
+            if ( isset($request->all_patients) ) {
+                $response = $xmx->sendSms($request->from, array_flatten(Patient::all()->select('phone_number')->get()->toArray()), $request->message);
+            } else {
+                $response = $xmx->sendSms($request->from, array_flatten(Patient::whereIn('id', $request->patients)->select('phone_number')->get()->toArray()), $request->message);
+            }
+        }
 
         // If Message is sent
         if ( count($response) > 1 ) {
@@ -212,7 +225,26 @@ class SmsController extends InternalControl
         if ( isset($request->all_patients) ) {
             $response = $xmx->sendSms($request->from, array_flatten(Patient::all()->select('phone_number')->get()->toArray()), $request->message);
         } else {
-            $response = $xmx->sendSms($request->from, array_flatten(Patient::whereIn('id', $request->patients)->select('phone_number')->get()->toArray()), $request->message);
+            if (str_contains($request->message, '[total_unpaid_bills]')) {
+                $setting = Setting::findOrFail(1);
+                $xmx = new SmartXmx($setting->sms_username, $setting->sms_password);
+
+                foreach ($request->patients as $val) {
+                    if(Patient::find($val)) {
+                        $value = Patient::find($val);
+                        $custom_message = str_ireplace('[total_unpaid_bills]', 'N'.$value->unpaid_bills()->sum('amount'), $request->message);
+                        $response = $xmx->sendSms($request->from, array($value->phone_number), $custom_message);
+                    }
+                }
+            } else {
+                $setting = Setting::findOrFail(1);
+                $xmx = new SmartXmx($setting->sms_username, $setting->sms_password);
+                if ( isset($request->all_patients) ) {
+                    $response = $xmx->sendSms($request->from, array_flatten(Patient::all()->select('phone_number')->get()->toArray()), $request->message);
+                } else {
+                    $response = $xmx->sendSms($request->from, array_flatten(Patient::whereIn('id', $request->patients)->select('phone_number')->get()->toArray()), $request->message);
+                }
+            }
         }
 
         // If Message is sent

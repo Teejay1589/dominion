@@ -81,7 +81,7 @@
 
                             <div class="form-group">
                                 <label class="form-control-label">SMS Message <span class="text-danger">*</span></label>
-                                <textarea name="message" class="form-control" rows="5" placeholder="Message" required>{{ old('message') }}</textarea>
+                                <textarea name="message" class="form-control" rows="5" placeholder="Message" required>{{ old('message', 'This is a reminder from DOMINION SPECIALIST HOSPITAL that you owe us a sum of [total_unpaid_bills] and we are expecting you to balance up.') }}</textarea>
                                 <span class="form-text"><small class="msg-characters">160 characters = 1 message unit</small></span>
                             </div>
                         </div>
