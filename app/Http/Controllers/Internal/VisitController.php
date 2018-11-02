@@ -117,7 +117,7 @@ class VisitController extends InternalControl
         $obj->save();
 
         // save Visit Doctors
-        if (count($request->doctors) > 0) {
+        if (isset($request->doctors) && count($request->doctors) > 0) {
             foreach ($request->doctors as $value) {
                 $obj1 = new VisitDoctors($request->all());
                 $obj1->visit_id = $obj->id;
