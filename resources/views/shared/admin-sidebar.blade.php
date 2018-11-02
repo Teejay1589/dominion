@@ -99,6 +99,7 @@
           <a href="{{ url('/m/patient_files') }}">
             <i class="fa fa-file"></i>
             <span>Patient Files</span>
+            <span class="label pull-right">{{ App\PatientFile::count() }}</span>
           </a>
         </li>
         <!-- /patients -->
@@ -110,6 +111,7 @@
           <a href="{{ url('/m/visits') }}">
             <i class="fa fa-child"></i>
             <span>All Visits</span>
+            <span class="label pull-right">{{ App\Visit::count() }}</span>
           </a>
         </li>
         <!-- /visits -->
@@ -121,6 +123,7 @@
           <a href="{{ url('/m/surgeries') }}">
             <i class="fa fa-stethoscope"></i>
             <span>All Surgeries</span>
+            <span class="label pull-right">{{ App\Surgery::count() }}</span>
           </a>
         </li>
         <!-- /surgeries -->
@@ -132,6 +135,7 @@
           <a href="{{ url('/m/surgery_names') }}">
             <i class="fa fa-bolt"></i>
             <span>Surgery Names</span>
+            <span class="label pull-right">{{ App\SurgeryName::count() }}</span>
           </a>
         </li>
         <!-- /surgery_names -->
@@ -143,6 +147,7 @@
           <a href="{{ url('/m/billings') }}">
             <i class="fa fa-money"></i>
             <span>All Billings</span>
+            <span class="label pull-right">{{ App\Billing::count() }}</span>
           </a>
         </li>
         <!-- /billings -->
@@ -154,6 +159,7 @@
           <a href="{{ url('/m/sms') }}">
             <i class="fa fa-envelope"></i>
             <span>All SMS</span>
+            <span class="label pull-right">{{ App\Sms::count() }}</span>
           </a>
         </li>
         <!-- /sms -->
@@ -165,6 +171,7 @@
           <a href="{{ url('/m/reminders') }}">
             <i class="fa fa-dot-circle-o"></i>
             <span>All Reminder</span>
+            <span class="label pull-right">{{ Auth::user()->reminders->count() }}</span>
           </a>
         </li>
         <!-- /reminder -->
@@ -176,6 +183,7 @@
         <a href="{{ url('/m/blog/posts') }}">
           <i class="fa fa-paragraph"></i>
           <span>Blog Posts</span>
+            <span class="label pull-right">{{ App\Post::count() }}</span>
         </a>
       </li>
       <!-- /blog_posts -->
@@ -189,6 +197,7 @@
           <a href="{{ url('/m/user-permissions') }}">
             <i class="fa fa-check"></i>
             <span>User Permissions</span>
+            <span class="label pull-right">{{ App\UserPermission::count() }}</span>
           </a>
         </li>
         <!-- /user permissions -->
@@ -200,6 +209,7 @@
           <a href="{{ url('/m/users') }}">
             <i class="fa fa-group"></i>
             <span>Users / Staff Management</span>
+            <span class="label pull-right">{{ App\User::count() }}</span>
           </a>
         </li>
         <!-- /users -->
