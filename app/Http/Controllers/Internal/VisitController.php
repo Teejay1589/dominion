@@ -167,44 +167,46 @@ class VisitController extends InternalControl
         $obj->update($request->all());
 
         // Update Visit Doctors
-        if ($obj->visit_doctors->count() > count($request->doctors)) {
-            $i = 1;
-            foreach ($obj->visit_doctors as $value) {
-                if ($i <= count($request->doctors)) {
+        if (isset($request->doctors)) {
+            if ($obj->visit_doctors->count() > count($request->doctors)) {
+                $i = 1;
+                foreach ($obj->visit_doctors as $value) {
+                    if ($i <= count($request->doctors)) {
+                        $obj1 = VisitDoctors::findOrFail($value->id);
+                        $obj1->visit_id = $id;
+                        $obj1->doctor_id = $request->doctors[$i - 1];
+                        $obj1->update();
+                        $i++;
+                    } else {
+                        $obj1 = VisitDoctors::findOrFail($value->id);
+                        $obj1->delete();
+                    }
+                }
+            } else if ($obj->visit_doctors->count() < count($request->doctors)) {
+                $i = 0;
+                foreach ($obj->visit_doctors as $value) {
                     $obj1 = VisitDoctors::findOrFail($value->id);
                     $obj1->visit_id = $id;
-                    $obj1->doctor_id = $request->doctors[$i - 1];
+                    $obj1->doctor_id = $request->doctors[$i];
                     $obj1->update();
                     $i++;
-                } else {
-                    $obj1 = VisitDoctors::findOrFail($value->id);
-                    $obj1->delete();
                 }
-            }
-        } else if ($obj->visit_doctors->count() < count($request->doctors)) {
-            $i = 0;
-            foreach ($obj->visit_doctors as $value) {
-                $obj1 = VisitDoctors::findOrFail($value->id);
-                $obj1->visit_id = $id;
-                $obj1->doctor_id = $request->doctors[$i];
-                $obj1->update();
-                $i++;
-            }
-            for ($j = $obj->visit_doctors->count(); $j < count($request->doctors); $j++) {
-                $obj1 = new VisitDoctors($request->all());
-                $obj1->user_id = Auth::id();
-                $obj1->visit_id = $id;
-                $obj1->doctor_id = $request->doctors[$j];
-                $obj1->save();
-            }
-        } else {
-            $i = 0;
-            foreach ($obj->visit_doctors as $value) {
-                $obj1 = VisitDoctors::findOrFail($value->id);
-                $obj1->visit_id = $id;
-                $obj1->doctor_id = $request->doctors[$i];
-                $obj1->update();
-                $i++;
+                for ($j = $obj->visit_doctors->count(); $j < count($request->doctors); $j++) {
+                    $obj1 = new VisitDoctors($request->all());
+                    $obj1->user_id = Auth::id();
+                    $obj1->visit_id = $id;
+                    $obj1->doctor_id = $request->doctors[$j];
+                    $obj1->save();
+                }
+            } else {
+                $i = 0;
+                foreach ($obj->visit_doctors as $value) {
+                    $obj1 = VisitDoctors::findOrFail($value->id);
+                    $obj1->visit_id = $id;
+                    $obj1->doctor_id = $request->doctors[$i];
+                    $obj1->update();
+                    $i++;
+                }
             }
         }
 
